@@ -1,0 +1,251 @@
+{
+    "name": "advpl-vscode",
+    "displayName": "advpl-vscode",
+    "description": "Adiciona suporte a Linguagem ADVPL",
+    "version": "0.0.3",
+    "publisher": "KillerAll",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "onCommand:advpl.startSmartClient",
+        "onCommand:advpl.compile",
+        "onCommand:advpl.getProgramName",
+        "onCommand:advpl.getDebugInfos",
+        "onCommand:advpl.getAuthorizationId",
+        "onCommand:advpl.CipherPassword"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "AdvplSuport configuration",
+            "properties": {
+                "advpl.smartClientPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Diretorio aonde esta o smartclient."
+                },
+                "advpl.serverVersion": {
+                    "type": "string",
+                    "default": "131327A",
+                    "description": "Versão do server"
+                },
+                "advpl.server": {
+                    "type": "string",
+                    "default": "localhost",
+                    "description": "Server IP"
+                },
+                "advpl.port": {
+                    "type": "string",
+                    "default": "1201",
+                    "description": "Server Port"
+                },
+                "advpl.environment": {
+                    "type": "string",
+                    "default": "environment",
+                    "description": "Environment"
+                },
+                "advpl.user": {
+                    "type": "string",
+                    "default": "Admin",
+                    "description": "Usuario com privilegio de Administração para conectar no servidor."
+                },
+                "advpl.passwordCipher": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
+                },
+                "advpl.includeList": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                },
+                "advpl.language": {
+                    "type": "string",
+                    "default": "PORTUGUESE",
+                    "description": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH"
+                },
+                "advpl.rpoType": {
+                    "type": "string",
+                    "default": "TOP",
+                    "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
+                },
+                "advpl.startProgram": {
+                    "type": "string",
+                    "default": "SIGAFAT",
+                    "description": "Programa inicial para o Debug"
+                },
+                "advpl.authorization_generation": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Data de geração da chave no formato yyyymmdd"
+                },
+                "advpl.authorization_validation": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Data de validade da chave no formato yyyymmdd"
+                },
+                "advpl.authorization_permission": {
+                    "type": "string",
+                    "default": "",
+                    "description": "1 - Para permitir substiuir fontes TOTVS, 0 para Não"
+                },
+                "advpl.authorization_code": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Chave de compilação"
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "advpl",
+                "extensions": [
+                    ".prw",
+                    ".prx",
+                    ".prg"
+                ],
+                "aliases": [
+                    "Advpl(PRW)",
+                    "Advpl(PRX)",
+                    "Advpl(PRG)"
+                ],
+                "configuration": "./advpl.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "advpl",
+                "scopeName": "source.advpl",
+                "path": "./syntaxes/advpl.tmlanguage"
+            }
+        ],
+        "commands": [
+            {
+                "command": "advpl.startSmartClient",
+                "title": "Run SmartClient Protheus"
+            },
+            {
+                "command": "advpl.compile",
+                "title": "Compile Advpl Source"
+            },
+            {
+                "command": "advpl.getDebugInfos",
+                "title": "Retorna as informações iniciais para o debug"
+            },
+            {
+                "command": "advpl.getAuthorizationId",
+                "title": "Retorna o codigo da  authorization para ser solicitada pela Totvs."
+            },
+            {
+                "command": "advpl.CipherPassword",
+                "title": "Cipher Password - Criptografa a senha do usuario para conectar no appserver."
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "advpl.compile",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9",
+                "when": "editorLangId == advpl"
+            },
+            {
+                "command": "advpl.startSmartClient",
+                "key": "ctrl+f11",
+                "mac": "cmd+f11",
+                "when": "editorLangId == advpl"
+            }
+        ],
+        "debuggers": [
+            {
+                "type": "advpl",
+                "label": "Advpl Debug",
+                "enableBreakpointsFor": {
+                    "languageIds": [
+                        "advpl"
+                    ]
+                },
+                "variables": {
+                    "AskForProgramName": "advpl.getProgramName",
+                    "GetEnvInfos": "advpl.getDebugInfos"
+                },
+                "windows": {
+                    "program": "./bin/AdvplDebugBridge.exe"
+                },
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "program",
+                            "enviromentInfo"
+                        ],
+                        "properties": {
+                            "program": {
+                                "type": "string",
+                                "description": "Programa para Debugar.",
+                                "default": "${workspaceRoot}/${command.AskForProgramName}"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "Parar automaticamente no inicio do Debug?",
+                                "default": true
+                            },
+                            "enviromentInfo": {
+                                "type": "string",
+                                "description": "Enviroment Infos para o Debug. Uso interno",
+                                "default": "${command.GetEnvInfos}"
+                            },
+                            "workspace": {
+                                "type": "string",
+                                "default": "${workspaceRoot}/",
+                                "description": "WorkSpace Directory"
+                            },
+                            "args": {
+                                "type": "array",
+                                "description": "Argumentos%",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "default": []
+                            },
+                            "cwd": {
+                                "type": "string",
+                                "description": "Path do command",
+                                "default": "."
+                            }
+                        }
+                    }
+                },
+                "initialConfigurations": [
+                    {
+                        "name": "Advpl-Debug",
+                        "type": "advpl",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "${workspaceRoot}",
+                        "program": "${command.AskForProgramName}",
+                        "stopOnEntry": false,
+                        "enviromentInfo": "${command.GetEnvInfos}",
+                        "workspace": "${workspaceRoot}/"
+                    }
+                ]
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.5",
+        "vscode": "^0.11.0"
+    },
+    "dependencies": {
+        "vscode-debugadapter": "1.10.0",
+        "vscode-debugprotocol": "1.10.0"
+    }
+}
