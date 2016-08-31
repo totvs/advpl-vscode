@@ -1,14 +1,14 @@
 # advpl-vscode README
 
-Bem vindo a extensão para desenvolvimento de Advpl no visual code.
+Bem vindo a extensão para desenvolvimento de Advpl no visual code. [VsCode MarketPlace](https://github.com/killerall/advpl-vscode)
 
 Essa extensão adiciona suporte a edição, compilação e debugging de ADVPL no Visual Code.
 
-Caso você encontre algum problema, por favor abra uma issue no GitHub. 
+Caso você encontre algum problema, por favor abra uma issue no [GitHub](http://link). 
 
 > Atenção! Essa extensão não é desenvolvida ou suportada pela TOTVS. Utilize por sua conta e risco.
 
-> Veja um video explicando a configuração e uso dessa extensão em: xxxxxxxxxxx
+> Veja um video explicando a configuração e uso dessa extensão em:
 
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado aqui.
 
@@ -26,12 +26,12 @@ As próximas planejadas são:
 * Multi Thread Debug
 * Auto complete
 * Suporte a Mac e Linux
+* Geração e aplicação de Path
 
 
 ## Requisitos para utilização
 
-Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131327A ou superior, tendo essa versão de binário
-tanto o Protheus 11 e 12 são suportados.
+Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131327A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
 Essa extensão ainda não está disponível em MAC ou Linux. 
 
 ## Configurações da extensão
@@ -39,6 +39,9 @@ Essa extensão ainda não está disponível em MAC ou Linux.
 Essa extensão contribui com as seguintes configurações.
 
 * `advpl.smartClientPath`: Caminho completo para o diretório do smartclient. Esse diretório precisa possuir o apppre.exe e o smartclient.exe. Exemplo: `C:\\Protheus\\smartclient\\`
+* `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131327A
+* `advpl.server`: Server IP, Padrão: localhost                  
+* `advpl.port` : Porta do servidor
 * `advpl.environment`: Nome do ambiente que será feito o debug e a compilação
 * `advpl.language`: Língua do repositório, se não informado será português, valores permitidos: PORTUGUESE, ENGLISH, SPANISH
 * `advpl.rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
@@ -58,6 +61,22 @@ Caso você deseje pegar o ID utilizado pelo VSCODE para gerar uma nova chave, ve
 * `advpl.authorization_permission`: 1 - Para permitir substituir fontes TOTVS, 0 - para não pemitir
 * `advpl.authorization_code`: Chave de Autorização
 
+## Configurações
+
+Em breve será adicionado um video demonstrando como se configura a extensão toda.
+
+Caso você tenha conhecimento previo no VSCode, basta ir em Preferences -> User Settings e configurar as variaveis acima.
+
+## Teclas de Atalho padrões
+* CTRL + F9 - Compila o fonte atual
+* CTRL + F11 - Executa o smartClient sem debugar
+* F5  - Inicia o Debug
+# No Debug
+Utilizada as teclas padrões do VsCode
+* F5 - Run/Contiue
+* F10 - Step Into
+* F11 - Step Over
+
 
 ## Issues conhecidas
 
@@ -67,4 +86,7 @@ Caso você deseje pegar o ID utilizado pelo VSCODE para gerar uma nova chave, ve
 
 ### 0.0.1
 
-Versão inicial. 
+Versão inicial.
+
+### 0.0.4
+Correção da issue [2](https://github.com/killerall/advpl-vscode/issues/2)

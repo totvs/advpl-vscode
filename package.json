@@ -31,7 +31,7 @@
                 },
                 "advpl.serverVersion": {
                     "type": "string",
-                    "default": "131327A",
+                    "default": "131227A",
                     "description": "Versão do server"
                 },
                 "advpl.server": {
