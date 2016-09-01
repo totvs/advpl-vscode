@@ -45,7 +45,7 @@ export class advplCompile {
             child.on("exit",function(data){
                 var lRunned = data == 0
                 //console.log("exit: " + data);
-                vscode.window.showInformationMessage("Passoword:"+ that._lastAppreMsg);
+                vscode.window.showInformationMessage("Password:"+ that._lastAppreMsg);
             
             });
         }
