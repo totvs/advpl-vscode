@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.0.0"
@@ -139,7 +139,7 @@
             },
             {
                 "command": "advpl.getAuthorizationId",
-                "title": "Retorna o codigo da  authorization para ser solicitada pela Totvs."
+                "title": "Código Autorização para ser solicitada pela Totvs."
             },
             {
                 "command": "advpl.CipherPassword",

@@ -63,9 +63,7 @@ Caso você deseje pegar o ID utilizado pelo VSCODE para gerar uma nova chave, ve
 
 ## Configurações
 
-Em breve será adicionado um video demonstrando como se configura a extensão toda.
-
-Caso você tenha conhecimento previo no VSCode, basta ir em Preferences -> User Settings e configurar as variaveis acima.
+Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
 
 ## Teclas de Atalho padrões
 * CTRL + F9 - Compila o fonte atual
@@ -90,3 +88,10 @@ Versão inicial.
 
 ### 0.0.4
 Correção da issue [2](https://github.com/killerall/advpl-vscode/issues/2)
+
+### 0.0.5
+Melhorias nas messagens quando os diretorios da app esta errado
+Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)
+Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)
+Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)
+Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
