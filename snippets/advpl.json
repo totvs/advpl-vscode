@@ -1,0 +1,16 @@
+{
+	"Protheus doc" : {
+			"prefix": "protheusdoc"
+		,	"body": [
+				"//-------------------------------------------------------------------"
+			,	"/*/{Protheus.doc} ${function}"
+			,	"${description}"
+			,	"@author  ${author}"
+			,	"@since   ${date}"
+			,	"@version ${version}"
+			,	"/*/"
+			,	"//-------------------------------------------------------------------"
+			]
+		,	"description": "Protheus doc"
+	}
+}
