@@ -2,6 +2,7 @@ import * as process from 'child_process';
 import * as vscode from 'vscode';
 import {readFileSync,existsSync,unlinkSync,statSync} from 'fs';
 import {inspect}  from 'util';
+import {advplConsole}  from './advplConsole';
 
 export class advplCompile {
     private EnvInfos :string;
@@ -9,10 +10,12 @@ export class advplCompile {
     private _lastAppreMsg :string;
     private debugPath : string;
     private afterCompile
-    constructor(jSonInfos : string ,d : vscode.DiagnosticCollection)
+    private outChannel : advplConsole;
+    constructor(jSonInfos : string ,d : vscode.DiagnosticCollection, OutPutChannel)
     {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection =d ;
+        this.outChannel =  OutPutChannel;
         this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath+"\\bin\\AdvplDebugBridge.exe";
         //this.debugPath ="C:\\vscode\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
 //        this.debugPath ="D:\\vscode_advpl\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
@@ -45,8 +48,8 @@ export class advplCompile {
             child.on("exit",function(data){
                 var lRunned = data == 0
                 //console.log("exit: " + data);
-                vscode.window.showInformationMessage("Password:"+ that._lastAppreMsg);
-            
+                //vscode.window.showInformationMessage("Password:"+ that._lastAppreMsg);
+                that.outChannel.log("Password:"+ that._lastAppreMsg);
             });
         }
     });  
@@ -70,7 +73,8 @@ export class advplCompile {
         child.on("exit",function(data){
             var lRunned = data == 0
             console.log("exit: " + data);
-            vscode.window.showInformationMessage("ID:"+that._lastAppreMsg);
+           that.outChannel.log("ID:"+that._lastAppreMsg);
+            //vscode.window.showInformationMessage("ID:"+that._lastAppreMsg);
            
         });        
     }
@@ -78,6 +82,9 @@ export class advplCompile {
     {
         var that = this;
         var _args = new Array<string>()
+        
+         
+        this.outChannel.log("Iniciando compilação do fonte "+ sourceName + "\n");
         this.diagnosticCollection.clear();
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);        
@@ -112,9 +119,11 @@ export class advplCompile {
                if (source == "NOSOURCE")
                {
                 vscode.window.showInformationMessage(message);
+                this.outChannel.log("Erro: "+ message );
                }
                else
                {
+                this.outChannel.log("Compiler Erro." );
                 var range = new vscode.Range(lineIndex,0, lineIndex, 10);
                 let diagnosis = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error);
                 vscode.workspace.findFiles(source,"")
@@ -123,6 +132,7 @@ export class advplCompile {
             }
             else
             {
+                this.outChannel.log("Compilação OK");
                 this.afterCompile();
             }
         

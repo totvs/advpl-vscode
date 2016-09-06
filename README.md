@@ -95,3 +95,10 @@ Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)
 Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)
 Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)
 Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
+
+### 0.0.6
+* Implementação do console Advpl - As Messagens da extensão são mostradas nele agora.
+* Padronização dos comandos. Todos começam com Advpl para facilitar a busca.
+* Inicio da implementação de geração de patch(nada funcional ainda).
+* Snippets adicionados : Protheus DOC
+* Correções significativas na parte de debug, Correção de Access Violation que o debug as vezes causava no server.

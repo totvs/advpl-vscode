@@ -5,21 +5,32 @@
     "version": "0.0.5",
     "publisher": "KillerAll",
     "engines": {
-        "vscode": "^1.0.0"
+        "vscode": "^1.4.0"
     },
     "categories": [
         "Languages"
     ],
     "activationEvents": [
         "onCommand:advpl.startSmartClient",
+        "onCommand:advpl.menucompile",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
         "onCommand:advpl.getAuthorizationId",
-        "onCommand:advpl.CipherPassword"
+        "onCommand:advpl.CipherPassword",
+        "onCommand:advpl.patch.list",
+        "onCommand:advpl.patch.clear",
+        "onCommand:advpl.patch.build",
+        "onCommand:advpl.patch.selectSource"
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "menus": {
+		"explorer/context": [{
+			"when": "resourceLangId == advpl",
+			"command": "advpl.menucompile"
+		}]
+	},
         "configuration": {
             "type": "object",
             "title": "AdvplSuport configuration",
@@ -127,23 +138,46 @@
         "commands": [
             {
                 "command": "advpl.startSmartClient",
-                "title": "Run SmartClient Protheus"
+                "title": "Advpl - Execute -Run SmartClient Protheus"
+            },
+            {
+                "command": "advpl.menucompile",
+                "title": "Advpl - Compile Advpl Source"
             },
             {
                 "command": "advpl.compile",
-                "title": "Compile Advpl Source"
+                "title": "Advpl - Compiler -  Compile Advpl Source"
             },
             {
                 "command": "advpl.getDebugInfos",
-                "title": "Retorna as informações iniciais para o debug"
+                "title": "Advpl - Retorna as informações iniciais para o debug"
             },
             {
                 "command": "advpl.getAuthorizationId",
-                "title": "Código Autorização para ser solicitada pela Totvs."
+                "title": "Advpl - Compiler Auth ID - Código Autorização para ser solicitada pela Totvs."
             },
             {
                 "command": "advpl.CipherPassword",
-                "title": "Cipher Password - Criptografa a senha do usuario para conectar no appserver."
+                "title": "Advpl - Compiler Cipher -  Cipher Password - Criptografa a senha do usuario para conectar no appserver."
+            }
+            ,
+            {
+                "command": "advpl.patch.selectSource",
+                "title": "Advpl - Patch Select - Seleciona o fonte atual para a geração de um Patch(PTM)."
+            },
+            {
+                "command": "advpl.patch.build",
+                "title": "Advpl - Path Build - Gera um dos fontes selecionados Patch(PTM)."
+            }
+            ,
+            {
+                "command": "advpl.patch.clear",
+                "title": "Advpl - Path Clear - Limpa a lista de fontes seleciondados para a geração de  Patch(PTM)."
+            }
+            ,
+            {
+                "command": "advpl.patch.list",
+                "title": "Advpl - Patch List - Lista os fontes seleciondados para a geração de Patch(PTM)."
             }
         ],
         "keybindings": [
@@ -173,8 +207,8 @@
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
-                "windows": {
-                    "program": "./bin/AdvplDebugBridge.exe"
+                "windows": {                    
+                      "program": "./bin/AdvplDebugBridge.exe"                    
                 },
                 "configurationAttributes": {
                     "launch": {
@@ -221,7 +255,7 @@
                 },
                 "initialConfigurations": [
                     {
-                        "name": "Advpl-Debug",
+                        "name": "Advpl Debug",
                         "type": "advpl",
                         "request": "launch",
                         "args": [],
