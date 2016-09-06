@@ -13,7 +13,8 @@
 			]
 		,	"description": "Protheus doc"
 	},
-		"If": {
+	
+	"If": {
 		"prefix": "if",
 		"body": [
 		"If ${lCond}",
@@ -48,7 +49,7 @@
 	},
 	
 	"Case": {
-		"prefix": "case statement",
+		"prefix": "case",
 		"body": [
 		"Do Case",
 		"	Case (${lCond})",
@@ -61,17 +62,17 @@
 	},
 
 	"While": {
-		"prefix": "while statement",
+		"prefix": "while",
 		"body": [
 		"While (${lCond})",
 		"	$1",
-		"EndDo"
+		"End"
 		],
 		"description": "While Statement"
 	},
 
 	"For": {
-		"prefix": "for statement",
+		"prefix": "for",
 		"body": [
 		"For ${nX}:= 1 to Len(${aArray})",
 		"	$1",
