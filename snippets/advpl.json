@@ -14,7 +14,7 @@
 		,	"description": "Protheus doc"
 	},
 		"If": {
-		"prefix": "If",
+		"prefix": "if",
 		"body": [
 		"If ${lCond}",
 		"	$1",
@@ -23,8 +23,8 @@
 		"description": "If Statement"
 	},
 	
-	"If-Else": {
-		"prefix": "If-Else",
+	"If Else": {
+		"prefix": "if else",
 		"body": [
 		"If ${lCond}",
 		"	$1",
@@ -32,11 +32,11 @@
 		"	",
 		"EndIf"
 		],
-		"description": "If-Else Statement"
+		"description": "If Else Statement"
 	},
 
-	"If-ElseIf": {
-		"prefix": "If-ElseIf",
+	"If ElseIf": {
+		"prefix": "if elseif",
 		"body": [
 		"If ${lCond1}",
 		"	$1",
@@ -44,11 +44,11 @@
 		"	",
 		"EndIf"
 		],
-		"description": "If-ElseIf Statement"
+		"description": "If ElseIf Statement"
 	},
 	
 	"Case": {
-		"prefix": "Case Statement",
+		"prefix": "case statement",
 		"body": [
 		"Do Case",
 		"	Case (${lCond})",
@@ -61,7 +61,7 @@
 	},
 
 	"While": {
-		"prefix": "While Statement",
+		"prefix": "while statement",
 		"body": [
 		"While (${lCond})",
 		"	$1",
@@ -71,9 +71,8 @@
 	},
 
 	"For": {
-		"prefix": "For Statement",
+		"prefix": "for statement",
 		"body": [
-		"Local ${nX} := 0",
 		"For ${nX}:= 1 to Len(${aArray})",
 		"	$1",
 		"Next"
