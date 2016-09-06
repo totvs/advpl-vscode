@@ -267,6 +267,12 @@
                     }
                 ]
             }
+        ],
+        "snippets": [
+            {
+                "language": "advpl",
+                "path": "./snippets/advpl.json"
+            }
         ]
     },
     "scripts": {

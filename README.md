@@ -89,12 +89,12 @@ Versão inicial.
 ### 0.0.4
 Correção da issue [2](https://github.com/killerall/advpl-vscode/issues/2)
 
-### 0.0.5
-Melhorias nas messagens quando os diretorios da app esta errado
-Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)
-Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)
-Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)
-Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
+### 0.0.5  
+Melhorias nas menssagens quando os diretorios da app esta errado  
+Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)  
+Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)  
+Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)  
+Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)  
 
 ### 0.0.6
 * Implementação do console Advpl - As Messagens da extensão são mostradas nele agora.
@@ -102,3 +102,4 @@ Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
 * Inicio da implementação de geração de patch(nada funcional ainda).
 * Snippets adicionados : Protheus DOC
 * Correções significativas na parte de debug, Correção de Access Violation que o debug as vezes causava no server.
+
