@@ -25,7 +25,7 @@
 	},
 	
 	"If Else": {
-		"prefix": "if else",
+		"prefix": "ifelse",
 		"body": [
 		"If ${lCond}",
 		"	$1",
@@ -37,7 +37,7 @@
 	},
 
 	"If ElseIf": {
-		"prefix": "if elseif",
+		"prefix": "ifelseif",
 		"body": [
 		"If ${lCond1}",
 		"	$1",
