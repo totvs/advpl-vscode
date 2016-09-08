@@ -99,8 +99,6 @@ export class advplCompile {
         child.on("exit",function(data){
             var lRunned = data == 0
             console.log("exit: " + data);
-            
-            
            that.run_callBack(lRunned);
         });
         
@@ -132,6 +130,7 @@ export class advplCompile {
             }
             else
             {
+                this.outChannel.log("" + this._lastAppreMsg);
                 this.outChannel.log("Compilação OK");
                 this.afterCompile();
             }

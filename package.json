@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.4.0"
@@ -26,11 +26,13 @@
     "main": "./out/src/extension",
     "contributes": {
         "menus": {
-		"explorer/context": [{
-			"when": "resourceLangId == advpl",
-			"command": "advpl.menucompile"
-		}]
-	},
+            "explorer/context": [
+                {
+                    "when": "resourceLangId == advpl",
+                    "command": "advpl.menucompile"
+                }
+            ]
+        },
         "configuration": {
             "type": "object",
             "title": "AdvplSuport configuration",
@@ -159,8 +161,7 @@
             {
                 "command": "advpl.CipherPassword",
                 "title": "Advpl - Compiler Cipher -  Cipher Password - Criptografa a senha do usuario para conectar no appserver."
-            }
-            ,
+            },
             {
                 "command": "advpl.patch.selectSource",
                 "title": "Advpl - Patch Select - Seleciona o fonte atual para a geração de um Patch(PTM)."
@@ -168,13 +169,11 @@
             {
                 "command": "advpl.patch.build",
                 "title": "Advpl - Path Build - Gera um dos fontes selecionados Patch(PTM)."
-            }
-            ,
+            },
             {
                 "command": "advpl.patch.clear",
                 "title": "Advpl - Path Clear - Limpa a lista de fontes seleciondados para a geração de  Patch(PTM)."
-            }
-            ,
+            },
             {
                 "command": "advpl.patch.list",
                 "title": "Advpl - Patch List - Lista os fontes seleciondados para a geração de Patch(PTM)."
@@ -207,8 +206,8 @@
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
-                "windows": {                    
-                      "program": "./bin/AdvplDebugBridge.exe"                    
+                "windows": {
+                    "program": "../../cSharpDebug/AdvplDebugBridge/AdvplDebugBridge/AdvplDebugBridge/bin/Debug/AdvplDebugBridge.exe"
                 },
                 "configurationAttributes": {
                     "launch": {

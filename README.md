@@ -103,3 +103,7 @@ Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
 * Snippets adicionados : Protheus DOC
 * Correções significativas na parte de debug, Correção de Access Violation que o debug as vezes causava no server.
 
+### 0.0.7
+Correção das issues:
+Compilação com caracteres especiais - [14](https://github.com/killerall/advpl-vscode/issues/14)
+Avaliar Array no Debug - [20](https://github.com/killerall/advpl-vscode/issues/20)
