@@ -80,21 +80,17 @@ Utilizada as teclas padrões do VsCode
 
 * 1 [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1)- 
 
-## Release Notes
+## Release Notes  
 
-### 0.0.1
+### 0.0.8 
+Corrigido o caminho para o Debug  
 
-Versão inicial.
 
-### 0.0.4
-Correção da issue [2](https://github.com/killerall/advpl-vscode/issues/2)
-
-### 0.0.5  
-Melhorias nas menssagens quando os diretorios da app esta errado  
-Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)  
-Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)  
-Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)  
-Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)  
+### 0.0.7
+Correção das issues:  
+Compilação com caracteres especiais - [14](https://github.com/killerall/advpl-vscode/issues/14)  
+Avaliar Array no Debug - [20](https://github.com/killerall/advpl-vscode/issues/20)  
+* Snippets adicionados : Das estruturas basicas do ADVPL  
 
 ### 0.0.6
 * Implementação do console Advpl - As Messagens da extensão são mostradas nele agora.
@@ -103,7 +99,20 @@ Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)
 * Snippets adicionados : Protheus DOC
 * Correções significativas na parte de debug, Correção de Access Violation que o debug as vezes causava no server.
 
-### 0.0.7
-Correção das issues:
-Compilação com caracteres especiais - [14](https://github.com/killerall/advpl-vscode/issues/14)
-Avaliar Array no Debug - [20](https://github.com/killerall/advpl-vscode/issues/20)
+### 0.0.5  
+Melhorias nas menssagens quando os diretorios da app esta errado  
+Correção da issue [3](https://github.com/killerall/advpl-vscode/issues/3)  
+Correção da issue [7](https://github.com/killerall/advpl-vscode/issues/7)  
+Correção da issue [9](https://github.com/killerall/advpl-vscode/issues/9)  
+Correção da issue [10](https://github.com/killerall/advpl-vscode/issues/10)  
+
+### 0.0.4
+Correção da issue [2](https://github.com/killerall/advpl-vscode/issues/2)
+
+
+
+### 0.0.1
+
+Versão inicial.
+
+

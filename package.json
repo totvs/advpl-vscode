@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.4.0"
@@ -207,7 +207,7 @@
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
                 "windows": {
-                    "program": "../../cSharpDebug/AdvplDebugBridge/AdvplDebugBridge/AdvplDebugBridge/bin/Debug/AdvplDebugBridge.exe"
+                       "program": "./bin/AdvplDebugBridge.exe"
                 },
                 "configurationAttributes": {
                     "launch": {
