@@ -32,10 +32,10 @@ function getProgramName()
 {
    let disposable = vscode.commands.registerCommand('advpl.getProgramName', () => {
         var startProgram = vscode.workspace.getConfiguration("advpl").get<string>("startProgram");
-		return vscode.window.showInputBox({
-			placeHolder: "Informe o program",
-			value: startProgram
-		});
+		//value: startProgram/
+        const p = vscode.window.showInputBox({placeHolder: "Informe o program"});
+        
+        return p;
 	});
     return disposable;
 }

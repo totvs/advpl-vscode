@@ -2,10 +2,10 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "publisher": "KillerAll",
     "engines": {
-        "vscode": "^1.4.0"
+        "vscode": "^1.5.0"
     },
     "categories": [
         "Languages"
@@ -207,19 +207,20 @@
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
                 "windows": {
-                       "program": "./bin/AdvplDebugBridge.exe"
+                    "program": "./bin/AdvplDebugBridge.exe"    
                 },
+                
                 "configurationAttributes": {
                     "launch": {
                         "required": [
-                            "program",
+                            "programRun",
                             "enviromentInfo"
                         ],
                         "properties": {
-                            "program": {
+                            "programRun": {
                                 "type": "string",
                                 "description": "Programa para Debugar.",
-                                "default": "${workspaceRoot}/${command.AskForProgramName}"
+                                "default": "${command.AskForProgramName}"                                
                             },
                             "stopOnEntry": {
                                 "type": "boolean",
@@ -259,7 +260,7 @@
                         "request": "launch",
                         "args": [],
                         "cwd": "${workspaceRoot}",
-                        "program": "${command.AskForProgramName}",
+                        "programRun": "${command.AskForProgramName}",
                         "stopOnEntry": false,
                         "enviromentInfo": "${command.GetEnvInfos}",
                         "workspace": "${workspaceRoot}/"
@@ -281,10 +282,12 @@
     },
     "devDependencies": {
         "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "vscode": "^0.11.13",
+        
+		"vscode-debugadapter-testsupport": "^1.12.0"
     },
     "dependencies": {
-        "vscode-debugadapter": "1.10.0",
-        "vscode-debugprotocol": "1.10.0"
+        "vscode-debugprotocol": "^1.12.0",
+        "vscode-debugadapter": "^1.12.0"                
     }
 }

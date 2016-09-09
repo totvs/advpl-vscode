@@ -82,6 +82,14 @@ Utilizada as teclas padrões do VsCode
 
 ## Release Notes  
 
+### 0.0.9 
+
+* Alterado o lunch de debug, pois na versão liberada no VSCODE 1.5 caso carregue o valor padrão da rotina para se debugar, ele naão chama o debug.
+* Por hora não ira sugerir nenhuma rotina
+* Corrigido a avaliação de arrays no watchs.
+
+
+
 ### 0.0.8 
 Corrigido o caminho para o Debug  
 
