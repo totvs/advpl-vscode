@@ -82,7 +82,7 @@
 			<key>comment</key>
 			<string>logical</string>
 			<key>match</key>
-			<string>(?i)\b(nil)</string>
+			<string>(?i)\b(nil|\.t\.|\.f\.|\.and\.|\.or\.|\.not\.)</string>
 			<key>name</key>
 			<string>constant.numeric.advpl</string>
 		</dict>
