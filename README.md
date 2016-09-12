@@ -31,7 +31,7 @@ As próximas planejadas são:
 
 ## Requisitos para utilização
 
-Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131327A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
+Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
 Essa extensão ainda não está disponível em MAC ou Linux. 
 
 ## Configurações da extensão
@@ -39,7 +39,7 @@ Essa extensão ainda não está disponível em MAC ou Linux.
 Essa extensão contribui com as seguintes configurações.
 
 * `advpl.smartClientPath`: Caminho completo para o diretório do smartclient. Esse diretório precisa possuir o apppre.exe e o smartclient.exe. Exemplo: `C:\\Protheus\\smartclient\\`
-* `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131327A
+* `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
 * `advpl.server`: Server IP, Padrão: localhost                  
 * `advpl.port` : Porta do servidor
 * `advpl.environment`: Nome do ambiente que será feito o debug e a compilação
@@ -81,6 +81,11 @@ Utilizada as teclas padrões do VsCode
 * 1 [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1)- 
 
 ## Release Notes  
+### 0.0.10 
+
+* Corrigido a data e hora do fonte na compilação [23](https://github.com/killerall/advpl-vscode/issues/23)
+* Correção do Readme, a versão do server informada estava errada.
+* Melhorias de operadores na Syntax highlighting [24](https://github.com/killerall/advpl-vscode/pull/24)
 
 ### 0.0.9 
 
