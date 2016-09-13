@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.5.0"
@@ -289,10 +289,10 @@
         "vscode-debugadapter": "^1.12.0"
     },
     "repository": {
-		"type": "git",
-		"url": "https://github.com/killerall/advpl-vscode.git"
-	},
-	"bugs": {
-		"url": "https://github.com/killerall/advpl-vscode/issues"
-	}
+        "type": "git",
+        "url": "https://github.com/killerall/advpl-vscode.git"
+    },
+    "bugs": {
+        "url": "https://github.com/killerall/advpl-vscode/issues"
+    }
 }
