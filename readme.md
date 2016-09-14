@@ -2,6 +2,8 @@
 
 Essa extensão adiciona suporte a edição, compilação e debugging de ADVPL no Visual Code.
 
+> Atenção! Essa extensão não é desenvolvida ou suportada pela TOTVS. Utilize por sua conta e risco.
+
 ## Development setup
 - run npm install inside the `advpl` and `advpl-server` folders
 - open VS Code on `advpl` and `advpl-server`
