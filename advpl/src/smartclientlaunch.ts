@@ -1,9 +1,9 @@
-import * as process from 'child_process';
+import * as child_process from 'child_process';
 import * as vscode from 'vscode';
 
 export class smartClientLaunch
 {
-    private _Process: process.ChildProcess;
+    private _Process: child_process.ChildProcess;
 	private _Path: string;
 
 	private _output: vscode.OutputChannel;
@@ -11,13 +11,25 @@ export class smartClientLaunch
     private _args = new Array<string>()
     constructor(path:string)
     {
-        this._Path = path;
-        this._args.push('-M');
+        this._Path = path;        
     }
     public start() {
-        this._Process = process.spawn(this._Path, this._args);
+        if(process.platform == "darwin")
+        {
+            this._args.push(this._Path + "smartclient.app");
+            this._Process = child_process.execFile("open", this._args);
+
+        }
+        else
+        {
+            this._args.push('-M');
+            this._Process = child_process.spawn( this._Path + "smartclient.exe", this._args);
+        }
         
-    }
+        
+    }   
+    /*
+    Precisa implementar para MAC Diferente
     public setProgram(program :string) :void{
         this.addArg('-P='+program);
     }
@@ -34,4 +46,5 @@ export class smartClientLaunch
     private addArg (value : string) :void{
         this._args.push(value);
     }
+    */
 }
