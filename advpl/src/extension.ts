@@ -3,6 +3,8 @@ import * as vscode from 'vscode';
 import {advplCompile} from './advplCompile';
 import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
+import * as path from 'path';
+import { LanguageClient, LanguageClientOptions, SettingMonitor, ServerOptions, TransportKind } from 'vscode-languageclient';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 export function activate(context: vscode.ExtensionContext) {
@@ -22,6 +24,11 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathClear());
     context.subscriptions.push(PathList());
+
+
+    //Configuração do Language Server
+    context.subscriptions.push(LanguageServer(context))
+
 
 }
 
@@ -156,4 +163,30 @@ return disposable;
 
 
 
-
+function LanguageServer( context ){
+  	// The server is implemented in node
+	let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
+	// The debug options for the server
+	let debugOptions = { execArgv: ["--nolazy", "--debug=6004"] };
+	
+	// If the extension is launched in debug mode then the debug server options are used
+	// Otherwise the run options are used
+	let serverOptions: ServerOptions = {
+		run : { module: serverModule, transport: TransportKind.ipc },
+		debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
+	}
+	
+	// Options to control the language client
+	let clientOptions: LanguageClientOptions = {
+		// Register the server for plain text documents
+		documentSelector: ['advpl'],
+		synchronize: {
+			// Notify the server about file changes to '.clientrc files contain in the workspace
+			fileEvents: vscode.workspace.createFileSystemWatcher('**/.clientrc')
+		}
+	}
+	
+	// Create the language client and start the client.
+	let disposable = new LanguageClient('Advpl Language Server', serverOptions, clientOptions).start();
+    return disposable;  
+}

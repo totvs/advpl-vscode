@@ -1,0 +1,23 @@
+{
+    "name": "advpl-vscode-server",
+    "description": "Advpl Language server implementation in node for vscode",
+    "version": "0.0.1",
+    "publisher": "KillerAll",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "dependencies": {
+        "vscode-languageserver": "^2.2.0",
+        "vscode-languageserver-types": "^1.0.3"
+    },
+    "devDependencies": {
+        "typescript": "^1.8.9"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "scripts": {
+        "compile": "installServerIntoExtension ../advpl ./package.json ./tsconfig.json && tsc -p .",
+        "watch": "installServerIntoExtension ../advpl ./package.json ./tsconfig.json && tsc --watch -p ."
+    }
+}

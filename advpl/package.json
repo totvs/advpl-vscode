@@ -21,7 +21,8 @@
         "onCommand:advpl.patch.list",
         "onCommand:advpl.patch.clear",
         "onCommand:advpl.patch.build",
-        "onCommand:advpl.patch.selectSource"
+        "onCommand:advpl.patch.selectSource",
+        "onLanguage:advpl"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -286,7 +287,8 @@
     },
     "dependencies": {
         "vscode-debugprotocol": "^1.12.0",
-        "vscode-debugadapter": "^1.12.0"
+        "vscode-debugadapter": "^1.12.0",
+        "vscode-languageclient": "^2.2.1"
     },
     "repository": {
         "type": "git",
