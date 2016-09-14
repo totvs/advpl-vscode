@@ -48,7 +48,7 @@ let disposable = vscode.commands.registerCommand('advpl.startSmartClient', () =>
         
         var scPath :string; 
         scPath = vscode.workspace.getConfiguration("advpl").get<string>("smartClientPath");
-        scPath += "smartclient.exe";
+       // scPath += "smartclient.exe";
         var obj2  = new smartClientLaunch(scPath);
         obj2.start();
     });
