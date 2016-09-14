@@ -1,4 +1,4 @@
-import * as process from 'child_process';
+import * as child_process from 'child_process';
 import * as vscode from 'vscode';
 import {readFileSync,existsSync,unlinkSync,statSync} from 'fs';
 import {inspect}  from 'util';
@@ -16,7 +16,16 @@ export class advplCompile {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection =d ;
         this.outChannel =  OutPutChannel;
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath+"\\bin\\AdvplDebugBridge.exe";
+        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
+        if(process.platform == "darwin")
+        {
+            this.debugPath += "/bin/AdvplDebugBridgeMac";
+        }
+        else
+        {
+            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
+        }
+        
         //this.debugPath ="C:\\vscode\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
 //        this.debugPath ="D:\\vscode_advpl\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
 /*        if(serverVersion === "131327A")
@@ -39,7 +48,7 @@ export class advplCompile {
         {      
             _args.push("--CipherPassword="+info);
 
-            var child = process.spawn(this.debugPath,_args);
+            var child = child_process.spawn(this.debugPath,_args);
             child.stdout.on("data",function(data){
         
             that._lastAppreMsg = data;
@@ -64,7 +73,7 @@ export class advplCompile {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--getId");
 
-        var child = process.spawn(this.debugPath,_args);
+        var child = child_process.spawn(this.debugPath,_args);
         child.stdout.on("data",function(data){
       
            that._lastAppreMsg = data;
@@ -89,7 +98,7 @@ export class advplCompile {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);        
         
-        var child = process.spawn(this.debugPath,_args);
+        var child = child_process.spawn(this.debugPath,_args);
      
         child.stdout.on("data",function(data){
       
