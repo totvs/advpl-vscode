@@ -11,27 +11,25 @@ export class smartClientLaunch
     private _args = new Array<string>()
     constructor(path:string)
     {
-        this._Path = path;
-        this._args.push('-M');
+        this._Path = path;        
     }
     public start() {
-        this._Process = child_process.spawn(this.getRunCommand(), this._args);
-        
-    }
-    private getRunCommand():string
-    {
-        var command : string;
         if(process.platform == "darwin")
         {
-            command ="open " + this._Path + "smartclient.app --args" ;
+            this._args.push(this._Path + "smartclient.app");
+            this._Process = child_process.execFile("open", this._args);
+
         }
         else
         {
-            command = this._Path + "smartclient.exe";
+            this._args.push('-M');
+            this._Process = child_process.spawn( this._Path + "smartclient.exe", this._args);
         }
-        return command;
-
-    }
+        
+        
+    }   
+    /*
+    Precisa implementar para MAC Diferente
     public setProgram(program :string) :void{
         this.addArg('-P='+program);
     }
@@ -48,5 +46,5 @@ export class smartClientLaunch
     private addArg (value : string) :void{
         this._args.push(value);
     }
-    
+    */
 }
