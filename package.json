@@ -209,6 +209,9 @@
                 "windows": {
                     "program": "./bin/AdvplDebugBridge.exe"
                 },
+                "osx":{
+                    "program": "./bin/AdvplDebugBridgeMac"
+                },
                 "configurationAttributes": {
                     "launch": {
                         "required": [

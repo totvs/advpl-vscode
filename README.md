@@ -38,7 +38,13 @@ Essa extensão ainda não está disponível em MAC ou Linux.
 
 Essa extensão contribui com as seguintes configurações.
 
-* `advpl.smartClientPath`: Caminho completo para o diretório do smartclient. Esse diretório precisa possuir o apppre.exe e o smartclient.exe. Exemplo: `C:\\Protheus\\smartclient\\`
+* `advpl.smartClientPath`: Caminho completo para o diretório do smartclient. Esse diretório precisa possuir o apppre.exe e o smartclient.exe. 
+
+Exemplo: `C:\\Protheus\\smartclient\\`
+No caso de OSX:
+Exemplo: `/Applications/`
+
+
 * `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
 * `advpl.server`: Server IP, Padrão: localhost                  
 * `advpl.port` : Porta do servidor
@@ -81,6 +87,9 @@ Utilizada as teclas padrões do VsCode
 * 1 [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1)- 
 
 ## Release Notes  
+### 0.1.0
+* Liberação Alpha da versão em OSX, não é possivel compilar ainda, apenas debugar.
+
 ### 0.0.10 
 
 * Corrigido a data e hora do fonte na compilação [23](https://github.com/killerall/advpl-vscode/issues/23)
