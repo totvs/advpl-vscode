@@ -69,14 +69,13 @@ connection.onDidChangeTextDocument((params) => {
 	
 });
 
-function parseText(input: String, uri: string){
+function parseText(input: string, uri: string){
 	const antlr4 = require('antlr4');
 	const AdvplLexer=require("./parser/generated/AdvplLexer");
 	const AdvplParser=require("./parser/generated/AdvplParser");
 	let diagnostics: Diagnostic[] = [];
 	
-	var chars = new InputStream(input.toUpperCase());
-	chars.filename = uri;
+	var chars = new InputStream(input);
 	var lexer = new AdvplLexer.AdvplLexer(chars);
 	lexer.removeErrorListeners();
 	var tokens  = new antlr4.CommonTokenStream(lexer);

@@ -2,10 +2,10 @@ import InputStream from './InputStream';
 const Token = require('antlr4').Token;
 
 export default class NoCaseInputStream extends InputStream{
-    filename: String;
-	constructor(input){
+    lookaheadData: number[];
+	constructor(input: string){
 		super(input);
-		this.filename = "teste";
+		this.lookaheadData = input.toUpperCase().split("").map((char)=>char.charCodeAt(0));
 	}
 	LA(offset) :number {
 		if (offset === 0) {
@@ -18,9 +18,7 @@ export default class NoCaseInputStream extends InputStream{
 		if (pos < 0 || pos >= this._size) { // invalid
 			return Token.EOF;
 		}
-		let str: String = String.fromCharCode(this.data[pos]);
-		//console.log(str);
-		//console.log(str.toUpperCase());
-		return this.data[pos];//.toUpperCase().charCodeAt(0);
+		
+		return this.lookaheadData[pos];
 	};
 }
