@@ -13,6 +13,7 @@
     "activationEvents": [
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
+        "onCommand:advpl.menucompilemulti",        
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
@@ -28,8 +29,12 @@
         "menus": {
             "explorer/context": [
                 {
-                    "when": "resourceLangId == advpl",
+                    "when": "fold",
                     "command": "advpl.menucompile"
+                }
+                , {
+                 
+                    "command": "advpl.menucompilemulti"
                 }
             ]
         },
@@ -111,6 +116,11 @@
                     "type": "string",
                     "default": "",
                     "description": "Chave de compilação"
+                },
+                "advpl.compileFolderRegex": {
+                    "type": "string",
+                    "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|tres)",
+                    "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 }
             }
         },
@@ -145,6 +155,10 @@
             {
                 "command": "advpl.menucompile",
                 "title": "Advpl - Compile Advpl Source"
+            },
+            {
+                "command": "advpl.menucompilemulti",
+                "title": "Advpl - Compile Folder"
             },
             {
                 "command": "advpl.compile",

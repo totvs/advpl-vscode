@@ -20,19 +20,21 @@ Essa extensão possui as seguintes features implementadas:
 * Compilação de fonte
 * Chave de Compilação
 * Debug single Thread  
+* Compilação de multiplos fontes
 
 As próximas planejadas são:
-* Compilação de multiplos fontes
-* Multi Thread Debug
-* Auto complete
-* Suporte a Mac e Linux
+
 * Geração e aplicação de Path
+* Auto complete
+* Multi Thread Debug
+* Mac e Linux
+
 
 
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
-Essa extensão ainda não está disponível em MAC ou Linux. 
+Essa extensão ainda não está disponível no Linux. Em OSX o suporte do editor e do debug já esta funcional. 
 
 ## Configurações da extensão
 
@@ -57,7 +59,7 @@ Exemplo: `/Applications/`
     
 * `advpl.includeList`: Lista de diretórios separado por ponto-e-vírugla. Exemplo: `C:\\Protheus\\include\\;C:\\Protheus\\include_2\\`
 * `advpl.startProgram`: Módulo ou função que será sugerido no launch do Debug
-
+* `compileFolderRegex`: Regex que ira validar se na compilação de folders, o arquivo irá ser compilado ou não.
 
 
 As variáveis abaixo devem ser preenchidas caso você tenha uma senha de compilação.
@@ -88,7 +90,10 @@ Utilizada as teclas padrões do VsCode
 
 ## Release Notes  
 ### 0.1.0
+
 * Liberação Alpha da versão em OSX, não é possivel compilar ainda, apenas debugar.
+* [Compilação de pastas](https://github.com/killerall/advpl-vscode/issues/18). Liberada a função de compilar um pasta inteira. Para utiliza, na barra lateral, escolha a pasta que deseja compilar, clique com o botão direito em Advpl - Compile Folder.
+O comando iria compilar a pasta e suas sub-pastas, respeitando o Regex configurado em `compileFolderRegex`. 
 
 ### 0.0.10 
 
@@ -98,7 +103,7 @@ Utilizada as teclas padrões do VsCode
 
 ### 0.0.9 
 
-* Alterado o lunch de debug, pois na versão liberada no VSCODE 1.5 caso carregue o valor padrão da rotina para se debugar, ele naão chama o debug.
+* Alterado o lunch de debug, pois na versão liberada no VSCODE 1.5 caso carregue o valor padrão da rotina para se debugar, ele não chama o debug.
 * Por hora não ira sugerir nenhuma rotina
 * Corrigido a avaliação de arrays no watchs.
 
