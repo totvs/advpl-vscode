@@ -36,8 +36,8 @@
 // At this time TypeScript 2.0 is still in Beta pre-relase.
 
  interface IntStream {
-    /*readonly*/ index: number;
-    /*readonly*/ size: number;
+    /*readonly*/ _index: number;
+    /*readonly*/ _size: number;
 
     mark(): number;
     release( marker: number );
@@ -49,10 +49,12 @@
 }
 
 declare class InputStream implements CharStream {
-    public /*readonly*/ index: number;
-    public /*readonly*/ size: number;
+    public /*readonly*/ _index: number;
+    public /*readonly*/ _size: number;
+    public data: Array<number>;
 
     constructor( text: string );
+    InputStream(): InputStream;
     public mark(): number;
     public release( marker: number );
     public seek( index: number );
@@ -79,8 +81,8 @@ declare class Recognizer {
     constructor()
 
     // getVocabulary(): Vocabulary;
-    public getTokenTypeMap(): Map< string, number >;
-    public getRuleIndexMap(): Map< string, number >;
+    //public getTokenTypeMap(): Map< string, number >;
+    //public getRuleIndexMap(): Map< string, number >;
     public getTokenType( tokenName: string ): number;
     public getSerializedATN(): string;
     public getGrammarFileName(): string;
@@ -178,8 +180,8 @@ declare class Lexer extends Recognizer {
 }
 
 declare class BufferedTokenStream implements TokenStream {
-    public /*readonly*/ index: number;
-    public /*readonly*/ size: number;
+    public /*readonly*/ _index: number;
+    public /*readonly*/ _size: number;
 
     constructor( tokenSource: TokenSource );
 
@@ -225,12 +227,15 @@ declare interface TokenSource {
     getCharPositionInLine(): number;
 }
 
+
 declare enum TokenType {
     EPSILON = -2,
     EOF = -1,
     INVALID_TYPE = 0,
     MIN_USER_TOKEN_TYPE = 1,
 }
+
+
 
 declare enum Channel {
     DEFAULT_CHANNEL = 0,
@@ -252,4 +257,12 @@ declare interface Token {
                  getInputStream(): CharStream;
                  getTokenSource(): TokenSource;
 
+}
+
+//Error listener
+declare class ErrorListener {
+    syntaxError(recognizer: any, offendingSymbol: any, line: any, column: any, msg: any, e: any): any;
+    reportAmbiguity(): any;
+    reportAttemptingFullContext(): any;
+    reportContextSensitivity(): any;
 }
