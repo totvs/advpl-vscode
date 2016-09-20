@@ -100,8 +100,9 @@ export class advplCompile {
         this.outChannel.log("Iniciando compilação da Pasta e sub-Pastas "+ folder + "\n");
         this.diagnosticCollection.clear();
         //var regex = /.*\.(prw|prx)/i;        
-        var regex = new RegExp(vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex"),"i");
-        var files = this.walk(folder,regex);
+        var regex = vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
+        //var files = this.walk(folder,regex);
+        var files = folder + "ª" + regex;
         this.genericCompile(files);    
         
     }
