@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.0.10",
+    "version": "0.1.2",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.5.0"
@@ -13,7 +13,7 @@
     "activationEvents": [
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
-        "onCommand:advpl.menucompilemulti",        
+        "onCommand:advpl.menucompilemulti",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
@@ -31,9 +31,8 @@
                 {
                     "when": "fold",
                     "command": "advpl.menucompile"
-                }
-                , {
-                 
+                },
+                {
                     "command": "advpl.menucompilemulti"
                 }
             ]
@@ -223,7 +222,7 @@
                 "windows": {
                     "program": "./bin/AdvplDebugBridge.exe"
                 },
-                "osx":{
+                "osx": {
                     "program": "./bin/AdvplDebugBridgeMac"
                 },
                 "configurationAttributes": {
