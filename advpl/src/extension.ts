@@ -4,6 +4,7 @@ import {advplCompile} from './advplCompile';
 import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
 import * as path from 'path';
+import * as fs from 'fs';
 import { LanguageClient, LanguageClientOptions, SettingMonitor, ServerOptions, TransportKind } from 'vscode-languageclient';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
@@ -16,6 +17,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(addGetDebugInfosCommand());
     context.subscriptions.push(compile());
     context.subscriptions.push(menucompile());
+    context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
 
@@ -75,6 +77,35 @@ let disposable = vscode.commands.registerCommand('advpl.menucompile', function (
                     vscode.window.setStatusBarMessage('Source ' + cSource + ' Compiled!!! :D',3000);
                 });
                 compile.compile(cSource);
+
+});
+return disposable;
+}
+function menucompilemulti()
+{
+   
+let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', function (context)  {
+        
+        //var editor = vscode.window.activeTextEditor;
+        var cResource = context._fsPath;
+        if(fs.lstatSync(cResource).isDirectory())
+        {
+            vscode.window.setStatusBarMessage('Starting advpl folder compiler...' + cResource,3000);
+              var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+                compile.setAfterCompileOK(function (){            
+                    vscode.window.setStatusBarMessage('Folder ' + cResource + ' Compiled!!! :D',3000);
+                });
+                compile.compileFolder(cResource);
+        }
+            
+        else
+            vscode.window.showInformationMessage('Por favor selecione uma pasta.') ;
+      /*  var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+                compile.setAfterCompileOK(function (){
+                   // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
+                    vscode.window.setStatusBarMessage('Source ' + cSource + ' Compiled!!! :D',3000);
+                });
+                compile.compile(cSource);*/
 
 });
 return disposable;

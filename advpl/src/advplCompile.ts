@@ -3,7 +3,7 @@ import * as vscode from 'vscode';
 import {readFileSync,existsSync,unlinkSync,statSync} from 'fs';
 import {inspect}  from 'util';
 import {advplConsole}  from './advplConsole';
-
+import * as fs from 'fs';
 export class advplCompile {
     private EnvInfos :string;
     private diagnosticCollection :  vscode.DiagnosticCollection;
@@ -89,12 +89,27 @@ export class advplCompile {
     }
     public compile(sourceName:string)
     {
-        var that = this;
-        var _args = new Array<string>()
-        
-         
+                
         this.outChannel.log("Iniciando compilação do fonte "+ sourceName + "\n");
         this.diagnosticCollection.clear();
+        this.genericCompile(sourceName );
+        
+    }
+    public compileFolder(folder:string)
+    {
+        this.outChannel.log("Iniciando compilação da Pasta e sub-Pastas "+ folder + "\n");
+        this.diagnosticCollection.clear();
+        //var regex = /.*\.(prw|prx)/i;        
+        var regex = vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
+        //var files = this.walk(folder,regex);
+        var files = folder + "ª" + regex;
+        this.genericCompile(files);    
+        
+    }
+    private genericCompile(sourceName :string )
+    {
+         var _args = new Array<string>()
+         var that = this;
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);        
         
@@ -110,8 +125,31 @@ export class advplCompile {
             console.log("exit: " + data);
            that.run_callBack(lRunned);
         });
-        
     }
+    public  walk(dir : string,regex){
+    var results = "";
+    var list = fs.readdirSync(dir);
+    for(var i in list) {
+        var file = dir + '/' + list[i];
+        var stat = fs.statSync(file);
+        if (stat && stat.isDirectory()) 
+            results += "|" + this.walk(file,regex);
+        else 
+        {
+            if(file.match(regex))
+            {
+                this.outChannel.log("Compilando:" +file );
+                results += file + "|";
+            }
+            else
+            {
+                this.outChannel.log("Pulando " +file );
+            }
+                
+        }
+    }
+    return results;
+};
     private run_callBack(lOk)
     {
         
