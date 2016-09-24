@@ -193,7 +193,6 @@ return disposable;
 }
 
 
-
 function LanguageServer( context ){
   	// The server is implemented in node
 	let serverModule = context.asAbsolutePath(path.join('server', 'server.js'));
@@ -206,18 +205,19 @@ function LanguageServer( context ){
 		run : { module: serverModule, transport: TransportKind.ipc },
 		debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
 	}
-	
+	//var path = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath + "\\bin\\"
 	// Options to control the language client
 	let clientOptions: LanguageClientOptions = {
 		// Register the server for plain text documents
 		documentSelector: ['advpl'],
 		synchronize: {
-			// Notify the server about file changes to '.clientrc files contain in the workspace
+			configurationSection: 'languageServerAdvpl',
+            // Notify the server about file changes to '.clientrc files contain in the workspace
 			fileEvents: vscode.workspace.createFileSystemWatcher('**/.clientrc')
 		}
 	}
 	
-	// Create the language client and start the client.
+    	// Create the language client and start the client.
 	let disposable = new LanguageClient('Advpl Language Server', serverOptions, clientOptions).start();
     return disposable;  
 }

@@ -18,7 +18,7 @@
     "Languages"
   ],
   "scripts": {
-    "compile": "installServerIntoExtension ../advpl ./package.json ./tsconfig.json && tsc -p . && copy .\\src\\parser\\generated\\*.js ..\\advpl\\server\\parser\\generated\\",
+    "compile": "installServerIntoExtension ../advpl ./package.json ./tsconfig.json && tsc -p . ",
     "watch": "installServerIntoExtension ../advpl ./package.json ./tsconfig.json && tsc --watch -p ."
   }
 }

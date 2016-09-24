@@ -122,6 +122,12 @@
                     "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|tres)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 }
+                ,
+                "languageServerAdvpl.advplParserPath":{
+                    "type": "string",
+                    "default": "C:\\vscode\\advpl-vscode\\advpl\\bin\\",
+                    "description": "advplParserPath"
+                }
             }
         },
         "languages": [
