@@ -121,6 +121,12 @@
                     "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|tres)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 }
+                ,
+                "advpl.pathPatchBuild": {
+                    "type": "string",
+                    "default": "/patch/",
+                    "description": "Path do server que deve existir para geracao de patchs"
+                }
             }
         },
         "languages": [

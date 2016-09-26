@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import {advplCompile} from './advplCompile';
 import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
+import {advplPatch} from './advplPatch';
 import * as fs from 'fs';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
@@ -165,6 +166,8 @@ function PathBuild()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
+            var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+            patch.build();
     });
 return disposable;
 }
