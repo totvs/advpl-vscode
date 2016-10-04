@@ -48,4 +48,28 @@ export class advplPatch {
         });        
     }
 
+     public apply(patchApply : string)
+    {
+        var _args = new Array<string>();
+        var that = this;        
+                
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--patchApply="+ patchApply);
+
+        var child = child_process.spawn(this.debugPath,_args);
+        child.stdout.on("data",function(data){
+      
+           that.consoleReturn = data;
+        });
+        
+
+        child.on("exit",function(data){
+            var lRunned = data == 0
+            console.log("exit: " + data);
+           that.outChannel.log("ID:"+that.consoleReturn);
+            //vscode.window.showInformationMessage("ID:"+that._lastAppreMsg);
+           
+        });        
+    }
+
 }

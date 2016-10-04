@@ -19,6 +19,7 @@
         "onCommand:advpl.getDebugInfos",
         "onCommand:advpl.getAuthorizationId",
         "onCommand:advpl.CipherPassword",
+        "onCommand:advpl.patch.apply",
         "onCommand:advpl.patch.list",
         "onCommand:advpl.patch.clear",
         "onCommand:advpl.patch.build",
@@ -34,6 +35,9 @@
                 },
                 {
                     "command": "advpl.menucompilemulti"
+                },                
+                {
+                    "command": "advpl.patch.apply"
                 }
             ]
         },
@@ -124,8 +128,8 @@
                 ,
                 "advpl.pathPatchBuild": {
                     "type": "string",
-                    "default": "/patch/",
-                    "description": "Path do server que deve existir para geracao de patchs"
+                    "default": "c:\\patchs\\",
+                    "description": "Path do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, sera sobrescrito."
                 }
             }
         },
@@ -184,6 +188,10 @@
             {
                 "command": "advpl.patch.selectSource",
                 "title": "Advpl - Patch Select - Seleciona o fonte atual para a geração de um Patch(PTM)."
+            },
+            {
+                "command": "advpl.patch.apply",
+                "title": "Advpl - Path Apply - Aplica um Patch(PTM)."
             },
             {
                 "command": "advpl.patch.build",

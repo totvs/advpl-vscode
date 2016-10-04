@@ -22,6 +22,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     //Binds dos comandos de patch
     context.subscriptions.push(PathSelectSource());
+    context.subscriptions.push(PathApply());
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathClear());
     context.subscriptions.push(PathList());
@@ -153,7 +154,9 @@ let disposable = vscode.commands.registerCommand('advpl.CipherPassword', functio
     });
 return disposable;
 }
-
+/***
+ * Patchs
+ */
 function PathSelectSource() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectSource', function (context)  {
@@ -161,7 +164,20 @@ let disposable = vscode.commands.registerCommand('advpl.patch.selectSource', fun
     });
 return disposable;
 }
-
+function PathApply() 
+{
+let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (context)  {
+            var cResource = context._fsPath;
+            if(fs.lstatSync(cResource).isFile())
+            {
+                vscode.window.showInformationMessage("Não implementado ainda.");
+                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+                patch.apply(cResource);
+                
+            }
+    });
+return disposable;
+}
 function PathBuild() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {
