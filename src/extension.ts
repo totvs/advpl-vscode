@@ -7,6 +7,7 @@ import {advplPatch} from './advplPatch';
 import * as fs from 'fs';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
+let fileToBuildPath;
 export function activate(context: vscode.ExtensionContext) {
 
     
@@ -24,8 +25,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
     context.subscriptions.push(PathBuild());
-    context.subscriptions.push(PathClear());
-    context.subscriptions.push(PathList());
+    context.subscriptions.push(PathSelectFolder());
+    context.subscriptions.push(PathFileToBuild());
 
 }
 
@@ -170,36 +171,59 @@ let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (
             var cResource = context._fsPath;
             if(fs.lstatSync(cResource).isFile())
             {
-                vscode.window.showInformationMessage("Não implementado ainda.");
                 var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
                 patch.apply(cResource);
                 
+            }
+            else
+            {
+                vscode.window.showErrorMessage("Escolha uma arquivo PTM.");
             }
     });
 return disposable;
 }
 function PathBuild() 
 {
-let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {
-            vscode.window.showInformationMessage("Não implementado ainda.");
+let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {         
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
-            patch.build();
+            if (fileToBuildPath == null )
+            {
+                vscode.window.showErrorMessage("Informe o arquivo texto para com os fontes para serem gerados.");
+            }                
+           else
+           {
+                if (!fs.lstatSync(fileToBuildPath).isFile())
+                    vscode.window.showErrorMessage("Informe o arquivo texto para com os fontes para serem gerados.");
+                else
+                    patch.build(fileToBuildPath);
+           }
+             
     });
 return disposable;
 }
 
-function PathClear() 
+  
+function PathSelectFolder() 
 {
-let disposable = vscode.commands.registerCommand('advpl.patch.clear', function (context)  {
+let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
     });
 return disposable;
 }
 
-function PathList() 
+function PathFileToBuild() 
 {
-let disposable = vscode.commands.registerCommand('advpl.patch.list', function (context)  {
-            vscode.window.showInformationMessage("Não implementado ainda.");
+let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', function (context)  {
+            var cResource = context._fsPath;
+            if(fs.lstatSync(cResource).isFile())
+            {
+                fileToBuildPath = cResource;
+                vscode.window.showInformationMessage("O arquivo " + cResource + " foi selecionado para se a lista de fontes para patch.");
+            }
+            else
+            {
+                vscode.window.showInformationMessage("Informe um arquivo. ");
+            }
     });
 return disposable;
 }

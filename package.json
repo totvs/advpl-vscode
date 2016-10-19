@@ -20,10 +20,12 @@
         "onCommand:advpl.getAuthorizationId",
         "onCommand:advpl.CipherPassword",
         "onCommand:advpl.patch.apply",
-        "onCommand:advpl.patch.list",
-        "onCommand:advpl.patch.clear",
         "onCommand:advpl.patch.build",
-        "onCommand:advpl.patch.selectSource"
+        "onCommand:advpl.patch.selectSource",
+        "onCommand:advpl.patch.selectFolder",
+        "onCommand:advpl.patch.setFileToBuild"
+        
+        
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -38,6 +40,10 @@
                 },                
                 {
                     "command": "advpl.patch.apply"
+                }
+                ,                
+                {
+                    "command": "advpl.patch.setFileToBuild"
                 }
             ]
         },
@@ -198,12 +204,12 @@
                 "title": "Advpl - Path Build - Gera um dos fontes selecionados Patch(PTM)."
             },
             {
-                "command": "advpl.patch.clear",
-                "title": "Advpl - Path Clear - Limpa a lista de fontes seleciondados para a geração de  Patch(PTM)."
+                "command": "advpl.patch.setFileToBuild",
+                "title": "Advpl - Path Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
             },
             {
-                "command": "advpl.patch.list",
-                "title": "Advpl - Patch List - Lista os fontes seleciondados para a geração de Patch(PTM)."
+                "command": "advpl.patch.selectFolder",
+                "title": "Advpl - Patch Add Folder To Build Patch - Seleciona todos fontes  da pasta atual para a geração de um Patch(PTM)."
             }
         ],
         "keybindings": [

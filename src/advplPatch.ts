@@ -24,26 +24,33 @@ export class advplPatch {
              
         
     }
-    public build()
+    public build(file : String)
     {
         var _args = new Array<string>();
         var that = this;        
                 
         _args.push("--compileInfo=" + this.EnvInfos);
-        _args.push("--patchBuild=C:\\temp\\patch.txt");
+        _args.push("--patchBuild=" + file);
 
         var child = child_process.spawn(this.debugPath,_args);
         child.stdout.on("data",function(data){
       
-           that.consoleReturn = data;
+            var xRet = data + "";
+           if (xRet.indexOf("|") > 0) 
+           {
+                var values = String.fromCharCode.apply(null, data).split('|');
+                that.consoleReturn = "Build Failure:" + values[3];
+           }
+           else
+           {
+               that.consoleReturn = xRet;
+           }
         });
         
 
-        child.on("exit",function(data){
-            var lRunned = data == 0
-            console.log("exit: " + data);
-           that.outChannel.log("ID:"+that.consoleReturn);
-            //vscode.window.showInformationMessage("ID:"+that._lastAppreMsg);
+        child.on("exit",function(data){         
+           that.outChannel.log(that.consoleReturn);
+            
            
         });        
     }
@@ -57,18 +64,23 @@ export class advplPatch {
         _args.push("--patchApply="+ patchApply);
 
         var child = child_process.spawn(this.debugPath,_args);
-        child.stdout.on("data",function(data){
-      
-           that.consoleReturn = data;
+        child.stdout.on("data",function(data){      
+           var xRet = data + "";
+           if (xRet.indexOf("|") > 0) 
+           {
+                var values = String.fromCharCode.apply(null, data).split('|');
+                that.consoleReturn = "Apply Failure:" + values[3];
+           }
+           else
+           {
+               that.consoleReturn = xRet;
+           }
+           
         });
         
 
         child.on("exit",function(data){
-            var lRunned = data == 0
-            console.log("exit: " + data);
-           that.outChannel.log("ID:"+that.consoleReturn);
-            //vscode.window.showInformationMessage("ID:"+that._lastAppreMsg);
-           
+           that.outChannel.log(that.consoleReturn);
         });        
     }
 
