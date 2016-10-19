@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.5.0"
@@ -24,8 +24,6 @@
         "onCommand:advpl.patch.selectSource",
         "onCommand:advpl.patch.selectFolder",
         "onCommand:advpl.patch.setFileToBuild"
-        
-        
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -37,11 +35,10 @@
                 },
                 {
                     "command": "advpl.menucompilemulti"
-                },                
+                },
                 {
                     "command": "advpl.patch.apply"
-                }
-                ,                
+                },
                 {
                     "command": "advpl.patch.setFileToBuild"
                 }
@@ -130,12 +127,11 @@
                     "type": "string",
                     "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|tres)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
-                }
-                ,
+                },
                 "advpl.pathPatchBuild": {
                     "type": "string",
                     "default": "c:\\patchs\\",
-                    "description": "Path do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, sera sobrescrito."
+                    "description": "Patch do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, ser� sobrescrito."
                 }
             }
         },

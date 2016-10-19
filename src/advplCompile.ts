@@ -178,7 +178,7 @@ export class advplCompile {
             else
             {
                 this.outChannel.log("" + this._lastAppreMsg);
-                this.outChannel.log("CompilaÃ§Ã£o OK");
+                this.outChannel.log("Compilação OK");
                 this.afterCompile();
             }
         
