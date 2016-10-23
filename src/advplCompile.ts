@@ -168,7 +168,8 @@ export class advplCompile {
                }
                else
                {
-                this.outChannel.log("Compiler Erro." );
+                this.outChannel.log( message );
+                
                 var range = new vscode.Range(lineIndex,0, lineIndex, 10);
                 let diagnosis = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error);
                 vscode.workspace.findFiles(source,"")
@@ -177,8 +178,21 @@ export class advplCompile {
             }
             else
             {
-                this.outChannel.log("" + this._lastAppreMsg);
-                this.outChannel.log("Compilação OK");
+                if(this._lastAppreMsg != null)
+                {
+                    var values = String.fromCharCode.apply(null, this._lastAppreMsg).split('|');
+                    var source = values[0];
+                    var lineIndex = Number(values[1])-1;
+                    var col =  Number(values[2]);
+                    var message = values[3];
+                    var range = new vscode.Range(lineIndex,0, lineIndex, 10);
+                    let diagnosis = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Warning);
+                    vscode.workspace.findFiles(source,"")
+                    this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);
+                }
+
+                //this.outChannel.log("" + this._lastAppreMsg);
+                this.outChannel.log("CompilaÃ§Ã£o OK");
                 this.afterCompile();
             }
         
