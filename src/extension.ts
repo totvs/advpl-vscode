@@ -4,6 +4,7 @@ import {advplCompile} from './advplCompile';
 import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
 import {advplPatch} from './advplPatch';
+import {advplMonitor} from './advplMonitor';
 import * as fs from 'fs';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
@@ -27,6 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathSelectFolder());
     context.subscriptions.push(PathFileToBuild());
+    //Binds do monitor
+    context.subscriptions.push(GetThreads());
 
 }
 
@@ -228,6 +231,15 @@ let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', f
 return disposable;
 }
 
+function GetThreads()
+{
+let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', function (context)  {
+        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        monitor.getThreads();
+    });
+return disposable;
 
+
+}
 
 

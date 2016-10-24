@@ -23,7 +23,9 @@
         "onCommand:advpl.patch.build",
         "onCommand:advpl.patch.selectSource",
         "onCommand:advpl.patch.selectFolder",
-        "onCommand:advpl.patch.setFileToBuild"
+        "onCommand:advpl.patch.setFileToBuild",
+        "onCommand:advpl.monitor.getThreads"
+
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -207,6 +209,12 @@
                 "command": "advpl.patch.selectFolder",
                 "title": "Advpl - Patch Add Folder To Build Patch - Seleciona todos fontes  da pasta atual para a geração de um Patch(PTM)."
             }
+            ,
+            {
+                "command": "advpl.monitor.getThreads",
+                "title": "Advpl - Monitor - Imprime todas as Threads desse server."
+            }
+            
         ],
         "keybindings": [
             {
