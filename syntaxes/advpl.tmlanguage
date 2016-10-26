@@ -66,7 +66,7 @@
 			<key>comment</key>
 			<string>palavra chave</string>
 			<key>match</key>
-			<string>(?i)\b(?:do|case|endcase|otherwise|switch|if|else|elseif|endif|while|end|enddo|exit|static|function|return|for|next|include|ifdef|user|main|project|ifndef|class|endclass|new|method|data|from|local|static|public|user|public|main)\b</string>
+			<string>(?i)\b(?:do|case|endcase|otherwise|switch|if|else|elseif|endif|while|end|enddo|exit|static|function|return|for|next|include|ifdef|user|main|project|ifndef|class|endclass|new|method|data|from|local|static|public|user|public|main|private)\b</string>
 			<key>name</key>
 			<string>keyword.control.harbour</string>
 		</dict>
