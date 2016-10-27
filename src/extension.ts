@@ -237,6 +237,7 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', fun
         var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
         monitor.getThreads();
     });
+    
 return disposable;
 
 

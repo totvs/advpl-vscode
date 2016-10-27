@@ -66,7 +66,7 @@
 			<key>comment</key>
 			<string>palavra chave</string>
 			<key>match</key>
-			<string>(?i)\b(?:do|case|endcase|otherwise|switch|if|else|elseif|endif|while|end|enddo|exit|static|function|return|for|next|include|ifdef|user|main|project|ifndef|class|endclass|new|method|data|from|local|static|public|user|public|main|private)\b</string>
+			<string>(?i)\b(?:do|case|endcase|otherwise|switch|if|else|elseif|endif|while|end|enddo|exit|static|function|return|for|next|include|ifdef|user|main|project|ifndef|class|endclass|new|method|data|from|local|static|public|user|public|main|private|self|loop)\b</string>
 			<key>name</key>
 			<string>keyword.control.harbour</string>
 		</dict>
@@ -74,9 +74,9 @@
 			<key>comment</key>
 			<string>funcoes</string>
 			<key>match</key>
-			<string>(?i)\b(?:dbskip|dbseek|alias|dbusearea|dbcommit|dbselectarea|eof|bof|space|len)\b</string>
-			<key>name</key>
-			<string>keyword.control.harbour</string>
+			<string>(?i)\b(?:dbskip|fieldput|fieldpos|fieldget|dbgoto|dbgotopdbseek|dbSetOrder|dbSetOrder|alias|dbusearea|dbcommit|dbselectarea|eof|bof|space|len|ascan|ains|aeval|eval|aadd|recno|empty|strtran|substr|upper|padr|padl|alltrim|trim|rtrim|ltrim|iif)\b</string>
+			<key>name</key>			
+			<string>token.markup.bold|token.keyword.flow</string>
 		</dict>
         <dict>
 			<key>comment</key>

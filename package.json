@@ -134,6 +134,11 @@
                     "type": "string",
                     "default": "c:\\patchs\\",
                     "description": "Patch do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, ser� sobrescrito."
+                },
+                "advpl.debug_multiThread": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Habilita Debug multi Thread."
                 }
             }
         },

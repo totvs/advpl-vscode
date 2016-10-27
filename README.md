@@ -19,14 +19,13 @@ Essa extensão possui as seguintes features implementadas:
 * Syntax highlighting
 * Compilação de fonte
 * Chave de Compilação
-* Debug single Thread  
+* Debug single Thread e Multi Thread   
 * Compilação de multiplos fontes
-* Geração e aplicação de Path [Wiki] (https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
+* Geração e aplicação de Path [Wiki](https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
 
 As próximas planejadas são:
 
 * Auto complete
-* Multi Thread Debug
 * Mac e Linux
 
 
@@ -72,6 +71,9 @@ Caso você deseje pegar o ID utilizado pelo VSCODE para gerar uma nova chave, ve
 Configuração de Patchs
 * `advpl.pathPatchBuild` :  Patch do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, será sobrescrito.
 
+Debug
+* `advpl.debug_multiThread` : Caso seja colocado com true, habilita o debug multi Thread
+
 ## Configurações
 
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
@@ -87,11 +89,12 @@ Utilizada as teclas padrões do VsCode
 * F11 - Step Over
 
 
-## Issues conhecidas
+## Release Notes
+### 0.3.0
+* Liberado o debug multi Thread : [Não é possível debugar em múltiplas threads](https://github.com/killerall/advpl-vscode/issues/19)
+* Melhorias e correções no Debug Issues: [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1) e [Debug not launch if breakpoints are disabled](https://github.com/killerall/advpl-vscode/issues/27)
+* Adicionado mais palavras chaves na Syntax highlighting, e feito a separação entre comandos e funções 
 
-* 1 [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1)- 
-
-## Release Notes  
 ### 0.2.0
 * Liberada a funcionalidade de geração e aplicação de patch
 * Correção de pequenos problemas no eval do Debug
