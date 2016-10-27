@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "KillerAll",
     "engines": {
         "vscode": "^1.5.0"
@@ -25,7 +25,6 @@
         "onCommand:advpl.patch.selectFolder",
         "onCommand:advpl.patch.setFileToBuild",
         "onCommand:advpl.monitor.getThreads"
-
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -140,6 +139,12 @@
                     "default": false,
                     "description": "Habilita Debug multi Thread."
                 }
+                ,
+                "advpl.debug_ignoreSourceNotFound": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Ignorar os fontes não encotrados no debug."
+                }
             }
         },
         "languages": [
@@ -213,13 +218,11 @@
             {
                 "command": "advpl.patch.selectFolder",
                 "title": "Advpl - Patch Add Folder To Build Patch - Seleciona todos fontes  da pasta atual para a geração de um Patch(PTM)."
-            }
-            ,
+            },
             {
                 "command": "advpl.monitor.getThreads",
                 "title": "Advpl - Monitor - Imprime todas as Threads desse server."
             }
-            
         ],
         "keybindings": [
             {
