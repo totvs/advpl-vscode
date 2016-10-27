@@ -4,6 +4,7 @@
     "description": "Adiciona suporte a Linguagem ADVPL",
     "version": "0.3.1",
     "publisher": "KillerAll",
+    "icon": "images/logo_vscode.png",
     "engines": {
         "vscode": "^1.5.0"
     },
