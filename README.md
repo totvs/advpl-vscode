@@ -91,8 +91,12 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.3
+* Corrigido problema de compilação de folders
+
 ### 0.3.1
 * Liberado configuração para ignorar fontes não encontrados no debug
+
 ### 0.3.0
 * Liberado o debug multi Thread : [Não é possível debugar em múltiplas threads](https://github.com/killerall/advpl-vscode/issues/19)
 * Melhorias e correções no Debug Issues: [Debug não para em uma user function chamada sem interface na primeira tentativa de debug](https://github.com/killerall/advpl-vscode/issues/1) e [Debug not launch if breakpoints are disabled](https://github.com/killerall/advpl-vscode/issues/27)

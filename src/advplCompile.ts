@@ -16,6 +16,7 @@ export class advplCompile {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection =d ;
         this.outChannel =  OutPutChannel;
+        this._lastAppreMsg = "";
         this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
         if(process.platform == "darwin")
         {
@@ -25,11 +26,6 @@ export class advplCompile {
         {
             this.debugPath += "\\bin\\AdvplDebugBridge.exe";
         }
-        
-        //this.debugPath ="C:\\vscode\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
-//        this.debugPath ="D:\\vscode_advpl\\cSharpDebug\\AdvplDebugBridge\\AdvplDebugBridge\\AdvplDebugBridge\\bin\\Debug\\AdvplDebugBridge.exe";
-/*        if(serverVersion === "131327A")
-            this._timestamp = "20131227104539";*/
     }
     public setAfterCompileOK(aftercomp)
     {
@@ -55,9 +51,7 @@ export class advplCompile {
             });
             
             child.on("exit",function(data){
-                var lRunned = data == 0
-                //console.log("exit: " + data);
-                //vscode.window.showInformationMessage("Password:"+ that._lastAppreMsg);
+                var lRunned = data == 0                
                 that.outChannel.log("Password:"+ that._lastAppreMsg);
             });
         }
@@ -117,7 +111,7 @@ export class advplCompile {
      
         child.stdout.on("data",function(data){
       
-           that._lastAppreMsg = data;
+           that._lastAppreMsg += data;
         });
         
         child.on("exit",function(data){
@@ -154,47 +148,43 @@ export class advplCompile {
     {
         
         
-            if (!lOk)
-            {
-                var values = String.fromCharCode.apply(null, this._lastAppreMsg).split('|');
-                var source = values[0];
-                var lineIndex = Number(values[1])-1;
-                var col =  Number(values[2]);
-                var message = values[3];
-               if (source == "NOSOURCE")
-               {
-                vscode.window.showInformationMessage(message);
-                this.outChannel.log("Erro: "+ message );
-               }
-               else
-               {
-                this.outChannel.log( message );
-                
-                var range = new vscode.Range(lineIndex,0, lineIndex, 10);
-                let diagnosis = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error);
-                vscode.workspace.findFiles(source,"")
-                this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);
-                }
-            }
-            else
-            {
+         
                 if(this._lastAppreMsg != null)
                 {
-                    var values = String.fromCharCode.apply(null, this._lastAppreMsg).split('|');
-                    var source = values[0];
-                    var lineIndex = Number(values[1])-1;
-                    var col =  Number(values[2]);
-                    var message = values[3];
-                    var range = new vscode.Range(lineIndex,0, lineIndex, 10);
-                    let diagnosis = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Warning);
-                    vscode.workspace.findFiles(source,"")
-                    this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);
+                    var oEr = JSON.parse(this._lastAppreMsg);
+                    for (let x = 0; x < oEr.msgs.length;x++)
+                    {
+                        let msgerr = oEr.msgs[x];
+
+                        
+                        let source = msgerr.Source;
+                        let lineIndex = Number(msgerr.Line)-1;
+                        if(lineIndex<=0)
+                            lineIndex = 1;
+                        let col =  Number(msgerr.Column);
+                        let message = msgerr.Message;
+                        let range = new vscode.Range(lineIndex,0, lineIndex, 10);
+                        if (source == "NOSOURCE")
+                        {
+                            vscode.window.showInformationMessage(message);
+                            this.outChannel.log("Erro: "+ message );
+                        }
+
+                        let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
+                        vscode.workspace.findFiles(source,"")
+                        this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);
+                        
+                    }
+                    
                 }
 
-                //this.outChannel.log("" + this._lastAppreMsg);
-                this.outChannel.log("Compilação OK");
-                this.afterCompile();
-            }
+                if (lOk)
+                {
+                    this.outChannel.log("Compilação OK");
+                    this.afterCompile();
+                }
+                    
+            
         
 
     }
