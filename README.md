@@ -91,6 +91,9 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.4
+* Corrigido problema de compilação de folders quando tinha caracteres especias no nome da folder
+
 ### 0.3.3
 * Corrigido problema de compilação de folders
 
