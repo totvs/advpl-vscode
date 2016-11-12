@@ -48,19 +48,6 @@
 		"description": "If ElseIf Statement"
 	},
 	
-	"Case": {
-		"prefix": "case",
-		"body": [
-		"Do Case",
-		"	Case (${lCond})",
-		"		$1",
-		"	OtherWise	",
-		"		",
-		"EndCase"
-		],
-		"description": "Case Statement"
-	},
-
 	"While": {
 		"prefix": "while",
 		"body": [
@@ -79,5 +66,136 @@
 		"Next"
 		],
 		"description": "For Statement"
-	}
+	},
+	"Query":{
+		"prefix": "Query",
+		"body":[
+			"Local ${cQuery} := ''",
+				"${cQuery} := 'query'",
+				"${cQuery} := ChangeQuery(${cQuery})",
+				"dbUseArea(.T.,'TOPCONN', TCGenQry(,,${cQuery}),alias, .F., .T.)",
+				"While alias->(!Eof())",
+					
+					"alias->(dbSkip())",
+				"EndDo",
+				"alias->(dbCloseArea())"
+		],
+		"description": "Cria a função de Query ja efetuando a conexão com o TOP e efetuando o While"
+	},
+    "Help":{
+        "prefix": "Help",
+        "body":[
+			 
+              "HELP(' ',1,${cabecalho} ,,${descricao},2,0,,,,,, ${solucao})"
+        ],
+        "description":"Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
+    },
+	"Static Function":{
+		"prefix": "StaticFunction",
+		"body":[
+			"/*/{Protheus.doc} ${nomeStaticFunction}",
+			"	(long_description)",
+			"	@type  Static Function",
+			"	@author ${user}",
+			"	@since ${date}",
+			"	@version ${version}",
+			"	@param ${param}, ${param_type}, ${param_descr}",
+			"	@return ${returno},${return_type}, ${return_description}",
+			"	@example",
+			"	(examples)",
+			"	@see (links_or_references)",
+			"	/*/",
+			" Static Function ${nomeStaticFunction}",
+			"Return ${returno}"
+
+
+		],
+		"description": "Declaração de uma Static Function ja com o Protheus.doc"
+		
+	},
+	"Function":{
+		"prefix": "Function",
+		"body":[
+			"/*/{Protheus.doc} ${nomeFunction}",
+			"	(long_description)",
+			"	@type  Function",
+			"	@author ${user}",
+			"	@since ${date}",
+			"	@version ${version}",
+			"	@param ${param}, ${param_type}, ${param_descr}",
+			"	@return ${returno},${return_type}, ${return_description}",
+			"	@example",
+			"	(examples)",
+			"	@see (links_or_references)",
+			"	/*/",
+			" Function ${nomeFunction}",
+			"Return ${returno}"
+
+
+		],
+		"description": "Declaração de uma Function ja com o Protheus.doc"
+	},
+	 "Strtokarr2": {
+        "prefix": "Strtokarr2",
+        "body": [
+            "Strtokarr2( ${cValue}, ${cToken}, ${lEmptyStr})"
+        ],
+        "description": "Strtokarr2- Transforma uma String em um array,\n cValue := Caracter a ser separado\n cToken := Caracter a ser ultilizado na quebra \n lEmptyStr:= Se retorna elementos vazios" 					
+	 },
+	 "Year": {
+        "prefix": "Year",
+        "body": [
+            "Year( ${dData})"
+        ],
+        "description": "Year - Retorna o Ano no formato 'AAAA' da data informada"
+    },
+	 "Type": {
+        "prefix": "Type",
+        "body": [
+            "Type( ${cVariavel})"
+        ],
+        "description": "Type() - Retorna o tipo de dado de uma expressao ou variavel."
+    },
+	 "ValType": {
+        "prefix": "ValType",
+        "body": [
+            "ValType( ${cVariavel})"
+        ],
+        "description":  "Valtype() - Retorna o tipo de dado de uma expressao ou variavel."						
+	 },
+	 "ComputerName": {
+        "prefix": "ComputerName",
+        "body": [
+            "ComputerName()"
+        ],
+        "description": "ComputerName() - Retorna o nome do computador em que o SmartClient esta sendo executado"
+    },
+	"ConOut": {
+        "prefix": "ConOut",
+        "body": [
+            "ConOut( ${cText})"
+        ],
+        "description": "ConOut() - Apresenta no console, do Application Server, uma mensagem."
+	},
+	"Decode64": {
+        "prefix": "Decode64",
+        "body": [
+            "Decode64( ${cText})"
+        ],
+        "description": "Decode64() - Converte uma string de Base64 para Base ASCII"
+    },
+	"Encode64": {
+        "prefix": "Encode64",
+        "body": [
+            "Encode64( ${cText})"
+        ],
+        "description": "Encode64() - Converte uma string de ASCII para base64"
+    },
+	 "FindFunction": {
+        "prefix": "FindFunction",
+        "body": [
+            "FindFunction( ${cFunction})"
+        ],
+        "description": "FindFunction() - Faz a busca de uma determinada função no rpo ou no binário"
+	 }
 }
