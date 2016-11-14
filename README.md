@@ -95,6 +95,9 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.6
+* Correção de colateral de não compilar da 0.3.5
+
 ### 0.3.5
 
 * Adiciona possibilidade de se visualizar as [tabelas](https://github.com/killerall/advpl-vscode/issues/37) e variáveis publics, statics, e privates no Debug 
