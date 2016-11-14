@@ -144,7 +144,29 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Ignorar os fontes não encotrados no debug."
+                },
+                "advpl.debug_showTables": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Mostra as tabelas abertas."
+                },
+                "advpl.debug_showPrivates": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Mostra as variaveis Privates."
                 }
+                ,
+                "advpl.debug_showPublic": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Mostra as variaveis Publicas."
+                },
+                "advpl.debug_showStatics": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Mostra as variaveis Estaticas."
+                }
+
             }
         },
         "languages": [

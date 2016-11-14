@@ -72,8 +72,12 @@ Configuração de Patchs
 * `advpl.pathPatchBuild` :  Patch do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, será sobrescrito.
 
 Debug
-* `advpl.debug_multiThread` : Caso seja colocado com true, habilita o debug multi Thread
+* `advpl.debug_multiThread` : Caso seja colocado com true, habilita o debug multi Thread.
 * `advpl.debug_ignoreSourceNotFound` : Ignorar os fontes não encotrados no debug.
+* `advpl.debug_showTables` : Mostra as tabelas abertas.
+* `advpl.debug_showPrivates` : Mostra as variaveis Privates.
+* `advpl.debug_showPublic` : Mostra as variaveis Publicas.
+* `advpl.debug_showStatics` : Mostra as variaveis Estaticas .
 
 ## Configurações
 
@@ -91,6 +95,13 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.5
+
+* Adiciona possibilidade de se visualizar as [tabelas](https://github.com/killerall/advpl-vscode/issues/37) e variáveis publics, statics, e privates no Debug 
+* Adicionado snipett de case via [pull request](https://github.com/killerall/advpl-vscode/pull/41) 
+* Correção de compilação com folders ou arquivos com [espaço no nome](https://github.com/killerall/advpl-vscode/issues/39) e [fonte não compila](https://github.com/killerall/advpl-vscode/issues/36)
+* Correção [Not showing error message when missing or wrong passwordCipher](https://github.com/killerall/advpl-vscode/issues/6)
+
 ### 0.3.4
 * Corrigido problema de compilação de folders quando tinha caracteres especias no nome da folder
 
