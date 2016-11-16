@@ -95,6 +95,9 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.8
+* Adicionado validação caso a string de include estiver errada.
+
 ### 0.3.7
 * Correção de colateral do colateral da 0.3.6
 * Correção [Warnings estão sendo exibidos como erro no output](https://github.com/killerall/advpl-vscode/issues/43)
