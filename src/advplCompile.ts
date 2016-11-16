@@ -168,7 +168,10 @@ export class advplCompile {
                         {
                             vscode.window.showInformationMessage(message);                    
                         }
-                        this.outChannel.log("Erro: "+ message );
+                        if (msgerr.Type == 0)
+                            this.outChannel.log("Erro: "+ message );
+                        else
+                            this.outChannel.log("Warning: "+ message );
                         let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
                         vscode.workspace.findFiles(source,"")
                         this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);

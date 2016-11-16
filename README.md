@@ -95,6 +95,10 @@ Utilizada as teclas padrões do VsCode
 
 
 ## Release Notes
+### 0.3.7
+* Correção de colateral do colateral da 0.3.6
+* Correção [Warnings estão sendo exibidos como erro no output](Warnings estão sendo exibidos como erro no output)
+
 ### 0.3.6
 * Correção de colateral de não compilar da 0.3.5
 
