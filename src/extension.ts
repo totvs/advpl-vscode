@@ -5,13 +5,13 @@ import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
 import {advplPatch} from './advplPatch';
 import {advplMonitor} from './advplMonitor';
+import {Enviroment} from './advplEnviroment';
 import * as fs from 'fs';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let fileToBuildPath;
+let env;
 export function activate(context: vscode.ExtensionContext) {
-
-    
 
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());    
@@ -21,6 +21,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
+    context.subscriptions.push(selectEnviroment());
+    
 
     //Binds dos comandos de patch
     context.subscriptions.push(PathSelectSource());
@@ -30,12 +32,16 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathFileToBuild());
     //Binds do monitor
     context.subscriptions.push(GetThreads());
-
+    //Enviroment no bar
+    env = new Enviroment();
+    env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+    
 }
 
 
 export function deactivate() {
 }
+
 function getProgramName()
 {
    let disposable = vscode.commands.registerCommand('advpl.getProgramName', () => {
@@ -82,6 +88,7 @@ return disposable;
 }
 function menucompilemulti()
 {
+
    
 let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', function (context)  {
         
@@ -242,5 +249,34 @@ return disposable;
 
 
 }
+function selectEnviroment()
+{
+let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {
+        
+        var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
+        let list = obj.map(env => env["environment"]);
+        vscode.window.showQuickPick(list).then(function(select){
+            console.log(select);
+            let oSelectEnv = obj.find(env =>env["environment"] === select);
+            if (oSelectEnv)
+            {
+                let updObj = vscode.workspace.getConfiguration("advpl");
+                
+                updObj.update("selectedEnvironment",select);
+                vscode.window.showInformationMessage("Ambiente " + select + " selecionado com sucesso.");
+                env.update(select);                
 
+            }
+            else
+            {
+                vscode.window.showErrorMessage("Environment não encontrado.!!!");
+            }
+        })
+        
+        //vscode.window.showQuickPick(obj.environments)
+    });
+    
+return disposable;
+
+}
 

@@ -1,3 +1,10 @@
+## 0.4.0
+ - Liberado a possibilidade de configuração de diversos Enviroments, adicionado possiblidade de seleção do ambiente atual;
+ - Reconstrução do Launch agora com e sem Debug (Agora para executar o smartclient com as mesmas configurações 
+ do debug, porem sem debugar, pode-se utilizar o ctrl+F5);
+ - Correção de como o Debug se comportava em relação aos breakpoints, que causava quedas estranhas no debug.
+ - Atualização da extensão para ultima versão do TypeScript;
+
 ## 0.3.8
  - Adicionado validação caso a string de include estiver errada.
 

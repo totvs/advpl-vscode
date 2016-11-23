@@ -8,9 +8,9 @@ Caso você encontre algum problema, por favor abra uma issue no [GitHub](https:/
 
 > Atenção! Essa extensão não é desenvolvida ou suportada pela TOTVS. Utilize por sua conta e risco.
 
-> Veja um video explicando a configuração e uso dessa extensão em:
-
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado [aqui](https://github.com/killerall/advpl-vscode/blob/master/TDSProjectToVscode.jar).
+
+> Atenção! A partir da versão 0.4.0 a configuração dos ambientes sofreu alteração para suportar multiplos ambientes
 
 ## Features
 
@@ -45,18 +45,35 @@ Exemplo: `C:\\Protheus\\smartclient\\`
 No caso de OSX:
 Exemplo: `/Applications/`
 
-
+> Atenção! A partir da versão 0.4.0, as configurações de ambientes devem ser feitas com o array `advpl.environments`
 * `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
 * `advpl.server`: Server IP, Padrão: localhost                  
 * `advpl.port` : Porta do servidor
 * `advpl.environment`: Nome do ambiente que será feito o debug e a compilação
-* `advpl.language`: Língua do repositório, se não informado será português, valores permitidos: PORTUGUESE, ENGLISH, SPANISH
-* `advpl.rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
 * `advpl.user`: Nome do usuário para se conectar no Protheus, se não informado utiliza "Admin"
 * `advpl.passwordCipher` : Senha criptografada do usuário de login no Protheus, para gerá-la utilize o comando CipherPassword
-
-    
 * `advpl.includeList`: Lista de diretórios separado por ponto-e-vírugla. Exemplo: `C:\\Protheus\\include\\;C:\\Protheus\\include_2\\`
+* `advpl.language`: Língua do repositório, se não informado será português, valores permitidos: PORTUGUESE, ENGLISH, SPANISH
+* `advpl.rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
+
+> Atenção! Nova configuração de ambiente 
+> `advpl.environments` : Array com os ambientes configurados
+
+> Cada ambiente deve especificar:   
+> * `environment`: Nome do ambiente que será feito o debug e a compilação
+> * `serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
+> * `server`: Server IP, Padrão: localhost                  
+> * `port` : Porta do servidor
+> * `user`: Nome do usuário para se conectar no Protheus, se não informado utiliza "Admin"
+> * `passwordCipher` : Senha criptografada do usuário de login no Protheus, para gerá-la utilize o comando CipherPassword
+> * `includeList`: Lista de diretórios separado por ponto-e-vírugla. Exemplo: `C:\\Protheus\\include\\;C:\\Protheus\\include_2\\`
+> * `language`: Língua do repositório, se não informado será português, valores permitidos: PORTUGUESE, ENGLISH, SPANISH
+> * `rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
+> 
+
+
+* `advpl.selectedEnvironment` Ambiente atualmente selecionado
+
 * `advpl.startProgram`: Módulo ou função que será sugerido no launch do Debug
 * `compileFolderRegex`: Regex que ira validar se na compilação de folders, o arquivo irá ser compilado ou não.
 
@@ -84,9 +101,11 @@ Debug
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
 
 ## Teclas de Atalho padrões
-* CTRL + F9 - Compila o fonte atual
-* CTRL + F11 - Executa o smartClient sem debugar
 * F5  - Inicia o Debug
+* CTRL + F5  - Inicia o SmartClient sem debugar
+* CTRL + F9 - Compila o fonte atual
+* CTRL + F11 - Executa o smartClient sem configuração e mostrando o parametro,
+
 # No Debug
 Utilizada as teclas padrões do VsCode
 * F5 - Run/Contiue

@@ -47,7 +47,7 @@ export class advplCompile {
             var child = child_process.spawn(this.debugPath,_args);
             child.stdout.on("data",function(data){
         
-            that._lastAppreMsg = data;
+            that._lastAppreMsg = "" + data;
             });
             
             child.on("exit",function(data){
@@ -70,7 +70,7 @@ export class advplCompile {
         var child = child_process.spawn(this.debugPath,_args);
         child.stdout.on("data",function(data){
       
-           that._lastAppreMsg = data;
+           that._lastAppreMsg = data+"";
         });
         
         child.on("exit",function(data){

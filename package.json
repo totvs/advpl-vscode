@@ -6,12 +6,13 @@
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.5.0"
+        "vscode": "^1.7.0"
     },
     "categories": [
         "Languages"
     ],
     "activationEvents": [
+        "onLanguage:advpl",
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompilemulti",
@@ -25,7 +26,8 @@
         "onCommand:advpl.patch.selectSource",
         "onCommand:advpl.patch.selectFolder",
         "onCommand:advpl.patch.setFileToBuild",
-        "onCommand:advpl.monitor.getThreads"
+        "onCommand:advpl.monitor.getThreads",
+        "onCommand:advpl.selectEnviroment"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -50,47 +52,54 @@
             "type": "object",
             "title": "AdvplSuport configuration",
             "properties": {
-                "advpl.smartClientPath": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Diretorio aonde esta o smartclient."
+                "advpl.selectedEnvironment":{
+                        "type": "string",
+                        "default": "",
+                        "description": "Ambiente atual selecionado."
                 },
-                "advpl.serverVersion": {
-                    "type": "string",
-                    "default": "131227A",
-                    "description": "Versão do server"
-                },
-                "advpl.server": {
-                    "type": "string",
-                    "default": "localhost",
-                    "description": "Server IP"
-                },
-                "advpl.port": {
-                    "type": "string",
-                    "default": "1201",
-                    "description": "Server Port"
-                },
-                "advpl.environment": {
-                    "type": "string",
-                    "default": "environment",
-                    "description": "Environment"
-                },
-                "advpl.user": {
-                    "type": "string",
-                    "default": "Admin",
-                    "description": "Usuario com privilegio de Administração para conectar no servidor."
-                },
-                "advpl.passwordCipher": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
-                },
-                "advpl.includeList": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Diretorios de include para compilação separar cada diretorio com ;"
-                },
-                "advpl.language": {
+                "advpl.environments":{
+                    "type": "array",
+                    "default": [],
+                    "description": "Ambientes",
+                    "items":{
+                        "type": "object",
+                     "properties":{
+                         "smartClientPath": {
+                        "type": "string",
+                        "default": "",
+                        "description": "Diretorio aonde esta o smartclient."
+                    },
+                    "serverVersion": {
+                        "type": "string",
+                        "default": "131227A",
+                        "description": "Versão do server"
+                    },
+                    "server": {
+                        "type": "string",
+                        "default": "localhost",
+                        "description": "Server IP"
+                    },
+                    "port": {
+                        "type": "string",
+                        "default": "1201",
+                        "description": "Server Port"
+                    },
+                    "environment": {
+                        "type": "string",
+                        "default": "environment",
+                        "description": "Environment"
+                    },
+                    "user": {
+                        "type": "string",
+                        "default": "Admin",
+                        "description": "Usuario com privilegio de Administração para conectar no servidor."
+                    },
+                    "passwordCipher": {
+                        "type": "string",
+                        "default": "",
+                        "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
+                    },
+                    "language": {
                     "type": "string",
                     "default": "PORTUGUESE",
                     "description": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH"
@@ -99,7 +108,17 @@
                     "type": "string",
                     "default": "TOP",
                     "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
+                }
                 },
+                "advpl.includeList": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                }
+                }
+              },
+                    
+                                
                 "advpl.startProgram": {
                     "type": "string",
                     "default": "SIGAFAT",
@@ -242,7 +261,12 @@
             {
                 "command": "advpl.monitor.getThreads",
                 "title": "Advpl - Monitor - Imprime todas as Threads desse server."
+            },
+            {
+                "command": "advpl.selectEnviroment",
+                "title": "Advpl - Seleciona o ambiente de compilação/Debug."
             }
+            
         ],
         "keybindings": [
             {
@@ -343,14 +367,16 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.13",
-        "vscode-debugadapter-testsupport": "^1.12.0"
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "vscode-debugadapter-testsupport": "^1.12.0",        
+        "@types/node": "^6.0.40"
+        
     },
     "dependencies": {
         "vscode-debugprotocol": "^1.12.0",
