@@ -1,3 +1,7 @@
+## 0.4.1
+ - Corrigido a geração de alguns IDs de cipth, que não deixa a extensão funcionar.
+ - Liberado [Trazer última execução quando for debugar](https://github.com/killerall/advpl-vscode/issues/15)
+
 ## 0.4.0
  - Liberado a possibilidade de configuração de diversos Enviroments, adicionado possiblidade de seleção do ambiente atual;
  - Reconstrução do Launch agora com e sem Debug (Agora para executar o smartclient com as mesmas configurações 
