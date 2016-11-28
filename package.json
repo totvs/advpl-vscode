@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.3.8",
+    "version": "0.4.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -52,73 +52,71 @@
             "type": "object",
             "title": "AdvplSuport configuration",
             "properties": {
-                "advpl.selectedEnvironment":{
-                        "type": "string",
-                        "default": "",
-                        "description": "Ambiente atual selecionado."
+                "advpl.selectedEnvironment": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Ambiente atual selecionado."
                 },
-                "advpl.environments":{
+                "advpl.environments": {
                     "type": "array",
                     "default": [],
                     "description": "Ambientes",
-                    "items":{
+                    "items": {
                         "type": "object",
-                     "properties":{
-                         "smartClientPath": {
-                        "type": "string",
-                        "default": "",
-                        "description": "Diretorio aonde esta o smartclient."
-                    },
-                    "serverVersion": {
-                        "type": "string",
-                        "default": "131227A",
-                        "description": "Versão do server"
-                    },
-                    "server": {
-                        "type": "string",
-                        "default": "localhost",
-                        "description": "Server IP"
-                    },
-                    "port": {
-                        "type": "string",
-                        "default": "1201",
-                        "description": "Server Port"
-                    },
-                    "environment": {
-                        "type": "string",
-                        "default": "environment",
-                        "description": "Environment"
-                    },
-                    "user": {
-                        "type": "string",
-                        "default": "Admin",
-                        "description": "Usuario com privilegio de Administração para conectar no servidor."
-                    },
-                    "passwordCipher": {
-                        "type": "string",
-                        "default": "",
-                        "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
-                    },
-                    "language": {
-                    "type": "string",
-                    "default": "PORTUGUESE",
-                    "description": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH"
+                        "properties": {
+                            "smartClientPath": {
+                                "type": "string",
+                                "default": "",
+                                "description": "Diretorio aonde esta o smartclient."
+                            },
+                            "serverVersion": {
+                                "type": "string",
+                                "default": "131227A",
+                                "description": "Versão do server"
+                            },
+                            "server": {
+                                "type": "string",
+                                "default": "localhost",
+                                "description": "Server IP"
+                            },
+                            "port": {
+                                "type": "string",
+                                "default": "1201",
+                                "description": "Server Port"
+                            },
+                            "environment": {
+                                "type": "string",
+                                "default": "environment",
+                                "description": "Environment"
+                            },
+                            "user": {
+                                "type": "string",
+                                "default": "Admin",
+                                "description": "Usuario com privilegio de Administração para conectar no servidor."
+                            },
+                            "passwordCipher": {
+                                "type": "string",
+                                "default": "",
+                                "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
+                            },
+                            "language": {
+                                "type": "string",
+                                "default": "PORTUGUESE",
+                                "description": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH"
+                            },
+                            "advpl.rpoType": {
+                                "type": "string",
+                                "default": "TOP",
+                                "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
+                            }
+                        },
+                        "advpl.includeList": {
+                            "type": "string",
+                            "default": "",
+                            "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                        }
+                    }
                 },
-                "advpl.rpoType": {
-                    "type": "string",
-                    "default": "TOP",
-                    "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
-                }
-                },
-                "advpl.includeList": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Diretorios de include para compilação separar cada diretorio com ;"
-                }
-                }
-              },
-                    
-                                
                 "advpl.startProgram": {
                     "type": "string",
                     "default": "SIGAFAT",
@@ -266,7 +264,6 @@
                 "command": "advpl.selectEnviroment",
                 "title": "Advpl - Seleciona o ambiente de compilação/Debug."
             }
-            
         ],
         "keybindings": [
             {
@@ -374,9 +371,8 @@
     "devDependencies": {
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
-        "vscode-debugadapter-testsupport": "^1.12.0",        
+        "vscode-debugadapter-testsupport": "^1.12.0",
         "@types/node": "^6.0.40"
-        
     },
     "dependencies": {
         "vscode-debugprotocol": "^1.12.0",
@@ -384,9 +380,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/killerall/advpl-vscode.git"
+        "url": "https://github.com/killerall/advpl-vscode.git"        
+    
     },
     "bugs": {
         "url": "https://github.com/killerall/advpl-vscode/issues"
     }
+    
 }

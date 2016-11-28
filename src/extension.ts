@@ -41,14 +41,15 @@ export function activate(context: vscode.ExtensionContext) {
 
 export function deactivate() {
 }
-
+var lastProgram : string = "";
 function getProgramName()
 {
-   let disposable = vscode.commands.registerCommand('advpl.getProgramName', () => {
-        var startProgram = vscode.workspace.getConfiguration("advpl").get<string>("startProgram");
-		//value: startProgram/
-        const p = vscode.window.showInputBox({placeHolder: "Informe o program"});
-        
+   let disposable = vscode.commands.registerCommand('advpl.getProgramName', () => {        
+        let p = vscode.window.showInputBox({placeHolder: "Informe o program",value:  lastProgram});
+        p.then(function(select){
+            lastProgram = select;
+        });
+         
         return p;
 	});
     return disposable;
