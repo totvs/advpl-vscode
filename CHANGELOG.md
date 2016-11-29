@@ -1,3 +1,7 @@
+## 0.4.2
+ - Corrigido pequenos problemas;
+ - Implementação inicial para disponibilizar a lista de fonte e resources do rpo.
+
 ## 0.4.1
  - Corrigido a geração de alguns IDs de cipth, que não deixa a extensão funcionar.
  - Liberado [Trazer última execução quando for debugar](https://github.com/killerall/advpl-vscode/issues/15)

@@ -32,6 +32,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathFileToBuild());
     //Binds do monitor
     context.subscriptions.push(GetThreads());
+    context.subscriptions.push(GetRpoInfos());
+    
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
@@ -250,6 +252,19 @@ return disposable;
 
 
 }
+function GetRpoInfos()
+{
+let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', function (context)  {
+        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        monitor.getRpoInfos();
+    });
+    
+return disposable;
+
+
+}
+
+
 function selectEnviroment()
 {
 let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {

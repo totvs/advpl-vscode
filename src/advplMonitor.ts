@@ -47,5 +47,28 @@ export class advplMonitor {
            that.outChannel.log(that.consoleReturn);
         });        
     }
+    public getRpoInfos()
+    {
+        var _args = new Array<string>();
+        var that = this;        
+                
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--getMap");
+        this.consoleReturn = "";
+        var child = child_process.spawn(this.debugPath,_args);
+        child.stdout.on("data",function(data){      
+           var xRet = data + "";
+          
+               that.consoleReturn += xRet;
+          
+           
+        });
+        
+
+        child.on("exit",function(data){
+           that.outChannel.log(that.consoleReturn);
+        });        
+    }
+
 
 }
