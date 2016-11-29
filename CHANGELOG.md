@@ -1,3 +1,6 @@
+## 0.4.3
+ - Correção da Correção;
+
 ## 0.4.2
  - Corrigido pequenos problemas;
  - Implementação inicial para disponibilizar a lista de fonte e resources do rpo.
