@@ -1,3 +1,6 @@
+## 0.4.5
+ - Correção da validação de compilação
+
 ## 0.4.3
  - Correção da Correção;
 
