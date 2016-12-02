@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.4.5",
+    "version": "0.4.6",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
