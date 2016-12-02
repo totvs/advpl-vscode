@@ -129,6 +129,8 @@ let disposable = vscode.commands.registerCommand('advpl.compile', function (cont
         var cSource = editor.document.fileName;
         vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
         var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+        compile.setEncoding(encoding);
                 compile.setAfterCompileOK(function (){
                    // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
                     vscode.window.setStatusBarMessage('Source ' + editor.document.fileName + ' Compiled!!! :D',3000);

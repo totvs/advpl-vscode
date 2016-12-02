@@ -11,6 +11,7 @@ export class advplCompile {
     private debugPath : string;
     private afterCompile
     private outChannel : advplConsole;
+    private encoding : string;
     constructor(jSonInfos : string ,d : vscode.DiagnosticCollection, OutPutChannel)
     {
         this.EnvInfos = jSonInfos;
@@ -26,6 +27,11 @@ export class advplCompile {
         {
             this.debugPath += "\\bin\\AdvplDebugBridge.exe";
         }
+        this.encoding ="";
+    }
+    public setEncoding(enc)
+    {
+        this.encoding = enc;
     }
     public setAfterCompileOK(aftercomp)
     {
@@ -66,7 +72,10 @@ export class advplCompile {
         
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--getId");
-
+        if(this.encoding != "")
+        {
+            _args.push("--encoding="+this.encoding);
+        }            
         var child = child_process.spawn(this.debugPath,_args);
         child.stdout.on("data",function(data){
       

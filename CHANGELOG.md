@@ -1,3 +1,8 @@
+## 0.4.6
+ - Correção na aplicação de patch
+ - Correção na compilação de pasta com apenas resources
+ - Leitura do encoding no ambiente, para ser possivel compilar em 1251 e utf8 tambem.
+
 ## 0.4.5
  - Correção da validação de compilação
 
