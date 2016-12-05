@@ -127,7 +127,41 @@ let disposable = vscode.commands.registerCommand('advpl.compile', function (cont
         
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
-        vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
+        if (editor.document.isDirty)
+        {
+            let list = ["Sim","Não"];
+            vscode.window.showQuickPick(list,{placeHolder:"O arquivo não está salvo e foi modificado, deseja salva-lo antes de compilar?"}).then(function(select){
+            console.log(select);
+            
+            if (select==="Sim")
+            {
+                editor.document.save().then(function(select){
+                __internal_compile(cSource,editor);
+            }
+            )
+               
+            }
+            else
+            {
+                vscode.window.setStatusBarMessage('Ação cancelado pelo usuario, fonte não compilado!!!',5000);
+            }
+        })
+            
+            
+        }
+        else
+        {
+            __internal_compile(cSource,editor);
+        }
+       
+
+});
+return disposable;
+}
+function __internal_compile(cSource,editor)
+{
+
+     vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
         var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
@@ -136,9 +170,6 @@ let disposable = vscode.commands.registerCommand('advpl.compile', function (cont
                     vscode.window.setStatusBarMessage('Source ' + editor.document.fileName + ' Compiled!!! :D',3000);
                 });
                 compile.compile(cSource);
-
-});
-return disposable;
 }
 
 function addGetDebugInfosCommand()
