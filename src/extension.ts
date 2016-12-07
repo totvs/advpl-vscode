@@ -6,6 +6,7 @@ import {advplConsole} from './advplConsole';
 import {advplPatch} from './advplPatch';
 import {advplMonitor} from './advplMonitor';
 import {Enviroment} from './advplEnviroment';
+import EnvObject from './Environment';
 import * as fs from 'fs';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
@@ -309,11 +310,17 @@ let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', funct
             let oSelectEnv = obj.find(env =>env["environment"] === select);
             if (oSelectEnv)
             {
-                let updObj = vscode.workspace.getConfiguration("advpl");
+                let error = validEnvironment(oSelectEnv);
+                if(error){
+                    vscode.window.showErrorMessage(error);
+                }else{
+                    let updObj = vscode.workspace.getConfiguration("advpl");
+
+                    updObj.update("selectedEnvironment",select);
+                    vscode.window.showInformationMessage("Ambiente " + select + " selecionado com sucesso.");
+                    env.update(select);
+                }
                 
-                updObj.update("selectedEnvironment",select);
-                vscode.window.showInformationMessage("Ambiente " + select + " selecionado com sucesso.");
-                env.update(select);                
 
             }
             else
@@ -329,3 +336,14 @@ return disposable;
 
 }
 
+
+function validEnvironment(environment){
+    let env = new EnvObject().deserialize(environment),
+        errors = env.getErrors(),
+        msgError;
+    if(errors.length > 0){
+        msgError = errors.join(' - ');
+    }
+
+    return msgError;
+}
