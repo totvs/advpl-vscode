@@ -7,12 +7,19 @@ import {advplPatch} from './advplPatch';
 import {advplMonitor} from './advplMonitor';
 import {Enviroment} from './advplEnviroment';
 import EnvObject from './Environment';
+import { spawn, execFile, ChildProcess } from 'child_process';
+import * as path from 'path';
+import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
+import * as net from 'net';
+import * as url from 'url';
 import * as fs from 'fs';
+import { StringDecoder } from 'string_decoder';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let fileToBuildPath;
 let env;
 export function activate(context: vscode.ExtensionContext) {
+
 
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());    
@@ -38,7 +45,7 @@ export function activate(context: vscode.ExtensionContext) {
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    
+    //initLanguageServer(context);
 }
 
 
@@ -57,6 +64,50 @@ function getProgramName()
 	});
     return disposable;
 }
+/**
+ * Inicia Language Server
+ */
+function initLanguageServer(context: vscode.ExtensionContext)
+{
+  let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\Debug\\advpl-language-server.exe"; 
+  const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
+        function spawnServer(...args: string[]): ChildProcess {
+            // The server is implemented in C#         
+            const childProcess = spawn(executablePath, args);
+            childProcess.stderr.on('data', (chunk: Buffer) => {
+                console.error(chunk + '');
+            });
+            childProcess.stdout.on('data', (chunk: Buffer) => {
+                console.log(chunk + '');
+            });
+            return childProcess;
+        }
+    resolve(spawnServer());
+
+    });
+      // Options to control the language client
+    const clientOptions: LanguageClientOptions = {
+        // Register the server for php documents
+        documentSelector: ['advpl'],
+        
+        synchronize: {
+            // Synchronize the setting section 'php' to the server
+            configurationSection: 'advpl'
+            // Notify the server about file changes to composer.json files contain in the workspace
+            
+        }
+    };
+
+    // Create the language client and start the client.
+    const disposable = new LanguageClient('Advpl Language Server', serverOptions, clientOptions).start();
+
+    // Push the disposable to the context's subscriptions so that the
+    // client can be deactivated on extension deactivation
+    context.subscriptions.push(disposable);
+
+}
+
+
 /**
  * Inicia o smartClient
  */
