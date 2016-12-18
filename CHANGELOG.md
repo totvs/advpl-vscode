@@ -1,3 +1,9 @@
+## 0.4.9
+ - Correção da captura da exceção no debug. Quando algum errolog ocorria no debug, o mesmo parava e não [mostrava o erro.](https://github.com/killerall/advpl-vscode/issues/54)
+ - [No show error when missing `includeList` config.](https://github.com/killerall/advpl-vscode/issues/51)
+ - Exclusão dos arquivos de patchs temporarios, que por vezes provocavam geração de patch errado.
+ - Preparação para o lancamento da versao 0.5 com language server
+ 
 ## 0.4.8
  - Liberação da versão MAC atualizada
  - Feito melhoria de perguntar se o usuario quer salvar o arquivo ao compilar, caso o mesmo não esteja salvo
