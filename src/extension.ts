@@ -69,7 +69,7 @@ function getProgramName()
  */
 function initLanguageServer(context: vscode.ExtensionContext)
 {
-  let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\Debug\\advpl-language-server.exe"; 
+  let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\x86\\Debug\\advpl-language-server.exe"; 
   const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in C#         

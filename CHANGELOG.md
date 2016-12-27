@@ -1,3 +1,8 @@
+## 0.4.10
+ - [Melhora de Performance no Debug, quando temos muitos arquivos na workspace](https://github.com/killerall/advpl-vscode/issues/57)
+ - Correção: [Todos os warnings aparecem num único warning](https://github.com/killerall/advpl-vscode/issues/56)
+ - Inspetor de Objeto, agora é criado o rpoinfo.log com as informações do [rpo] (https://github.com/killerall/advpl-vscode/issues/44)
+
 ## 0.4.9
  - Correção da captura da exceção no debug. Quando algum errolog ocorria no debug, o mesmo parava e não [mostrava o erro.](https://github.com/killerall/advpl-vscode/issues/54)
  - [No show error when missing `includeList` config.](https://github.com/killerall/advpl-vscode/issues/51)
@@ -6,7 +11,7 @@
  
 ## 0.4.8
  - Liberação da versão MAC atualizada
- - Feito melhoria de perguntar se o usuario quer salvar o arquivo ao compilar, caso o mesmo não esteja salvo
+ - Feito melhoria de perguntar se o usuariVo quer salvar o arquivo ao compilar, caso o mesmo não esteja salvo
 
 ## 0.4.6
  - Correção na aplicação de patch

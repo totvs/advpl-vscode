@@ -161,12 +161,14 @@ export class advplCompile {
                 if(this._lastAppreMsg != null)
                 {
                     var oEr = JSON.parse(this._lastAppreMsg);
+                    let diags: vscode.Diagnostic[] = [];
+                    let source;
                     for (let x = 0; x < oEr.msgs.length;x++)
                     {
                         let msgerr = oEr.msgs[x];
 
                         
-                        let source = msgerr.Source;
+                        source = msgerr.Source;
                         let lineIndex = Number(msgerr.Line)-1;
                         if(lineIndex<=0)
                             lineIndex = 1;
@@ -183,9 +185,10 @@ export class advplCompile {
                             this.outChannel.log("Warning: "+ message );
                         let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
                         vscode.workspace.findFiles(source,"")
-                        this.diagnosticCollection.set(vscode.Uri.file(source), [diagnosis]);
+                        diags.push (diagnosis);
                         
                     }
+                    this.diagnosticCollection.set(vscode.Uri.file(source), diags);
                     
                 }
 
