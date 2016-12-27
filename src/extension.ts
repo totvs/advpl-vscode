@@ -36,6 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
     context.subscriptions.push(PathBuild());
+    context.subscriptions.push(PathInfo());
     context.subscriptions.push(PathSelectFolder());
     context.subscriptions.push(PathFileToBuild());
     //Binds do monitor
@@ -271,6 +272,23 @@ let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (
             {
                 var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
                 patch.apply(cResource);
+                
+            }
+            else
+            {
+                vscode.window.showErrorMessage("Escolha uma arquivo PTM.");
+            }
+    });
+return disposable;
+}
+function PathInfo() 
+{
+let disposable = vscode.commands.registerCommand('advpl.patch.info', function (context)  {
+            var cResource = context._fsPath;
+            if(fs.lstatSync(cResource).isFile())
+            {
+                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+                patch.info(cResource);
                 
             }
             else

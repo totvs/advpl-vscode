@@ -1,3 +1,7 @@
+## 0.4.12
+ - Implementado opção de visualizar as informações num patch. Verifique na Wiki como [utilizar] (https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
+ - Correção [Pressionar ESC na hora de informar o programa não cancela o debug.](https://github.com/killerall/advpl-vscode/issues/58)
+
 ## 0.4.10
  - [Melhora de Performance no Debug, quando temos muitos arquivos na workspace](https://github.com/killerall/advpl-vscode/issues/57)
  - Correção: [Todos os warnings aparecem num único warning](https://github.com/killerall/advpl-vscode/issues/56)
