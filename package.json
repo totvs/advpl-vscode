@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.4.9",
+    "version": "0.4.10",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -111,12 +111,11 @@
                                 "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
                             },
                             "includeList": {
-                            "type": "string",
-                            "default": "",
-                            "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                                "type": "string",
+                                "default": "",
+                                "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                            }
                         }
-                        }
-                        
                     }
                 },
                 "advpl.startProgram": {
