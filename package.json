@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.4.12",
+    "version": "0.4.13",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -257,7 +257,6 @@
                 "command": "advpl.patch.info",
                 "title": "Advpl - Path Info - Mostra o conteudo de um pacote/Patch(PTM)."
             },
-            
             {
                 "command": "advpl.patch.setFileToBuild",
                 "title": "Advpl - Path Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."

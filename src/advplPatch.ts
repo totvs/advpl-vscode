@@ -92,6 +92,7 @@ export class advplPatch {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--patchInfo="+ patchApply);
         this.outChannel.log("Iniciando a analise do patch.");
+        this.consoleReturn = "";
         var child = child_process.spawn(this.debugPath,_args);
         child.stdout.on("data",function(data){      
            var xRet = data + "";
@@ -102,7 +103,7 @@ export class advplPatch {
            }
            else*/
            {
-               that.consoleReturn = xRet;
+               that.consoleReturn += xRet;
            }
            
         });
