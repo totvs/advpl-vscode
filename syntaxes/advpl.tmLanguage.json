@@ -1,0 +1,712 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "ADVPL",
+	"patterns": [
+		{
+			"include": "#diretivas-compilador"
+		},
+		{
+			"include": "#tipos"
+		},
+		{
+			"include": "#comentario"
+		},
+		{
+			"include": "#estruturas-de-controle"
+		},
+		{
+			"include": "#declaracoes"
+		},
+		{
+			"include": "#expression"
+		}
+	],
+	"repository": {
+		"diretivas-compilador": {
+			"patterns": [
+				{
+					"name": "keyword.control.advpl",
+					"match": "(?i)#\\b(define|endif|ifn?def|include|xcommand|xtranslate)\\b"
+				}
+			]
+		},
+		"tipos": {
+			"patterns": [
+				{
+					"include": "#tipo-logico"
+				},
+				{
+					"include": "#tipo-numero"
+				},
+				{
+					"include": "#tipo-caracter"
+				},
+				{
+					"include": "#tipo-bloco"
+				},
+				{
+					"include": "#tipo-array"
+				},
+				{
+					"include": "#tipo-objeto"
+				},
+				{
+					"include": "#declaracao-wsstruct"
+				}
+			]
+		},
+		"declaracoes": {
+			"patterns": [
+				{
+					"include": "#declaracao-funcao"
+				},
+				{
+					"include": "#declaracao-classe"
+				},
+				{
+					"include": "#declaracao-metodo"
+				},
+				{
+					"include": "#declaracao-wsmethod"
+				},
+				{
+					"include": "#declaracao-wsservice-wsclient"
+				},
+				{
+					"include": "#declaracao-variavel"
+				}
+			]
+		},
+		"tipo-logico": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.true.advpl",
+					"match": "(?i)\\.t\\."
+				},
+				{
+					"name": "constant.language.boolean.false.advpl",
+					"match": "(?i)\\.f\\."
+				},
+				{
+					"name": "constant.language.null.advpl",
+					"match": "(?i)\\bnil\\b"
+				}
+			]
+		},
+		"tipo-numero": {
+			"patterns": [
+				{
+					"match": "(?x)\n(?<!\\$)(?:\n  (?:\\b[0-9]+(\\.)[0-9]+[eE][+-]?[0-9]+\\b)| # 1.1E+3\n  (?:\\b[0-9]+(\\.)[eE][+-]?[0-9]+\\b)|       # 1.E+3\n  (?:\\B(\\.)[0-9]+[eE][+-]?[0-9]+\\b)|       # .1E+3\n  (?:\\b[0-9]+[eE][+-]?[0-9]+\\b)|            # 1E+3\n  (?:\\b[0-9]+(\\.)[0-9]+\\b)|                # 1.1\n  (?:\\b[0-9]+(\\.)\\B)|                      # 1.\n  (?:\\B(\\.)[0-9]+\\b)|                      # .1\n  (?:\\b[0-9]+\\b(?!\\.))                     # 1\n)(?!\\$)",
+					"captures": {
+						"0": {
+							"name": "constant.numeric.decimal.advpl"
+						},
+						"1": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						},
+						"2": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						},
+						"3": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						},
+						"4": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						},
+						"5": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						},
+						"6": {
+							"name": "meta.delimiter.decimal.period.advpl"
+						}
+					}
+				}
+			]
+		},
+		"tipo-caracter": {
+			"patterns": [
+				{
+					"name": "string.quoted.double.advpl",
+					"match": "(\"[^\"]*\"?)"
+				},
+				{
+					"name": "string.quoted.double.advpl",
+					"match": "('[^']*'?)"
+				}
+			]
+		},
+		"tipo-objeto": {
+			"patterns": [
+				{
+					"match": "(::[_$[:alpha:]][_$[:alnum:]]*)",
+					"name": "entity.name.type.object.advpl"
+				},
+				{
+					"match": "\\b([_$[:alpha:]][_$[:alnum:]]*)(?=:)(?!:=)",
+					"name": "entity.name.type.object.advpl"
+				},
+				{
+					"include": "#chamada-metodo"
+				},
+				{
+					"match": "(:[_$[:alpha:]][_$[:alnum:]]*)",
+					"name": "entity.name.type.object.advpl"
+				}				
+			]
+		},
+		"tipo-array": {
+			"name": "meta.array.literal.advpl",
+			"begin": "\\{",
+			"beginCaptures": {
+				"0": {
+					"name": "meta.brace.decl.advpl"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "meta.brace.decl.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#expression"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"tipo-bloco": {
+			"name": "meta.codeblock.literal.advpl",
+			"begin": "\\{\\s(?=(\\|.*\\|))",
+			"beginCaptures": {
+				"0": {
+					"name": "meta.brace.decl.advpl"
+				}
+			},
+			"end": "\\}",
+			"endCaptures": {
+				"0": {
+					"name": "meta.brace.decl.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#expression"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"comentario": {
+			"patterns": [
+				{
+					"name": "comment.block.advpl",
+					"begin": "/\\*",
+					"end": "\\*/",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.advpl"
+						}
+					}
+				},
+				{
+					"begin": "(^[ \\t]+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.advpl"
+						}
+					},
+					"end": "(?=$)",
+					"patterns": [
+						{
+							"name": "comment.line.double-slash.advpl",
+							"begin": "//",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.advpl"
+								}
+							},
+							"end": "(?=$)"
+						}
+					]
+				}
+			]
+		},
+		"estruturas-de-controle": {
+			"patterns": [
+				{
+					"name": "keyword.control.loop.advpl",
+					"match": "(?i)\\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.flow.advpl",
+					"match": "(?i)\\b(begin|end|sequence|break|return)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.switch.advpl",
+					"match": "(?i)\\b(do|case|otherwise|endcase)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.conditional.advpl",
+					"match": "(?i)\\b(else?if|i?if|endif)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.object.advpl",
+					"match": "(?i)\\b(end(ws(struct|service)|class))\\b(?!\\$)"
+				},
+				{
+					"begin": "(?i)\\b(beginsql)\\s+(alias)(\\s+\\w+)?",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.control.beginsql.advpl"
+						},
+						"2": {
+							"name": "keyword.control.alias.advpl"
+						},
+						"3": {
+							"name": "variable.parameter.advpl"
+						}
+					},
+					"end": "(?i)endsql",
+					"endCaptures": {
+						"0": {
+							"name": "keyword.control.endsql.advpl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comentario"
+						},
+						{
+							"include": "#tipo-caracter"
+						},
+						{
+							"name": "storage.modifier.advpl",
+							"match": "%.*?%"
+						},
+						{
+							"name": "variable.parameter.sqlquery.advpl",
+							"match": "\\b(\\w+)\\b"
+						}
+					]
+				}
+			]
+		},
+		"operadores": {
+			"patterns": [
+				{
+					"name": "keyword.operator.assignment.compound.advpl",
+					"match": "\\*=|(?<!\\()/=|%=|\\+=|\\-="
+				},
+				{
+					"name": "keyword.operator.comparison.advpl",
+					"match": "==|!="
+				},
+				{
+					"name": "keyword.operator.relational.advpl",
+					"match": "<=|>=|<>|<|>"
+				},
+				{
+					"name": "keyword.operator.logical.advpl",
+					"match": "\\!|\\.and\\.|\\.or\\."
+				},
+				{
+					"name": "keyword.operator.assignment.advpl",
+					"match": ":\\="
+				},
+				{
+					"name": "keyword.operator.decrement.advpl",
+					"match": "--"
+				},
+				{
+					"name": "keyword.operator.increment.advpl",
+					"match": "\\+\\+"
+				},
+				{
+					"name": "keyword.operator.arithmetic.advpl",
+					"match": "%|\\*|/|-|\\+"
+				}
+			]
+		},
+		"declaracao-variavel": {
+			"name": "meta.declaration.advpl",
+			"begin": "(?i)\\b(local|static|private|public|default)\\b\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.advpl"
+				}
+			},
+			"end": "(?=$)",
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"data": {
+			"patterns": [
+				{
+					"match": "(?i)\\b((?:ws)?data)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s+(as)\\s+(array of\\s+)?(?:(string|date|integer|float|boolean)|([_$[:alpha:]][_$[:alnum:]]*))\\s*(optional)?",
+					"captures": {
+						"1": {
+							"name": "storage.modifier.advpl"
+						},
+						"2": {
+							"name": "variable.object.property.advpl"
+						},
+						"3": {
+							"name": "keyword.control.as.advpl"
+						},
+						"4": {
+							"name": "keyword.control.arrayof.advpl"
+						},
+						"5": {
+							"name": "storage.type.advpl"
+						},
+						"6": {
+							"name": "entity.name.type.class.advpl"
+						},
+						"7": {
+							"name": "keyword.control.optional.advpl"
+						}
+					}
+				}
+			]
+		},
+		"expression": {
+			"name": "meta.expression.advpl",
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#tipos"
+				},
+				{
+					"include": "#operadores"
+				},
+				{
+					"include": "#chamada-funcao"
+				},
+				{
+					"include": "#paren-expression"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"chamada-metodo": {
+			"begin": "((?:::|:)[_$[:alpha:]][_$[:alnum:]]*)(?=\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.type.object.advpl"
+				}
+			},
+			"end": "(?<=\\))",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#paren-expression"
+				}
+			]
+		},
+		"chamada-funcao": {
+			"begin": "([_$[:alpha:]][_$[:alnum:]]*)(?=\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "entity.name.function.advpl"
+				}
+			},
+			"end": "(?<=\\))",
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#paren-expression"
+				}
+			]
+		},
+		"declaracao-funcao": {
+			"name": "meta.function.advpl",
+			"begin": "(?i)(?:(html|main|project|pyme|static|template|user|web|webuser)\\s+)?(function)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.modifier.advpl"
+				},
+				"2": {
+					"name": "storage.type.function.advpl"
+				},
+				"3": {
+					"name": "entity.name.function.advpl"
+				}
+			},
+			"end": "(?<=\\)|\\s)",
+			"patterns": [
+				{
+					"include": "#function-parameters"
+				},
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		"declaracao-classe": {
+			"name": "meta.class.advpl",
+			"begin": "(?i)(class)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?:\\s+(inherit(?:\\sfrom)|from|of)\\s+([_$[:alpha:]][_$[:alnum:]]*))",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.class.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.class.advpl"
+				},
+				"3": {
+					"name": "storage.type.class.advpl"
+				},
+				"4": {
+					"name": "entity.name.type.class.advpl"
+				}
+			},
+			"end": "(?i)(endclass)",
+			"endCaptures": {
+				"1": {
+					"name": "storage.type.class.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#declaracao-metodo"
+				},
+				{
+					"name": "keyword.control.constructor.advpl",
+					"match": "(?i)\\b(constructor)\\b"
+				},
+				{
+					"include": "#data"
+				}
+			]
+		},
+		"declaracao-metodo": {
+			"name": "meta.method.advpl",
+			"begin": "(?i)(method)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?=\\()",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.class.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.class.advpl"
+				}
+			},
+			"end": "(?i)(?<=\\))(?:\\s+(class)\\s+([_$[:alpha:]][_$[:alnum:]]*))?",
+			"endCaptures": {
+				"1": {
+					"name": "storage.type.class.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.class.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#function-parameters"
+				}
+			]
+		},
+		"function-parameters": {
+			"name": "meta.parameters.advpl",
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.begin.advpl"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.parameters.end.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"name": "variable.parameter.advpl",
+					"match": "([_$[:alpha:]][_$[:alnum:]]*)"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"declaracao-wsstruct": {
+			"name": "meta.struct.literal.advpl",
+			"begin": "(?i)(wsstruct)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.struct.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.object.advpl"
+				}
+			},
+			"end": "(?i)(endwsstruct)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.struct.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#data"
+				},
+				{
+					"match": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.struct.advpl"
+						},
+						"2": {
+							"name": "entity.name.type.function.advpl"
+						},
+						"3": {
+							"name": "keyword.control.struct.advpl"
+						}
+					}
+				}
+			]
+		},
+		"declaracao-wsservice-wsclient": {
+			"name": "meta.ws.literal.advpl",
+			"begin": "(?i)(?<!wsmethod)(wsservice|wsclient)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.ws.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.class.advpl"
+				},
+				"3": {
+					"name": "keyword.control.ws.advpl"
+				}
+			},
+			"end": "(?i)(endwsservice|endwsclient)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.ws.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comentario"
+				},
+				{
+					"include": "#tipo-caracter"
+				},
+				{
+					"include": "#data"
+				},
+				{
+					"match": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.ws.advpl"
+						},
+						"2": {
+							"name": "entity.name.type.function.advpl"
+						},
+						"3": {
+							"name": "keyword.control.ws.advpl"
+						}
+					}
+				}
+			]
+		},
+		"declaracao-wsmethod": {
+			"begin": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s+(?=.*(?:wsservice|wsclient))",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.control.struct.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.function.advpl"
+				}
+			},
+			"end": "(?i)(wsservice|wsclient)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"endCaptures": {
+				"1": {
+					"name": "keyword.control.struct.advpl"
+				},
+				"2": {
+					"name": "entity.name.type.class.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"match": "(?i)(wssend|wsreceive)",
+					"name": "keyword.control.struct.advpl"
+				},
+				{
+					"match": "([_$[:alpha:]][_$[:alnum:]]*)",
+					"name": "variable.parameter.advpl"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"paren-expression": {
+			"begin": "\\(",
+			"beginCaptures": {
+				"0": {
+					"name": "meta.brace.round.advpl"
+				}
+			},
+			"end": "\\)",
+			"endCaptures": {
+				"0": {
+					"name": "meta.brace.round.advpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#expression"
+				},
+				{
+					"include": "#punctuation-comma"
+				}
+			]
+		},
+		"punctuation-comma": {
+			"patterns": [
+				{
+					"name": "punctuation.separator.comma.advpl",
+					"match": ","
+				}
+			]
+		}
+	},
+	"scopeName": "source.advpl"
+}
