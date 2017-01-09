@@ -47,6 +47,12 @@ export function activate(context: vscode.ExtensionContext) {
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
     //initLanguageServer(context);
+	vscode.languages.setLanguageConfiguration("advpl", {
+		indentationRules: {
+			increaseIndentPattern: /^\s*(begin(\s+)?(\w+)?|else|elsif|for|if|while|case)\b[^\{;]*$/i,
+			decreaseIndentPattern: /^\s*(end(\s+)?(\w+)?|else|elsif|endif)\b/i
+		}
+	});
 }
 
 
