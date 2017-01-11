@@ -257,7 +257,7 @@
 				},
 				{
 					"name": "keyword.control.conditional.advpl",
-					"match": "(?i)\\b(else?if|i?if|endif)\\b(?!\\$)"
+					"match": "(?i)\\b(else(if)?|i?if|endif)\\b(?!\\$)"
 				},
 				{
 					"name": "keyword.control.object.advpl",
