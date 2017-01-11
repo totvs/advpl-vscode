@@ -138,6 +138,10 @@
 		"tipo-objeto": {
 			"patterns": [
 				{
+					"match": "(?i)\\b(self|_super)",
+					"name": "keyword.class.advpl"
+				},
+				{
 					"match": "(::[_$[:alpha:]][_$[:alnum:]]*)",
 					"name": "entity.name.type.object.advpl"
 				},
@@ -243,6 +247,10 @@
 		},
 		"estruturas-de-controle": {
 			"patterns": [
+				{
+					"name": "support.function.advpl",
+					"match": "(?i)\\b(len)\\b(?!\\$)"
+				},
 				{
 					"name": "keyword.control.loop.advpl",
 					"match": "(?i)\\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\\b(?!\\$)"
@@ -358,7 +366,7 @@
 		"data": {
 			"patterns": [
 				{
-					"match": "(?i)\\b((?:ws)?data)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s+(as)\\s+(array of\\s+)?(?:(string|date|integer|float|boolean)|([_$[:alpha:]][_$[:alnum:]]*))\\s*(optional)?",
+					"match": "(?i)\\b((?:ws)?data)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?:\\s+(as)\\s+(array of\\s+)?(?:(string|date|integer|float|boolean)|([_$[:alpha:]][_$[:alnum:]]*))\\s*)?(optional)?",
 					"captures": {
 						"1": {
 							"name": "storage.modifier.advpl"
