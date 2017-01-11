@@ -188,7 +188,10 @@ export class advplCompile {
                         diags.push (diagnosis);
                         
                     }
-                    this.diagnosticCollection.set(vscode.Uri.file(source), diags);
+                    if(diags.length > 0)
+                    {
+                        this.diagnosticCollection.set(vscode.Uri.file(source), diags);
+                    }
                     
                 }
 
