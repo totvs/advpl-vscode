@@ -1,3 +1,6 @@
+
+## 0.4.15
+ - Correção da messagem de compilação quando não tinha warning, não informava o sucesso.
 ## 0.4.14
  - Correção do Patch Info quando a informação é muito grande.
 ## 0.4.12
