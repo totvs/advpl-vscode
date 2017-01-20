@@ -29,6 +29,7 @@
         "onCommand:advpl.patch.setFileToBuild",
         "onCommand:advpl.monitor.getThreads",
         "onCommand:advpl.monitor.getRpoInfos",
+        "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnviroment"
     ],
     "main": "./out/src/extension",
@@ -273,6 +274,11 @@
                 "command": "advpl.monitor.getRpoInfos",
                 "title": "Advpl - Env - Imprime todas os fontes e datas do rpo."
             },
+            {
+                "command": "advpl.buildWSClient",
+                "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."
+            },
+            
             {
                 "command": "advpl.selectEnviroment",
                 "title": "Advpl - Seleciona o ambiente de compilação/Debug."
