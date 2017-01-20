@@ -1,8 +1,8 @@
-
 ## 0.4.15
+ - Implementação da geração de [Client de WebService] (https://github.com/killerall/advpl-vscode/issues/63)  
  - Correção da messagem de compilação quando não tinha warning, não informava o sucesso.
-## 0.4.14
- - Implementação da geração de [Client de WebService] (https://github.com/killerall/advpl-vscode/issues/63)
+ 
+## 0.4.14 
  - Correção do Patch Info quando a informação é muito grande.
 ## 0.4.12
  - Implementado opção de visualizar as informações num patch. Verifique na Wiki como [utilizar] (https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
