@@ -83,6 +83,49 @@ export class advplMonitor {
             });
         });        
     }
+    /**
+     * Gerar o Client do WS
+     */
+    public  buildWSClient() : void
+    {
+        var _args = new Array<string>();
+        var that = this;
+        this.consoleReturn = "";
+        _args.push("--compileInfo=" + this.EnvInfos);
+        let options:vscode.InputBoxOptions = {
+            prompt : "Informe o URL do Web Service:"            
+        }
+        var urlws = vscode.window.showInputBox(options).then(info=>{
+        if (urlws  != undefined)
+        {      
+            _args.push("--urlBuildWSClient="+info);
 
+            var child = child_process.spawn(this.debugPath,_args);
+            child.stdout.on("data",function(data){
+        
+            that.consoleReturn += "" + data;
+            });
+            
+            child.on("exit",function(data){
+           that.outChannel.log("Web Service criado com sucesso");
 
+           let initNamePos = that.consoleReturn.indexOf("WSCLIENT") + 9;
+           let endLine = that.consoleReturn.indexOf("\n",initNamePos);
+           let name = that.consoleReturn.substr(initNamePos,endLine-initNamePos);
+          const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, name+ 'Client.prw'));
+            vscode.workspace.openTextDocument(newFile).then(document => {
+                const edit = new vscode.WorkspaceEdit();
+                edit.insert(newFile, new vscode.Position(0, 0), that.consoleReturn);
+                return vscode.workspace.applyEdit(edit).then(success => {
+                    if (success) {                     
+                        vscode.window.showTextDocument(document);
+                    } else {
+                        vscode.window.showInformationMessage('Error!');
+                    }
+                });
+            });
+        });      
+        }
+    });  
+    }
 }

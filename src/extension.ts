@@ -42,6 +42,7 @@ export function activate(context: vscode.ExtensionContext) {
     //Binds do monitor
     context.subscriptions.push(GetThreads());
     context.subscriptions.push(GetRpoInfos());
+    context.subscriptions.push(BuildWSClient());
     
     //Enviroment no bar
     env = new Enviroment();
@@ -76,7 +77,8 @@ function getProgramName()
  */
 function initLanguageServer(context: vscode.ExtensionContext)
 {
-  let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\x86\\Debug\\advpl-language-server.exe"; 
+ // let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\x86\\Debug\\advpl-language-server.exe"; 
+ let executablePath = "C:\\vscode\\advpl-language-server\\bin\\Debug\\advpl-language-server.exe"; 
   const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in C#         
@@ -372,8 +374,16 @@ return disposable;
 
 
 }
+function BuildWSClient()
+{
+let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {
 
-
+        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        monitor.buildWSClient();
+    });
+    
+return disposable;
+}
 function selectEnviroment()
 {
 let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {
