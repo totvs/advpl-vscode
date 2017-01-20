@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.4.14",
+    "version": "0.4.15",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -278,7 +278,6 @@
                 "command": "advpl.buildWSClient",
                 "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."
             },
-            
             {
                 "command": "advpl.selectEnviroment",
                 "title": "Advpl - Seleciona o ambiente de compilação/Debug."

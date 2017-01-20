@@ -21,7 +21,7 @@
  
 ## 0.4.8
  - Liberação da versão MAC atualizada
- - Feito melhoria de perguntar se o usuariVo quer salvar o arquivo ao compilar, caso o mesmo não esteja salvo
+ - Feito melhoria de perguntar se o usuario quer salvar o arquivo ao compilar, caso o mesmo não esteja salvo
 
 ## 0.4.6
  - Correção na aplicação de patch
