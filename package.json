@@ -75,6 +75,11 @@
                                 "default": "",
                                 "description": "Diretorio aonde esta o smartclient."
                             },
+                            "name": {
+                                "type": "string",
+                                "default": null,
+                                "description": "Nome do Ambiente"
+                            },
                             "serverVersion": {
                                 "type": "string",
                                 "default": "131227A",

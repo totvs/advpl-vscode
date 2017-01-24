@@ -383,12 +383,22 @@ function selectEnviroment()
 let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {
         
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
-        let list = obj.map(env => env["environment"]);
+        let envs = obj.map(env => env["environment"]  );
+        let envnames = obj.map(env =>  env["name"] );
+        let list = envs.map((a,i) => envnames[i] == null ? a : envnames[i] ) ;
+        	
+
         vscode.window.showQuickPick(list).then(function(select){
             console.log(select);
             let oSelectEnv = obj.find(env =>env["environment"] === select);
-            if (oSelectEnv)
+            if (!(oSelectEnv))
             {
+                 let npos = obj.findIndex(env =>env["name"] === select);
+                 oSelectEnv = obj[npos];
+                 select = oSelectEnv.environment;
+            }            
+            if (oSelectEnv)
+            {   
                 let error = validEnvironment(oSelectEnv);
                 if(error){
                     vscode.window.showErrorMessage(error);
