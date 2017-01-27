@@ -517,7 +517,7 @@
 		},
 		"declaracao-classe": {
 			"name": "meta.class.advpl",
-			"begin": "(?i)(class)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?:(?:\\s+(inherit(?:\\sfrom)|from|of)\\s+([_$[:alpha:]][_$[:alnum:]]*)))?",
+			"begin": "(?i)^\\s*(class)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?:(?:\\s+(inherit(?:\\sfrom)|from|of)\\s+([_$[:alpha:]][_$[:alnum:]]*)))?",
 			"beginCaptures": {
 				"1": {
 					"name": "storage.type.class.advpl"
