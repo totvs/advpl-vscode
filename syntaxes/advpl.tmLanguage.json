@@ -193,18 +193,19 @@
 					"name": "keyword.class.advpl"
 				},
 				{
-					"match": "(::[_$[:alpha:]][_$[:alnum:]]*)",
-					"name": "entity.name.type.object.advpl"
-				},
-				{
-					"match": "\\b([_$[:alpha:]][_$[:alnum:]]*)(?=:)(?!:=)",
-					"name": "entity.name.type.object.advpl"
-				},
-				{
 					"include": "#chamada-metodo"
 				},
 				{
-					"match": "(:[_$[:alpha:]][_$[:alnum:]]*)",
+					"match": "((?:::|:)\\b[_$[:alpha:]][_$[:alnum:]]*)\\b(?!:\\w)",
+					"name": "variable.parameter.advpl"
+				},
+				{
+					"match": "((?:::|:)\\b[_$[:alpha:]][_$[:alnum:]]*)\\b",
+					"name": "entity.name.type.object.advpl",
+					"comment": "variable.parameter.advpl"
+				},
+				{
+					"match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\b(?=:)(?!:=)",
 					"name": "entity.name.type.object.advpl"
 				}
 			]
@@ -237,13 +238,13 @@
 		},
 		"tipo-bloco": {
 			"name": "meta.codeblock.literal.advpl",
-			"begin": "\\{\\s(?=(\\|.*\\|))",
+			"begin": "\\{\\s*(?=(\\|.*\\|))",
 			"beginCaptures": {
 				"0": {
 					"name": "meta.brace.decl.advpl"
 				}
 			},
-			"end": "\\}",
+			"end": "\\s*\\}",
 			"endCaptures": {
 				"0": {
 					"name": "meta.brace.decl.advpl"
@@ -264,8 +265,9 @@
 		"tipo-campo": {
 			"patterns": [
 				{
-					"match": "\\b(?:(?:([A-Z0-9]{2,3})(->))?([A-Z0-9]{2,3})_([A-Z0-9_]{1,7}))|(?:([_$[:alpha:]][_$[:alnum:]]*)(->)([_$[:alpha:]][_$[:alnum:]]*))\\b",
+					"match": "####",
 					"name": "meta.field.advpl",
+					"comment": "\\b(?:(?:\\(?([A-Z0-9]{2,3})\\)?(->))?([A-Z0-9]{2,3})_([A-Z0-9_]{1,7}))|(?:(\\(?[_$[:alpha:]][_$[:alnum:]]*\\)?)(->)([_$[:alpha:]][_$[:alnum:]]*))\\b",
 					"captures": {
 						"1": {
 							"name": "meta.alias.name.advpl"
@@ -330,12 +332,24 @@
 		"estruturas-de-controle": {
 			"patterns": [
 				{
-					"name": "keyword.control.loop.advpl",
-					"match": "(?i)\\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\\b(?!\\$)"
+					"name": "keyword.control.ws.flow.advpl",
+					"match": "(?i)\\b(begin|end)\\b\\s+\\b(wsmethod)\\b"
+				},
+				{
+					"name": "keyword.control.sequence.flow.advpl",
+					"match": "(?i)\\b(begin|end)\\b\\s+\\b(sequence)\\b"
+				},
+				{
+					"name": "keyword.control.transaction.flow.advpl",
+					"match": "(?i)\\b(begin|end)\\b\\s+\\b(transaction)\\b"
 				},
 				{
 					"name": "keyword.control.flow.advpl",
-					"match": "(?i)\\b(begin|end|sequence|transaction|break|return)\\b(?!\\$)"
+					"match": "(?i)\\b(break|return)\\b(?!\\$)"
+				},
+				{
+					"name": "keyword.control.loop.advpl",
+					"match": "(?i)\\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\\b(?!\\$)"
 				},
 				{
 					"name": "keyword.control.switch.advpl",
@@ -385,7 +399,7 @@
 		},
 		"declaracao-variavel": {
 			"name": "meta.declaration.advpl",
-			"begin": "(?i)\\b(local|static|private|public|default)\\b\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"begin": "(?i)^\\s*\\b(local|static|private|public|default)\\b\\s+([_$[:alpha:]][_$[:alnum:]]*)",
 			"beginCaptures": {
 				"1": {
 					"name": "storage.modifier.advpl"
@@ -461,7 +475,7 @@
 			"begin": "((?:::|:)[_$[:alpha:]][_$[:alnum:]]*)(?=\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "entity.name.type.object.advpl"
+					"name": "entity.name.function.advpl"				
 				}
 			},
 			"end": "(?<=\\))",
@@ -493,7 +507,7 @@
 		},
 		"declaracao-funcao": {
 			"name": "meta.function.advpl",
-			"begin": "(?i)(?:(html|main|project|pyme|static|template|user|web|webuser)\\s+)?(function)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"begin": "(?i)^\\s*(?:(html|main|project|pyme|static|template|user|web|webuser)\\s+)?(function)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
 			"beginCaptures": {
 				"1": {
 					"name": "storage.modifier.advpl"
@@ -555,14 +569,13 @@
 			]
 		},
 		"declaracao-metodo": {
-			"name": "meta.method.advpl",
-			"begin": "(?i)(method)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*(?=\\()",
+			"begin": "(?i)^\\s*(method)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*(?=\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "storage.type.class.advpl"
+					"name": "storage.type.method.advpl"
 				},
 				"2": {
-					"name": "entity.name.type.class.advpl"
+					"name": "entity.name.function.advpl"
 				}
 			},
 			"end": "(?i)(?<=\\))(?:\\s+(class)\\s+([_$[:alpha:]][_$[:alnum:]]*))?",
@@ -609,19 +622,19 @@
 		},
 		"declaracao-wsstruct": {
 			"name": "meta.struct.literal.advpl",
-			"begin": "(?i)(wsstruct)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+			"begin": "(?i)^\\s*(wsstruct)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.struct.advpl"
+					"name": "storage.type.struct.advpl"
 				},
 				"2": {
 					"name": "entity.name.type.object.advpl"
 				}
 			},
-			"end": "(?i)(endwsstruct)",
+			"end": "(?i)^\\s*(endwsstruct)",
 			"endCaptures": {
 				"1": {
-					"name": "keyword.control.struct.advpl"
+					"name": "storage.type.struct.advpl"
 				}
 			},
 			"patterns": [
@@ -635,10 +648,10 @@
 					"match": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
 					"captures": {
 						"1": {
-							"name": "keyword.control.struct.advpl"
+							"name": "storage.type.method.advpl"
 						},
 						"2": {
-							"name": "entity.name.type.function.advpl"
+							"name": "entity.name.function.advpl"
 						},
 						"3": {
 							"name": "keyword.control.struct.advpl"
@@ -649,22 +662,22 @@
 		},
 		"declaracao-wsservice-wsclient": {
 			"name": "meta.ws.literal.advpl",
-			"begin": "(?i)(?<!wsmethod)(wsservice|wsclient)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
+			"begin": "(?i)^\\s*(?<!wsmethod)(wsservice|wsclient)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.ws.advpl"
+					"name": "storage.type.ws.advpl"
 				},
 				"2": {
-					"name": "entity.name.type.class.advpl"
+					"name": "entity.name.type.ws.advpl"
 				},
 				"3": {
 					"name": "keyword.control.ws.advpl"
 				}
 			},
-			"end": "(?i)(endwsservice|endwsclient)",
+			"end": "(?i)^\\s*(endwsservice|endwsclient)",
 			"endCaptures": {
 				"1": {
-					"name": "keyword.control.ws.advpl"
+					"name": "storage.type.ws.advpl"
 				}
 			},
 			"patterns": [
@@ -681,10 +694,10 @@
 					"match": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)(\\s+description)?",
 					"captures": {
 						"1": {
-							"name": "keyword.control.ws.advpl"
+							"name": "storage.type.method.advpl"
 						},
 						"2": {
-							"name": "entity.name.type.function.advpl"
+							"name": "entity.name.function.advpl"
 						},
 						"3": {
 							"name": "keyword.control.ws.advpl"
@@ -694,19 +707,19 @@
 			]
 		},
 		"declaracao-wsmethod": {
-			"begin": "(?i)(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s+(?=.*(?:wsservice|wsclient))",
+			"begin": "(?i)^\\s*(wsmethod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s+(?=.*(?:wsservice|wsclient))",
 			"beginCaptures": {
 				"1": {
-					"name": "keyword.control.struct.advpl"
+					"name": "storage.type.method.advpl"
 				},
 				"2": {
-					"name": "entity.name.type.function.advpl"
+					"name": "entity.name.function.advpl"
 				}
 			},
 			"end": "(?i)(wsservice|wsclient)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
 			"endCaptures": {
 				"1": {
-					"name": "keyword.control.struct.advpl"
+					"name": "storage.type.ws.advpl"
 				},
 				"2": {
 					"name": "entity.name.type.class.advpl"
@@ -715,7 +728,7 @@
 			"patterns": [
 				{
 					"match": "(?i)(wssend|wsreceive)",
-					"name": "keyword.control.struct.advpl"
+					"name": "storage.type.parameter.advpl"
 				},
 				{
 					"match": "([_$[:alpha:]][_$[:alnum:]]*)",
@@ -727,13 +740,22 @@
 			]
 		},
 		"alias-expression": {
-			"name": "meta.alias.expression.advpl",
-			"begin": "([_$[:alpha:]][_$[:alnum:]]*)->(\\()",
+			"begin": "####",
+			"coment":" desabilitado (\\(?)([_$[:alpha:]][_$[:alnum:]]*)(\\)?)(->)(\\()",
 			"beginCaptures": {
 				"1": {
-					"name": "meta.alias.name.advpl"
+					"name": "meta.brace.round.advpl"
 				},
 				"2": {
+					"name": "meta.alias.name.advpl"
+				},
+				"3": {
+					"name": "meta.brace.round.advpl"
+				},
+				"4": {
+					"name": "keyword.operator.alias.advpl"
+				},
+				"5": {
 					"name": "meta.brace.round.advpl"
 				}
 			},
