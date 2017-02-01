@@ -60,6 +60,7 @@ Exemplo: `/Applications/`
 > `advpl.environments` : Array com os ambientes configurados
 
 > Cada ambiente deve especificar:   
+> * `name` : Nome para o ambiente, caso não informado sera utilizado o enviroment para a seleção
 > * `environment`: Nome do ambiente que será feito o debug e a compilação
 > * `serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
 > * `server`: Server IP, Padrão: localhost                  
