@@ -216,7 +216,7 @@
             {
                 "language": "advpl",
                 "scopeName": "source.advpl",
-                "path": "./syntaxes/advpl.tmlanguage"
+                "path": "./syntaxes/advpl.tmlanguage.json"
             }
         ],
         "commands": [
@@ -254,19 +254,19 @@
             },
             {
                 "command": "advpl.patch.apply",
-                "title": "Advpl - Path Apply - Aplica um Patch(PTM)."
+                "title": "Advpl - Patch Apply - Aplica um Patch(PTM)."
             },
             {
                 "command": "advpl.patch.build",
-                "title": "Advpl - Path Build - Gera um dos fontes selecionados Patch(PTM)."
+                "title": "Advpl - Patch Build - Gera um dos fontes selecionados Patch(PTM)."
             },
             {
                 "command": "advpl.patch.info",
-                "title": "Advpl - Path Info - Mostra o conteudo de um pacote/Patch(PTM)."
+                "title": "Advpl - Patch Info - Mostra o conteudo de um pacote/Patch(PTM)."
             },
             {
                 "command": "advpl.patch.setFileToBuild",
-                "title": "Advpl - Path Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
+                "title": "Advpl - Patch Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
             },
             {
                 "command": "advpl.patch.selectFolder",

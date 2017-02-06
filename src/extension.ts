@@ -47,7 +47,9 @@ export function activate(context: vscode.ExtensionContext) {
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+
 //    initLanguageServer(context);
+
 }
 
 
