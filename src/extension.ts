@@ -43,11 +43,11 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(GetThreads());
     context.subscriptions.push(GetRpoInfos());
     context.subscriptions.push(BuildWSClient());
-    
+    context.subscriptions.push(DeleteSource());
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    //initLanguageServer(context);
+//    initLanguageServer(context);
 }
 
 
@@ -365,9 +365,20 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', fu
     });
     
 return disposable;
-
-
 }
+function DeleteSource()
+{
+let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
+        let compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+        compile.setEncoding(encoding);
+        compile.deleteSource();
+    });
+    
+return disposable;
+}
+
+
 function BuildWSClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {

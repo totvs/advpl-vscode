@@ -83,6 +83,7 @@ export class advplMonitor {
             });
         });        
     }
+   
     /**
      * Gerar o Client do WS
      */

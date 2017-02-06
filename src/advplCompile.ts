@@ -205,5 +205,40 @@ export class advplCompile {
         
 
     }
+
+     public deleteSource() : void
+    {
+                
+        
+        let options:vscode.InputBoxOptions = {
+            prompt : "Informe o nome do fonte que será excluido:"            
+        }
+        var dlg = vscode.window.showInputBox(options).then(info=>{
+            if (info  != undefined)
+            {      
+                this.outChannel.log("Iniciando exclusão do(s) fonte(s) "+ info+ "\n");
+                this.diagnosticCollection.clear();
+            var _args = new Array<string>()
+            var that = this;
+            _args.push("--compileInfo=" + this.EnvInfos);
+            _args.push("--deleteSource=" + info);        
+            
+            var child = child_process.spawn(this.debugPath,_args);
+        
+            child.stdout.on("data",function(data){
+        
+            that._lastAppreMsg += data;
+            });
+            
+            child.on("exit",function(data){
+                var lRunned = data == 0
+                console.log("exit: " + data);
+            that.run_callBack(lRunned);
+            });
+        
+            }
+        });
+
+    }
 }
 
