@@ -1,12 +1,19 @@
+## 0.5
+ - Refactory da parte de Syntax highlighting feito pelo [Izacsc] (https://github.com/killerall/advpl-vscode/pull/62)
+ - Adicionado comando para excluir fontes do RPO.
+ - Aviso de chave de compilação expirada.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
+
 ## 0.4.16
  - Adicionado a chave `name` dentro da configuração de `ambiente`, permitindo nomear um ambiente com um nome, que será utilizado
  no lugar do proprio ambiente na seleção de ambiente ativo. Essa chave é opcional.
+
 ## 0.4.15
  - Implementação da geração de [Client de WebService] (https://github.com/killerall/advpl-vscode/issues/63)  
  - Correção da messagem de compilação quando não tinha warning, não informava o sucesso.
  
 ## 0.4.14 
  - Correção do Patch Info quando a informação é muito grande.
+ 
 ## 0.4.12
  - Implementado opção de visualizar as informações num patch. Verifique na Wiki como [utilizar] (https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
  - Correção [Pressionar ESC na hora de informar o programa não cancela o debug.](https://github.com/killerall/advpl-vscode/issues/58)

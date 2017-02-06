@@ -282,7 +282,7 @@
             },
             {
                 "command": "advpl.monitor.deleteSource",
-                "title": "Advpl - Env - Delete um fonte do RPO."
+                "title": "Advpl - Env - Excluir um(s) fonte(s) do RPO."
             },            
             {
                 "command": "advpl.buildWSClient",

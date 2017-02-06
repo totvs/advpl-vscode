@@ -211,7 +211,7 @@ export class advplCompile {
                 
         
         let options:vscode.InputBoxOptions = {
-            prompt : "Informe o nome do fonte que será excluido:"            
+            prompt : "Informe o(s) nome(s) do(s) fonte(s) que serão excluido(s):"            
         }
         var dlg = vscode.window.showInputBox(options).then(info=>{
             if (info  != undefined)
