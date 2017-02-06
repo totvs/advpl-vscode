@@ -1,3 +1,6 @@
+## 0.4.16
+ - Adicionado a chave `name` dentro da configuração de `ambiente`, permitindo nomear um ambiente com um nome, que será utilizado
+ no lugar do proprio ambiente na seleção de ambiente ativo. Essa chave é opcional.
 ## 0.4.15
  - Implementação da geração de [Client de WebService] (https://github.com/killerall/advpl-vscode/issues/63)  
  - Correção da messagem de compilação quando não tinha warning, não informava o sucesso.

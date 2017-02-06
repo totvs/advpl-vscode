@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.4.15",
+    "version": "0.4.16",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -29,6 +29,7 @@
         "onCommand:advpl.patch.setFileToBuild",
         "onCommand:advpl.monitor.getThreads",
         "onCommand:advpl.monitor.getRpoInfos",
+        "onCommand:advpl.monitor.deleteSource",
         "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnviroment"
     ],
@@ -74,6 +75,11 @@
                                 "type": "string",
                                 "default": "",
                                 "description": "Diretorio aonde esta o smartclient."
+                            },
+                            "name": {
+                                "type": "string",
+                                "default": null,
+                                "description": "Nome do Ambiente"
                             },
                             "serverVersion": {
                                 "type": "string",
@@ -274,6 +280,10 @@
                 "command": "advpl.monitor.getRpoInfos",
                 "title": "Advpl - Env - Imprime todas os fontes e datas do rpo."
             },
+            {
+                "command": "advpl.monitor.deleteSource",
+                "title": "Advpl - Env - Delete um fonte do RPO."
+            },            
             {
                 "command": "advpl.buildWSClient",
                 "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."

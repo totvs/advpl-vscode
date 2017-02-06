@@ -43,17 +43,13 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(GetThreads());
     context.subscriptions.push(GetRpoInfos());
     context.subscriptions.push(BuildWSClient());
-    
+    context.subscriptions.push(DeleteSource());
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    //initLanguageServer(context);
-	/*vscode.languages.setLanguageConfiguration("advpl", {
-		indentationRules: {
-			increaseIndentPattern: /^\s*(begin(\s+)?(\w+)?|else|elsif|for|if|while|case)\b[^\{;]*$/i,
-			decreaseIndentPattern: /^\s*(end(\s+)?(\w+)?|else|elsif|endif)\b/i
-		}
-	});*/
+
+//    initLanguageServer(context);
+
 }
 
 
@@ -371,9 +367,20 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', fu
     });
     
 return disposable;
-
-
 }
+function DeleteSource()
+{
+let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
+        let compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+        compile.setEncoding(encoding);
+        compile.deleteSource();
+    });
+    
+return disposable;
+}
+
+
 function BuildWSClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {
@@ -389,12 +396,22 @@ function selectEnviroment()
 let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {
         
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
-        let list = obj.map(env => env["environment"]);
+        let envs = obj.map(env => env["environment"]  );
+        let envnames = obj.map(env =>  env["name"] );
+        let list = envs.map((a,i) => envnames[i] == null ? a : envnames[i] ) ;
+        	
+
         vscode.window.showQuickPick(list).then(function(select){
             console.log(select);
             let oSelectEnv = obj.find(env =>env["environment"] === select);
-            if (oSelectEnv)
+            if (!(oSelectEnv))
             {
+                 let npos = obj.findIndex(env =>env["name"] === select);
+                 oSelectEnv = obj[npos];
+                 select = oSelectEnv.environment;
+            }            
+            if (oSelectEnv)
+            {   
                 let error = validEnvironment(oSelectEnv);
                 if(error){
                     vscode.window.showErrorMessage(error);
