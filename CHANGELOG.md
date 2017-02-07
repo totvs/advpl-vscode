@@ -1,7 +1,7 @@
 ## 0.5
  - Refactory da parte de Syntax highlighting feito pelo [Izacsc] (https://github.com/killerall/advpl-vscode/pull/62)
- - Adicionado comando para excluir fontes do RPO.
- - Aviso de chave de compilação expirada.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
+ - Adicionado comando para excluir fontes do RPO.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
+ - Aviso de chave de compilação expirada.
 
 ## 0.4.16
  - Adicionado a chave `name` dentro da configuração de `ambiente`, permitindo nomear um ambiente com um nome, que será utilizado
