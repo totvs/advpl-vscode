@@ -1,3 +1,6 @@
+## 0.5.1
+ - [Congelamento ao compilar] (https://github.com/killerall/advpl-vscode/issues/70)
+
 ## 0.5
  - Refactory da parte de Syntax highlighting feito pelo [Izacsc] (https://github.com/killerall/advpl-vscode/pull/62)
  - Adicionado comando para excluir fontes do RPO.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)

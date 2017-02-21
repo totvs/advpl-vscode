@@ -22,12 +22,14 @@ Essa extensão possui as seguintes features implementadas:
 * Debug single Thread e Multi Thread   
 * Compilação de multiplos fontes
 * Geração e aplicação de Path [Wiki](https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
+* Exclusão de fontes do RPO
+* Lista dos fontes/resources do rpo
+* Geração Cliente WS Protheus
 
 As próximas planejadas são:
 
 * Auto complete
 * Mac e Linux
-
 
 
 ## Requisitos para utilização

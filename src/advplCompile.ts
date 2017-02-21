@@ -155,43 +155,52 @@ export class advplCompile {
 };
     private run_callBack(lOk)
     {
-        
-        
          
                 if(this._lastAppreMsg != null)
                 {
                     var oEr = JSON.parse(this._lastAppreMsg);
-                    let diags: vscode.Diagnostic[] = [];
+                    
                     let source;
+                    
                     for (let x = 0; x < oEr.msgs.length;x++)
                     {
-                        let msgerr = oEr.msgs[x];
-
-                        
-                        source = msgerr.Source;
-                        let lineIndex = Number(msgerr.Line)-1;
-                        if(lineIndex<=0)
-                            lineIndex = 1;
-                        let col =  Number(msgerr.Column);
-                        let message = msgerr.Message;
-                        let range = new vscode.Range(lineIndex,0, lineIndex, 10);
-                        if (source == "NOSOURCE")
+                        let sourceArray = oEr.msgs[x];
+                        let diags: vscode.Diagnostic[] = [];                        
+                        source = sourceArray.Key;
+                        for (let y =0 ; y < sourceArray.Value.length; y++)
                         {
-                            vscode.window.showInformationMessage(message);                    
+                            let msgerr = sourceArray.Value[y];
+                            let lineIndex = Number(msgerr.Line)-1;
+                            if(lineIndex<=0)
+                                lineIndex = 1;
+                            let col =  Number(msgerr.Column);
+                            let message = msgerr.Message;
+                            let range = new vscode.Range(lineIndex,0, lineIndex, 10);
+                            if (source == "NOSOURCE")
+                            {
+                                vscode.window.showInformationMessage(message);                    
+                            }
+                            else
+                            {
+                                if (msgerr.Type == 0)
+                                    this.outChannel.log("Erro: "+ message );
+                                else
+                                    this.outChannel.log("Warning: "+ message );
+                                let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
+                                //vscode.workspace.findFiles(source,"")
+                                diags.push (diagnosis);
+                            }
                         }
-                        if (msgerr.Type == 0)
-                            this.outChannel.log("Erro: "+ message );
-                        else
-                            this.outChannel.log("Warning: "+ message );
-                        let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
-                        vscode.workspace.findFiles(source,"")
-                        diags.push (diagnosis);
+                        if(diags.length > 0)
+                        {
+                            this.diagnosticCollection.set(vscode.Uri.file(source), diags);
+                        }
+                        
+                        
+                        
                         
                     }
-                    if(diags.length > 0)
-                    {
-                        this.diagnosticCollection.set(vscode.Uri.file(source), diags);
-                    }
+                    
                     
                 }
 
