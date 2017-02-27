@@ -10,7 +10,6 @@ Caso você encontre algum problema, por favor abra uma issue no [GitHub](https:/
 
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado [aqui](https://github.com/killerall/advpl-vscode/blob/master/TDSProjectToVscode.jar).
 
-> Atenção! A partir da versão 0.4.0 a configuração dos ambientes sofreu alteração para suportar multiplos ambientes
 
 ## Features
 
@@ -107,7 +106,7 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 * F5  - Inicia o Debug
 * CTRL + F5  - Inicia o SmartClient sem debugar
 * CTRL + F9 - Compila o fonte atual
-* CTRL + F11 - Executa o smartClient sem configuração e mostrando o parametro,
+* CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
 
 # No Debug
 Utilizada as teclas padrões do VsCode

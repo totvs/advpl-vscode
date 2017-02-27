@@ -24,11 +24,10 @@
         "onCommand:advpl.patch.apply",
         "onCommand:advpl.patch.build",
         "onCommand:advpl.patch.info",
-        "onCommand:advpl.patch.selectSource",
-        "onCommand:advpl.patch.selectFolder",
         "onCommand:advpl.patch.setFileToBuild",
         "onCommand:advpl.monitor.getThreads",
         "onCommand:advpl.monitor.getRpoInfos",
+        "onCommand:advpl.monitor.getRpoFunctions",
         "onCommand:advpl.monitor.deleteSource",
         "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnviroment"
@@ -249,16 +248,12 @@
                 "title": "Advpl - Compiler Cipher -  Cipher Password - Criptografa a senha do usuario para conectar no appserver."
             },
             {
-                "command": "advpl.patch.selectSource",
-                "title": "Advpl - Patch Select - Seleciona o fonte atual para a geração de um Patch(PTM)."
-            },
-            {
                 "command": "advpl.patch.apply",
-                "title": "Advpl - Patch Apply - Aplica um Patch(PTM)."
+                "title": "Advpl - Patch - Apply - Aplica um Patch(PTM)."
             },
             {
                 "command": "advpl.patch.build",
-                "title": "Advpl - Patch Build - Gera um dos fontes selecionados Patch(PTM)."
+                "title": "Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo, selecionado pelo comando - Patch - Set."
             },
             {
                 "command": "advpl.patch.info",
@@ -266,11 +261,7 @@
             },
             {
                 "command": "advpl.patch.setFileToBuild",
-                "title": "Advpl - Patch Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
-            },
-            {
-                "command": "advpl.patch.selectFolder",
-                "title": "Advpl - Patch Add Folder To Build Patch - Seleciona todos fontes  da pasta atual para a geração de um Patch(PTM)."
+                "title": "Advpl - Patch - Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
             },
             {
                 "command": "advpl.monitor.getThreads",
@@ -279,6 +270,10 @@
             {
                 "command": "advpl.monitor.getRpoInfos",
                 "title": "Advpl - Env - Imprime todas os fontes e datas do rpo."
+            },
+            {
+                "command": "advpl.monitor.getRpoFunctions",
+                "title": "Advpl - Env - Imprime todas as funcoes do rpo por fonte."
             },
             {
                 "command": "advpl.monitor.deleteSource",

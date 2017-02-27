@@ -48,13 +48,16 @@ export class advplMonitor {
            that.outChannel.log(that.consoleReturn);
         });        
     }
-    public getRpoInfos()
+    public getRpoInfos(lFunction : boolean)
     {
         var _args = new Array<string>();
         var that = this;        
                 
         _args.push("--compileInfo=" + this.EnvInfos);
-        _args.push("--getMap");
+        if (lFunction)
+            _args.push("--getFunctions");
+        else
+            _args.push("--getMap");
         this.consoleReturn = "";
         this.outChannel.log("Iniciando a leitura do RPO. Aguarde.")
         var child = child_process.spawn(this.debugPath,_args);
@@ -68,8 +71,8 @@ export class advplMonitor {
         
 
         child.on("exit",function(data){
-           that.outChannel.log("RpoInfo criado com sucesso");
-          const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'rpoInfo.log'));
+           that.outChannel.log("Informações criadas  com sucesso");
+          const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'rpoInfo' + (new Date()).getMilliseconds().toString()  +'.log'));
             vscode.workspace.openTextDocument(newFile).then(document => {
                 const edit = new vscode.WorkspaceEdit();
                 edit.insert(newFile, new vscode.Position(0, 0), that.consoleReturn);

@@ -33,15 +33,16 @@ export function activate(context: vscode.ExtensionContext) {
     
 
     //Binds dos comandos de patch
-    context.subscriptions.push(PathSelectSource());
+    //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathInfo());
-    context.subscriptions.push(PathSelectFolder());
+    //context.subscriptions.push(PathSelectFolder());
     context.subscriptions.push(PathFileToBuild());
     //Binds do monitor
     context.subscriptions.push(GetThreads());
     context.subscriptions.push(GetRpoInfos());
+    context.subscriptions.push(GetRpoFunctions());    
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
     //Enviroment no bar
@@ -261,13 +262,13 @@ return disposable;
 /***
  * Patchs
  */
-function PathSelectSource() 
+/*function PathSelectSource() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectSource', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
     });
 return disposable;
-}
+}*/
 function PathApply() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (context)  {
@@ -322,7 +323,7 @@ let disposable = vscode.commands.registerCommand('advpl.patch.build', function (
 return disposable;
 }
 
-  
+/*  
 function PathSelectFolder() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', function (context)  {
@@ -330,7 +331,7 @@ let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', fun
     });
 return disposable;
 }
-
+*/
 function PathFileToBuild() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', function (context)  {
@@ -363,11 +364,23 @@ function GetRpoInfos()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', function (context)  {
         var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
-        monitor.getRpoInfos();
+        monitor.getRpoInfos(false);
     });
     
 return disposable;
 }
+
+function GetRpoFunctions()
+{
+let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoFunctions', function (context)  {
+        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        monitor.getRpoInfos(true);
+    });
+    
+return disposable;
+}
+
+
 function DeleteSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {

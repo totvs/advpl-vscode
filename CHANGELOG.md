@@ -1,3 +1,10 @@
+## 0.5.2
+ - Correção: [Gerar patch que nao existe a pasta] (https://github.com/killerall/advpl-vscode/issues/64)
+ - Melhoria: [Implementar o inspetor de funções] (https://github.com/killerall/advpl-vscode/issues/71)
+ - Melhoria: [Adicionar campos das tabelas no Debug] (https://github.com/killerall/advpl-vscode/issues/61)
+ - Melhoria: [BreakPoint Condicional no Debug] (https://github.com/killerall/advpl-vscode/issues/40)
+ - Melhoria: [Não é possível passar parâmetros ao lançar o smartclient] (https://github.com/killerall/advpl-vscode/issues/50)
+
 ## 0.5.1
  - [Congelamento ao compilar] (https://github.com/killerall/advpl-vscode/issues/70)
 
