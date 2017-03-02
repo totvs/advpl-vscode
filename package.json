@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.5.3",
+    "version": "0.5.4",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -371,9 +371,9 @@
                         "request": "launch",
                         "args": [],
                         "cwd": "${workspaceRoot}",
-                        "programRun": "${command.AskForProgramName}",
+                        "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
-                        "enviromentInfo": "${command.GetEnvInfos}",
+                        "enviromentInfo": "${command:GetEnvInfos}",
                         "workspace": "${workspaceRoot}/"
                     }
                 ]

@@ -1,3 +1,6 @@
+## 0.5.4
+ - Ajuste do Package.json devido a atualização do VSCODE 1.10
+
 ## 0.5.2
  - Correção: [Gerar patch que nao existe a pasta] (https://github.com/killerall/advpl-vscode/issues/64)
  - Melhoria: [Implementar o inspetor de funções] (https://github.com/killerall/advpl-vscode/issues/71)
