@@ -178,7 +178,8 @@ export class advplCompile {
                             let range = new vscode.Range(lineIndex,0, lineIndex, 10);
                             if (source == "NOSOURCE")
                             {
-                                vscode.window.showInformationMessage(message);                    
+                                vscode.window.showInformationMessage(message);
+                                this.outChannel.log(message);
                             }
                             else
                             {
