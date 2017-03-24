@@ -1,3 +1,11 @@
+## 0.5.5
+ - Melhoria: Performace gerais, tanto de compilação quanto debug.
+ - Melhoria:[Possibilidade de configuração de novo parametro, para determinar se vai recompilar o fonte sem alteração ´compile_force_recompile´] (https://github.com/killerall/advpl-vscode/issues/75)
+ - Melhoria: Novo comando para compilar os fontes de um projeto. Basta clicar com o botão direito sobre um arquivo prj, e selecionar compilar Projeto.
+ - Melhoria: Adicionado informação de data e hora de inicio e fim de compilação.
+ - Correção: [Identificação de Extensão APL] (https://github.com/killerall/advpl-vscode/issues/76)
+ - Correção: [Error de compilação] (https://github.com/killerall/advpl-vscode/issues/74)
+ 
 ## 0.5.4
  - Ajuste do Package.json devido a atualização do VSCODE 1.10
 

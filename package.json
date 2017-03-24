@@ -15,6 +15,7 @@
         "onLanguage:advpl",
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
+        "onCommand:advpl.menucompileProjet",
         "onCommand:advpl.menucompilemulti",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
@@ -43,6 +44,9 @@
                 {
                     "command": "advpl.menucompilemulti"
                 },
+                {
+                    "command": "advpl.menucompileProjet"
+                },                
                 {
                     "command": "advpl.patch.apply"
                 },
@@ -193,6 +197,13 @@
                     "default": false,
                     "description": "Mostra as variaveis Estaticas."
                 }
+                ,
+                "advpl.compile_force_recompile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração."
+                }
+            
             }
         },
         "languages": [
@@ -201,12 +212,16 @@
                 "extensions": [
                     ".prw",
                     ".prx",
-                    ".prg"
+                    ".prg",
+                    ".aph",
+                    ".apl"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
                     "Advpl(PRX)",
-                    "Advpl(PRG)"
+                    "Advpl(PRG)",
+                    "Advpl(APH)",
+                    "Advpl(APL)"
                 ],
                 "configuration": "./advpl.configuration.json"
             }
@@ -230,6 +245,10 @@
             {
                 "command": "advpl.menucompilemulti",
                 "title": "Advpl - Compile Folder"
+            },
+            {
+                "command": "advpl.menucompileProjet",
+                "title": "Advpl - Compile PRJ Project"
             },
             {
                 "command": "advpl.compile",

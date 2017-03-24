@@ -109,6 +109,17 @@ export class advplCompile {
         this.genericCompile(files);    
         
     }
+    public compileProject(project:string)
+    {
+        
+        this.outChannel.log("Iniciando compilação do projeto "+ project + "\n");
+        this.diagnosticCollection.clear();
+        //var regex = /.*\.(prw|prx)/i;        
+        var regex = "PROJECT";// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
+        //var files = this.walk(folder,regex);
+        var files = project + "ª" + regex;
+        this.genericCompile(files);    
+    }
     private genericCompile(sourceName :string )
     {
          var _args = new Array<string>()
@@ -116,6 +127,7 @@ export class advplCompile {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);        
         
+        this.outChannel.log("Compile Start at "+ new Date() + "\n");
         var child = child_process.spawn(this.debugPath,_args);
      
         child.stdout.on("data",function(data){
@@ -127,6 +139,7 @@ export class advplCompile {
             var lRunned = data == 0
             console.log("exit: " + data);
            that.run_callBack(lRunned);
+           that.outChannel.log("Compile Finish at "+ new Date() + "\n");
         });
     }
     public  walk(dir : string,regex){
@@ -178,7 +191,7 @@ export class advplCompile {
                             let range = new vscode.Range(lineIndex,0, lineIndex, 10);
                             if (source == "NOSOURCE")
                             {
-                                vscode.window.showInformationMessage(message);
+                                //vscode.window.showInformationMessage(message);
                                 this.outChannel.log(message);
                             }
                             else

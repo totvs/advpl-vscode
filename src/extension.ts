@@ -27,6 +27,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(compile());
     context.subscriptions.push(menucompile());
     context.subscriptions.push(menucompilemulti());
+    context.subscriptions.push(menucompileProjet());    
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
     context.subscriptions.push(selectEnviroment());
@@ -128,6 +129,29 @@ let disposable = vscode.commands.registerCommand('advpl.startSmartClient', () =>
         obj2.start();
     });
     return disposable;
+}
+function menucompileProjet()
+{
+   
+let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', function (context)  {
+        
+        var cSource = context._fsPath;
+        if(fs.lstatSync(cSource).isFile() && cSource.substr(cSource.lastIndexOf('.') + 1).toUpperCase() == "PRJ")
+        {
+        vscode.window.setStatusBarMessage('Starting Project compile...' + cSource,3000);
+        var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+                compile.setAfterCompileOK(function (){
+                   // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
+                    vscode.window.setStatusBarMessage('Project ' + cSource + ' Compiled!!! :D',3000);
+                });
+                compile.compileProject(cSource);
+        }
+        else
+        {
+             vscode.window.showInformationMessage('Por favor selecione um arquivo de Projeto(.PRJ).') ;
+        }
+});
+return disposable;
 }
 function menucompile()
 {
