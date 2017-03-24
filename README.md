@@ -100,6 +100,9 @@ Debug
 * `advpl.debug_showPublic` : Mostra as variaveis Publicas.
 * `advpl.debug_showStatics` : Mostra as variaveis Estaticas .
 
+Compilação
+* `compile_force_recompile` : Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração.
+
 ## Configurações
 
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
