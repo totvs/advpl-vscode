@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.5.4",
+    "version": "0.5.5",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -46,7 +46,7 @@
                 },
                 {
                     "command": "advpl.menucompileProjet"
-                },                
+                },
                 {
                     "command": "advpl.patch.apply"
                 },
@@ -196,14 +196,12 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Mostra as variaveis Estaticas."
-                }
-                ,
+                },
                 "advpl.compile_force_recompile": {
                     "type": "boolean",
                     "default": false,
                     "description": "Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração."
                 }
-            
             }
         },
         "languages": [

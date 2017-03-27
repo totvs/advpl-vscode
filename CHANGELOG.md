@@ -1,3 +1,8 @@
+## 0.5.6
+ - Correção: [Problema ao compilar após atualização 0.5.5] (https://github.com/killerall/advpl-vscode/issues/79)
+ Esse erro ocorre quando o ini do protheus não consegue ser lido corretamente, portanto não atigiu todas as pessoas.
+
+
 ## 0.5.5
  - Melhoria: Performace gerais, tanto de compilação quanto debug.
  - Melhoria:[Possibilidade de configuração de novo parametro, para determinar se vai recompilar o fonte sem alteração ´compile_force_recompile´] (https://github.com/killerall/advpl-vscode/issues/75)
