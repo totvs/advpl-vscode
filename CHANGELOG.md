@@ -1,3 +1,6 @@
+## 0.5.7
+ - Correção: [Debug não para depois da atualização 1.11.0] (https://github.com/killerall/advpl-vscode/issues/82)
+
 ## 0.5.6
  - Correção: [Problema ao compilar após atualização 0.5.5] (https://github.com/killerall/advpl-vscode/issues/79)
  Esse erro ocorre quando o ini do protheus não consegue ser lido corretamente, portanto não atigiu todas as pessoas.
