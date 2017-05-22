@@ -141,6 +141,18 @@
 				{
 					"name": "constant.language.null.advpl",
 					"match": "(?i)\\bnil\\b"
+				},
+				{
+					"name": "constant.language.boolean.operator.and.advpl",
+					"match": "(?i)\\.and\\."
+				},
+				{
+					"name": "constant.language.boolean.operator.or.advpl",
+					"match": "(?i)\\.or\\."
+				},
+				{
+					"name": "constant.language.boolean.operator.not.advpl",
+					"match": "(?i)\\.not\\."
 				}
 				,
 				{
