@@ -1,3 +1,7 @@
+## 0.5.8
+ - Correção: [Operadores lógicos - Syntax Highlighting] (https://github.com/killerall/advpl-vscode/pull/85)
+ - Suporte ao servido de build 170117A , utilize a tag:   "serverVersion" : "170117A" dentro da configuracao do ambiente.
+
 ## 0.5.7
  - Correção: [Debug não para depois da atualização 1.11.0] (https://github.com/killerall/advpl-vscode/issues/82)
 

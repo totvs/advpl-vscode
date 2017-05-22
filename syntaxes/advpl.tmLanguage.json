@@ -142,6 +142,21 @@
 					"name": "constant.language.null.advpl",
 					"match": "(?i)\\bnil\\b"
 				}
+				,
+				{
+					"name": "constant.language.and.advpl",
+					"match": "(?i)\\.and\\."
+				}
+				,
+				{
+					"name": "constant.language.or.advpl",
+					"match": "(?i)\\.or\\."
+				}
+				,
+				{
+					"name": "constant.language.not.advpl",
+					"match": "(?i)\\.not\\."
+				}
 			]
 		},
 		"tipo-numero": {

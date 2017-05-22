@@ -65,7 +65,7 @@ Exemplo: `/Applications/`
 > Cada ambiente deve especificar:   
 > * `name` : Nome para o ambiente, caso não informado sera utilizado o enviroment para a seleção
 > * `environment`: Nome do ambiente que será feito o debug e a compilação
-> * `serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
+> * `serverVersion`.": Versão do server - Atualmente suporta o 131227A , 170117A
 > * `server`: Server IP, Padrão: localhost                  
 > * `port` : Porta do servidor
 > * `user`: Nome do usuário para se conectar no Protheus, se não informado utiliza "Admin"
