@@ -37,8 +37,7 @@
     "contributes": {
         "menus": {
             "explorer/context": [
-                {
-                    "when": "fold",
+                {                    
                     "command": "advpl.menucompile"
                 },
                 {
