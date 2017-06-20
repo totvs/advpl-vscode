@@ -236,7 +236,7 @@
             {
                 "language": "advpl",
                 "scopeName": "source.advpl",
-                "path": "./syntaxes/advpl.tmlanguage.json"
+                "path": "./syntaxes/advpl.tmLanguage.tmLanguage"
             }
         ],
         "commands": [
