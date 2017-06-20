@@ -38,22 +38,31 @@
         "menus": {
             "explorer/context": [
                 {                    
-                    "command": "advpl.menucompile"
+                    "command": "advpl.menucompile",
+                    "when": "resourceLangId == advpl",
+                    "group": "advpl"
                 },
                 {
-                    "command": "advpl.menucompilemulti"
+                    "command": "advpl.menucompilemulti",
+                    "when": "explorerResourceIsFolder",
+                    "group": "advpl"
+                    
                 },
                 {
-                    "command": "advpl.menucompileProjet"
+                    "command": "advpl.menucompileProjet",
+                    "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.apply"
+                    "command": "advpl.patch.apply",
+                    "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.info"
+                    "command": "advpl.patch.info",
+                    "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.setFileToBuild"
+                    "command": "advpl.patch.setFileToBuild",
+                    "group": "advpl"
                 }
             ]
         },
