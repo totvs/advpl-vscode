@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.5.8",
+    "version": "0.5.9",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -38,7 +38,7 @@
     "contributes": {
         "menus": {
             "explorer/context": [
-                {                    
+                {
                     "command": "advpl.menucompile"
                 },
                 {
@@ -48,8 +48,8 @@
                     "command": "advpl.menucompileProjet"
                 },
                 {
-                    "command": "advpl.menucompiletextfile"                },
-                
+                    "command": "advpl.menucompiletextfile"
+                },
                 {
                     "command": "advpl.patch.apply"
                 },
@@ -204,8 +204,7 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração."
-                }
-                ,
+                },
                 "advpl.logger": {
                     "type": "boolean",
                     "default": false,
@@ -261,7 +260,6 @@
                 "command": "advpl.menucompiletextfile",
                 "title": "Advpl - Compile TXT list of files"
             },
-            
             {
                 "command": "advpl.compile",
                 "title": "Advpl - Compiler -  Compile Advpl Source"
