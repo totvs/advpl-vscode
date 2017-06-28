@@ -98,6 +98,16 @@ export class advplCompile {
         this.genericCompile(sourceName );
         
     }
+    public compileText(textFile:string)
+    {
+        this.outChannel.log("Iniciando compilação de arquivo TXT "+ textFile + "\n");
+        this.diagnosticCollection.clear();
+        //var regex = /.*\.(prw|prx)/i;        
+        var regex = "TEXTFILE:"+vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
+        //var files = this.walk(folder,regex);
+        var files = textFile  + "ª" + regex;
+        this.genericCompile(files);    
+    }
     public compileFolder(folder:string)
     {
         this.outChannel.log("Iniciando compilação da Pasta e sub-Pastas "+ folder + "\n");

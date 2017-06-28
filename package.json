@@ -17,6 +17,7 @@
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompileProjet",
         "onCommand:advpl.menucompilemulti",
+        "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
@@ -46,6 +47,9 @@
                 {
                     "command": "advpl.menucompileProjet"
                 },
+                {
+                    "command": "advpl.menucompiletextfile"                },
+                
                 {
                     "command": "advpl.patch.apply"
                 },
@@ -201,6 +205,12 @@
                     "default": false,
                     "description": "Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração."
                 }
+                ,
+                "advpl.logger": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Cria arquivo de log."
+                }
             }
         },
         "languages": [
@@ -247,6 +257,11 @@
                 "command": "advpl.menucompileProjet",
                 "title": "Advpl - Compile PRJ Project"
             },
+            {
+                "command": "advpl.menucompiletextfile",
+                "title": "Advpl - Compile TXT list of files"
+            },
+            
             {
                 "command": "advpl.compile",
                 "title": "Advpl - Compiler -  Compile Advpl Source"

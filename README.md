@@ -101,7 +101,10 @@ Debug
 * `advpl.debug_showStatics` : Mostra as variaveis Estaticas .
 
 Compilação
-* `compile_force_recompile` : Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração.
+* `advpl.compile_force_recompile` : Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração.
+
+Log 
+* `advpl.logger`: Crie um log da execução
 
 ## Configurações
 
