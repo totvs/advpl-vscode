@@ -36,7 +36,7 @@ As próximas planejadas são:
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
-Essa extensão ainda não está disponível no Linux. Em OSX o suporte do editor e do debug já esta funcional. 
+Essa extensão ainda não está disponível no Linux. 
 
 ## Configurações da extensão
 
@@ -48,18 +48,6 @@ Exemplo: `C:\\Protheus\\smartclient\\`
 No caso de OSX:
 Exemplo: `/Applications/`
 
-> Atenção! A partir da versão 0.4.0, as configurações de ambientes devem ser feitas com o array `advpl.environments`
-* `advpl.serverVersion`.": Versão do server - Atualmente suporta apenas o 131227A
-* `advpl.server`: Server IP, Padrão: localhost                  
-* `advpl.port` : Porta do servidor
-* `advpl.environment`: Nome do ambiente que será feito o debug e a compilação
-* `advpl.user`: Nome do usuário para se conectar no Protheus, se não informado utiliza "Admin"
-* `advpl.passwordCipher` : Senha criptografada do usuário de login no Protheus, para gerá-la utilize o comando CipherPassword
-* `advpl.includeList`: Lista de diretórios separado por ponto-e-vírugla. Exemplo: `C:\\Protheus\\include\\;C:\\Protheus\\include_2\\`
-* `advpl.language`: Língua do repositório, se não informado será português, valores permitidos: PORTUGUESE, ENGLISH, SPANISH
-* `advpl.rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
-
-> Atenção! Nova configuração de ambiente 
 > `advpl.environments` : Array com os ambientes configurados
 
 > Cada ambiente deve especificar:   
@@ -75,12 +63,10 @@ Exemplo: `/Applications/`
 > * `rpoType`: Tipo do RPO, se não informado será  "TOP", valores permitidos: TOP, CTREE, DBF
 > 
 
-
 * `advpl.selectedEnvironment` Ambiente atualmente selecionado
 
 * `advpl.startProgram`: Módulo ou função que será sugerido no launch do Debug
-* `compileFolderRegex`: Regex que ira validar se na compilação de folders, o arquivo irá ser compilado ou não.
-
+* `advpl.compileFolderRegex`: Regex que ira validar se na compilação de folders, o arquivo irá ser compilado ou não.
 
 As variáveis abaixo devem ser preenchidas caso você tenha uma senha de compilação.
 Caso você deseje pegar o ID utilizado pelo VSCODE para gerar uma nova chave, veja o comando getAuthorizationId 
@@ -121,5 +107,3 @@ Utilizada as teclas padrões do VsCode
 * F5 - Run/Contiue
 * F10 - Step Into
 * F11 - Step Over
-
-
