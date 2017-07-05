@@ -1,3 +1,6 @@
+## 0.5.11
+- Correção: Corrigido problema ao instalar a extensão com usuarios que tinham espaço no nome, que fazia que ao compilar não retorna se tinha compilado ou não.
+
 ## 0.5.10
 - Correção: Corrigido compilação em ambientes que não são TOPConnect
 
