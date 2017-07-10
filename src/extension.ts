@@ -137,7 +137,10 @@ let disposable = vscode.commands.registerCommand('advpl.startSmartClient', () =>
 
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d512d00... remoção arquivo package-lock.json
        // scPath += "smartclient.exe";
         var obj2  = new smartClientLaunch(scPath);
         obj2.start();
