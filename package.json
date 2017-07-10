@@ -54,6 +54,7 @@
                 },
                 {
                     "command": "advpl.menucompiletextfile"
+                    "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.apply"
