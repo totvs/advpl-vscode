@@ -53,11 +53,11 @@
                     "group": "advpl"
                 },
                 {
-                    "command": "advpl.menucompiletextfile"
+                    "command": "advpl.menucompiletextfile",
                     "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.apply"
+                    "command": "advpl.patch.apply",
                     "group": "advpl"
                 },
                 {
