@@ -28,6 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompile());
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(menucompileProjet());    
+    context.subscriptions.push(menucompiletextfile());    
+    
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
     context.subscriptions.push(selectEnviroment());
@@ -75,8 +77,9 @@ function getProgramName()
  */
 function initLanguageServer(context: vscode.ExtensionContext)
 {
- // let executablePath = "D:\\vscode_advpl\\advpl-language-server\\bin\\x86\\Debug\\advpl-language-server.exe"; 
- let executablePath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath + "\\bin\\advpl-language-server.exe"; 
+  
+  let executablePath = "C:\\Totvs\\vscode\\advpl-language-server\\bin\\Debug\\advpl-language-server.exe"; 
+ //let executablePath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath + "\\bin\\advpl-language-server.exe"; 
   const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
             // The server is implemented in C#         
@@ -149,6 +152,28 @@ let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', func
         else
         {
              vscode.window.showInformationMessage('Por favor selecione um arquivo de Projeto(.PRJ).') ;
+        }
+});
+return disposable;
+}
+function menucompiletextfile()
+{
+    let disposable = vscode.commands.registerCommand('advpl.menucompiletextfile', function (context)  {
+        
+        var cSource = context._fsPath;
+        if(fs.lstatSync(cSource).isFile() )
+        {
+        vscode.window.setStatusBarMessage('Starting Project files in text file...' + cSource,3000);
+        var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+                compile.setAfterCompileOK(function (){
+                   // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
+                    vscode.window.setStatusBarMessage('Project ' + cSource + ' Compiled!!! :D',3000);
+                });
+                compile.compileText(cSource);
+        }
+        else
+        {
+             vscode.window.showInformationMessage('Por favor selecione um arquivo de texto.') ;
         }
 });
 return disposable;

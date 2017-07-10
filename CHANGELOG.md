@@ -1,3 +1,14 @@
+## 0.5.11
+- Correção: Corrigido problema ao instalar a extensão com usuarios que tinham espaço no nome, que fazia que ao compilar não retorna se tinha compilado ou não.
+
+## 0.5.10
+- Correção: Corrigido compilação em ambientes que não são TOPConnect
+
+## 0.5.9
+- Melhoria: Possiblidade de usar uma lista de fontes para compilar. Para utilizar por exemplo o arquivo de patch. (Wiki) [https://github.com/killerall/advpl-vscode/wiki/Compila%C3%A7%C3%A3o-de-lista-de-arquivo]
+- Correção: [Problema ao tentar gerar Patch Protheus ADVPL] (https://github.com/killerall/advpl-vscode/issues/92) , [Patch em rpo TTTS ] (https://github.com/killerall/advpl-vscode/issues/84) 
+- Correção : [Patchs] (https://github.com/killerall/advpl-vscode/issues/52)
+
 ## 0.5.8
  - Correção: [Operadores lógicos - Syntax Highlighting] (https://github.com/killerall/advpl-vscode/pull/85)
  - Suporte ao servido de build 170117A , utilize a tag:   "serverVersion" : "170117A" dentro da configuracao do ambiente.

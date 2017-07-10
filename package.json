@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.5.8",
+    "version": "0.5.11",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -17,6 +17,7 @@
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompileProjet",
         "onCommand:advpl.menucompilemulti",
+        "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
@@ -39,7 +40,6 @@
             "explorer/context": [
                 {                    
                     "command": "advpl.menucompile",
-                    "when": "resourceLangId == advpl",
                     "group": "advpl"
                 },
                 {
@@ -53,7 +53,10 @@
                     "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.apply",
+                    "command": "advpl.menucompiletextfile"
+                },
+                {
+                    "command": "advpl.patch.apply"
                     "group": "advpl"
                 },
                 {
@@ -209,6 +212,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração."
+                },
+                "advpl.logger": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Cria arquivo de log."
                 }
             }
         },
@@ -255,6 +263,10 @@
             {
                 "command": "advpl.menucompileProjet",
                 "title": "Advpl - Compile PRJ Project"
+            },
+            {
+                "command": "advpl.menucompiletextfile",
+                "title": "Advpl - Compile TXT list of files"
             },
             {
                 "command": "advpl.compile",
