@@ -125,8 +125,17 @@ function startSmartClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.startSmartClient', () => {
         
-        var scPath :string; 
-        scPath = vscode.workspace.getConfiguration("advpl").get<string>("smartClientPath");
+        var scPath :string = vscode.workspace.getConfiguration("advpl").get<string>("smartClientPath");
+        var ambientes:Array<any> = vscode.workspace.getConfiguration("advpl").get<Array<any>>("environments");
+        var ambienteAtual:string = vscode.workspace.getConfiguration("advpl").get<string>("selectedEnvironment");
+
+        if(scPath === undefined || scPath === null){
+                ambientes.forEach(element => {
+                if(element.environment == ambienteAtual)
+                scPath = element.smartClientPath
+            });
+
+        }
        // scPath += "smartclient.exe";
         var obj2  = new smartClientLaunch(scPath);
         obj2.start();
