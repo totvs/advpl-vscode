@@ -1,3 +1,10 @@
+## 0.6.0
+- Refactory do Debug, para melhorias de performace e principalmente quedas quando se disparava o botão de step in, causando erros de sincronia com o appserver.
+- [Implementar melhorias de performance no debug] (https://github.com/killerall/advpl-vscode/issues/90)
+- Atualização do protocolo de debug do vscode
+- Correção via Pull Request [ de Ctrl+F11] (https://github.com/killerall/advpl-vscode/pull/95)
+- Melhoria via Pull Request : [Ajustes Package.json e Gramática - Condições e Agrupamentos de comandos de menu] (https://github.com/killerall/advpl-vscode/pull/91)
+
 ## 0.5.11
 - Correção: Corrigido problema ao instalar a extensão com usuarios que tinham espaço no nome, que fazia que ao compilar não retorna se tinha compilado ou não.
 
