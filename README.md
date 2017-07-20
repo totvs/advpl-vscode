@@ -26,11 +26,12 @@ Essa extensão possui as seguintes features implementadas:
 * Exclusão de fontes do RPO
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
+* Mac OSX
 
 As próximas planejadas são:
 
 * Auto complete
-* Mac e Linux
+* Linux
 
 
 ## Requisitos para utilização

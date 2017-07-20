@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.5.12",
+    "version": "0.6.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -38,7 +38,7 @@
     "contributes": {
         "menus": {
             "explorer/context": [
-                {                    
+                {
                     "command": "advpl.menucompile",
                     "group": "advpl"
                 },
@@ -46,7 +46,6 @@
                     "command": "advpl.menucompilemulti",
                     "when": "explorerResourceIsFolder",
                     "group": "advpl"
-                    
                 },
                 {
                     "command": "advpl.menucompileProjet",
@@ -171,7 +170,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|tres)",
+                    "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|res)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 },
                 "advpl.pathPatchBuild": {
