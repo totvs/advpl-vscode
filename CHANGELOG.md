@@ -1,3 +1,6 @@
+## 0.6.1
+- Correção no Debug, quando dava errolog debugando, o Debug aparentava estar travado.
+
 ## 0.6.0
 - Refactory do Debug, para melhorias de performace e principalmente quedas quando se disparava o botão de step in, causando erros de sincronia com o appserver.
 - [Implementar melhorias de performance no debug] (https://github.com/killerall/advpl-vscode/issues/90)
