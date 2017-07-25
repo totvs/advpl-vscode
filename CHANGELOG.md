@@ -1,3 +1,6 @@
+## 0.6.2
+- [Correção no Debug na versão 11, não parava nos breakpoints] (https://github.com/killerall/advpl-vscode/issues/105)
+
 ## 0.6.1
 - Correção no Debug, quando dava errolog debugando, o Debug aparentava estar travado.
 
