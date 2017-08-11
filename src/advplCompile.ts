@@ -12,6 +12,7 @@ export class advplCompile {
     private afterCompile
     private outChannel : advplConsole;
     private encoding : string;
+    private compileStartTime
     constructor(jSonInfos : string ,d : vscode.DiagnosticCollection, OutPutChannel)
     {
         this.EnvInfos = jSonInfos;
@@ -93,8 +94,8 @@ export class advplCompile {
     public compile(sourceName:string)
     {
                 
-        this.outChannel.log("Iniciando compilação do fonte "+ sourceName + "\n");
-        this.diagnosticCollection.clear();
+        this.outChannel.log("Iniciando compilação do fonte "+ sourceName + "\n");        
+        this.diagnosticCollection.clear();        
         this.genericCompile(sourceName );
         
     }
@@ -132,7 +133,8 @@ export class advplCompile {
     }
     private genericCompile(sourceName :string )
     {
-         var _args = new Array<string>()
+        this.compileStartTime = new Date(); 
+        var _args = new Array<string>()
          var that = this;
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);        
@@ -149,7 +151,11 @@ export class advplCompile {
             var lRunned = data == 0
             console.log("exit: " + data);
            that.run_callBack(lRunned);
-           that.outChannel.log("Compile Finish at "+ new Date() + "\n");
+           var endTime; 
+           endTime = new Date();
+           let timeDiff = (endTime - that.compileStartTime); //in ms            
+           timeDiff /= 1000;
+           that.outChannel.log("Compile Finish at "+ new Date() + " Elapsed  (" + timeDiff + " segs.)\n"); 
         });
     }
     public  walk(dir : string,regex){
@@ -174,12 +180,14 @@ export class advplCompile {
                 
         }
     }
-    return results;
+    return results; 
 };
     private run_callBack(lOk)
     {
          
-                if(this._lastAppreMsg != null)
+            try
+            {
+            if(this._lastAppreMsg != null)
                 {
                     var oEr = JSON.parse(this._lastAppreMsg);
                     
@@ -233,13 +241,16 @@ export class advplCompile {
                     this.outChannel.log("Compilação OK");
                     this.afterCompile();
                 }
-                    
-            
+            }       
+            catch (ex)
+            {
+                this.outChannel.log(ex);
+            }
         
 
     }
 
-     public deleteSource() : void
+    public deleteSource() : void
     {
                 
         
@@ -273,5 +284,28 @@ export class advplCompile {
         });
 
     }
+    public defragRPO() : void
+    {
+        this.outChannel.log("Iniciando a Desfragmentação do RPO \n");
+        this.diagnosticCollection.clear();
+        var _args = new Array<string>()
+        var that = this;
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--defragRpo");        
+        
+        var child = child_process.spawn(this.debugPath,_args);
+    
+        child.stdout.on("data",function(data){
+    
+        that._lastAppreMsg += data;
+        });
+        
+        child.on("exit",function(data){
+            var lRunned = data == 0
+            console.log("exit: " + data);
+        that.run_callBack(lRunned);
+        });        
+    }
+   
 }
 

@@ -1,3 +1,11 @@
+## 0.7.0
+- Melhoria: Para gerar path de uma lista de arquivo, agora basta clicar com o botao direito nele, e selecionar: Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo.
+- Melhoria: Velocidade da compilação de pastas, foi criado uma configuração a mais, para definir o numero de threads, o padrão é 4 (advpl.compile_threads)
+- Melhoria: [Desfragmentar RPO] (https://github.com/killerall/advpl-vscode/issues/103)
+- Correção: [Debug com problemas] (https://github.com/killerall/advpl-vscode/issues/106)
+- Correção: [Seleção de ambiente] (https://github.com/killerall/advpl-vscode/issues/89)
+- Correção: [Stop não encerra conexão iniciada via Shift+F5] (https://github.com/killerall/advpl-vscode/issues/98)
+
 ## 0.6.2
 - [Correção no Debug na versão 11, não parava nos breakpoints] (https://github.com/killerall/advpl-vscode/issues/105)
 

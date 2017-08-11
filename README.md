@@ -89,6 +89,7 @@ Debug
 
 Compilação
 * `advpl.compile_force_recompile` : Caso esteja como true, força recompilar os fontes mesmo que não tiveram alteração.
+* `advpl.compile_threads` : Numero de Threads que serão utilizadas quando se compila uma Folder, o padrão é 4. Aumentar para mais de 4 Threads, fara o uso de CPU ficar bem alto
 
 Log 
 * `advpl.logger`: Crie um log da execução

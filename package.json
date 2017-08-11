@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.6.2",
+    "version": "0.6.3",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -25,12 +25,12 @@
         "onCommand:advpl.CipherPassword",
         "onCommand:advpl.patch.apply",
         "onCommand:advpl.patch.build",
-        "onCommand:advpl.patch.info",
-        "onCommand:advpl.patch.setFileToBuild",
+        "onCommand:advpl.patch.info",        
         "onCommand:advpl.monitor.getThreads",
         "onCommand:advpl.monitor.getRpoInfos",
         "onCommand:advpl.monitor.getRpoFunctions",
         "onCommand:advpl.monitor.deleteSource",
+        "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnviroment"
     ],
@@ -64,7 +64,7 @@
                     "group": "advpl"
                 },
                 {
-                    "command": "advpl.patch.setFileToBuild",
+                    "command": "advpl.patch.build",
                     "group": "advpl"
                 }
             ]
@@ -217,6 +217,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "Cria arquivo de log."
+                },
+                "advpl.compile_threads": {
+                    "type": "number",
+                    "default": 4,
+                    "description": "Numero de threads utilizada para compilação de folder."
                 }
             }
         },
@@ -290,15 +295,11 @@
             },
             {
                 "command": "advpl.patch.build",
-                "title": "Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo, selecionado pelo comando - Patch - Set."
+                "title": "Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo."
             },
             {
                 "command": "advpl.patch.info",
                 "title": "Advpl - Patch Info - Mostra o conteudo de um pacote/Patch(PTM)."
-            },
-            {
-                "command": "advpl.patch.setFileToBuild",
-                "title": "Advpl - Patch - Set File to Build - Define qual arquivo texto será usado com a lista de arquivos para se gerar o patch."
             },
             {
                 "command": "advpl.monitor.getThreads",
@@ -316,6 +317,11 @@
                 "command": "advpl.monitor.deleteSource",
                 "title": "Advpl - Env - Excluir um(s) fonte(s) do RPO."
             },
+            {
+                "command": "advpl.monitor.defragRpo",
+                "title": "Advpl - Env - Defrag do RPO."
+            },
+            
             {
                 "command": "advpl.buildWSClient",
                 "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."

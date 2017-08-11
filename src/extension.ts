@@ -16,7 +16,7 @@ import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
-let fileToBuildPath;
+
 let env;
 export function activate(context: vscode.ExtensionContext) {
 
@@ -41,13 +41,14 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathInfo());
     //context.subscriptions.push(PathSelectFolder());
-    context.subscriptions.push(PathFileToBuild());
+    //context.subscriptions.push(PathFileToBuild());
     //Binds do monitor
     context.subscriptions.push(GetThreads());
     context.subscriptions.push(GetRpoInfos());
     context.subscriptions.push(GetRpoFunctions());    
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
+    context.subscriptions.push(DefragRpo());    
     //Enviroment no bar
     env = new Enviroment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
@@ -365,17 +366,21 @@ function PathBuild()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {         
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+            let fileToBuildPath = context._fsPath;
             if (fileToBuildPath == null )
             {
                 vscode.window.showErrorMessage("Informe o arquivo texto para com os fontes para serem gerados.");
             }                
            else
-           {
+            {
                 if (!fs.lstatSync(fileToBuildPath).isFile())
                     vscode.window.showErrorMessage("Informe o arquivo texto para com os fontes para serem gerados.");
                 else
                     patch.build(fileToBuildPath);
-           }
+
+            }
+            
+
              
     });
 return disposable;
@@ -390,6 +395,7 @@ let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', fun
 return disposable;
 }
 */
+/*
 function PathFileToBuild() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', function (context)  {
@@ -406,7 +412,7 @@ let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', f
     });
 return disposable;
 }
-
+*/
 function GetThreads()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', function (context)  {
@@ -450,7 +456,19 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', f
     
 return disposable;
 }
-
+function DefragRpo()
+{
+    let disposable = vscode.commands.registerCommand('advpl.monitor.defragRpo', function (context)  {
+        let compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+        compile.setEncoding(encoding);
+        compile.setAfterCompileOK(function (){
+                   OutPutChannel.log("Defragmentação OK")
+                });
+        compile.defragRPO();
+    });
+return disposable;
+}
 
 function BuildWSClient()
 {
@@ -479,7 +497,7 @@ let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', funct
             {
                  let npos = obj.findIndex(env =>env["name"] === select);
                  oSelectEnv = obj[npos];
-                 select = oSelectEnv.environment;
+                 //select = oSelectEnv.environment;
             }            
             if (oSelectEnv)
             {   
