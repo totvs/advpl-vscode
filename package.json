@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "advpl-vscode",
     "description": "Adiciona suporte a Linguagem ADVPL",
-    "version": "0.6.3",
+    "version": "0.7.1",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -25,7 +25,7 @@
         "onCommand:advpl.CipherPassword",
         "onCommand:advpl.patch.apply",
         "onCommand:advpl.patch.build",
-        "onCommand:advpl.patch.info",        
+        "onCommand:advpl.patch.info",
         "onCommand:advpl.monitor.getThreads",
         "onCommand:advpl.monitor.getRpoInfos",
         "onCommand:advpl.monitor.getRpoFunctions",
@@ -170,7 +170,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|apw|aph|tres|png|bmp|res)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 },
                 "advpl.pathPatchBuild": {
@@ -321,7 +321,6 @@
                 "command": "advpl.monitor.defragRpo",
                 "title": "Advpl - Env - Defrag do RPO."
             },
-            
             {
                 "command": "advpl.buildWSClient",
                 "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."
