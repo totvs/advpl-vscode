@@ -1,5 +1,9 @@
+## 0.7.2
+ - Correção:[Criação de patch em ambiente local ] (https://github.com/killerall/advpl-vscode/issues/112) 
+
 ## 0.7.1
  - Correção da Messagem de Erro. SyntaxError: Unexpected end of JSON input.
+ 
 ## 0.7.0
 - Melhoria: Para gerar path de uma lista de arquivo, agora basta clicar com o botao direito nele, e selecionar: Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo.
 - Melhoria: Velocidade da compilação de pastas, foi criado uma configuração a mais, para definir o numero de threads, o padrão é 4 (advpl.compile_threads)

@@ -19,8 +19,7 @@ let OutPutChannel = new advplConsole() ;
 
 let env;
 export function activate(context: vscode.ExtensionContext) {
-
-
+    
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());    
     context.subscriptions.push(addGetDebugInfosCommand());
@@ -54,7 +53,13 @@ export function activate(context: vscode.ExtensionContext) {
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
 
     //initLanguageServer(context);
-
+    let api = {
+        writeAdvplConsole(cLog)
+        {
+            OutPutChannel.log(cLog);
+        }        
+    };
+    return api;
 }
 
 

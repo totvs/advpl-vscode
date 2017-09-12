@@ -1,4 +1,4 @@
-# advpl-vscode README
+# Advpl Language Support
 
 Bem vindo a extensão para desenvolvimento de Advpl no visual code. [VsCode MarketPlace](https://marketplace.visualstudio.com/items?itemName=KillerAll.advpl-vscode)
 
@@ -26,7 +26,7 @@ Essa extensão possui as seguintes features implementadas:
 * Exclusão de fontes do RPO
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
-* Mac OSX
+* Mac OSX (Configuração a baixo)
 
 As próximas planejadas são:
 
@@ -109,3 +109,9 @@ Utilizada as teclas padrões do VsCode
 * F5 - Run/Contiue
 * F10 - Step Into
 * F11 - Step Over
+
+## Para versão MAC
+Efetuar o download do [executavel](https://github.com/killerall/advpl-vscode/raw/master/bin/AdvplDebugBridgeMac)
+Copiar o mesmo para a pasta:
+~/.vscode/extensions/KillerAll.advpl-vscode-x.x.x/bin
+Dar acesso a execução no arquivo.
