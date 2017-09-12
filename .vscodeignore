@@ -3,6 +3,7 @@ typings/**
 out/test/**
 test/**
 src/**
+bin/AdvplDebugBridgeMac
 **/*.map
 .gitignore
 tsconfig.json
