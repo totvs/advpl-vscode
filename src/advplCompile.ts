@@ -3,13 +3,15 @@ import * as vscode from 'vscode';
 import {readFileSync,existsSync,unlinkSync,statSync} from 'fs';
 import {inspect}  from 'util';
 import {advplConsole}  from './advplConsole';
+import * as path from 'path';
 import * as fs from 'fs';
 export class advplCompile {
     private EnvInfos :string;
     private diagnosticCollection :  vscode.DiagnosticCollection;
     private _lastAppreMsg :string;
     private debugPath : string;
-    private afterCompile
+    private afterCompile;
+    private onError;
     private outChannel : advplConsole;
     private encoding : string;
     private compileStartTime
@@ -36,7 +38,11 @@ export class advplCompile {
     }
     public setAfterCompileOK(aftercomp)
     {
-        this.afterCompile =aftercomp 
+        this.afterCompile =aftercomp; 
+    }
+    public setonError(func)
+    {
+        this.onError =func;
     }
     public CipherPassword()
     {
@@ -241,10 +247,15 @@ export class advplCompile {
                     this.outChannel.log("Compilação OK");
                     this.afterCompile();
                 }
+                else
+                {
+                    this.onError();    
+                }
             }       
             catch (ex)
             {
                 this.outChannel.log(ex);
+                this.onError();
             }
         
 
@@ -306,6 +317,54 @@ export class advplCompile {
         that.run_callBack(lRunned);
         });        
     }
-   
+    public BuildPPO(sourceName:string)
+    {
+                
+        this.outChannel.log("Iniciando compilação do fonte "+ sourceName + "\n");        
+        this.diagnosticCollection.clear();        
+        this.buildPPOCall(sourceName );
+        
+    }   
+    private buildPPOCall(sourceName :string )
+    {
+        this.compileStartTime = new Date(); 
+        var _args = new Array<string>()
+         var that = this;
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--source=" + sourceName);        
+        _args.push("--buildPPO");        
+        
+        this.outChannel.log("PPO build Start at "+ new Date() + "\n");
+        var child = child_process.spawn(this.debugPath,_args);
+        
+        child.stdout.on("data",function(data){
+            
+                 that._lastAppreMsg += data;
+              });
+        child.on("exit",function(data){
+            
+            var endTime; 
+            endTime = new Date();
+            let timeDiff = (endTime - that.compileStartTime); //in ms            
+            timeDiff /= 1000;
+            that.outChannel.log("PPO Finish at "+ new Date() + " Elapsed  (" + timeDiff + " segs.)\n"); 
+            
+           const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName)+ '_ppo'));
+             vscode.workspace.openTextDocument(newFile).then(document => {
+                 const edit = new vscode.WorkspaceEdit();
+                 edit.insert(newFile, new vscode.Position(0, 0), that._lastAppreMsg);
+                 return vscode.workspace.applyEdit(edit).then(success => {
+                     if (success) {                     
+                         vscode.window.showTextDocument(document);
+                         that.afterCompile();
+                     } else {
+                         vscode.window.showInformationMessage('Error!');
+                         that.onError();    
+                     }
+                 });
+             });
+         });      
+         }
+     
 }
 

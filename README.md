@@ -26,6 +26,7 @@ Essa extensão possui as seguintes features implementadas:
 * Exclusão de fontes do RPO
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
+* Geração de PPO do fonte(Para fazer isso utilize CTRL+SHIFT+F9)
 * Mac OSX (Configuração a baixo)
 
 As próximas planejadas são:
@@ -102,6 +103,7 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 * F5  - Inicia o Debug
 * CTRL + F5  - Inicia o SmartClient sem debugar
 * CTRL + F9 - Compila o fonte atual
+* CTRL + SHIFT +  F9 - Compila o fonte atual
 * CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
 
 # No Debug

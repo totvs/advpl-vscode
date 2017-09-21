@@ -1,3 +1,8 @@
+## 0.7.3
+ - Correção: Compilação de .prj e txt depois da versao 0.7
+ - Correção: [Erro ao compilar antes do fim da compilação anterior] (https://github.com/killerall/advpl-vscode/issues/116)
+ - Melhoria: [Criar comando para gerar ppo do Fonte] (https://github.com/killerall/advpl-vscode/issues/119)
+
 ## 0.7.2
  - Correção:[Criação de patch em ambiente local ] (https://github.com/killerall/advpl-vscode/issues/112) 
 

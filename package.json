@@ -278,6 +278,10 @@
                 "title": "Advpl - Compiler -  Compile Advpl Source"
             },
             {
+                "command": "advpl.createPPO",
+                "title": "Advpl - Compiler - Cria o arquivo PPo do arquivo"
+            },
+            {
                 "command": "advpl.getDebugInfos",
                 "title": "Advpl - Retorna as informações iniciais para o debug"
             },
@@ -342,7 +346,14 @@
                 "key": "ctrl+f11",
                 "mac": "cmd+f11",
                 "when": "editorLangId == advpl"
+            },
+            {
+                "command": "advpl.createPPO",
+                "key": "ctrl+shift+f9",
+                "mac": "cmd+f4",
+                "when": "editorLangId == advpl"
             }
+            
         ],
         "debuggers": [
             {
