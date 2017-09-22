@@ -18,7 +18,7 @@
 		"prefix": "if",
 		"body": [
 		"If ${lCond}",
-		"	$1",
+			"\t$1",
 		"EndIf"
 		],
 		"description": "If Statement"
@@ -28,9 +28,9 @@
 		"prefix": "ifelse",
 		"body": [
 		"If ${lCond}",
-		"	$1",
+			"\t$1",
 		"Else",
-		"	",
+			"\t",
 		"EndIf"
 		],
 		"description": "If Else Statement"
@@ -40,9 +40,9 @@
 		"prefix": "ifelseif",
 		"body": [
 		"If ${lCond1}",
-		"	$1",
+			"\t$1",
 		"ElseIf ${lCond2}",
-		"	",
+			"\t",
 		"EndIf"
 		],
 		"description": "If ElseIf Statement"
@@ -52,7 +52,7 @@
 		"prefix": "while",
 		"body": [
 		"While (${lCond})",
-		"	$1",
+			"\t$1",
 		"End"
 		],
 		"description": "While Statement"
@@ -62,7 +62,7 @@
 		"prefix": "for",
 		"body": [
 		"For ${nX}:= 1 to Len(${aArray})",
-		"	$1",
+			"\t$1",
 		"Next"
 		],
 		"description": "For Statement"
@@ -75,12 +75,11 @@
 				"${cQuery} := ChangeQuery(${cQuery})",
 				"dbUseArea(.T.,'TOPCONN', TCGenQry(,,${cQuery}),alias, .F., .T.)",
 				"While alias->(!Eof())",
-					
-					"alias->(dbSkip())",
+					"\talias->(dbSkip())",
 				"EndDo",
 				"alias->(dbCloseArea())"
 		],
-		"description": "Cria a função de Query ja efetuando a conexão com o TOP e efetuando o While"
+		"description": "Cria a func�o de Query ja efetuando a conexa�o com o TOP e efetuando o While"
 	},
     "Help":{
         "prefix": "Help",
@@ -88,7 +87,7 @@
 			 
               "HELP(' ',1,${cabecalho} ,,${descricao},2,0,,,,,, ${solucao})"
         ],
-        "description":"Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
+        "description":"Funa�a�o de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
     },
 	"Static Function":{
 		"prefix": "StaticFunction",
@@ -110,7 +109,7 @@
 
 
 		],
-		"description": "Declaração de uma Static Function ja com o Protheus.doc"
+		"description": "Declaraa�a�o de uma Static Function ja com o Protheus.doc"
 		
 	},
 	"Function":{
@@ -133,7 +132,6 @@
 
 
 		],
-		"description": "Declaração de uma Function ja com o Protheus.doc"
 	},
 	 "Strtokarr2": {
         "prefix": "Strtokarr2",
@@ -196,6 +194,159 @@
         "body": [
             "FindFunction( ${cFunction})"
         ],
-        "description": "FindFunction() - Faz a busca de uma determinada função no rpo ou no binário"
-	 }
+        "description": "FindFunction() - Faz a busca de uma determinada func�o no rpo ou no bina�rio"
+	 },
+
+	 "Class": {
+		"prefix": "class",
+		"body": [
+			"/*/{Protheus.doc} $1",
+				"\t(long_description)",
+				"\t@type  Class",
+				"\t@author ${user}",
+				"\t@since ${date}",
+				"\t@version ${version}",
+				"\t@example",
+				"\t(examples)",
+				"\t@see (links_or_references)",
+			"/*/",
+			"Class $1 ",
+				"\t",
+				"\tData $2 ",
+				"\t",
+				"\tMethod $1() Constructor ",
+				"\tMethod ",
+				"\t",
+			"EndClass",
+			"",
+			"Method New() Class $1",
+			"Return self"
+		],
+		"description": "Estrutura basica de uma classe ADVPL"
+	},
+
+	"Class from": {
+		"prefix": "class from",
+		"body": [
+			"/*/{Protheus.doc} $1",
+				"\t(long_description)",
+				"\t@type  Class",
+				"\t@author ${user}",
+				"\t@since ${date}",
+				"\t@version ${version}",
+				"\t@example",
+				"\t(examples)",
+				"\t@see (links_or_references)",
+			"/*/",
+			"Class $1 from $2",
+				"\t",
+				"\tData $3 ",
+				"\t",
+				"\tMethod New() Constructor ",
+				"\tMethod ",
+				"\t",
+			"EndClass",
+			"",
+			"Method $1() Class $1",
+			"Return self"
+		],
+		"description": "Estrutura de uma classe ADVPL com heranca"
+	},
+
+	"Constructor Method": {
+		"prefix": "constructor",
+		"body": [
+			"Method $1() Class $1",
+			"Return self"
+		],
+		"description": "Estrutura basica de um construtor ADVPL"
+	},
+
+	"Data declaration": {
+		"prefix": "Data",
+		"body": [
+			"Data $1 as $2"
+		],
+		"description": "Declara uma nova propriedade"
+	},
+
+	"Method declaration": {
+		"prefix": "method",
+		"body": [
+			"Method $1()"
+		],
+		"description": "Declara um novo metodo"
+	},
+
+	"Constructor declaration": {
+		"prefix": "constructor",
+		"body": [
+			"Method $1() Constructor"
+		],
+		"description": "Declara um novo construtor"
+	},
+
+	"Method": {
+		"prefix": "method",
+		"body": [
+			"/*/{Protheus.doc} ${nomeMetodo}",
+				"\t(long_description)",
+				"\t@type  Method",
+				"\t@author ${user}",
+				"\t@since ${date}",
+				"\t@version ${version}",
+				"\t@param ${param}, ${param_type}, ${param_descr}",
+				"\t@return ${returno},${return_type}, ${return_description}",
+				"\t@example",
+				"\t(examples)",
+				"\t@see (links_or_references)",
+			"/*/",
+			"Method $1() Class $2",
+			"\t",
+			"Return"
+		],
+		"description": "Estrutura basica de um metodo ADVPL"
+	},
+	"Method setter": {
+		"prefix": "setter",
+		"body": [
+			"/*/{Protheus.doc} set$1",
+				"\t(long_description)",
+				"\t@type  Method",
+				"\t@author ${user}",
+				"\t@since ${date}",
+				"\t@version ${version}",
+				"\t@param ${param}, ${param_type}, ${param_descr}",
+				"\t@return ${returno},${return_type}, ${return_description}",
+				"\t@example",
+				"\t(examples)",
+				"\t@see (links_or_references)",
+			"/*/",
+			"Method set$1($1) Class $2 ",
+				"\tself:$1 := $1",
+			"Return"
+		],
+		"description": "Metodo setter ADVPL"
+	},
+	"Cria um novo metodo getter": {
+		"prefix": "getter",
+		"body": [
+			"/*/{Protheus.doc} get$1",
+				"\t(long_description)",
+				"\t@type  Method",
+				"\t@author ${user}",
+				"\t@since ${date}",
+				"\t@version ${version}",
+				"\t@param ${param}, ${param_type}, ${param_descr}",
+				"\t@return ${returno},${return_type}, ${return_description}",
+				"\t@example",
+				"\t(examples)",
+				"\t@see (links_or_references)",
+			"/*/",
+			"Method get$1() Class $2 ",
+			"Return self:$1"
+		],
+		"description": "Metodo getter ADVPL"
+	}
+
 }
