@@ -1,3 +1,7 @@
+## 0.7.4
+- Correção: [Compilação  txt, depedendo do nome da pasta] (https://github.com/killerall/advpl-vscode/issues/120)
+- Correção: Depuração Multi Thread as vezes caia no inicio.
+
 ## 0.7.3
  - Correção: Compilação de .prj e txt depois da versao 0.7
  - Correção: [Erro ao compilar antes do fim da compilação anterior] (https://github.com/killerall/advpl-vscode/issues/116)
