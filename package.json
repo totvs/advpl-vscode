@@ -151,11 +151,13 @@
                 "advpl.authorization_generation": {
                     "type": "string",
                     "default": "",
+                    "pattern": "\\d{8}",
                     "description": "Data de geração da chave no formato yyyymmdd"
                 },
                 "advpl.authorization_validation": {
                     "type": "string",
                     "default": "",
+                    "pattern": "\\d{8}",
                     "description": "Data de validade da chave no formato yyyymmdd"
                 },
                 "advpl.authorization_permission": {
