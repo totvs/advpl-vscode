@@ -14,6 +14,7 @@ import * as net from 'net';
 import * as url from 'url';
 import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
+import {getConfigurationAsString} from './utils';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let isCompiling = false;
@@ -164,7 +165,7 @@ let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', func
             if(fs.lstatSync(cSource).isFile() && cSource.substr(cSource.lastIndexOf('.') + 1).toUpperCase() == "PRJ")
             {
             vscode.window.setStatusBarMessage('Starting Project compile...' + cSource,3000);
-            var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
             compile.setonError(function (){isCompiling = false;});
                     compile.setAfterCompileOK(function (){
                        // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
@@ -197,7 +198,7 @@ function menucompiletextfile()
             if(fs.lstatSync(cSource).isFile() )
             {
             vscode.window.setStatusBarMessage('Starting Project files in text file...' + cSource,3000);
-            var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
                     compile.setonError(function (){isCompiling = false;});
                     compile.setAfterCompileOK(function (){
                     // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
@@ -230,7 +231,7 @@ let disposable = vscode.commands.registerCommand('advpl.menucompile', function (
     
             var cSource = context._fsPath;
             vscode.window.setStatusBarMessage('Starting advpl compile...' + cSource,3000);
-            var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
                     compile.setonError(function (){isCompiling = false;});
                     compile.setAfterCompileOK(function (){
                     // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
@@ -261,7 +262,7 @@ let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', funct
             {
                 
                 vscode.window.setStatusBarMessage('Starting advpl folder compiler...' + cResource,3000);
-                var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+                var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
                 compile.setonError(function (){isCompiling = false;});
                 compile.setAfterCompileOK(function (){            
                     vscode.window.setStatusBarMessage('Folder ' + cResource + ' Compiled!!! :D',3000);
@@ -334,7 +335,7 @@ function __internal_compile(cSource,editor,lbuildPPO)
     {
      
      vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
-        var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
         compile.setonError(function (){isCompiling = false;});
@@ -369,7 +370,7 @@ return disposable;
 function getAuthorizationId() 
 {
 let disposable = vscode.commands.registerCommand('advpl.getAuthorizationId', function (context)  {
-       var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection,OutPutChannel);
+       var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection,OutPutChannel);
        compile.getHdId();
           
     });
@@ -379,7 +380,7 @@ return disposable;
 function CipherPassword() 
 {
 let disposable = vscode.commands.registerCommand('advpl.CipherPassword', function (context)  {
-       var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection,OutPutChannel);
+       var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection,OutPutChannel);
        compile.CipherPassword();
           
     });
@@ -418,7 +419,7 @@ let disposable = vscode.commands.registerCommand('advpl.patch.info', function (c
             var cResource = context._fsPath;
             if(fs.lstatSync(cResource).isFile())
             {
-                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+                var patch = new advplPatch(getConfigurationAsString(),OutPutChannel)
                 patch.info(cResource);
                 
             }
@@ -432,7 +433,7 @@ return disposable;
 function PathBuild() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {         
-            var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+            var patch = new advplPatch(getConfigurationAsString(),OutPutChannel)
             let fileToBuildPath = context._fsPath;
             if (fileToBuildPath == null )
             {
@@ -483,7 +484,7 @@ return disposable;
 function GetThreads()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', function (context)  {
-        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getThreads();
     });
     
@@ -494,7 +495,7 @@ return disposable;
 function GetRpoInfos()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', function (context)  {
-        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getRpoInfos(false);
     });
     
@@ -504,7 +505,7 @@ return disposable;
 function GetRpoFunctions()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoFunctions', function (context)  {
-        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getRpoInfos(true);
     });
     
@@ -515,7 +516,7 @@ return disposable;
 function DeleteSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
-        let compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
         compile.deleteSource();
@@ -526,7 +527,7 @@ return disposable;
 function DefragRpo()
 {
     let disposable = vscode.commands.registerCommand('advpl.monitor.defragRpo', function (context)  {
-        let compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
+        let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
         compile.setAfterCompileOK(function (){
@@ -541,7 +542,7 @@ function BuildWSClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {
 
-        var monitor = new advplMonitor(JSON.stringify(vscode.workspace.getConfiguration("advpl")),OutPutChannel)
+        var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.buildWSClient();
     });
     
