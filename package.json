@@ -446,10 +446,12 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
+        "@types/mocha": "^2.2.43",
+        "@types/node": "^6.0.40",
+        "mocha": "^4.0.0",
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
-        "vscode-debugadapter-testsupport": "^1.12.0",
-        "@types/node": "^6.0.40"
+        "vscode-debugadapter-testsupport": "^1.12.0"
     },
     "dependencies": {
         "vscode-debugprotocol": "^1.21.0",
