@@ -23,16 +23,14 @@ export default async function generateConfigFromAuthorizationFile(context): Prom
     if(!filePath) return;
 
     var aut = new AuthorizationFile();
-    var dataObj:AuthorizationData = aut.ReadFromFile(filePath);
+    var dataObj:AuthorizationData = aut.GetAuthorizationDataFromFile(filePath);
     generateConfig(dataObj);
 }
 
 
 class AuthorizationFile {
-    public ReadFromFile(filePath: string):AuthorizationData{
+    public GetAuthorizationDataFromFile(filePath: string):AuthorizationData{
         let myData = new AuthorizationData();
-        let firstLine = true;
-        let that = this;
         let aRawData = fs.readFileSync(filePath,'utf-8').split('\r\n');
         
         if( aRawData[0] !== "[AUTHORIZATION]" ) throw new Error("Arquivo de autorização inválido")
@@ -42,15 +40,10 @@ class AuthorizationFile {
         });
 
         return myData;
-
-
-    }
-    private setKeyValue(keyValue: Array<string>, obj: AuthorizationData){
-
     }
 }
 
-class AuthorizationData{
+export class AuthorizationData{
     code :string;
     genarateData: string;
     validData: string;
@@ -75,7 +68,7 @@ class AuthorizationData{
         }
     }
 
-    private getDateFromValue(value: string): string{
+    public getDateFromValue(value: string): string{
         return value.split('/').reverse().join('');
     }
 }
