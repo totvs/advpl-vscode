@@ -15,6 +15,7 @@ import * as url from 'url';
 import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
 import {getConfigurationAsString} from './utils';
+import generateConfigFromAuthorizationFile from './authorizationFile';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let isCompiling = false;
@@ -34,6 +35,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
     context.subscriptions.push(selectEnviroment());
+
+    context.subscriptions.push(generateAuthorizationConfig());
     
 
     //Binds dos comandos de patch
@@ -150,6 +153,11 @@ let disposable = vscode.commands.registerCommand('advpl.startSmartClient', () =>
     });
     return disposable;
 }
+
+function generateAuthorizationConfig(){
+        return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
+}
+
 function menucompileProjet()
 {
    

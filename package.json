@@ -334,6 +334,10 @@
             {
                 "command": "advpl.selectEnviroment",
                 "title": "Advpl - Seleciona o ambiente de compilação/Debug."
+            },
+            {
+                "command": "advpl.generateAuthorizationConfig",
+                "title": "Advpl - Gera informações de autorização baseada no arquivo .aut"
             }
         ],
         "keybindings": [
