@@ -423,7 +423,7 @@ repository:
                 name: entity.name.type.ws.advpl
             '3':
                 name: keyword.control.ws.advpl
-        end: '(?i)^\s*(endwsservice|endwsclient|endwsrestful|end/s*wsrestful)'
+        end: '(?i)^\s*(endwsservice|endwsclient|endwsrestful|end\s*wsrestful)'
         endCaptures:
             '1':
                 name: storage.type.ws.advpl
