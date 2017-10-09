@@ -180,7 +180,7 @@
           </dict>
           <dict>
             <key>include</key>
-            <string>#declaracao-wsservice-wsclient</string>
+            <string>#declaracao-wsservice-wsclient-wsrestful</string>
           </dict>
           <dict>
             <key>include</key>
@@ -1074,12 +1074,12 @@
           </dict>
         </array>
       </dict>
-      <key>declaracao-wsservice-wsclient</key>
+      <key>declaracao-wsservice-wsclient-wsrestful</key>
       <dict>
         <key>name</key>
         <string>meta.ws.literal.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*(?&lt;!wsmethod)(wsservice|wsclient)\s+(\w+)(\s+description)?</string>
+        <string>(?i)^\s*(?&lt;!wsmethod)(wsservice|wsclient|wsrestful)\s+(\w+)(\s+description)?</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -1099,7 +1099,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)^\s*(endwsservice|endwsclient)</string>
+        <string>(?i)^\s*(endwsservice|endwsclient|endwsrestful|end\s*wsrestful)</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -1149,7 +1149,7 @@
       <key>declaracao-wsmethod</key>
       <dict>
         <key>begin</key>
-        <string>(?i)^\s*(wsmethod)\s+(\w+)\s+(?=.*(?:wsservice|wsclient))</string>
+        <string>(?i)^\s*(wsmethod)\s+(\w+)\s+(?=.*(?:wsservice|wsclient|wsrestful))</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -1164,7 +1164,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(wsservice|wsclient)\s+(\w+)</string>
+        <string>(?i)(wsservice|wsclient|wsrestful)\s+(\w+)</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
