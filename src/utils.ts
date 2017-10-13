@@ -1,6 +1,7 @@
 import fs = require('fs');
 import os = require('os');
 import path = require('path');
+import * as vscode from 'vscode';
 
 export let PowerShellLanguageId = 'advpl';
 
@@ -32,4 +33,8 @@ export function checkIfFileExists(filePath: string): boolean {
     catch (e) {
         return false;
     }
+}
+
+export function getConfigurationAsString(): string{
+    return JSON.stringify(vscode.workspace.getConfiguration("advpl"));
 }

@@ -151,11 +151,13 @@
                 "advpl.authorization_generation": {
                     "type": "string",
                     "default": "",
+                    "pattern": "\\d{8}",
                     "description": "Data de geração da chave no formato yyyymmdd"
                 },
                 "advpl.authorization_validation": {
                     "type": "string",
                     "default": "",
+                    "pattern": "\\d{8}",
                     "description": "Data de validade da chave no formato yyyymmdd"
                 },
                 "advpl.authorization_permission": {
@@ -332,6 +334,10 @@
             {
                 "command": "advpl.selectEnviroment",
                 "title": "Advpl - Seleciona o ambiente de compilação/Debug."
+            },
+            {
+                "command": "advpl.generateAuthorizationConfig",
+                "title": "Advpl - Gera informações de autorização baseada no arquivo .aut"
             }
         ],
         "keybindings": [
@@ -441,13 +447,16 @@
     "scripts": {
         "vscode:prepublish": "tsc -p ./",
         "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
+        "@types/mocha": "^2.2.43",
+        "@types/node": "^6.0.40",
+        "mocha": "^4.0.0",
         "typescript": "^2.0.3",
         "vscode": "^1.0.0",
-        "vscode-debugadapter-testsupport": "^1.12.0",
-        "@types/node": "^6.0.40"
+        "vscode-debugadapter-testsupport": "^1.12.0"
     },
     "dependencies": {
         "vscode-debugprotocol": "^1.21.0",
