@@ -524,13 +524,22 @@ return disposable;
 function DeleteSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
+    if (isCompiling)
+    {
+        OutPutChannel.log("Compilação ignorada, existe outra compilação sendo executada.");
+    }
+    else
+    {
         let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
+        compile.setAfterCompileOK(function (){
+             isCompiling = false;
+         });
         compile.deleteSource();
+    }    
     });
-    
-return disposable;
+    return disposable;
 }
 function DefragRpo()
 {
