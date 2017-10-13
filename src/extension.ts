@@ -76,7 +76,7 @@ function getProgramName()
    let disposable = vscode.commands.registerCommand('advpl.getProgramName', () => {        
         let p = vscode.window.showInputBox({placeHolder: "Informe o program",value:  lastProgram});
         p.then(function(select){
-            lastProgram = select;
+            if(select) lastProgram = select;
         });
          
         return p;
