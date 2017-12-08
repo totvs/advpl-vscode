@@ -1,9 +1,12 @@
+## 0.7.6
+ - Correção: Aplicação de patch em binario 64 bits
+ 
 ## 0.7.5
-Correção:[Erro ao excluir fonte do repositório] (https://github.com/killerall/advpl-vscode/issues/128)
-Melhoria:[Read authorization file and generate setttings] (https://github.com/killerall/advpl-vscode/issues/5)
-Melhoria:[Último programa executado fica em branco depois de cancelar execução.] (https://github.com/killerall/advpl-vscode/issues/130)
-Melhoria:[Implementada a sintaxe para highlight de uma classe REST em AdvPl.] (https://github.com/killerall/advpl-vscode/pull/129)
-Documentação: [removida documentação que já existe na wiki] (https://github.com/killerall/advpl-vscode/pull/126)
+ - Correção:[Erro ao excluir fonte do repositório] (https://github.com/killerall/advpl-vscode/issues/128)
+ - Melhoria:[Read authorization file and generate setttings] (https://github.com/killerall/advpl-vscode/issues/5)
+ - Melhoria:[Último programa executado fica em branco depois de cancelar execução.] (https://github.com/killerall/advpl-vscode/issues/130)
+ - Melhoria:[Implementada a sintaxe para highlight de uma classe REST em AdvPl.] (https://github.com/killerall/advpl-vscode/pull/129)
+ - Documentação: [removida documentação que já existe na wiki] (https://github.com/killerall/advpl-vscode/pull/126)
 
 ## 0.7.4
 - Correção: [Compilação  txt, depedendo do nome da pasta] (https://github.com/killerall/advpl-vscode/issues/120)
