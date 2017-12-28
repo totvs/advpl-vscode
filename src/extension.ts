@@ -298,8 +298,11 @@ return disposable;
 function compile()
 {
    
-let disposable = vscode.commands.registerCommand('advpl.compile', function (context)  {
-        
+        let disposable = vscode.commands.registerCommand('advpl.compile', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
         if (editor.document.isDirty)
@@ -368,12 +371,20 @@ function __internal_compile(cSource,editor,lbuildPPO)
 function addGetDebugInfosCommand()
 {
 let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context)  {
-    var _jSon = vscode.workspace.getConfiguration("advpl");
-    var Jstring = JSON.stringify(_jSon);  
+    var workSpaceInfo = vscode.workspace.getConfiguration("advpl");
+    var workspaceFolders = vscode.workspace.workspaceFolders;    
+    var cWork = "";
+    workspaceFolders.forEach(function(value){
+        cWork += value.uri.fsPath + ";"
+    });
+    workSpaceInfo.update("workspaceFolders",cWork);    
+    //_jSon.workspaceFolders = cWork;
+    var Jstring = JSON.stringify(workSpaceInfo);  
      return Jstring;    
     });
 return disposable;
 }
+
 
 function getAuthorizationId() 
 {
@@ -407,6 +418,10 @@ return disposable;
 function PathApply() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (context)  {
+            if (!isEnviromentSelected())
+            {
+                return;
+            }
             var cResource = context._fsPath;
             if(fs.lstatSync(cResource).isFile())
             {
@@ -424,6 +439,10 @@ return disposable;
 function PathInfo() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.info', function (context)  {
+            if (!isEnviromentSelected())
+            {
+                return;
+            }
             var cResource = context._fsPath;
             if(fs.lstatSync(cResource).isFile())
             {
@@ -440,7 +459,11 @@ return disposable;
 }
 function PathBuild() 
 {
-let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {         
+let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {
+            if (!isEnviromentSelected())
+            {
+                return;
+            }
             var patch = new advplPatch(getConfigurationAsString(),OutPutChannel)
             let fileToBuildPath = context._fsPath;
             if (fileToBuildPath == null )
@@ -492,6 +515,10 @@ return disposable;
 function GetThreads()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getThreads();
     });
@@ -503,6 +530,10 @@ return disposable;
 function GetRpoInfos()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getRpoInfos(false);
     });
@@ -513,6 +544,10 @@ return disposable;
 function GetRpoFunctions()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoFunctions', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.getRpoInfos(true);
     });
@@ -524,6 +559,10 @@ return disposable;
 function DeleteSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
+    if (!isEnviromentSelected())
+    {
+        return;
+    }
     if (isCompiling)
     {
         OutPutChannel.log("Compilação ignorada, existe outra compilação sendo executada.");
@@ -544,6 +583,10 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', f
 function DefragRpo()
 {
     let disposable = vscode.commands.registerCommand('advpl.monitor.defragRpo', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         compile.setEncoding(encoding);
@@ -558,6 +601,10 @@ return disposable;
 function BuildWSClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
 
         var monitor = new advplMonitor(getConfigurationAsString(),OutPutChannel)
         monitor.buildWSClient();
@@ -615,7 +662,10 @@ function buildPPO()
 {
    
 let disposable = vscode.commands.registerCommand('advpl.createPPO', function (context)  {
-        
+        if (!isEnviromentSelected())
+        {
+            return;
+        }
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
         if (editor.document.isDirty)
@@ -649,7 +699,16 @@ let disposable = vscode.commands.registerCommand('advpl.createPPO', function (co
 });
 return disposable;
 }
-
+function isEnviromentSelected() :boolean
+{
+    let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
+    if(env === "" || env == undefined)
+    {
+        vscode.window.showInformationMessage('Por favor selecione um ambiente.') ;        
+        return false;
+    }
+    return true;
+}
 function validEnvironment(environment){
     let env = new EnvObject().deserialize(environment),
         errors = env.getErrors(),

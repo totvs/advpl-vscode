@@ -6,7 +6,7 @@
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.7.0"
+        "vscode": "^1.17.0"
     },
     "categories": [
         "Languages"
@@ -20,7 +20,7 @@
         "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
         "onCommand:advpl.getProgramName",
-        "onCommand:advpl.getDebugInfos",
+        "onCommand:advpl.getDebugInfos",        
         "onCommand:advpl.getAuthorizationId",
         "onCommand:advpl.CipherPassword",
         "onCommand:advpl.patch.apply",
@@ -77,6 +77,11 @@
                     "type": "string",
                     "default": "",
                     "description": "Ambiente atual selecionado."
+                },
+                "advpl.workspaceFolders" :{
+                    "type": "string",
+                    "default": "",
+                    "description": "Variavel atualizada automaticamente com os diretorios da workspace."
                 },
                 "advpl.environments": {
                     "type": "array",
