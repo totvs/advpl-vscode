@@ -1,3 +1,9 @@
+## 0.7.7
+ - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas] (https://github.com/killerall/advpl-vscode/issues/157)
+ - Correção: [Ao compilar pasta e o Server esta fora esta dando SyntaxError] (https://github.com/killerall/advpl-vscode/issues/145)
+ - Correção: [Error in 64 bits version] (https://github.com/killerall/advpl-vscode/issues/150)
+ - Correção: [Mensagem de erro não é clara quando ambiente não está selecionado.] (https://github.com/killerall/advpl-vscode/issues/125)
+ 
 ## 0.7.6
  - Correção: Aplicação de patch em binario 64 bits
  
