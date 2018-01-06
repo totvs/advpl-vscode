@@ -16,6 +16,7 @@ import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
 import {getConfigurationAsString} from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
+import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let isCompiling = false;
@@ -37,8 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(selectEnviroment());
 
     context.subscriptions.push(generateAuthorizationConfig());
+    context.subscriptions.push(addAdvplEnvironment());    
     
-
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
@@ -188,6 +189,8 @@ try {
 }
 
 return compile;
+function addAdvplEnvironment(){
+    return vscode.commands.registerCommand('advpl.addAdvplEnvironment',cmdAddAdvplEnvironment);
 }
 
 function menucompileProjet()
