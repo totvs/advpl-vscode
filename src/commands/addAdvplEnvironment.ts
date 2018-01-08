@@ -34,7 +34,7 @@ export default function cmdAddAdvplEnvironment(context): any{
         }
     },{
         message: "Smartclient Path",
-        name: "smartclientPath",
+        name: "smartClientPath",
         validate: env => env.length > 0
     },{
         message: "AppServer Version",
@@ -74,6 +74,7 @@ export default function cmdAddAdvplEnvironment(context): any{
     adapter.prompt(questions, answers => {
         const compile = new advplCompile();
         compile.runCipherPassword(answers.password, cipher => {
+            cipher = cipher.replace(/\r?\n?/g, '')
             environments.push({
                 server: answers.server,
                 port: answers.port,
