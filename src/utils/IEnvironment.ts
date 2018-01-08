@@ -7,6 +7,7 @@ export default interface IEnvironment{
     passwordCipher: string;
     includeList: string;
     user: string;
+    smartClientPath: string;
     language?: string;
     rpoType?: string;
     name?: string;

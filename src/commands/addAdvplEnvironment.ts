@@ -58,16 +58,6 @@ export default function cmdAddAdvplEnvironment(context): any{
         name: "password",
         type: "password"
     },{
-        message: "Idioma repositório",
-        name: "language",
-        type: "list",
-        choices: ['PORTUGUESE', 'ENGLISH', 'SPANISH'],
-    },{
-        message: "Tipo do RPO",
-        name: "rpoType",
-        type: "list",
-        choices: ['TOP', 'CTREE', 'DBF']
-    },{
         message: "Include list",
         name: "includeList"
     }]
@@ -76,13 +66,15 @@ export default function cmdAddAdvplEnvironment(context): any{
         compile.runCipherPassword(answers.password, cipher => {
             cipher = cipher.replace(/\r?\n?/g, '')
             environments.push({
+                environment: answers.environment,
+                name: answers.name,
                 server: answers.server,
                 port: answers.port,
-                environment: answers.environment,
                 serverVersion: answers.appserverVersion,
                 passwordCipher: cipher,
                 includeList: answers.includeList,
-                user: answers.user
+                user: answers.user,
+                smartClientPath: answers.smartClientPath
             });
             config.update("environments",environments)
         })
