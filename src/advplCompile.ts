@@ -49,9 +49,14 @@ export class advplCompile {
             selectedEnvironment = parsedEnvInfos.selectedEnvironment;
             foundEnvironment = false;
             for (let entry of parsedEnvInfos.environments) {
-                if (selectedEnvironment === entry.environment)
+                if
+                (
+                    selectedEnvironment === entry.environment ||
+                    entry.hasOwnProperty('name') && selectedEnvironment === entry.name
+                )
                 {
                     foundEnvironment = true;
+                    retorno = false;
                     break;
                 }
             }
