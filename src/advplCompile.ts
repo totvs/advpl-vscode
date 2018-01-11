@@ -56,7 +56,6 @@ export class advplCompile {
                 )
                 {
                     foundEnvironment = true;
-                    retorno = false;
                     break;
                 }
             }
