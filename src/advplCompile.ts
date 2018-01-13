@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import {readFileSync,existsSync,unlinkSync,statSync} from 'fs';
 import {inspect}  from 'util';
 import {advplConsole}  from './advplConsole';
+import {advplDebugBridgePath} from './utils';
 import * as path from 'path';
 import * as fs from 'fs';
 export class advplCompile {
@@ -21,15 +22,7 @@ export class advplCompile {
         this.diagnosticCollection =d ;
         this.outChannel =  OutPutChannel;
         this._lastAppreMsg = "";
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-        if(process.platform == "darwin")
-        {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else
-        {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
+        this.debugPath = advplDebugBridgePath();
         this.encoding ="";
     }
     public setEncoding(enc)
