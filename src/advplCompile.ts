@@ -15,7 +15,7 @@ export class advplCompile {
     private outChannel : advplConsole;
     private encoding : string;
     private compileStartTime
-    constructor(jSonInfos : string ,d : vscode.DiagnosticCollection, OutPutChannel)
+    constructor(jSonInfos? : string ,d? : vscode.DiagnosticCollection, OutPutChannel?)
     {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection =d ;
@@ -82,31 +82,34 @@ export class advplCompile {
     }
     public CipherPassword()
     {
-       var _args = new Array<string>();
-        var that = this;
+
         let options:vscode.InputBoxOptions = {
             prompt : "Informe a senha:",
             password : true
         }
         var password = vscode.window.showInputBox(options).then(info=>{
-        if (password != undefined)
-        {      
-            _args.push("--CipherPassword="+info);
+            if (password != undefined)
+            {      
+                this.runCipherPassword(info, cipher => this.outChannel.log("Password:"+ cipher));
+            }
+        });  
+    }
+    public async runCipherPassword(password: string, done: Function)
+    {
+        var _args = new Array<string>();
+        var that = this;
+        _args.push("--CipherPassword="+password);
 
-            var child = child_process.spawn(this.debugPath,_args);
-            child.stdout.on("data",function(data){
-        
+        var child = child_process.spawn(this.debugPath,_args);
+        child.stdout.on("data",function(data){
             that._lastAppreMsg = "" + data;
-            });
-            
-            child.on("exit",function(data){
-                var lRunned = data == 0                
-                that.outChannel.log("Password:"+ that._lastAppreMsg);
-            });
-        }
-    });  
-}
-    
+        });
+        
+        child.on("exit",function(data){
+            var lRunned = data == 0
+            done(that._lastAppreMsg);           
+        });
+    }
     public getHdId()
     {
         var _args = new Array<string>();
