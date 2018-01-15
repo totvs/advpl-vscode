@@ -31,6 +31,42 @@ export class advplCompile {
             this.debugPath += "\\bin\\AdvplDebugBridge.exe";
         }
         this.encoding ="";
+
+        // Throws exception
+        this.validateCompile();
+    }
+    public validateCompile()
+    {
+        let retorno: boolean;
+        retorno = true;
+
+        if (retorno)    //Valida ambiente selecionado
+        {
+            let parsedEnvInfos = JSON.parse(this.EnvInfos);
+            let selectedEnvironment: string;
+            let foundEnvironment: boolean;
+            
+            selectedEnvironment = parsedEnvInfos.selectedEnvironment;
+            foundEnvironment = false;
+            for (let entry of parsedEnvInfos.environments) {
+                if
+                (
+                    selectedEnvironment === entry.environment ||
+                    entry.hasOwnProperty('name') && selectedEnvironment === entry.name
+                )
+                {
+                    foundEnvironment = true;
+                    break;
+                }
+            }
+
+            if (! foundEnvironment)
+            {
+                throw new Error("Nenhum ambiente selecionado !");
+            }
+        }
+
+        return retorno;
     }
     public setEncoding(enc)
     {
