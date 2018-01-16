@@ -230,6 +230,7 @@ export class advplCompile {
     private run_callBack(lOk)
     {
          
+            let lErrorFound; 
             try
             {
             if(this._lastAppreMsg != null)
@@ -260,7 +261,11 @@ export class advplCompile {
                             else
                             {
                                 if (msgerr.Type == 0)
-                                    this.outChannel.log("Erro: "+ message );
+                                    {
+                                        lErrorFound = true;
+                                        this.outChannel.log("Erro in "+ path.basename(source)+" "+  message );
+                                    }
+                                    
                                 else
                                     this.outChannel.log("Warning: "+ message );
                                 let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
@@ -283,7 +288,7 @@ export class advplCompile {
 
                 if (lOk)
                 {
-                    this.outChannel.log("Compilação OK");
+                    this.outChannel.log(lErrorFound ?"Compilação finalizada com erros, verifique a aba Problemas" :"Compilação OK");
                     this.afterCompile();
                 }
                 else

@@ -189,6 +189,7 @@ try {
 }
 
 return compile;
+}
 function addAdvplEnvironment(){
     return vscode.commands.registerCommand('advpl.addAdvplEnvironment',cmdAddAdvplEnvironment);
 }
