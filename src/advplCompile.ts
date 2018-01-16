@@ -31,9 +31,9 @@ export class advplCompile {
             this.debugPath += "\\bin\\AdvplDebugBridge.exe";
         }
         this.encoding ="";
-
-        // Throws exception
-        this.validateCompile();
+        if(jSonInfos) this.validateCompile(); // Throws exception
+        
+        
     }
     public validateCompile()
     {
