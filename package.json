@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "Suporte a Linguagem ADVPL",
-    "version": "0.7.7",
+    "version": "0.7.8",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -343,6 +343,10 @@
             {
                 "command": "advpl.generateAuthorizationConfig",
                 "title": "Advpl - Gera informações de autorização baseada no arquivo .aut"
+            },
+            {
+                "command": "advpl.addAdvplEnvironment",
+                "title": "Advpl - Cria environment para conexão"
             }
         ],
         "keybindings": [
@@ -464,8 +468,10 @@
         "vscode-debugadapter-testsupport": "^1.12.0"
     },
     "dependencies": {
-        "vscode-debugprotocol": "^1.21.0",
+        "error-ex": "^1.3.1",
+        "figures": "^2.0.0",
         "vscode-debugadapter": "^1.21.0",
+        "vscode-debugprotocol": "^1.21.0",
         "vscode-languageclient": "1.3.1"
     },
     "repository": {

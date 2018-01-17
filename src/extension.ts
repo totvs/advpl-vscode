@@ -16,6 +16,7 @@ import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
 import {getConfigurationAsString} from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
+import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let isCompiling = false;
@@ -37,8 +38,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(selectEnviroment());
 
     context.subscriptions.push(generateAuthorizationConfig());
+    context.subscriptions.push(addAdvplEnvironment());    
     
-
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
@@ -158,6 +159,41 @@ function generateAuthorizationConfig(){
         return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
+function createAdvplCompile(cSource: string, cDescription: string)
+{
+let compile: advplCompile;
+
+try {
+    compile = new advplCompile(
+        getConfigurationAsString(),
+        advplDiagnosticCollection,
+        OutPutChannel
+    );
+    compile.setonError( function () {
+        isCompiling = false;
+    });
+    compile.setAfterCompileOK( function () {
+        if (! (cSource == null))
+        {
+            vscode.window.setStatusBarMessage(
+                cDescription + ' ' + cSource + ' compiled!!! :D', 3000
+            );
+        } else if (! (cDescription == null)) {
+            OutPutChannel.log(cDescription)
+        }
+        isCompiling = false;
+    });
+    isCompiling = true;
+} catch (e) {
+    OutPutChannel.log("Erro ao iniciar compilação: " + (<Error>e).message);
+}
+
+return compile;
+}
+function addAdvplEnvironment(){
+    return vscode.commands.registerCommand('advpl.addAdvplEnvironment',cmdAddAdvplEnvironment);
+}
+
 function menucompileProjet()
 {
    
@@ -172,16 +208,12 @@ let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', func
         {
             if(fs.lstatSync(cSource).isFile() && cSource.substr(cSource.lastIndexOf('.') + 1).toUpperCase() == "PRJ")
             {
-            vscode.window.setStatusBarMessage('Starting Project compile...' + cSource,3000);
-            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-            compile.setonError(function (){isCompiling = false;});
-                    compile.setAfterCompileOK(function (){
-                       // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
-                        vscode.window.setStatusBarMessage('Project ' + cSource + ' Compiled!!! :D',3000);
-                        isCompiling = false;
-                    });
-                    isCompiling = true;
+                vscode.window.setStatusBarMessage('Starting Project compile...' + cSource,3000);
+                var compile = createAdvplCompile(cSource, 'Project');
+                if (! (compile == null))
+                {
                     compile.compileProject(cSource);
+                }
             }
             else
             {
@@ -205,16 +237,12 @@ function menucompiletextfile()
             var cSource = context._fsPath;
             if(fs.lstatSync(cSource).isFile() )
             {
-            vscode.window.setStatusBarMessage('Starting Project files in text file...' + cSource,3000);
-            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-                    compile.setonError(function (){isCompiling = false;});
-                    compile.setAfterCompileOK(function (){
-                    // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
-                        vscode.window.setStatusBarMessage('Project ' + cSource + ' Compiled!!! :D',3000);
-                        isCompiling = false;
-                    });
-                    isCompiling = true;
+                vscode.window.setStatusBarMessage('Starting Project files in text file...' + cSource,3000);
+                var compile = createAdvplCompile(cSource, 'Project');
+                if (! (compile == null))
+                {
                     compile.compileText(cSource);
+                }
             }
             else
             {
@@ -236,19 +264,14 @@ let disposable = vscode.commands.registerCommand('advpl.menucompile', function (
         }
         else
         {
-    
             var cSource = context._fsPath;
             vscode.window.setStatusBarMessage('Starting advpl compile...' + cSource,3000);
-            var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-                    compile.setonError(function (){isCompiling = false;});
-                    compile.setAfterCompileOK(function (){
-                    // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
-                        vscode.window.setStatusBarMessage('Source ' + cSource + ' Compiled!!! :D',3000);
-                        isCompiling = false;
-                    });
-                    isCompiling = true;
-                    compile.compile(cSource);
+            var compile = createAdvplCompile(cSource, 'Source');
+            if (! (compile == null))
+            {
+                compile.compile(cSource);
             }
+        }
 });
 return disposable;
 }
@@ -268,29 +291,17 @@ let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', funct
             }
             else
             {
-                
                 vscode.window.setStatusBarMessage('Starting advpl folder compiler...' + cResource,3000);
-                var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-                compile.setonError(function (){isCompiling = false;});
-                compile.setAfterCompileOK(function (){            
-                    vscode.window.setStatusBarMessage('Folder ' + cResource + ' Compiled!!! :D',3000);
-                    isCompiling = false;
-                });
-                isCompiling = true;
-                compile.compileFolder(cResource);
-                
+                var compile = createAdvplCompile(cResource, 'Folder');
+                if (! (compile == null))
+                {
+                    compile.compileFolder(cResource);
+                }
             }
         }
             
         else
             vscode.window.showInformationMessage('Por favor selecione uma pasta.') ;
-      /*  var compile = new advplCompile(JSON.stringify(vscode.workspace.getConfiguration("advpl")),advplDiagnosticCollection, OutPutChannel);
-                compile.setAfterCompileOK(function (){
-                   // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
-                    vscode.window.setStatusBarMessage('Source ' + cSource + ' Compiled!!! :D',3000);
-                });
-                compile.compile(cSource);*/
-
 });
 return disposable;
 }
@@ -344,27 +355,24 @@ function __internal_compile(cSource,editor,lbuildPPO)
     }
     else
     {
-     
-     vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
-        var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
-        compile.setEncoding(encoding);
-        compile.setonError(function (){isCompiling = false;});
-                compile.setAfterCompileOK(function (){
-                   // vscode.window.showInformationMessage('Source ' + editor.document.fileName + ' Compiled!!! :D') ;
-                    vscode.window.setStatusBarMessage('Source ' + editor.document.fileName + ' Compiled!!! :D',3000);
-                    isCompiling = false;
-                });
-                isCompiling = true;
-                if(!lbuildPPO)
-                {
-                    compile.compile(cSource);
-                }
-                else
-                {
-                    compile.BuildPPO(cSource);
-                }
-                
+        vscode.window.setStatusBarMessage('Starting advpl compile...' + editor.document.fileName,3000);
+        var compile = createAdvplCompile(cSource, 'Source');
+        let encoding =
+            vscode.workspace
+                .getConfiguration("files")
+                .get("encoding");
+        if (! (compile == null))
+        {
+            compile.setEncoding(encoding);
+            if(! lbuildPPO)
+            {
+                compile.compile(cSource);
+            }
+            else
+            {
+                compile.BuildPPO(cSource);
+            }
+        }
     }
 }
 
@@ -389,20 +397,24 @@ return disposable;
 function getAuthorizationId() 
 {
 let disposable = vscode.commands.registerCommand('advpl.getAuthorizationId', function (context)  {
-       var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection,OutPutChannel);
-       compile.getHdId();
-          
-    });
+    var compile = createAdvplCompile(null, null);
+    if (! (compile == null))
+    {
+        compile.getHdId();
+    }
+});
 return disposable;
 }
 
 function CipherPassword() 
 {
 let disposable = vscode.commands.registerCommand('advpl.CipherPassword', function (context)  {
-       var compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection,OutPutChannel);
-       compile.CipherPassword();
-          
-    });
+    var compile = createAdvplCompile(null, null);
+    if (! (compile == null))
+    {
+        compile.CipherPassword();
+    }
+});
 return disposable;
 }
 /***
@@ -569,13 +581,16 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', f
     }
     else
     {
-        let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
-        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
-        compile.setEncoding(encoding);
-        compile.setAfterCompileOK(function (){
-             isCompiling = false;
-         });
-        compile.deleteSource();
+        var compile = createAdvplCompile(null, null);
+        let encoding =
+            vscode.workspace
+                .getConfiguration("files")
+                .get("encoding");
+        if (! (compile == null))
+        {
+            compile.setEncoding(encoding);
+            compile.deleteSource();
+        }
     }    
     });
     return disposable;
@@ -587,13 +602,13 @@ function DefragRpo()
         {
             return;
         }
-        let compile = new advplCompile(getConfigurationAsString(),advplDiagnosticCollection, OutPutChannel);
+        let compile = createAdvplCompile(null, 'Defragmentação OK');
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
-        compile.setEncoding(encoding);
-        compile.setAfterCompileOK(function (){
-                   OutPutChannel.log("Defragmentação OK")
-                });
-        compile.defragRPO();
+        if (! (compile == null))
+        {
+            compile.setEncoding(encoding);
+            compile.defragRPO();
+        }
     });
 return disposable;
 }
