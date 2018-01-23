@@ -5,6 +5,7 @@ import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
 import {advplPatch} from './advplPatch';
 import {advplMonitor} from './advplMonitor';
+import {advplFormatterActivate} from './advplFormatter';
 import {Enviroment} from './advplEnviroment';
 import EnvObject from './Environment';
 import { spawn, execFile, ChildProcess } from 'child_process';
@@ -32,6 +33,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(menucompileProjet());    
     context.subscriptions.push(menucompiletextfile());    
+
+    advplFormatterActivate(context);
     
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
