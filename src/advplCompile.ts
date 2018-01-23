@@ -15,7 +15,7 @@ export class advplCompile {
     private outChannel : advplConsole;
     private encoding : string;
     private compileStartTime
-    constructor(jSonInfos : string ,d : vscode.DiagnosticCollection, OutPutChannel)
+    constructor(jSonInfos? : string ,d? : vscode.DiagnosticCollection, OutPutChannel?)
     {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection =d ;
@@ -31,6 +31,42 @@ export class advplCompile {
             this.debugPath += "\\bin\\AdvplDebugBridge.exe";
         }
         this.encoding ="";
+        if(jSonInfos) this.validateCompile(); // Throws exception
+        
+        
+    }
+    public validateCompile()
+    {
+        let retorno: boolean;
+        retorno = true;
+
+        if (retorno)    //Valida ambiente selecionado
+        {
+            let parsedEnvInfos = JSON.parse(this.EnvInfos);
+            let selectedEnvironment: string;
+            let foundEnvironment: boolean;
+            
+            selectedEnvironment = parsedEnvInfos.selectedEnvironment;
+            foundEnvironment = false;
+            for (let entry of parsedEnvInfos.environments) {
+                if
+                (
+                    selectedEnvironment === entry.environment ||
+                    entry.hasOwnProperty('name') && selectedEnvironment === entry.name
+                )
+                {
+                    foundEnvironment = true;
+                    break;
+                }
+            }
+
+            if (! foundEnvironment)
+            {
+                throw new Error("Nenhum ambiente selecionado !");
+            }
+        }
+
+        return retorno;
     }
     public setEncoding(enc)
     {
@@ -46,31 +82,34 @@ export class advplCompile {
     }
     public CipherPassword()
     {
-       var _args = new Array<string>();
-        var that = this;
+
         let options:vscode.InputBoxOptions = {
             prompt : "Informe a senha:",
             password : true
         }
         var password = vscode.window.showInputBox(options).then(info=>{
-        if (password != undefined)
-        {      
-            _args.push("--CipherPassword="+info);
+            if (password != undefined)
+            {      
+                this.runCipherPassword(info, cipher => this.outChannel.log("Password:"+ cipher));
+            }
+        });  
+    }
+    public async runCipherPassword(password: string, done: Function)
+    {
+        var _args = new Array<string>();
+        var that = this;
+        _args.push("--CipherPassword="+password);
 
-            var child = child_process.spawn(this.debugPath,_args);
-            child.stdout.on("data",function(data){
-        
+        var child = child_process.spawn(this.debugPath,_args);
+        child.stdout.on("data",function(data){
             that._lastAppreMsg = "" + data;
-            });
-            
-            child.on("exit",function(data){
-                var lRunned = data == 0                
-                that.outChannel.log("Password:"+ that._lastAppreMsg);
-            });
-        }
-    });  
-}
-    
+        });
+        
+        child.on("exit",function(data){
+            var lRunned = data == 0
+            done(that._lastAppreMsg);           
+        });
+    }
     public getHdId()
     {
         var _args = new Array<string>();
@@ -191,6 +230,7 @@ export class advplCompile {
     private run_callBack(lOk)
     {
          
+            let lErrorFound; 
             try
             {
             if(this._lastAppreMsg != null)
@@ -221,7 +261,11 @@ export class advplCompile {
                             else
                             {
                                 if (msgerr.Type == 0)
-                                    this.outChannel.log("Erro: "+ message );
+                                    {
+                                        lErrorFound = true;
+                                        this.outChannel.log("Erro in "+ path.basename(source)+" "+  message );
+                                    }
+                                    
                                 else
                                     this.outChannel.log("Warning: "+ message );
                                 let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0?vscode.DiagnosticSeverity.Error :vscode.DiagnosticSeverity.Warning);
@@ -244,7 +288,7 @@ export class advplCompile {
 
                 if (lOk)
                 {
-                    this.outChannel.log("Compilação OK");
+                    this.outChannel.log(lErrorFound ?"Compilação finalizada com erros, verifique a aba Problemas" :"Compilação OK");
                     this.afterCompile();
                 }
                 else
