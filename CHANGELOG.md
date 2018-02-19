@@ -2,7 +2,7 @@
  - Melhoria: [Wizard de Criação de Ambiente] (https://github.com/killerall/advpl-vscode/pull/164)
  - Melhoria: [Mensagem validação ambiente selecionado] (https://github.com/killerall/advpl-vscode/pull/156)
  - Correção: [Mostrar mensagem no Output quando ocorre algum erro na compilação de pasta] (https://github.com/killerall/advpl-vscode/issues/159)
-
+ - Correção: [Título "Source" do rpoInfo ] (https://github.com/killerall/advpl-vscode/issues/168)
 ## 0.7.7
  - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas] (https://github.com/killerall/advpl-vscode/issues/157)
  - Correção: [Ao compilar pasta e o Server esta fora esta dando SyntaxError] (https://github.com/killerall/advpl-vscode/issues/145)
