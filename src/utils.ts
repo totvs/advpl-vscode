@@ -38,3 +38,35 @@ export function checkIfFileExists(filePath: string): boolean {
 export function getConfigurationAsString(): string{
     return JSON.stringify(vscode.workspace.getConfiguration("advpl"));
 }
+
+export function advplDebugBridgePath(): string {
+    let retPath: string;
+    retPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
+    retPath += formatPath('/bin/');
+    switch (process.platform)
+    {
+        case "darwin":
+            retPath += "AdvplDebugBridgeMac";
+            break;
+        case "linux":
+            retPath += "NOT_IMPLEMENTED";
+            break;
+        default:
+            retPath += "AdvplDebugBridge.exe";
+    }
+    return retPath;
+}
+
+export function formatPath(rawUnixPath: string): string {
+    let retPath: string;
+    switch (process.platform)
+    {
+        case "darwin":
+        case "linux":
+            retPath = rawUnixPath;
+            break;
+        default:
+            retPath = rawUnixPath.replace(/\//g, '\\');
+    }
+    return retPath;
+}

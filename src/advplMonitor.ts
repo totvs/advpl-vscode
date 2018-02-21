@@ -2,8 +2,9 @@ import * as child_process from 'child_process';
 import * as vscode from 'vscode';
 import {inspect}  from 'util';
 import {advplConsole}  from './advplConsole';
-import * as fs from 'fs';
+import {advplDebugBridgePath} from './utils';
 import * as path from 'path';
+import * as fs from 'fs';
 export class advplMonitor {
     private outChannel : advplConsole;
     private EnvInfos :string;
@@ -13,17 +14,7 @@ export class advplMonitor {
     {
         this.outChannel = _outChannel;
         this.EnvInfos = jSonInfos;
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-        if(process.platform == "darwin")
-        {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else
-        {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
-             
-        
+        this.debugPath = advplDebugBridgePath();
     }
 
    public getThreads()

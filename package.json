@@ -229,6 +229,12 @@
                     "type": "number",
                     "default": 4,
                     "description": "Numero de threads utilizada para compilação de folder."
+                },
+                "advpl.formatterTabSize": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "default": 4,
+                    "description": "Número de espaços para identação"
                 }
             }
         },

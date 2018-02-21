@@ -2,6 +2,7 @@ import * as child_process from 'child_process';
 import * as vscode from 'vscode';
 import {inspect}  from 'util';
 import {advplConsole}  from './advplConsole';
+import {advplDebugBridgePath} from './utils';
 import * as fs from 'fs';
 import * as path from 'path';
 export class advplPatch {
@@ -13,17 +14,7 @@ export class advplPatch {
     {
         this.outChannel = _outChannel;
         this.EnvInfos = jSonInfos;   
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-        if(process.platform == "darwin")
-        {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else
-        {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
-             
-        
+        this.debugPath = advplDebugBridgePath();
     }
     public build(file : String)
     {
