@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "Suporte a Linguagem ADVPL",
-    "version": "0.7.8",
+    "version": "0.8.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
