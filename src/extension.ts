@@ -1,4 +1,7 @@
 'use strict';
+import * as nls from 'vscode-nls';
+const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
+
 import * as vscode from 'vscode';
 import {advplCompile} from './advplCompile';
 import {smartClientLaunch} from './smartClientLaunch';
@@ -17,10 +20,12 @@ import { StringDecoder } from 'string_decoder';
 import {getConfigurationAsString} from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
+
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole() ; 
 let isCompiling = false;
 let env;
+
 export function activate(context: vscode.ExtensionContext) {
     
     context.subscriptions.push(getProgramName());
