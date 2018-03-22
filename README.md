@@ -34,7 +34,6 @@ As próximas planejadas são:
 * Auto complete
 * Linux
 
-
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
@@ -62,3 +61,9 @@ Efetuar o download do [executavel](https://github.com/killerall/advpl-vscode/raw
 Copiar o mesmo para a pasta:
 ~/.vscode/extensions/KillerAll.advpl-vscode-x.x.x/bin
 Dar acesso a execução no arquivo.
+
+## Localização
+
+Está no diretório i18n. Para compilar os recursos de localização, deve ser utilizar o [Gulp](https://gulpjs.com/)
+
+`$ gulp build`
