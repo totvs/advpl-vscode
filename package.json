@@ -177,7 +177,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res)",
+                    "default": ".*\\.(prw|apw|prx|prg|apw|aph|tres|png|bmp|res)",
                     "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
                 },
                 "advpl.pathPatchBuild": {
@@ -237,6 +237,7 @@
                 "id": "advpl",
                 "extensions": [
                     ".prw",
+                    ".apw",
                     ".prx",
                     ".prg",
                     ".aph",
@@ -244,6 +245,7 @@
                 ],
                 "aliases": [
                     "Advpl(PRW)",
+                    "Advpl(APW)",
                     "Advpl(PRX)",
                     "Advpl(PRG)",
                     "Advpl(APH)",
