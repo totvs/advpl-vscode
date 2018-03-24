@@ -62,8 +62,46 @@ Copiar o mesmo para a pasta:
 ~/.vscode/extensions/KillerAll.advpl-vscode-x.x.x/bin
 Dar acesso a execução no arquivo.
 
-## Localização
+# Localização
 
-Está no diretório i18n. Para compilar os recursos de localização, deve ser utilizar o [Gulp](https://gulpjs.com/)
+## Estrutura
+
+O diretório que conterá os recursos de localização é
+
+`./i18n/{iso639-2}/`
+
+Para maiores informações referentes aos códigos dos países, consulte a [ISO639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php)
+
+## Arquivos de configuração JSON
+
+Esses recursos de localização estarão contidos no seguinte arquivo:
+
+`./i18n/{iso639-2}/package.i18n.json`
+
+No arquivo destino da localização, no exemplo, o ./package.json, deverá ser utilizado o seguinte formato:
+
+```json
+"description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
+```
+
+No arquivo de recurso de localização, para a entrada exemplo acima, deverá ser utilizado o seguinte formato:
+
+```json
+"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
+```
+
+## Compilação dos recursos de localização
+
+Será necessário instalar o [Gulp](https://gulpjs.com/)
+
+A lista de línguas localizadas está definida no arquivo `./gulpfile.json` no seguinte trecho de código (formato [ISO639-2](https://www.loc.gov/standards/iso639-2/php/code_list.php)):
+
+```js
+const languages = ['ptb','enu','rus'];
+```
+
+Para compilar os recursos de localização, deve-se executar o seguinte comando:
 
 `$ gulp build`
+
+Ele irá construir arquivos conforme ISO639-3 na raiz do projeto e nos sub-diretórios configurados para cada language especificada no gulpfile.json
