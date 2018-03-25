@@ -1,0 +1,4 @@
+{
+	"src.authorizationFile.promptText": "Введите путь к файлу авторизации  (*.aut)",
+	"src.authorizationFile.invalidAuthorizationFileText": "Файл авторизации, неверный!"
+}

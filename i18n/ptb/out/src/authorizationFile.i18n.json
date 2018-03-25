@@ -1,0 +1,4 @@
+{
+	"src.authorizationFile.promptText": "Digite o caminho (path) do arquivo de autorização (*.aut)",
+	"src.authorizationFile.invalidAuthorizationFileText": "Invalid authorization file!"
+}
