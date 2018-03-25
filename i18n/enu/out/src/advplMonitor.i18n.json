@@ -1,0 +1,7 @@
+{
+	"src.advplMonitor.initializingText": "Reading the APO, please wait...",
+	"src.advplMonitor.creationText": "Configuration entries were successfully created.",
+	"src.advplMonitor.errorText": "Error!",
+	"src.advplMonitor.wsQueryUrlText": "Inform the Web Service URL:",
+	"src.advplMonitor.wsCreatedText": "The Web Service was successfully created."
+}
