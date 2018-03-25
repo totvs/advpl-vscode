@@ -1,8 +1,12 @@
+import * as nls from 'vscode-nls';
+
+const localize = nls.loadMessageBundle();
+
 /**
  * Classe para representar um ambiente preenchido no Preferences
  */
 
-export default class Environment{
+export default class Environment {
     user: String;
     server: String;
 
@@ -12,13 +16,13 @@ export default class Environment{
         return this;
     }
 
-    getErrors(): Array<String>{
+    getErrors(): Array<String> {
         let errors = [];
-        if(!this.user){
-            errors.push("User não preenchido");
+        if (!this.user) {
+            errors.push(localize('src.Environment.userNotFilledText', 'User not filled! (en)'));
         }
-        if(!this.server){
-            errors.push("Endereço do Server não preenchido (server)");
+        if (!this.server) {
+            errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled! (en)'));
         }
         return errors;
     }
