@@ -8,7 +8,7 @@ import {smartClientLaunch} from './smartClientLaunch';
 import {advplConsole} from './advplConsole';
 import {advplPatch} from './advplPatch';
 import {advplMonitor} from './advplMonitor';
-import {Enviroment} from './advplEnviroment';
+import {Environment} from './advplEnvironment';
 import EnvObject from './Environment';
 import { spawn, execFile, ChildProcess } from 'child_process';
 import * as path from 'path';
@@ -40,7 +40,7 @@ export function activate(context: vscode.ExtensionContext) {
     
     context.subscriptions.push(getAuthorizationId()); 
     context.subscriptions.push(CipherPassword());
-    context.subscriptions.push(selectEnviroment());
+    context.subscriptions.push(selectEnvironment());
 
     context.subscriptions.push(generateAuthorizationConfig());
     context.subscriptions.push(addAdvplEnvironment());    
@@ -59,8 +59,8 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
     context.subscriptions.push(DefragRpo());    
-    //Enviroment no bar
-    env = new Enviroment();
+    //Environment no bar
+    env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
 
     //initLanguageServer(context);
@@ -315,7 +315,7 @@ function compile()
 {
    
         let disposable = vscode.commands.registerCommand('advpl.compile', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -435,7 +435,7 @@ return disposable;
 function PathApply() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.apply', function (context)  {
-            if (!isEnviromentSelected())
+            if (!isEnvironmentSelected())
             {
                 return;
             }
@@ -456,7 +456,7 @@ return disposable;
 function PathInfo() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.info', function (context)  {
-            if (!isEnviromentSelected())
+            if (!isEnvironmentSelected())
             {
                 return;
             }
@@ -477,7 +477,7 @@ return disposable;
 function PathBuild() 
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.build', function (context)  {
-            if (!isEnviromentSelected())
+            if (!isEnvironmentSelected())
             {
                 return;
             }
@@ -532,7 +532,7 @@ return disposable;
 function GetThreads()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getThreads', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -547,7 +547,7 @@ return disposable;
 function GetRpoInfos()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoInfos', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -561,7 +561,7 @@ return disposable;
 function GetRpoFunctions()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.getRpoFunctions', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -576,7 +576,7 @@ return disposable;
 function DeleteSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', function (context)  {
-    if (!isEnviromentSelected())
+    if (!isEnvironmentSelected())
     {
         return;
     }
@@ -603,7 +603,7 @@ let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSource', f
 function DefragRpo()
 {
     let disposable = vscode.commands.registerCommand('advpl.monitor.defragRpo', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -621,7 +621,7 @@ return disposable;
 function BuildWSClient()
 {
 let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -632,9 +632,9 @@ let disposable = vscode.commands.registerCommand('advpl.buildWSClient', function
     
 return disposable;
 }
-function selectEnviroment()
+function selectEnvironment()
 {
-let disposable = vscode.commands.registerCommand('advpl.selectEnviroment', function (context)  {
+let disposable = vscode.commands.registerCommand('advpl.selectEnvironment', function (context)  {
         
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
         let envs = obj.map(env => env["environment"]  );
@@ -682,7 +682,7 @@ function buildPPO()
 {
    
 let disposable = vscode.commands.registerCommand('advpl.createPPO', function (context)  {
-        if (!isEnviromentSelected())
+        if (!isEnvironmentSelected())
         {
             return;
         }
@@ -719,7 +719,7 @@ let disposable = vscode.commands.registerCommand('advpl.createPPO', function (co
 });
 return disposable;
 }
-function isEnviromentSelected() :boolean
+function isEnvironmentSelected() :boolean
 {
     let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
     if(env === "" || env == undefined)

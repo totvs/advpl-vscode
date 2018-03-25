@@ -32,7 +32,7 @@
         "onCommand:advpl.monitor.deleteSource",
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
-        "onCommand:advpl.selectEnviroment"
+        "onCommand:advpl.selectEnvironment"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -337,8 +337,8 @@
                 "title": "%advpl.buildWSClient%"
             },
             {
-                "command": "advpl.selectEnviroment",
-                "title": "%advpl.selectEnviroment%"
+                "command": "advpl.selectEnvironment",
+                "title": "%advpl.selectEnvironment%"
             },
             {
                 "command": "advpl.generateAuthorizationConfig",
@@ -392,7 +392,7 @@
                     "launch": {
                         "required": [
                             "programRun",
-                            "enviromentInfo"
+                            "environmentInfo"
                         ],
                         "properties": {
                             "programRun": {
@@ -405,9 +405,9 @@
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
                                 "default": true
                             },
-                            "enviromentInfo": {
+                            "environmentInfo": {
                                 "type": "string",
-                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.environmentinfo%",
                                 "default": "${command.GetEnvInfos}"
                             },
                             "workspace": {
@@ -440,7 +440,7 @@
                         "cwd": "${workspaceRoot}",
                         "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
-                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "environmentInfo": "${command:GetEnvInfos}",
                         "workspace": "${workspaceRoot}/"
                     }
                 ]

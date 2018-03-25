@@ -19,7 +19,7 @@
 	"advpl.monitor.deleteSource": "Advpl - Env - Delete  source(s) from RPO.",
 	"advpl.monitor.defragRpo": "Advpl - Env - Defrag RPO.",
 	"advpl.buildWSClient": "Advpl - Web Service - Generates a WebService Client based on a URL.",
-	"advpl.selectEnviroment": "Advpl - Selects the environment to build/Debug.",
+	"advpl.selectEnvironment": "Advpl - Selects the environment to build/Debug.",
 	"advpl.generateAuthorizationConfig": "Advpl - Generates authorization information based on the file .aut",
 	"advpl.addAdvplEnvironment": "Advpl - Creates environment for connection",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT": "Environment",
@@ -50,7 +50,7 @@
 	"advpl.configuration.title": "AdvplSupport configuration",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Arguments%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Command?s Path ",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Enviroment Info for Debug. Internal use",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.environmentinfo": "Environment Info for Debug. Internal use",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Program for Debugging.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"

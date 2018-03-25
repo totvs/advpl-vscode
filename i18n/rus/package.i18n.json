@@ -19,7 +19,7 @@
 	"advpl.monitor.deleteSource": "Advpl - Env - Удалить(s) источника(ов), РПО.",
 	"advpl.monitor.defragRpo": "Advpl - Env - Defrag РПО.",
 	"advpl.buildWSClient": "Advpl - Веб-сервис Генерирует WebService Клиента, основанный на URL-адрес.",
-	"advpl.selectEnviroment": "Advpl - Выбор среды компиляции/Отладки.",
+	"advpl.selectEnvironment": "Advpl - Выбор среды компиляции/Отладки.",
 	"advpl.generateAuthorizationConfig": "Advpl - Генерирует информацию для авторизации на основе файла .aut",
 	"advpl.addAdvplEnvironment": "Advpl - Создание среды для подключения",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT": "Environment",
@@ -50,7 +50,7 @@
 	"advpl.configuration.title": "AdvplSuport configuration",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Аргументы%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Command Path",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Окружающей среды Информация для Отладки. Внутреннего использования",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.environmentinfo": "Окружающей среды Информация для Отладки. Внутреннего использования",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Программы для Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
