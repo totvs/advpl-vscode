@@ -19,7 +19,7 @@ const validFilePath = (text: string): string => {
 
 export default async function generateConfigFromAuthorizationFile(context): Promise<any> {
     let filePath = await vscode.window.showInputBox({
-        prompt: localize('src.authorizationFile.promptText', 'Type in the path of the authorization file (*.aut) (en)'),
+        prompt: localize('src.authorizationFile.promptText', 'Type in the path of the authorization file (*.aut)'),
         ignoreFocusOut: true,
         validateInput: validFilePath
     });
@@ -36,7 +36,7 @@ class AuthorizationFile {
         let aRawData = fs.readFileSync(filePath, 'utf-8').split('\r\n');
 
         if (aRawData[0] !== "[AUTHORIZATION]")
-            throw new Error(localize('src.authorizationFile.invalidAuthorizationFileText', 'Invalid authorization file! (en)'));
+            throw new Error(localize('src.authorizationFile.invalidAuthorizationFileText', 'Invalid authorization file!'));
         aRawData.forEach(element => {
             let keyValue = element.split("=");
             myData.setKeyValue(keyValue);

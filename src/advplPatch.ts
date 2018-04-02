@@ -38,7 +38,7 @@ export class advplPatch {
             var xRet = data + "";
             if (xRet.indexOf("|") > 0) {
                 var values = String.fromCharCode.apply(null, data).split('|');
-                that.consoleReturn = localize('src.advplPatch.buildFailureText', 'Build failure: (en)') + values[3];
+                that.consoleReturn = localize('src.advplPatch.buildFailureText', 'Build failure:') + values[3];
             }
             else {
                 that.consoleReturn = xRet;
@@ -62,7 +62,7 @@ export class advplPatch {
             var xRet = data + "";
             if (xRet.indexOf("|") > 0) {
                 var values = String.fromCharCode.apply(null, data).split('|');
-                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure: (en)') + values[3];
+                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure:') + values[3];
             }
             else {
                 that.consoleReturn = xRet;
@@ -82,7 +82,7 @@ export class advplPatch {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--patchInfo=" + patchApply);
 
-        this.outChannel.log(localize('src.advplPatch.startPatchAnalysisText', 'Starting patch analysis... (en)'));
+        this.outChannel.log(localize('src.advplPatch.startPatchAnalysisText', 'Starting patch analysis...'));
         this.consoleReturn = "";
 
         var child = child_process.spawn(this.debugPath, _args);
@@ -94,7 +94,7 @@ export class advplPatch {
         child.on("exit", function (data) {
             const patchLogFileName: string = 'patchInfo.log';
 
-            that.outChannel.log(patchLogFileName + localize('src.advplPatch.patchCreateSuccessText', 'created successfully! (en)'));
+            that.outChannel.log(patchLogFileName + localize('src.advplPatch.patchCreateSuccessText', 'created successfully!'));
             const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, patchLogFileName));
 
             vscode.workspace.openTextDocument(newFile).then(document => {
@@ -105,7 +105,7 @@ export class advplPatch {
                     if (success) {
                         vscode.window.showTextDocument(document);
                     } else {
-                        vscode.window.showInformationMessage(localize('src.advplPatch.errorText', 'Error! (en)'));
+                        vscode.window.showInformationMessage(localize('src.advplPatch.errorText', 'Error!'));
                     }
                 });
             });

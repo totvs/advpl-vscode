@@ -123,10 +123,10 @@ A função de localização deve ser implementada conforme exemplo abaixo:
 `./src/advplConsole.ts`
 
 ```typescript
-this.log(localize('src.advplConsole.text', 'AdvPL Started (en)'));
+this.log(localize('src.advplConsole.text', 'AdvPL Started'));
 ```
 
-O segundo parâmetro da localize recebe uma mensagem de fallback que será utilizada caso a tradução não seja localizada para a linguagem local. Ela preferencialmente deve estar em inglês e isso deve ser sinalizado com o sufixo (en).
+O segundo parâmetro da localize recebe uma mensagem de fallback que será utilizada caso a tradução não seja localizada para a linguagem local. Ela preferencialmente deve estar em inglês.
 
 ### Compilação dos recursos de localização
 
@@ -141,7 +141,7 @@ const languages = ['ptb','enu','rus'];
 Para compilar os recursos de localização, deve-se executar o seguinte comando:
 
 ```bash
-$ npm run compile
+$ npm run resources
 
 > advpl-vscode@0.8.0 compile /home/vlopes/dev/github/advpl-vscode
 > tsc -p ./ && gulp build
