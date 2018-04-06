@@ -19,10 +19,10 @@ export default class Environment {
     getErrors(): Array<String> {
         let errors = [];
         if (!this.user) {
-            errors.push(localize('src.Environment.userNotFilledText', 'User not filled! (en)'));
+            errors.push(localize('src.Environment.userNotFilledText', 'User not filled!'));
         }
         if (!this.server) {
-            errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled! (en)'));
+            errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled!'));
         }
         return errors;
     }

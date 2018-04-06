@@ -12,17 +12,17 @@ export default function cmdAddAdvplEnvironment(context): any {
     const environments = config.get<Array<IEnvironment>>("environments");
     let adapter = new CodeAdapter()
     const questions = [{
-        message: localize('src.commands.addAdvplEnvironment.envAppserverText', 'Environment AppServer (en)'),
+        message: localize('src.commands.addAdvplEnvironment.envAppserverText', 'Environment AppServer'),
         validate: (env) => {
             if (environments.find(environment => environment.environment == env))
-                return localize('src.commands.addAdvplEnvironment.envExistsErrorText', 'The inputted environment already exists! (en)');
+                return localize('src.commands.addAdvplEnvironment.envExistsErrorText', 'The inputted environment already exists!');
             if (env.length <= 0)
-                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory! (en)');
+                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
             return true;
         },
         name: "environment"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.nameText', 'Name (en)'),
+        message: localize('src.commands.addAdvplEnvironment.nameText', 'Name'),
         name: "name",
         when: function (answers) {
             this.default = answers.environment;
@@ -31,38 +31,38 @@ export default function cmdAddAdvplEnvironment(context): any {
         default: '',
         validate: (name) => {
             if (environments.find(environment => environment.name == name))
-                return `${name}` + localize('src.commands.addAdvplEnvironment.existsText', ' already exists! (en)');
+                return `${name}` + localize('src.commands.addAdvplEnvironment.existsText', ' already exists!');
             if (name.length <= 0)
-                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory! (en)');
+                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
             return true;
         }
     }, {
-        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Smartclient Path (en)'),
+        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Smartclient Path'),
         name: "smartClientPath",
         validate: env => env.length > 0
     }, {
-        message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version (en)'),
+        message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version'),
         name: "appserverVersion",
         type: "list",
         default: '131227A',
         choices: ['131227A', '170117A']
     }, {
-        message: localize('src.commands.addAdvplEnvironment.serverIpText', 'Server IP (en)'),
+        message: localize('src.commands.addAdvplEnvironment.serverIpText', 'Server IP'),
         name: "server",
         default: "localhost"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.appserverPortText', 'AppServer Port (en)'),
+        message: localize('src.commands.addAdvplEnvironment.appserverPortText', 'AppServer Port'),
         name: "port"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.userText', 'User (en)'),
+        message: localize('src.commands.addAdvplEnvironment.userText', 'User'),
         name: "user",
         default: "Admin"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password (en)'),
+        message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password'),
         name: "password",
         type: "password"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Include list (en)'),
+        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Include list'),
         name: "includeList"
     }]
     adapter.prompt(questions, answers => {

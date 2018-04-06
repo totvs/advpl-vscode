@@ -10,7 +10,7 @@ export class advplConsole {
         this.outPutChannel = vscode.window.createOutputChannel('Advpl');
         this.outPutChannel.show();
         
-        this.log(localize('src.advplConsole.text', 'AdvPL Started (en)'));
+        this.log(localize('src.advplConsole.text', 'AdvPL Started'));
     }
 
     public log(message: string) {

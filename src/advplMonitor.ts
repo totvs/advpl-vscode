@@ -57,7 +57,7 @@ export class advplMonitor {
             _args.push("--getMap");
 
         this.consoleReturn = "";
-        this.outChannel.log(localize('src.advplMonitor.initializingText', 'Reading the APO, please wait... (en)'));
+        this.outChannel.log(localize('src.advplMonitor.initializingText', 'Reading the APO, please wait...'));
         var child = child_process.spawn(this.debugPath, _args);
 
         child.stdout.on("data", function (data) {
@@ -67,7 +67,7 @@ export class advplMonitor {
         });
 
         child.on("exit", function (data) {
-            that.outChannel.log(localize('src.advplMonitor.creationText', 'Configuration entries were successfully created. (en)'));
+            that.outChannel.log(localize('src.advplMonitor.creationText', 'Configuration entries were successfully created.'));
             const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'rpoInfo' + (new Date()).getMilliseconds().toString() + '.log'));
 
             vscode.workspace.openTextDocument(newFile).then(document => {
@@ -78,7 +78,7 @@ export class advplMonitor {
                     if (success) {
                         vscode.window.showTextDocument(document);
                     } else {
-                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error! (en)'));
+                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
                     }
                 });
             });
@@ -95,7 +95,7 @@ export class advplMonitor {
 
         _args.push("--compileInfo=" + this.EnvInfos);
         let options: vscode.InputBoxOptions = {
-            prompt: localize('src.advplMonitor.wsQueryUrlText', 'Inform the Web Service URL: (en)')
+            prompt: localize('src.advplMonitor.wsQueryUrlText', 'Inform the Web Service URL:')
         }
         var urlws = vscode.window.showInputBox(options).then(info => {
             if (urlws != undefined) {
@@ -107,7 +107,7 @@ export class advplMonitor {
                 });
 
                 child.on("exit", function (data) {
-                    that.outChannel.log(localize('src.advplMonitor.wsCreatedText', 'The Web Service was successfully created. (en)'));
+                    that.outChannel.log(localize('src.advplMonitor.wsCreatedText', 'The Web Service was successfully created.'));
 
                     let initNamePos = that.consoleReturn.indexOf("WSCLIENT") + 9;
                     let endLine = that.consoleReturn.indexOf("\n", initNamePos);
@@ -122,7 +122,7 @@ export class advplMonitor {
                             if (success) {
                                 vscode.window.showTextDocument(document);
                             } else {
-                                vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error! (en)'));
+                                vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
                             }
                         });
                     });

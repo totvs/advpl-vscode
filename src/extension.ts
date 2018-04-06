@@ -176,7 +176,7 @@ function createAdvplCompile(cSource: string, cDescription: string) {
         compile.setAfterCompileOK(function () {
             if (!(cSource == null)) {
                 vscode.window.setStatusBarMessage(
-                    cDescription + ' ' + cSource + localize('src.extension.compiledText', 'compiled! (en)'), 3000
+                    cDescription + ' ' + cSource + localize('src.extension.compiledText', 'compiled!'), 3000
                 );
             } else if (!(cDescription == null)) {
                 OutPutChannel.log(cDescription)
@@ -185,7 +185,7 @@ function createAdvplCompile(cSource: string, cDescription: string) {
         });
         isCompiling = true;
     } catch (e) {
-        OutPutChannel.log(localize('src.extension.compileInitializationErrorText', 'Error in compilation initialization: (en)') + (<Error>e).message);
+        OutPutChannel.log(localize('src.extension.compileInitializationErrorText', 'Error in compilation initialization:') + (<Error>e).message);
     }
 
     return compile;
@@ -200,18 +200,18 @@ function menucompileProjet() {
 
         var cSource = context._fsPath;
         if (isCompiling) {
-            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
             if (fs.lstatSync(cSource).isFile() && cSource.substr(cSource.lastIndexOf('.') + 1).toUpperCase() == "PRJ") {
-                vscode.window.setStatusBarMessage(localize('src.extension.startingProjectCompilationText', 'Starting project compilation... (en)') + cSource, 3000);
-                var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project (en)'));
+                vscode.window.setStatusBarMessage(localize('src.extension.startingProjectCompilationText', 'Starting project compilation...') + cSource, 3000);
+                var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project'));
                 if (!(compile == null)) {
                     compile.compileProject(cSource);
                 }
             }
             else {
-                vscode.window.showInformationMessage(localize('src.extension.projectSelectFileErrorText', 'Please, select a project file (*.prj) (en)'));
+                vscode.window.showInformationMessage(localize('src.extension.projectSelectFileErrorText', 'Please, select a project file (*.prj)'));
             }
         }
 
@@ -222,19 +222,19 @@ function menucompileProjet() {
 function menucompiletextfile() {
     let disposable = vscode.commands.registerCommand('advpl.menucompiletextfile', function (context) {
         if (isCompiling) {
-            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
             var cSource = context._fsPath;
             if (fs.lstatSync(cSource).isFile()) {
-                vscode.window.setStatusBarMessage(localize('src.extension.projectStartTextFileText', 'Starting project files from text file (en)') + cSource, 3000);
-                var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project (en)'));
+                vscode.window.setStatusBarMessage(localize('src.extension.projectStartTextFileText', 'Starting project files from text file') + cSource, 3000);
+                var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project'));
                 if (!(compile == null)) {
                     compile.compileText(cSource);
                 }
             }
             else {
-                vscode.window.showInformationMessage(localize('src.extension.textSelectFileErrorText', 'Please, select a text file! (en)'));
+                vscode.window.showInformationMessage(localize('src.extension.textSelectFileErrorText', 'Please, select a text file!'));
             }
         }
     });
@@ -246,12 +246,12 @@ function menucompile() {
 
         //var editor = vscode.window.activeTextEditor;
         if (isCompiling) {
-            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
             var cSource = context._fsPath;
-            vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation... (en)') + cSource, 3000);
-            var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source (en)'));
+            vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation...') + cSource, 3000);
+            var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source'));
             if (!(compile == null)) {
                 compile.compile(cSource);
             }
@@ -267,18 +267,18 @@ function menucompilemulti() {
         var cResource = context._fsPath;
         if (fs.lstatSync(cResource).isDirectory()) {
             if (isCompiling) {
-                OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+                OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
             }
             else {
-                vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplFolderCompilationText', 'Starting AdvPL Folder compilation... (en)') + cResource, 3000);
-                var compile = createAdvplCompile(cResource, localize('src.extension.folderText', 'Folder (en)'));
+                vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplFolderCompilationText', 'Starting AdvPL Folder compilation...') + cResource, 3000);
+                var compile = createAdvplCompile(cResource, localize('src.extension.folderText', 'Folder'));
                 if (!(compile == null)) {
                     compile.compileFolder(cResource);
                 }
             }
         }
         else {
-            vscode.window.showInformationMessage(localize('src.extension.folderSelectErrorText', 'Please, select a folder! (en)'));
+            vscode.window.showInformationMessage(localize('src.extension.folderSelectErrorText', 'Please, select a folder!'));
         }
     });
     return disposable;
@@ -294,8 +294,8 @@ function compile() {
         var cSource = editor.document.fileName;
 
         if (editor.document.isDirty) {
-            let list = [localize('src.extension.yesText', 'Yes (en)'), localize('src.extension.noText', 'No (en)')];
-            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveConfirmationText', 'The file is not saved and was modified. Save file before compilation? (en)') }).then(function (select) {
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveConfirmationText', 'The file is not saved and was modified. Save file before compilation?') }).then(function (select) {
                 console.log(select);
 
                 if (select === list[0]) {
@@ -305,7 +305,7 @@ function compile() {
                     )
                 }
                 else {
-                    vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled! (en)'), 5000);
+                    vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled!'), 5000);
                 }
             })
         }
@@ -319,11 +319,11 @@ function compile() {
 
 function __internal_compile(cSource, editor, lbuildPPO) {
     if (isCompiling) {
-        OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+        OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
     }
     else {
-        vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation... (en)') + editor.document.fileName, 3000);
-        var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source (en)'));
+        vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation...') + editor.document.fileName, 3000);
+        var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source'));
         let encoding =
             vscode.workspace
                 .getConfiguration("files")
@@ -398,7 +398,7 @@ function PathApply() {
 
         }
         else {
-            vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm) (en)'));
+            vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
     });
     return disposable;
@@ -416,7 +416,7 @@ function PathInfo() {
 
         }
         else {
-            vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm) (en)'));
+            vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
     });
     return disposable;
@@ -430,11 +430,11 @@ function PathBuild() {
         var patch = new advplPatch(getConfigurationAsString(), OutPutChannel)
         let fileToBuildPath = context._fsPath;
         if (fileToBuildPath == null) {
-            vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included! (en)'));
+            vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included!'));
         }
         else {
             if (!fs.lstatSync(fileToBuildPath).isFile())
-                vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included! (en)'));
+                vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included!'));
             else
                 patch.build(fileToBuildPath);
         }
@@ -512,7 +512,7 @@ function DeleteSource() {
             return;
         }
         if (isCompiling) {
-            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress. (en)'));
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
             var compile = createAdvplCompile(null, null);
@@ -534,7 +534,7 @@ function DefragRpo() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        let compile = createAdvplCompile(null, localize('src.extension.defragOkText', 'Defragmentation was successful. (en)'));
+        let compile = createAdvplCompile(null, localize('src.extension.defragOkText', 'Defragmentation was successful.'));
         let encoding = vscode.workspace.getConfiguration("files").get("encoding");
         if (!(compile == null)) {
             compile.setEncoding(encoding);
@@ -582,12 +582,12 @@ function selectEnvironment() {
                     let updObj = vscode.workspace.getConfiguration("advpl");
 
                     updObj.update("selectedEnvironment", select);
-                    vscode.window.showInformationMessage(localize('src.extension.environmentText', 'Environment (en)') + select + localize('src.extension.environmentSelectedText', ' selection was successful. (en)'));
+                    vscode.window.showInformationMessage(localize('src.extension.environmentText', 'Environment') + select + localize('src.extension.environmentSelectedText', ' selection was successful.'));
                     env.update(select);
                 }
             }
             else {
-                vscode.window.showErrorMessage(localize('src.extension.environmentNotFoundText', 'Environment not found! (en)'));
+                vscode.window.showErrorMessage(localize('src.extension.environmentNotFoundText', 'Environment not found!'));
             }
         })
     });
@@ -603,8 +603,8 @@ function buildPPO() {
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
         if (editor.document.isDirty) {
-            let list = [localize('src.extension.yesText', 'Yes (en)'), localize('src.extension.noText', 'No (en)')];
-            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.modifiedPpoText', 'The file is not saved and was modified. Save file before generation of PPO? (en)') }).then(function (select) {
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.modifiedPpoText', 'The file is not saved and was modified. Save file before generation of PPO?') }).then(function (select) {
                 console.log(select);
 
                 if (select === list[0]) {
@@ -614,7 +614,7 @@ function buildPPO() {
                     )
                 }
                 else {
-                    vscode.window.setStatusBarMessage(localize('src.extension.userCancelPpoText', 'Action canceled by the user, the PPO was not generated! (en)'), 5000);
+                    vscode.window.setStatusBarMessage(localize('src.extension.userCancelPpoText', 'Action canceled by the user, the PPO was not generated!'), 5000);
                 }
             })
 
@@ -630,7 +630,7 @@ function buildPPO() {
 function isEnvironmentSelected(): boolean {
     let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
     if (env === "" || env == undefined) {
-        vscode.window.showInformationMessage(localize('src.extension.environmentSelectErrorText', 'Please, select an environment! (en)'));
+        vscode.window.showInformationMessage(localize('src.extension.environmentSelectErrorText', 'Please, select an environment!'));
         return false;
     }
     return true;
