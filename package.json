@@ -392,7 +392,7 @@
                     "launch": {
                         "required": [
                             "programRun",
-                            "environmentInfo"
+                            "enviromentInfo"
                         ],
                         "properties": {
                             "programRun": {
@@ -405,9 +405,9 @@
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
                                 "default": true
                             },
-                            "environmentInfo": {
+                            "enviromentInfo": {
                                 "type": "string",
-                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.environmentinfo%",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
                                 "default": "${command.GetEnvInfos}"
                             },
                             "workspace": {
@@ -440,7 +440,7 @@
                         "cwd": "${workspaceRoot}",
                         "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
-                        "environmentInfo": "${command:GetEnvInfos}",
+                        "enviromentInfo": "${command:GetEnvInfos}",
                         "workspace": "${workspaceRoot}/"
                     }
                 ]

@@ -50,7 +50,7 @@
 	"advpl.configuration.title": "AdvplSupport configuration",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Arguments%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Command?s Path ",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.environmentinfo": "Environment Info for Debug. Internal use",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Info for Debug. Internal use",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Program for Debugging.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
