@@ -1,0 +1,7 @@
+{
+	"src.advplPatch.buildFailureText": "Build failure:",
+	"src.advplPatch.applyFailureText": "Apply failure:",
+	"src.advplPatch.startPatchAnalysisText": "Starting patch analysis...",
+	"src.advplPatch.patchCreateSuccessText": " created successfully!",
+	"src.advplPatch.errorText": "Error!"
+}

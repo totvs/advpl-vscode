@@ -2,63 +2,67 @@
 import CodeAdapter from '../adapter';
 import * as vscode from 'vscode';
 import IEnvironment from '../utils/IEnvironment';
-import {advplCompile} from '../advplCompile'
-export default function cmdAddAdvplEnvironment(context): any{
+import { advplCompile } from '../advplCompile'
+import * as nls from 'vscode-nls';
+
+const localize = nls.loadMessageBundle();
+
+export default function cmdAddAdvplEnvironment(context): any {
     const config = vscode.workspace.getConfiguration("advpl");
     const environments = config.get<Array<IEnvironment>>("environments");
     let adapter = new CodeAdapter()
     const questions = [{
-        message: "Environment Appserver",
+        message: localize('src.commands.addAdvplEnvironment.envAppserverText', 'Environment AppServer'),
         validate: (env) => {
             if (environments.find(environment => environment.environment == env))
-                return "Environment já cadastrado!";
-            if (env.length <= 0 )
-                return "Obrigatório!";
+                return localize('src.commands.addAdvplEnvironment.envExistsErrorText', 'The inputted environment already exists!');
+            if (env.length <= 0)
+                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
             return true;
         },
         name: "environment"
-    },{
-        message: "Nome",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.nameText', 'Name'),
         name: "name",
-        when: function(answers){
+        when: function (answers) {
             this.default = answers.environment;
             return true;
         },
         default: '',
         validate: (name) => {
             if (environments.find(environment => environment.name == name))
-                return `${name} já cadastrado`;
-            if (name.length <= 0 )
-                return "Obrigatório!";
+                return `${name}` + localize('src.commands.addAdvplEnvironment.existsText', ' already exists!');
+            if (name.length <= 0)
+                return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
             return true;
         }
-    },{
-        message: "Smartclient Path",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Smartclient Path'),
         name: "smartClientPath",
         validate: env => env.length > 0
-    },{
-        message: "AppServer Version",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version'),
         name: "appserverVersion",
         type: "list",
         default: '131227A',
-        choices: ['131227A','170117A']
-    },{
-        message: "Server IP",
+        choices: ['131227A', '170117A']
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.serverIpText', 'Server IP'),
         name: "server",
         default: "localhost"
-    },{
-        message: "Porta do appserver",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.appserverPortText', 'AppServer Port'),
         name: "port"
-    },{
-        message: "Usuário Protheus",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.userText', 'User'),
         name: "user",
         default: "Admin"
-    },{
-        message: "Senha",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password'),
         name: "password",
         type: "password"
-    },{
-        message: "Include list",
+    }, {
+        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Include list'),
         name: "includeList"
     }]
     adapter.prompt(questions, answers => {
@@ -76,7 +80,7 @@ export default function cmdAddAdvplEnvironment(context): any{
                 user: answers.user,
                 smartClientPath: answers.smartClientPath
             });
-            config.update("environments",environments)
+            config.update("environments", environments)
         })
 
     })

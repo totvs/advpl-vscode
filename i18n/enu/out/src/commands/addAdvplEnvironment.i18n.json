@@ -1,0 +1,14 @@
+{
+	"src.commands.addAdvplEnvironment.envAppserverText": "Environment AppServer",
+	"src.commands.addAdvplEnvironment.envExistsErrorText": "The inputted environment already exists!",
+	"src.commands.addAdvplEnvironment.mandatoryText": "Mandatory!",
+	"src.commands.addAdvplEnvironment.nameText": "Name",
+	"src.commands.addAdvplEnvironment.existsText": " already exists!",
+	"src.commands.addAdvplEnvironment.smartclientPathText": "Smartclient Path",
+	"src.commands.addAdvplEnvironment.appserverVersionText": "AppServer Version",
+	"src.commands.addAdvplEnvironment.serverIpText": "Server IP",
+	"src.commands.addAdvplEnvironment.appserverPortText": "AppServer Port",
+	"src.commands.addAdvplEnvironment.userText": "User",
+	"src.commands.addAdvplEnvironment.passwordText": "Password",
+	"src.commands.addAdvplEnvironment.includeListText": "Include list"
+}

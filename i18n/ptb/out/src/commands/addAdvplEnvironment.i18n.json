@@ -1,0 +1,14 @@
+{
+	"src.commands.addAdvplEnvironment.envAppserverText": "Ambiente AppServer",
+	"src.commands.addAdvplEnvironment.envExistsErrorText": "O ambiente digitado já está cadastrado!",
+	"src.commands.addAdvplEnvironment.mandatoryText": "Obrigatório!",
+	"src.commands.addAdvplEnvironment.nameText": "Nome",
+	"src.commands.addAdvplEnvironment.existsText": " já está cadastrado!",
+	"src.commands.addAdvplEnvironment.smartclientPathText": "Caminho Smartclient",
+	"src.commands.addAdvplEnvironment.appserverVersionText": "Versão AppServer",
+	"src.commands.addAdvplEnvironment.serverIpText": "IP do AppServer",
+	"src.commands.addAdvplEnvironment.appserverPortText": "Porta do AppServer",
+	"src.commands.addAdvplEnvironment.userText": "Usuário",
+	"src.commands.addAdvplEnvironment.passwordText": "Senha",
+	"src.commands.addAdvplEnvironment.includeListText": "Lista de includes"
+}
