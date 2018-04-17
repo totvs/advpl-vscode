@@ -176,7 +176,7 @@ function createAdvplCompile(cSource: string, cDescription: string) {
         compile.setAfterCompileOK(function () {
             if (!(cSource == null)) {
                 vscode.window.setStatusBarMessage(
-                    cDescription + ' ' + cSource + localize('src.extension.compiledText', 'compiled!'), 3000
+                    cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
                 );
             } else if (!(cDescription == null)) {
                 OutPutChannel.log(cDescription)
