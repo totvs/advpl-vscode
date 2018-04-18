@@ -178,7 +178,7 @@
                 "advpl.compileFolderRegex": {
                     "type": "string",
                     "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl)",
-                    "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
                     "type": "string",
