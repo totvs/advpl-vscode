@@ -33,7 +33,7 @@ export class smartClientLaunch
     public setProgram(program :string) :void{
         this.addArg('-P='+program);
     }
-    public setEnviromentInfo(andress : string , port : string,env:string)
+    public setEnvironmentInfo(andress : string , port : string,env:string)
     {
         this.addArg("-Y="+port);
         this.addArg("-Z="+andress);

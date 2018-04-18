@@ -1,0 +1,7 @@
+{
+	"src.advplPatch.buildFailureText": "Falha na compilação:",
+	"src.advplPatch.applyFailureText": "Falha ao aplicar:",
+	"src.advplPatch.startPatchAnalysisText": "Iniciando a análise do patch...",
+	"src.advplPatch.patchCreateSuccessText": " criado com sucesso!",
+	"src.advplPatch.errorText": "Erro!"
+}

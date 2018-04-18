@@ -1,7 +1,7 @@
 {
     "name": "advpl-vscode",
     "displayName": "Advpl",
-    "description": "Suporte a Linguagem ADVPL",
+    "description": "%advpl.package.description%",
     "version": "0.8.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
@@ -32,7 +32,7 @@
         "onCommand:advpl.monitor.deleteSource",
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
-        "onCommand:advpl.selectEnviroment"
+        "onCommand:advpl.selectEnvironment"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -71,79 +71,79 @@
         },
         "configuration": {
             "type": "object",
-            "title": "AdvplSuport configuration",
+            "title": "%advpl.configuration.title%",
             "properties": {
                 "advpl.selectedEnvironment": {
                     "type": "string",
                     "default": "",
-                    "description": "Ambiente atual selecionado."
+                    "description": "%advpl.configuration.properties.ADVPLSELECTEDENVIRONMENT%"
                 },
                 "advpl.workspaceFolders": {
                     "type": "string",
                     "default": "",
-                    "description": "Variavel atualizada automaticamente com os diretorios da workspace."
+                    "description": "%advpl.configuration.properties.ADVPLWORKSPACEFOLDERS%"
                 },
                 "advpl.environments": {
                     "type": "array",
                     "default": [],
-                    "description": "Ambientes",
+                    "description": "%advpl.configuration.properties.ADVPLENVIRONMENTS%",
                     "items": {
                         "type": "object",
                         "properties": {
                             "smartClientPath": {
                                 "type": "string",
                                 "default": "",
-                                "description": "Diretorio aonde esta o smartclient."
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH%"
                             },
                             "name": {
                                 "type": "string",
                                 "default": null,
-                                "description": "Nome do Ambiente"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.NAME%"
                             },
                             "serverVersion": {
                                 "type": "string",
                                 "default": "131227A",
-                                "description": "Versão do server"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION%"
                             },
                             "server": {
                                 "type": "string",
                                 "default": "localhost",
-                                "description": "Server IP"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVER%"
                             },
                             "port": {
                                 "type": "string",
                                 "default": "1201",
-                                "description": "Server Port"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.PORT%"
                             },
                             "environment": {
                                 "type": "string",
                                 "default": "environment",
-                                "description": "Environment"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT%"
                             },
                             "user": {
                                 "type": "string",
                                 "default": "Admin",
-                                "description": "Usuario com privilegio de Administração para conectar no servidor."
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER%"
                             },
                             "passwordCipher": {
                                 "type": "string",
                                 "default": "",
-                                "description": "Senha Criptografada do usuario. Utize o commando Cipher Password para gerar a senha."
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.PASSWORDCIPHER%"
                             },
                             "language": {
                                 "type": "string",
                                 "default": "PORTUGUESE",
-                                "description": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.LANGUAGE%"
                             },
                             "rpoType": {
                                 "type": "string",
                                 "default": "TOP",
-                                "description": "Type of Repository, Accepted values: TOP,CTREE,DBF"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.RPOTYPE%"
                             },
                             "includeList": {
                                 "type": "string",
                                 "default": "",
-                                "description": "Diretorios de include para compilação separar cada diretorio com ;"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST%"
                             }
                         }
                     }
@@ -151,7 +151,7 @@
                 "advpl.startProgram": {
                     "type": "string",
                     "default": "SIGAFAT",
-                    "description": "Programa inicial para o Debug"
+                    "description": "%advpl.configuration.properties.ADVPLSTARTPROGRAM%"
                 },
                 "advpl.authorization_generation": {
                     "type": "string",
@@ -178,42 +178,42 @@
                 "advpl.compileFolderRegex": {
                     "type": "string",
                     "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl)",
-                    "description": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta"
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
                     "type": "string",
                     "default": "c:\\patchs\\",
-                    "description": "Patch do cliente que deve existir para geracao de patchs. Caso o arquivo ja exista, será sobrescrito."
+                    "description": "%advpl.configuration.properties.ADVPLPATHPATCHBUILD%"
                 },
                 "advpl.debug_multiThread": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Habilita Debug multi Thread."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_MULTITHREAD%"
                 },
                 "advpl.debug_ignoreSourceNotFound": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Ignorar os fontes não encotrados no debug."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_IGNORESOURCENOTFOUND%"
                 },
                 "advpl.debug_showTables": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Mostra as tabelas abertas."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_SHOWTABLES%"
                 },
                 "advpl.debug_showPrivates": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Mostra as variaveis Privates."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_SHOWPRIVATES%"
                 },
                 "advpl.debug_showPublic": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Mostra as variaveis Publicas."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_SHOWPUBLIC%"
                 },
                 "advpl.debug_showStatics": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Mostra as variaveis Estaticas."
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_SHOWSTATICS%"
                 },
                 "advpl.compile_force_recompile": {
                     "type": "boolean",
@@ -223,12 +223,12 @@
                 "advpl.logger": {
                     "type": "boolean",
                     "default": false,
-                    "description": "Cria arquivo de log."
+                    "description": "%advpl.configuration.properties.ADVPLLOGGER%"
                 },
                 "advpl.compile_threads": {
                     "type": "number",
                     "default": 4,
-                    "description": "Numero de threads utilizada para compilação de folder."
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILE_THREADS%"
                 }
             }
         },
@@ -262,91 +262,91 @@
         "commands": [
             {
                 "command": "advpl.startSmartClient",
-                "title": "Advpl - Execute -Run SmartClient Protheus"
+                "title": "%advpl.startSmartClient%"
             },
             {
                 "command": "advpl.menucompile",
-                "title": "Advpl - Compile Advpl Source"
+                "title": "%advpl.menucompile%"
             },
             {
                 "command": "advpl.menucompilemulti",
-                "title": "Advpl - Compile Folder"
+                "title": "%advpl.menucompilemulti%"
             },
             {
                 "command": "advpl.menucompileProjet",
-                "title": "Advpl - Compile PRJ Project"
+                "title": "%advpl.menucompileProjet%"
             },
             {
                 "command": "advpl.menucompiletextfile",
-                "title": "Advpl - Compile TXT list of files"
+                "title": "%advpl.menucompiletextfile%"
             },
             {
                 "command": "advpl.compile",
-                "title": "Advpl - Compiler -  Compile Advpl Source"
+                "title": "%advpl.compile%"
             },
             {
                 "command": "advpl.createPPO",
-                "title": "Advpl - Compiler - Cria o arquivo PPo do arquivo"
+                "title": "%advpl.createPPO%"
             },
             {
                 "command": "advpl.getDebugInfos",
-                "title": "Advpl - Retorna as informações iniciais para o debug"
+                "title": "%advpl.getDebugInfos%"
             },
             {
                 "command": "advpl.getAuthorizationId",
-                "title": "Advpl - Compiler Auth ID - Código Autorização para ser solicitada pela Totvs."
+                "title": "%advpl.getAuthorizationId%"
             },
             {
                 "command": "advpl.CipherPassword",
-                "title": "Advpl - Compiler Cipher -  Cipher Password - Criptografa a senha do usuario para conectar no appserver."
+                "title": "%advpl.CipherPassword%"
             },
             {
                 "command": "advpl.patch.apply",
-                "title": "Advpl - Patch - Apply - Aplica um Patch(PTM)."
+                "title": "%advpl.patch.apply%"
             },
             {
                 "command": "advpl.patch.build",
-                "title": "Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo."
+                "title": "%advpl.patch.build%"
             },
             {
                 "command": "advpl.patch.info",
-                "title": "Advpl - Patch Info - Mostra o conteudo de um pacote/Patch(PTM)."
+                "title": "%advpl.patch.info%"
             },
             {
                 "command": "advpl.monitor.getThreads",
-                "title": "Advpl - Monitor - Imprime todas as Threads desse server."
+                "title": "%advpl.monitor.getThreads%"
             },
             {
                 "command": "advpl.monitor.getRpoInfos",
-                "title": "Advpl - Env - Imprime todas os fontes e datas do rpo."
+                "title": "%advpl.monitor.getRpoInfos%"
             },
             {
                 "command": "advpl.monitor.getRpoFunctions",
-                "title": "Advpl - Env - Imprime todas as funcoes do rpo por fonte."
+                "title": "%advpl.monitor.getRpoFunctions%"
             },
             {
                 "command": "advpl.monitor.deleteSource",
-                "title": "Advpl - Env - Excluir um(s) fonte(s) do RPO."
+                "title": "%advpl.monitor.deleteSource%"
             },
             {
                 "command": "advpl.monitor.defragRpo",
-                "title": "Advpl - Env - Defrag do RPO."
+                "title": "%advpl.monitor.defragRpo%"
             },
             {
                 "command": "advpl.buildWSClient",
-                "title": "Advpl - Web Service - Gera um WebService Cliente baseado numa URL."
+                "title": "%advpl.buildWSClient%"
             },
             {
-                "command": "advpl.selectEnviroment",
-                "title": "Advpl - Seleciona o ambiente de compilação/Debug."
+                "command": "advpl.selectEnvironment",
+                "title": "%advpl.selectEnvironment%"
             },
             {
                 "command": "advpl.generateAuthorizationConfig",
-                "title": "Advpl - Gera informações de autorização baseada no arquivo .aut"
+                "title": "%advpl.generateAuthorizationConfig%"
             },
             {
                 "command": "advpl.addAdvplEnvironment",
-                "title": "Advpl - Cria environment para conexão"
+                "title": "%advpl.addAdvplEnvironment%"
             }
         ],
         "keybindings": [
@@ -397,27 +397,27 @@
                         "properties": {
                             "programRun": {
                                 "type": "string",
-                                "description": "Programa para Debugar.",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
                                 "default": "${command.AskForProgramName}"
                             },
                             "stopOnEntry": {
                                 "type": "boolean",
-                                "description": "Parar automaticamente no inicio do Debug?",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
                                 "default": true
                             },
                             "enviromentInfo": {
                                 "type": "string",
-                                "description": "Enviroment Infos para o Debug. Uso interno",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
                                 "default": "${command.GetEnvInfos}"
                             },
                             "workspace": {
                                 "type": "string",
                                 "default": "${workspaceRoot}/",
-                                "description": "WorkSpace Directory"
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.workspace%"
                             },
                             "args": {
                                 "type": "array",
-                                "description": "Argumentos%",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.args%",
                                 "items": {
                                     "type": "string"
                                 },
@@ -425,7 +425,7 @@
                             },
                             "cwd": {
                                 "type": "string",
-                                "description": "Path do command",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.cwd%",
                                 "default": "."
                             }
                         }
@@ -454,25 +454,34 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
+        "vscode:prepublish": "tsc -p ./ && gulp build",
+        "resources": "gulp build",
+        "compile": "tsc -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
         "test": "node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
         "@types/mocha": "^2.2.43",
         "@types/node": "^6.0.40",
+        "del": "^3.0.0",
         "mocha": "^4.0.0",
+        "gulp": "^3.9.1",
+        "gulp-filter": "^5.0.1",
+        "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
+        "gulp-typescript": "3.2.2",
+        "vsce": "^1.32.0",
         "vscode": "^1.0.0",
-        "vscode-debugadapter-testsupport": "^1.12.0"
+        "vscode-debugadapter-testsupport": "^1.12.0",
+        "vscode-nls-dev": "^2.1.3"
     },
     "dependencies": {
         "error-ex": "^1.3.1",
         "figures": "^2.0.0",
         "vscode-debugadapter": "^1.21.0",
         "vscode-debugprotocol": "^1.21.0",
-        "vscode-languageclient": "1.3.1"
+        "vscode-languageclient": "1.3.1",
+        "vscode-nls": "^2.0.2"
     },
     "repository": {
         "type": "git",

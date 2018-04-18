@@ -1,0 +1,7 @@
+{
+	"src.advplMonitor.initializingText": "Читая АПО, пожалуйста, подождите...",
+	"src.advplMonitor.creationText": "Записи конфигурации были успешно созданы.",
+	"src.advplMonitor.errorText": "Ошибка!",
+	"src.advplMonitor.wsQueryUrlText": "Сообщите URL-адрес веб-службы:",
+	"src.advplMonitor.wsCreatedText": "Веб-служба была успешно создана."
+}
