@@ -1,8 +1,14 @@
-## 0.7.8 
+## 0.8.1
+ - Melhoria: [Localização] (https://github.com/killerall/advpl-vscode/pull/191)
+ - Melhoria: [Adiciona extensão APL em compilacao de Pasta] (https://github.com/killerall/advpl-vscode/pull/190)
+ - Melhoria: [No debug o :: ser interpretado como self: e assim conseguir ler os valores] (https://github.com/killerall/advpl-vscode/issues/166)
+ 
+## 0.8.0 
  - Melhoria: [Wizard de Criação de Ambiente] (https://github.com/killerall/advpl-vscode/pull/164)
  - Melhoria: [Mensagem validação ambiente selecionado] (https://github.com/killerall/advpl-vscode/pull/156)
  - Correção: [Mostrar mensagem no Output quando ocorre algum erro na compilação de pasta] (https://github.com/killerall/advpl-vscode/issues/159)
  - Correção: [Título "Source" do rpoInfo ] (https://github.com/killerall/advpl-vscode/issues/168)
+
 ## 0.7.7
  - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas] (https://github.com/killerall/advpl-vscode/issues/157)
  - Correção: [Ao compilar pasta e o Server esta fora esta dando SyntaxError] (https://github.com/killerall/advpl-vscode/issues/145)

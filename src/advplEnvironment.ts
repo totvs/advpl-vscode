@@ -12,7 +12,7 @@ export class Environment {
             this._statusBarItem = window.createStatusBarItem(StatusBarAlignment.Right);
             this._statusBarItem.command = "advpl.selectEnvironment";
         }
-        this._statusBarItem.text = "$(squirrel) " + localize('src.advplEnvironment.text', 'Environment') + envSeted;
+        this._statusBarItem.text = "$(squirrel) " + localize('src.advplEnvironment.text', 'Environment: ') + envSeted;
         this._statusBarItem.show();
     }
 }

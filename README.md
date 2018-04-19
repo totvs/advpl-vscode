@@ -62,3 +62,18 @@ Efetuar o download do [executavel](https://github.com/killerall/advpl-vscode/raw
 Copiar o mesmo para a pasta:
 ~/.vscode/extensions/KillerAll.advpl-vscode-x.x.x/bin
 Dar acesso a execução no arquivo.
+
+## Localização
+
+Atualmente as seguintes linguas estão suportadas:
+
+* Português
+* Inglês
+* Russo
+
+Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com/docs/getstarted/locales)
+
+Obs. Para português, é necessario instalar uma extensão da [microsoft.](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-pt-BR)
+
+Caso você queira contribuir com a localização [veja.](https://github.com/killerall/advpl-vscode/wiki/Localiza%C3%A7%C3%A3o)
+
