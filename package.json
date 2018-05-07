@@ -229,6 +229,11 @@
                     "type": "number",
                     "default": 4,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_THREADS%"
+                },
+                "advpl.alpha_compile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
                 }
             }
         },
@@ -386,7 +391,10 @@
                     "program": "./bin/AdvplDebugBridge.exe"
                 },
                 "osx": {
-                    "program": "./bin/AdvplDebugBridgeMac"
+                    "program": "./bin/alpha/mac/AdvplDebugBridgeC"
+                },
+                "linux": {
+                    "program": "./bin/alpha/linux/AdvplDebugBridgeC"
                 },
                 "configurationAttributes": {
                     "launch": {
