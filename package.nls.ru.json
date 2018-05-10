@@ -33,6 +33,7 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION": "Версия server",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH": "Директории, куда это в smartclient.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "Пользователь с возможность Администрирования для подключения на сервере.",
+	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Количество потоков, используемых для построения folder.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Регулярное типов файлов, которые будут собраны при выборе сборки папки",
 	"advpl.configuration.properties.ADVPLDEBUG_IGNORESOURCENOTFOUND": "Игнорировать источники не encotrados в debug.",
@@ -53,6 +54,5 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Окружающей среды Информация для Отладки. Внутреннего использования",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Программы для Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
-	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile."
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
 }

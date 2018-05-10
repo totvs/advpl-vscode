@@ -24,17 +24,21 @@ Essa extensão possui as seguintes features implementadas:
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
 * Geração de PPO do fonte(Para fazer isso utilize CTRL+SHIFT+F9)
-* Mac OSX (Configuração a baixo)
+* Mac OSX 
+* Linux
 
 As próximas planejadas são:
 
-* Auto complete
-* Linux
+* Language Server
+
 
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
-Essa extensão ainda não está disponível no Linux.
+
+## Para a instalação da versão MAC e Linux:
+
+Veja a seguinte pagina na [Wiki](https://github.com/killerall/advpl-vscode/wiki/Instala%C3%A7%C3%A3o-em-Linux-Mac-OS)
 
 ## Configurações
 
@@ -55,13 +59,6 @@ Utilizada as teclas padrões do VsCode
 * F5 - Run/Contiue
 * F10 - Step Into
 * F11 - Step Over
-
-## Para versão MAC
-
-Efetuar o download do [executavel](https://github.com/killerall/advpl-vscode/raw/master/bin/AdvplDebugBridgeMac)
-Copiar o mesmo para a pasta:
-~/.vscode/extensions/KillerAll.advpl-vscode-x.x.x/bin
-Dar acesso a execução no arquivo.
 
 ## Localização
 

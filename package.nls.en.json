@@ -33,6 +33,7 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION": "Server version",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH": "Smartclient?s folder",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "User with Administration privilege to connect to server.",
+	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Number of threads used to build folder.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Regex of the types of files that will be compiled when you select build folder",
 	"advpl.configuration.properties.ADVPLDEBUG_IGNORESOURCENOTFOUND": "Ignore the sources not found in debug.",
@@ -53,6 +54,5 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Info for Debug. Internal use",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Program for Debugging.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
-	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile."
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
 }

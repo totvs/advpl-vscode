@@ -1,19 +1,17 @@
 ## 0.9.0
- - Melhoria : Versão alfa para Linux e Mac
+ - Melhoria : Versão alfa para Linux e Mac as seguintes issues foram fechadas:
 
- https://github.com/killerall/advpl-vscode/issues/172
+    https://github.com/killerall/advpl-vscode/issues/172
 
- https://github.com/killerall/advpl-vscode/issues/143
+    https://github.com/killerall/advpl-vscode/issues/143
 
+    https://github.com/killerall/advpl-vscode/issues/78
 
-https://github.com/killerall/advpl-vscode/issues/78
+    https://github.com/killerall/advpl-vscode/issues/171
 
-https://github.com/killerall/advpl-vscode/issues/171
-
-https://github.com/killerall/advpl-vscode/issues/166
-https://github.com/killerall/advpl-vscode/issues/169
-
-
+    https://github.com/killerall/advpl-vscode/issues/166
+    
+    https://github.com/killerall/advpl-vscode/issues/169
 
 ## 0.8.1
  - Melhoria: [Localização] (https://github.com/killerall/advpl-vscode/pull/191)
