@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.8.1",
+    "version": "0.10.1",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
