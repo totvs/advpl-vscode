@@ -8,7 +8,7 @@ Caso você encontre algum problema, por favor abra uma issue no [GitHub](https:/
 
 > Atenção! Essa extensão não é desenvolvida ou suportada pela TOTVS. Utilize por sua conta e risco.
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado [aqui](https://github.com/killerall/advpl-vscode/blob/master/TDSProjectToVscode.jar).
-> Caso esteje com problema para debugar, apos a atualização do VSCODE 1.10 apague o launch.json e o recrie dando F5.
+
 
 ## Features
 
@@ -30,7 +30,7 @@ Essa extensão possui as seguintes features implementadas:
 As próximas planejadas são:
 
 * Language Server
-
+* TL++
 
 ## Requisitos para utilização
 
