@@ -1,13 +1,49 @@
+## 0.9.0 - Versão Alpha para Linux e Mac OS
+ - Melhoria : Versão alfa para Linux e Mac as seguintes issues foram fechadas:
+
+    https://github.com/killerall/advpl-vscode/issues/78    
+
+    https://github.com/killerall/advpl-vscode/issues/143    
+
+    https://github.com/killerall/advpl-vscode/issues/171
+
+    https://github.com/killerall/advpl-vscode/issues/172
+
+    https://github.com/killerall/advpl-vscode/issues/166
+    
+    https://github.com/killerall/advpl-vscode/issues/169
+
+    https://github.com/killerall/advpl-vscode/issues/199
+
+ - Melhoria: [SmartClient launcher for linux and fix cipherPassword] (https://github.com/killerall/advpl-vscode/pull/201)
+ - Melhoria: [fix snippets very likely confuse warning ] (https://github.com/killerall/advpl-vscode/pull/200)
+
+## Obrigado
+
+Agredecimento especial ao:
+ - Felipe Conti, pelo suporte no MacOx.
+ - Eduardo Riera, pelo Mac :D
+
 ## 0.8.1
  - Melhoria: [Localização] (https://github.com/killerall/advpl-vscode/pull/191)
  - Melhoria: [Adiciona extensão APL em compilacao de Pasta] (https://github.com/killerall/advpl-vscode/pull/190)
  - Melhoria: [No debug o :: ser interpretado como self: e assim conseguir ler os valores] (https://github.com/killerall/advpl-vscode/issues/166)
+
+## Obrigado
+
+Agredecimento especial ao:
+ - Victor Lopes, pelo intenso trabalho de localização.
  
 ## 0.8.0 
  - Melhoria: [Wizard de Criação de Ambiente] (https://github.com/killerall/advpl-vscode/pull/164)
  - Melhoria: [Mensagem validação ambiente selecionado] (https://github.com/killerall/advpl-vscode/pull/156)
  - Correção: [Mostrar mensagem no Output quando ocorre algum erro na compilação de pasta] (https://github.com/killerall/advpl-vscode/issues/159)
  - Correção: [Título "Source" do rpoInfo ] (https://github.com/killerall/advpl-vscode/issues/168)
+
+## Obrigado
+
+Agredecimento especial ao:
+ - Arthur Fucher, pelo Wizard de criação de ambiente.
 
 ## 0.7.7
  - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas] (https://github.com/killerall/advpl-vscode/issues/157)
@@ -24,6 +60,11 @@
  - Melhoria:[Último programa executado fica em branco depois de cancelar execução.] (https://github.com/killerall/advpl-vscode/issues/130)
  - Melhoria:[Implementada a sintaxe para highlight de uma classe REST em AdvPl.] (https://github.com/killerall/advpl-vscode/pull/129)
  - Documentação: [removida documentação que já existe na wiki] (https://github.com/killerall/advpl-vscode/pull/126)
+
+ ## Obrigado
+
+Agredecimento especial ao:
+ - Daniel Mendes, Com a syntax de Rest.
 
 ## 0.7.4
 - Correção: [Compilação  txt, depedendo do nome da pasta] (https://github.com/killerall/advpl-vscode/issues/120)
@@ -62,6 +103,13 @@
 - Melhoria via Pull Request : [Ajustes Package.json e Gramática - Condições e Agrupamentos de comandos de menu] (https://github.com/killerall/advpl-vscode/pull/91)
 - Liberada versão MAC 
 
+ ## Obrigado
+
+Agredecimento especial ao:
+ - Atila Augusto 
+ - Izac
+
+
 ## 0.5.11
 - Correção: Corrigido problema ao instalar a extensão com usuarios que tinham espaço no nome, que fazia que ao compilar não retorna se tinha compilado ou não.
 
@@ -76,6 +124,11 @@
 ## 0.5.8
  - Correção: [Operadores lógicos - Syntax Highlighting] (https://github.com/killerall/advpl-vscode/pull/85)
  - Suporte ao servido de build 170117A , utilize a tag:   "serverVersion" : "170117A" dentro da configuracao do ambiente.
+
+ ## Obrigado
+
+Agredecimento especial ao:
+ - Daniel Mendes, Com a syntax HighLighting
 
 ## 0.5.7
  - Correção: [Debug não para depois da atualização 1.11.0] (https://github.com/killerall/advpl-vscode/issues/82)
@@ -110,6 +163,12 @@
  - Refactory da parte de Syntax highlighting feito pelo [Izacsc] (https://github.com/killerall/advpl-vscode/pull/62)
  - Adicionado comando para excluir fontes do RPO.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
  - Aviso de chave de compilação expirada.
+
+## Obrigado
+
+Agredecimento especial ao:
+ - Izac, Com a syntax HighLighting
+
 
 ## 0.4.16
  - Adicionado a chave `name` dentro da configuração de `ambiente`, permitindo nomear um ambiente com um nome, que será utilizado
@@ -184,6 +243,12 @@
  - Correção de compilação com folders ou arquivos com [espaço no nome](https://github.com/killerall/advpl-vscode/issues/39) e [fonte não compila](https://github.com/killerall/advpl-vscode/issues/36)
  - Correção [Not showing error message when missing or wrong passwordCipher](https://github.com/killerall/advpl-vscode/issues/6)
 
+## Obrigado
+
+Agredecimento especial ao:
+ - José Augusto
+
+
 ## 0.3.4
  - Corrigido problema de compilação de folders quando tinha caracteres especias no nome da folder
 
@@ -213,6 +278,12 @@ O comando iria compilar a pasta e suas sub-pastas, respeitando o Regex configura
  - Corrigido a data e hora do fonte na compilação [23](https://github.com/killerall/advpl-vscode/issues/23)
  - Correção do Readme, a versão do server informada estava errada.
  - Melhorias de operadores na Syntax highlighting [24](https://github.com/killerall/advpl-vscode/pull/24)
+
+ ## Obrigado
+
+Agredecimento especial ao:
+ - Izac no Syntax highLighting
+
 
 ## 0.0.9 
 

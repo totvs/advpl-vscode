@@ -9,10 +9,14 @@ const localize = nls.loadMessageBundle();
 export default class Environment {
     user: String;
     server: String;
+    cipher : string;    
 
     deserialize(input) {
         this.user = input.user;
         this.server = input.server;
+        this.cipher = input.passwordCipher;
+     
+
         return this;
     }
 
@@ -24,6 +28,11 @@ export default class Environment {
         if (!this.server) {
             errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled!'));
         }
+        if(!this.cipher)
+        {
+            errors.push(localize('src.Environment.cipherNotFilledText', 'Cipher not filled!'));
+        }
+        
         return errors;
     }
 }

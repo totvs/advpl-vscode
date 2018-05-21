@@ -20,13 +20,13 @@ import { StringDecoder } from 'string_decoder';
 import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
-
+import * as debugBrdige from  './utils/debugBridge';
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());
     context.subscriptions.push(addGetDebugInfosCommand());
@@ -59,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
     context.subscriptions.push(DefragRpo());
-
+    await ensureRuntimeDependencies();
     //Environment no bar
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
@@ -645,4 +645,9 @@ function validEnvironment(environment) {
     }
 
     return msgError;
+}
+async function ensureRuntimeDependencies()
+{
+    debugBrdige.installAdvplDebugBridge(OutPutChannel);
+    
 }

@@ -1,4 +1,5 @@
 {
 	"src.Environment.userNotFilledText": "User not filled!",
-	"src.Environment.serverNotFilledText": "Server not filled!"
+	"src.Environment.serverNotFilledText": "Server not filled!",
+	"src.Environment.cipherNotFilledText": "Cipher not filled!"
 }

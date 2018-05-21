@@ -6,6 +6,7 @@ import { advplConsole } from './advplConsole';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as nls from 'vscode-nls';
+import * as debugBrdige from './utils/debugBridge';
 
 const localize = nls.loadMessageBundle();
 
@@ -24,13 +25,7 @@ export class advplCompile {
         this.diagnosticCollection = d;
         this.outChannel = OutPutChannel;
         this._lastAppreMsg = "";
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-        if (process.platform == "darwin") {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
+        this.debugPath = debugBrdige.getAdvplDebugBridge();
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
     }
@@ -93,7 +88,10 @@ export class advplCompile {
     public async runCipherPassword(password: string, done: Function) {
         var _args = new Array<string>();
         var that = this;
-        _args.push("--CipherPassword=" + password);
+        if (password === "")
+            _args.push("--CipherPasswordEmpty");
+        else
+            _args.push("--CipherPassword=" + password);
 
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {
@@ -102,6 +100,9 @@ export class advplCompile {
 
         child.on("exit", function (data) {
             var lRunned = data == 0
+            if (that.afterCompile) {
+                that.afterCompile();
+            }
             done(that._lastAppreMsg);
         });
     }

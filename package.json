@@ -6,10 +6,10 @@
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.17.0"
+        "vscode": "^1.23.0"
     },
     "categories": [
-        "Languages"
+        "Programming Languages"
     ],
     "activationEvents": [
         "onLanguage:advpl",
@@ -229,6 +229,11 @@
                     "type": "number",
                     "default": 4,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_THREADS%"
+                },
+                "advpl.alpha_compile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
                 }
             }
         },
@@ -386,7 +391,10 @@
                     "program": "./bin/AdvplDebugBridge.exe"
                 },
                 "osx": {
-                    "program": "./bin/AdvplDebugBridgeMac"
+                    "program": "./bin/alpha/mac/AdvplDebugBridgeC"
+                },
+                "linux": {
+                    "program": "./bin/alpha/linux/AdvplDebugBridgeC"
                 },
                 "configurationAttributes": {
                     "launch": {
@@ -469,9 +477,9 @@
         "gulp-filter": "^5.0.1",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "gulp-typescript": "3.2.2",
+        "gulp-typescript": "^3.2.2",
         "vsce": "^1.32.0",
-        "vscode": "^1.0.0",
+        "vscode": "^1.1.6",
         "vscode-debugadapter-testsupport": "^1.12.0",
         "vscode-nls-dev": "^2.1.3"
     },
