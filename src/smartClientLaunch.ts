@@ -1,33 +1,31 @@
 import * as child_process from 'child_process';
 import * as vscode from 'vscode';
 
-export class smartClientLaunch
-{
+export class smartClientLaunch {
     private _Process: child_process.ChildProcess;
-	private _Path: string;
+    private _Path: string;
 
-	private _output: vscode.OutputChannel;
-	private _statusbar: vscode.StatusBarItem;
+    private _output: vscode.OutputChannel;
+    private _statusbar: vscode.StatusBarItem;
     private _args = new Array<string>()
-    constructor(path:string)
-    {
-        this._Path = path;        
+    constructor(path: string) {
+        this._Path = path;
     }
     public start() {
-        if(process.platform == "darwin")
-        {
+        if (process.platform == "darwin") {
             this._args.push(this._Path + "smartclient.app");
             this._Process = child_process.execFile("open", this._args);
-
         }
-        else
-        {
+        else if (process.platform == "linux") {
+            this._Process = child_process.spawn(this._Path + "smartclient", this._args);
+        }
+        else {
             this._args.push('-M');
-            this._Process = child_process.spawn( this._Path + "smartclient.exe", this._args);
+            this._Process = child_process.spawn(this._Path + "smartclient.exe", this._args);
         }
-        
-        
-    }   
+
+
+    }
     /*
     Precisa implementar para MAC Diferente
     public setProgram(program :string) :void{
