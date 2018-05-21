@@ -1,4 +1,4 @@
-## 0.10.1 - Versão Alpha para Linux e Mac OS
+## 0.10.2 - Versão Alpha para Linux e Mac OS
  - Melhoria : Versão alfa para Linux e Mac as seguintes issues foram fechadas:
 
     https://github.com/killerall/advpl-vscode/issues/78    

@@ -19,7 +19,8 @@ export class advplCompile {
     private onError;
     private outChannel: advplConsole;
     private encoding: string;
-    private compileStartTime
+    private compileStartTime;
+    private isAlpha;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
@@ -28,6 +29,8 @@ export class advplCompile {
         this.debugPath = debugBrdige.getAdvplDebugBridge();
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
+        const config = vscode.workspace.getConfiguration("advpl");
+        this.isAlpha = config.get<boolean>("alpha_compile"); 
     }
 
     public validateCompile() {
@@ -131,7 +134,7 @@ export class advplCompile {
     public compile(sourceName: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
-        this.genericCompile(sourceName);
+        this.genericCompile(sourceName,0);
     }
 
     public compileText(textFile: string) {
@@ -141,7 +144,7 @@ export class advplCompile {
         var regex = "TEXTFILE:" + vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = textFile + "ª" + regex;
-        this.genericCompile(files);
+        this.genericCompile(files,4);
     }
 
     public compileFolder(folder: string) {
@@ -150,8 +153,17 @@ export class advplCompile {
         //var regex = /.*\.(prw|prx)/i;        
         var regex = vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
-        var files = folder + "ª" + regex;
-        this.genericCompile(files);
+        let files;
+        if (this.isAlpha)
+        {
+            files = folder;
+        }
+        else
+        {
+            files = folder + "ª" + regex;
+        }
+        
+        this.genericCompile(files,1);
 
     }
 
@@ -162,13 +174,18 @@ export class advplCompile {
         var regex = "PROJECT";// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = project + "ª" + regex;
-        this.genericCompile(files);
+        this.genericCompile(files,3);
     }
 
-    private genericCompile(sourceName: string) {
+    private genericCompile(sourceName: string, compileType : number) {
         this.compileStartTime = new Date();
         var _args = new Array<string>()
         var that = this;
+        if(this.isAlpha)
+        {
+            _args.push("--compileType=" + compileType);
+        }
+        
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
 
