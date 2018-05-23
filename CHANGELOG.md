@@ -1,3 +1,7 @@
+## 0.10.3 
+ - Correção: [Mac/Linux - A extensão não esta respeitando o caminho do Path do SmartClient] (https://github.com/killerall/advpl-vscode/issues/206)
+ - Correção: [Mac/Linux - Criando arquivos erx_prw e ppx_prw na compilação, mas não apaga] (https://github.com/killerall/advpl-vscode/issues/203)
+
 ## 0.10.2 - Versão Alpha para Linux e Mac OS
  - Melhoria : Versão alfa para Linux e Mac as seguintes issues foram fechadas:
 
