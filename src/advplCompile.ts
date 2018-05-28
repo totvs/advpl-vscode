@@ -30,7 +30,7 @@ export class advplCompile {
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
-        this.isAlpha = config.get<boolean>("alpha_compile"); 
+        this.isAlpha = config.get<boolean>("alpha_compile");
     }
 
     public validateCompile() {
@@ -140,7 +140,7 @@ export class advplCompile {
     public compileText(textFile: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationTXTText", "Starting the compilation of TXT file:") + textFile + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = "TEXTFILE:" + vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = textFile + "ª" + regex;
@@ -150,7 +150,7 @@ export class advplCompile {
     public compileFolder(folder: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationFolderText", "Starting recursive compilation of the folder:") + folder + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         let files;
@@ -162,7 +162,7 @@ export class advplCompile {
         {
             files = folder + "ª" + regex;
         }
-        
+
         this.genericCompile(files,1);
 
     }
@@ -170,7 +170,7 @@ export class advplCompile {
     public compileProject(project: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationProjectText", "Starting the compilation of the project:") + project + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = "PROJECT";// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = project + "ª" + regex;
@@ -185,7 +185,7 @@ export class advplCompile {
         {
             _args.push("--compileType=" + compileType);
         }
-        
+
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
 
@@ -202,7 +202,7 @@ export class advplCompile {
             that.run_callBack(lRunned);
             var endTime;
             endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms            
+            let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.compilationFinishedText", "Compilation finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
         });
@@ -241,7 +241,7 @@ export class advplCompile {
                 for (let x = 0; x < oEr.msgs.length; x++) {
                     let sourceArray = oEr.msgs[x];
                     let diags: vscode.Diagnostic[] = [];
-                    source = sourceArray.Key;
+                    source = decodeURI(sourceArray.Key);
                     for (let y = 0; y < sourceArray.Value.length; y++) {
                         let msgerr = sourceArray.Value[y];
                         let lineIndex = Number(msgerr.Line) - 1;
@@ -258,11 +258,15 @@ export class advplCompile {
                             if (msgerr.Type == 0) {
                                 lErrorFound = true;
                                 this.outChannel.log(localize("src.advplCompile.errorText", "Error in ") + path.basename(source) + " " + message);
+                                var regex = /\w+\.\w{3}\(\d{1,5}\)\s+(.*)/g
+                                message = regex.exec(message)[1];
                             }
-                            else
+                            else{
                                 this.outChannel.log(localize("src.advplCompile.warningText", "Warning: ") + message);
+                                var regex = /\w+\.\w{3}\(\d{1,5}\)\s+warning\s(.*)/g
+                                message = regex.exec(message)[1];
+                            }
                             let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0 ? vscode.DiagnosticSeverity.Error : vscode.DiagnosticSeverity.Warning);
-                            //vscode.workspace.findFiles(source,"")
                             diags.push(diagnosis);
                         }
                     }
@@ -365,7 +369,7 @@ export class advplCompile {
 
             var endTime;
             endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms            
+            let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
 
