@@ -1,0 +1,7 @@
+{
+	"src.advplMonitor.initializingText": "Iniciando la lectura del RPO. Aguarde.",
+	"src.advplMonitor.creationText": "Informacioes creadas exitosamente.",
+	"src.advplMonitor.errorText": "Error!",
+	"src.advplMonitor.wsQueryUrlText": "Informe la URL del Web Service:",
+	"src.advplMonitor.wsCreatedText": "Web Service creado exitosamente."
+}
