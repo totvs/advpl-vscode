@@ -18,15 +18,15 @@ const validFilePath = (text: string): string => {
 }
 
 export default async function generateConfigFromAuthorizationFile(context): Promise<any> {
-    let filePath = await vscode.window.showInputBox({
-        prompt: localize('src.authorizationFile.promptText', 'Type in the path of the authorization file (*.aut)'),
-        ignoreFocusOut: true,
-        validateInput: validFilePath
+    let filePath = await vscode.window.showOpenDialog({
+        filters: {
+            'AuthorizationFile': ['aut']
+        }
     });
     if (!filePath) return;
 
     var aut = new AuthorizationFile();
-    var dataObj: AuthorizationData = aut.GetAuthorizationDataFromFile(filePath);
+    var dataObj: AuthorizationData = aut.GetAuthorizationDataFromFile(filePath[0].fsPath);
     generateConfig(dataObj);
 }
 
