@@ -1,3 +1,11 @@
+## 0.10.4
+ - Melhoria via Pull Request:[Limpa visão de problemas e corrige URI] (https://github.com/killerall/advpl-vscode/pull/207)
+ - Correção: [MacOS/Linux - Problema na Execução (sem depuração)] (https://github.com/killerall/advpl-vscode/issues/214)
+ - Correção: [MacOS/Linux - Erro ao compilar resource] (https://github.com/killerall/advpl-vscode/issues/209)
+ 
+Agredecimento especial ao:
+- Izac
+
 ## 0.10.3 
  - Correção: [Mac/Linux - A extensão não esta respeitando o caminho do Path do SmartClient] (https://github.com/killerall/advpl-vscode/issues/206)
  - Correção: [Mac/Linux - Criando arquivos erx_prw e ppx_prw na compilação, mas não apaga] (https://github.com/killerall/advpl-vscode/issues/203)
