@@ -37,9 +37,9 @@ export default function cmdAddAdvplEnvironment(context): any {
             return true;
         }
     }, {
-        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Smartclient Path'),
+        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Selecione a pasta do SmartClient'),
         name: "smartClientPath",
-        validate: env => env.length > 0
+        type: 'folder'
     }, {
         message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version'),
         name: "appserverVersion",
@@ -62,8 +62,10 @@ export default function cmdAddAdvplEnvironment(context): any {
         name: "password",
         type: "password"
     }, {
-        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Include list'),
-        name: "includeList"
+        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Selecione as pastas de Include'),
+        name: "includeList",
+        type: 'folder',
+        canSelectMany: true
     }]
     adapter.prompt(questions, answers => {
         const compile = new advplCompile();
