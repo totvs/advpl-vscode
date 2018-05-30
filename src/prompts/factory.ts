@@ -7,6 +7,8 @@ import ListPrompt from './list';
 import ConfirmPrompt from './confirm';
 import CheckboxPrompt from './checkbox';
 import ExpandPrompt from './expand';
+import FilePrompt from './file';
+import FolderPrompt from './folder';
 
 export default class PromptFactory {
 
@@ -29,6 +31,10 @@ export default class PromptFactory {
 				return new CheckboxPrompt(question);
 			case 'expand':
 				return new ExpandPrompt(question);
+			case 'file':
+				return new FilePrompt(question);
+			case 'folder':
+				return new FolderPrompt(question);
 			default:
 				throw new Error(`Could not find a prompt for question type ${question.type}`);
 		}
