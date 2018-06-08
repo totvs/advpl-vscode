@@ -1,14 +1,21 @@
 ## 0.10.4
- - Melhoria via Pull Request:[Limpa visão de problemas e corrige URI] (https://github.com/killerall/advpl-vscode/pull/207)
- - Correção: [MacOS/Linux - Problema na Execução (sem depuração)] (https://github.com/killerall/advpl-vscode/issues/214)
- - Correção: [MacOS/Linux - Erro ao compilar resource] (https://github.com/killerall/advpl-vscode/issues/209)
+ - Melhoria via Pull Request: [Limpa visão de problemas e corrige URI](https://github.com/killerall/advpl-vscode/pull/207)
+ - Melhoria via Pull Request: [Localização para Espanhol](https://github.com/killerall/advpl-vscode/pull/215)
+ - Melhoria via Pull Request: [Changed to use file picker on authorization file select](https://github.com/killerall/advpl-vscode/pull/216)
+ - Melhoria via Pull Request: [Adicionado suporte a selecao de pasta no wizard de criacao de environment](https://github.com/killerall/advpl-vscode/pull/218)
+ 
+ - Correção: [MacOS/Linux - Problema na Execução (sem depuração)](https://github.com/killerall/advpl-vscode/issues/214)
+ - Correção: [MacOS/Linux - Erro ao compilar resource](https://github.com/killerall/advpl-vscode/issues/209) 
+ - Correção: [MacOS/Linux - Erro Compilação 0.10.3](https://github.com/killerall/advpl-vscode/issues/214)
  
 Agredecimento especial ao:
+- AleksSyntek
+- Arthur Fucher
 - Izac
 
 ## 0.10.3 
- - Correção: [Mac/Linux - A extensão não esta respeitando o caminho do Path do SmartClient] (https://github.com/killerall/advpl-vscode/issues/206)
- - Correção: [Mac/Linux - Criando arquivos erx_prw e ppx_prw na compilação, mas não apaga] (https://github.com/killerall/advpl-vscode/issues/203)
+ - Correção: [Mac/Linux - A extensão não esta respeitando o caminho do Path do SmartClient](https://github.com/killerall/advpl-vscode/issues/206)
+ - Correção: [Mac/Linux - Criando arquivos erx_prw e ppx_prw na compilação, mas não apaga](https://github.com/killerall/advpl-vscode/issues/203)
 
 ## 0.10.2 - Versão Alpha para Linux e Mac OS
  - Melhoria : Versão alfa para Linux e Mac as seguintes issues foram fechadas:
@@ -27,8 +34,8 @@ Agredecimento especial ao:
 
     https://github.com/killerall/advpl-vscode/issues/199
 
- - Melhoria: [SmartClient launcher for linux and fix cipherPassword] (https://github.com/killerall/advpl-vscode/pull/201)
- - Melhoria: [fix snippets very likely confuse warning ] (https://github.com/killerall/advpl-vscode/pull/200)
+ - Melhoria: [SmartClient launcher for linux and fix cipherPassword](https://github.com/killerall/advpl-vscode/pull/201)
+ - Melhoria: [fix snippets very likely confuse warning ](https://github.com/killerall/advpl-vscode/pull/200)
 
 ## Obrigado
 
@@ -37,9 +44,9 @@ Agredecimento especial ao:
  - Eduardo Riera, pelo Mac :D
 
 ## 0.8.1
- - Melhoria: [Localização] (https://github.com/killerall/advpl-vscode/pull/191)
- - Melhoria: [Adiciona extensão APL em compilacao de Pasta] (https://github.com/killerall/advpl-vscode/pull/190)
- - Melhoria: [No debug o :: ser interpretado como self: e assim conseguir ler os valores] (https://github.com/killerall/advpl-vscode/issues/166)
+ - Melhoria: [Localização](https://github.com/killerall/advpl-vscode/pull/191)
+ - Melhoria: [Adiciona extensão APL em compilacao de Pasta](https://github.com/killerall/advpl-vscode/pull/190)
+ - Melhoria: [No debug o :: ser interpretado como self: e assim conseguir ler os valores](https://github.com/killerall/advpl-vscode/issues/166)
 
 ## Obrigado
 
@@ -47,10 +54,10 @@ Agredecimento especial ao:
  - Victor Lopes, pelo intenso trabalho de localização.
  
 ## 0.8.0 
- - Melhoria: [Wizard de Criação de Ambiente] (https://github.com/killerall/advpl-vscode/pull/164)
- - Melhoria: [Mensagem validação ambiente selecionado] (https://github.com/killerall/advpl-vscode/pull/156)
- - Correção: [Mostrar mensagem no Output quando ocorre algum erro na compilação de pasta] (https://github.com/killerall/advpl-vscode/issues/159)
- - Correção: [Título "Source" do rpoInfo ] (https://github.com/killerall/advpl-vscode/issues/168)
+ - Melhoria: [Wizard de Criação de Ambiente](https://github.com/killerall/advpl-vscode/pull/164)
+ - Melhoria: [Mensagem validação ambiente selecionado](https://github.com/killerall/advpl-vscode/pull/156)
+ - Correção: [Mostrar mensagem no Output quando ocorre algum erro na compilação de pasta](https://github.com/killerall/advpl-vscode/issues/159)
+ - Correção: [Título "Source" do rpoInfo ](https://github.com/killerall/advpl-vscode/issues/168)
 
 ## Obrigado
 
@@ -58,20 +65,20 @@ Agredecimento especial ao:
  - Arthur Fucher, pelo Wizard de criação de ambiente.
 
 ## 0.7.7
- - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas] (https://github.com/killerall/advpl-vscode/issues/157)
- - Correção: [Ao compilar pasta e o Server esta fora esta dando SyntaxError] (https://github.com/killerall/advpl-vscode/issues/145)
- - Correção: [Error in 64 bits version] (https://github.com/killerall/advpl-vscode/issues/150)
- - Correção: [Mensagem de erro não é clara quando ambiente não está selecionado.] (https://github.com/killerall/advpl-vscode/issues/125)
+ - Melhoria: [Dar suporte a Debug em workspace com multiplas pastas](https://github.com/killerall/advpl-vscode/issues/157)
+ - Correção: [Ao compilar pasta e o Server esta fora esta dando SyntaxError](https://github.com/killerall/advpl-vscode/issues/145)
+ - Correção: [Error in 64 bits version](https://github.com/killerall/advpl-vscode/issues/150)
+ - Correção: [Mensagem de erro não é clara quando ambiente não está selecionado.](https://github.com/killerall/advpl-vscode/issues/125)
  
 ## 0.7.6
  - Correção: Aplicação de patch em binario 64 bits
  
 ## 0.7.5
- - Correção:[Erro ao excluir fonte do repositório] (https://github.com/killerall/advpl-vscode/issues/128)
- - Melhoria:[Read authorization file and generate setttings] (https://github.com/killerall/advpl-vscode/issues/5)
- - Melhoria:[Último programa executado fica em branco depois de cancelar execução.] (https://github.com/killerall/advpl-vscode/issues/130)
- - Melhoria:[Implementada a sintaxe para highlight de uma classe REST em AdvPl.] (https://github.com/killerall/advpl-vscode/pull/129)
- - Documentação: [removida documentação que já existe na wiki] (https://github.com/killerall/advpl-vscode/pull/126)
+ - Correção:[Erro ao excluir fonte do repositório](https://github.com/killerall/advpl-vscode/issues/128)
+ - Melhoria:[Read authorization file and generate setttings](https://github.com/killerall/advpl-vscode/issues/5)
+ - Melhoria:[Último programa executado fica em branco depois de cancelar execução.](https://github.com/killerall/advpl-vscode/issues/130)
+ - Melhoria:[Implementada a sintaxe para highlight de uma classe REST em AdvPl.](https://github.com/killerall/advpl-vscode/pull/129)
+ - Documentação: [removida documentação que já existe na wiki](https://github.com/killerall/advpl-vscode/pull/126)
 
  ## Obrigado
 
@@ -79,16 +86,16 @@ Agredecimento especial ao:
  - Daniel Mendes, Com a syntax de Rest.
 
 ## 0.7.4
-- Correção: [Compilação  txt, depedendo do nome da pasta] (https://github.com/killerall/advpl-vscode/issues/120)
+- Correção: [Compilação  txt, depedendo do nome da pasta](https://github.com/killerall/advpl-vscode/issues/120)
 - Correção: Depuração Multi Thread as vezes caia no inicio.
 
 ## 0.7.3
  - Correção: Compilação de .prj e txt depois da versao 0.7
- - Correção: [Erro ao compilar antes do fim da compilação anterior] (https://github.com/killerall/advpl-vscode/issues/116)
- - Melhoria: [Criar comando para gerar ppo do Fonte] (https://github.com/killerall/advpl-vscode/issues/119)
+ - Correção: [Erro ao compilar antes do fim da compilação anterior](https://github.com/killerall/advpl-vscode/issues/116)
+ - Melhoria: [Criar comando para gerar ppo do Fonte](https://github.com/killerall/advpl-vscode/issues/119)
 
 ## 0.7.2
- - Correção:[Criação de patch em ambiente local ] (https://github.com/killerall/advpl-vscode/issues/112) 
+ - Correção:[Criação de patch em ambiente local](https://github.com/killerall/advpl-vscode/issues/112) 
 
 ## 0.7.1
  - Correção da Messagem de Erro. SyntaxError: Unexpected end of JSON input.
@@ -96,23 +103,23 @@ Agredecimento especial ao:
 ## 0.7.0
 - Melhoria: Para gerar path de uma lista de arquivo, agora basta clicar com o botao direito nele, e selecionar: Advpl - Patch - Build - Cria um patch Patch(PTM) da lista de arquivo.
 - Melhoria: Velocidade da compilação de pastas, foi criado uma configuração a mais, para definir o numero de threads, o padrão é 4 (advpl.compile_threads)
-- Melhoria: [Desfragmentar RPO] (https://github.com/killerall/advpl-vscode/issues/103)
-- Correção: [Debug com problemas] (https://github.com/killerall/advpl-vscode/issues/106)
-- Correção: [Seleção de ambiente] (https://github.com/killerall/advpl-vscode/issues/89)
-- Correção: [Stop não encerra conexão iniciada via Shift+F5] (https://github.com/killerall/advpl-vscode/issues/98)
+- Melhoria: [Desfragmentar RPO](https://github.com/killerall/advpl-vscode/issues/103)
+- Correção: [Debug com problemas](https://github.com/killerall/advpl-vscode/issues/106)
+- Correção: [Seleção de ambiente](https://github.com/killerall/advpl-vscode/issues/89)
+- Correção: [Stop não encerra conexão iniciada via Shift+F5](https://github.com/killerall/advpl-vscode/issues/98)
 
 ## 0.6.2
-- [Correção no Debug na versão 11, não parava nos breakpoints] (https://github.com/killerall/advpl-vscode/issues/105)
+- [Correção no Debug na versão 11, não parava nos breakpoints](https://github.com/killerall/advpl-vscode/issues/105)
 
 ## 0.6.1
 - Correção no Debug, quando dava errolog debugando, o Debug aparentava estar travado.
 
 ## 0.6.0
 - Refactory do Debug, para melhorias de performace e principalmente quedas quando se disparava o botão de step in, causando erros de sincronia com o appserver.
-- [Implementar melhorias de performance no debug] (https://github.com/killerall/advpl-vscode/issues/90)
+- [Implementar melhorias de performance no debug](https://github.com/killerall/advpl-vscode/issues/90)
 - Atualização do protocolo de debug do vscode
-- Correção via Pull Request [ de Ctrl+F11] (https://github.com/killerall/advpl-vscode/pull/95)
-- Melhoria via Pull Request : [Ajustes Package.json e Gramática - Condições e Agrupamentos de comandos de menu] (https://github.com/killerall/advpl-vscode/pull/91)
+- Correção via Pull Request [ de Ctrl+F11](https://github.com/killerall/advpl-vscode/pull/95)
+- Melhoria via Pull Request : [Ajustes Package.json e Gramática - Condições e Agrupamentos de comandos de menu](https://github.com/killerall/advpl-vscode/pull/91)
 - Liberada versão MAC 
 
  ## Obrigado
@@ -130,11 +137,11 @@ Agredecimento especial ao:
 
 ## 0.5.9
 - Melhoria: Possiblidade de usar uma lista de fontes para compilar. Para utilizar por exemplo o arquivo de patch. (Wiki) [https://github.com/killerall/advpl-vscode/wiki/Compila%C3%A7%C3%A3o-de-lista-de-arquivo]
-- Correção: [Problema ao tentar gerar Patch Protheus ADVPL] (https://github.com/killerall/advpl-vscode/issues/92) , [Patch em rpo TTTS ] (https://github.com/killerall/advpl-vscode/issues/84) 
-- Correção : [Patchs] (https://github.com/killerall/advpl-vscode/issues/52)
+- Correção: [Problema ao tentar gerar Patch Protheus ADVPL](https://github.com/killerall/advpl-vscode/issues/92) , [Patch em rpo TTTS ](https://github.com/killerall/advpl-vscode/issues/84) 
+- Correção : [Patchs](https://github.com/killerall/advpl-vscode/issues/52)
 
 ## 0.5.8
- - Correção: [Operadores lógicos - Syntax Highlighting] (https://github.com/killerall/advpl-vscode/pull/85)
+ - Correção: [Operadores lógicos - Syntax Highlighting](https://github.com/killerall/advpl-vscode/pull/85)
  - Suporte ao servido de build 170117A , utilize a tag:   "serverVersion" : "170117A" dentro da configuracao do ambiente.
 
  ## Obrigado
@@ -143,37 +150,37 @@ Agredecimento especial ao:
  - Daniel Mendes, Com a syntax HighLighting
 
 ## 0.5.7
- - Correção: [Debug não para depois da atualização 1.11.0] (https://github.com/killerall/advpl-vscode/issues/82)
+ - Correção: [Debug não para depois da atualização 1.11.0](https://github.com/killerall/advpl-vscode/issues/82)
 
 ## 0.5.6
- - Correção: [Problema ao compilar após atualização 0.5.5] (https://github.com/killerall/advpl-vscode/issues/79)
+ - Correção: [Problema ao compilar após atualização 0.5.5](https://github.com/killerall/advpl-vscode/issues/79)
  Esse erro ocorre quando o ini do protheus não consegue ser lido corretamente, portanto não atigiu todas as pessoas.
 
 
 ## 0.5.5
  - Melhoria: Performace gerais, tanto de compilação quanto debug.
- - Melhoria:[Possibilidade de configuração de novo parametro, para determinar se vai recompilar o fonte sem alteração ´compile_force_recompile´] (https://github.com/killerall/advpl-vscode/issues/75)
+ - Melhoria:[Possibilidade de configuração de novo parametro, para determinar se vai recompilar o fonte sem alteração ´compile_force_recompile´](https://github.com/killerall/advpl-vscode/issues/75)
  - Melhoria: Novo comando para compilar os fontes de um projeto. Basta clicar com o botão direito sobre um arquivo prj, e selecionar compilar Projeto.
  - Melhoria: Adicionado informação de data e hora de inicio e fim de compilação.
- - Correção: [Identificação de Extensão APL] (https://github.com/killerall/advpl-vscode/issues/76)
- - Correção: [Error de compilação] (https://github.com/killerall/advpl-vscode/issues/74)
+ - Correção: [Identificação de Extensão APL](https://github.com/killerall/advpl-vscode/issues/76)
+ - Correção: [Error de compilação](https://github.com/killerall/advpl-vscode/issues/74)
  
 ## 0.5.4
  - Ajuste do Package.json devido a atualização do VSCODE 1.10
 
 ## 0.5.2
- - Correção: [Gerar patch que nao existe a pasta] (https://github.com/killerall/advpl-vscode/issues/64)
- - Melhoria: [Implementar o inspetor de funções] (https://github.com/killerall/advpl-vscode/issues/71)
- - Melhoria: [Adicionar campos das tabelas no Debug] (https://github.com/killerall/advpl-vscode/issues/61)
- - Melhoria: [BreakPoint Condicional no Debug] (https://github.com/killerall/advpl-vscode/issues/40)
- - Melhoria: [Não é possível passar parâmetros ao lançar o smartclient] (https://github.com/killerall/advpl-vscode/issues/50)
+ - Correção: [Gerar patch que nao existe a pasta](https://github.com/killerall/advpl-vscode/issues/64)
+ - Melhoria: [Implementar o inspetor de funções](https://github.com/killerall/advpl-vscode/issues/71)
+ - Melhoria: [Adicionar campos das tabelas no Debug](https://github.com/killerall/advpl-vscode/issues/61)
+ - Melhoria: [BreakPoint Condicional no Debug](https://github.com/killerall/advpl-vscode/issues/40)
+ - Melhoria: [Não é possível passar parâmetros ao lançar o smartclient](https://github.com/killerall/advpl-vscode/issues/50)
 
 ## 0.5.1
- - [Congelamento ao compilar] (https://github.com/killerall/advpl-vscode/issues/70)
+ - [Congelamento ao compilar](https://github.com/killerall/advpl-vscode/issues/70)
 
 ## 0.5
- - Refactory da parte de Syntax highlighting feito pelo [Izacsc] (https://github.com/killerall/advpl-vscode/pull/62)
- - Adicionado comando para excluir fontes do RPO.[Wiki] (https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
+ - Refactory da parte de Syntax highlighting feito pelo [Izacsc](https://github.com/killerall/advpl-vscode/pull/62)
+ - Adicionado comando para excluir fontes do RPO.[Wiki](https://github.com/killerall/advpl-vscode/wiki/Excluindo-fontes-do-RPO)
  - Aviso de chave de compilação expirada.
 
 ## Obrigado
@@ -187,20 +194,20 @@ Agredecimento especial ao:
  no lugar do proprio ambiente na seleção de ambiente ativo. Essa chave é opcional.
 
 ## 0.4.15
- - Implementação da geração de [Client de WebService] (https://github.com/killerall/advpl-vscode/issues/63)  
+ - Implementação da geração de [Client de WebService](https://github.com/killerall/advpl-vscode/issues/63)  
  - Correção da messagem de compilação quando não tinha warning, não informava o sucesso.
  
 ## 0.4.14 
  - Correção do Patch Info quando a informação é muito grande.
  
 ## 0.4.12
- - Implementado opção de visualizar as informações num patch. Verifique na Wiki como [utilizar] (https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
+ - Implementado opção de visualizar as informações num patch. Verifique na Wiki como [utilizar](https://github.com/killerall/advpl-vscode/wiki/Trabalhando-com-Patchs)
  - Correção [Pressionar ESC na hora de informar o programa não cancela o debug.](https://github.com/killerall/advpl-vscode/issues/58)
 
 ## 0.4.10
  - [Melhora de Performance no Debug, quando temos muitos arquivos na workspace](https://github.com/killerall/advpl-vscode/issues/57)
  - Correção: [Todos os warnings aparecem num único warning](https://github.com/killerall/advpl-vscode/issues/56)
- - Inspetor de Objeto, agora é criado o rpoinfo.log com as informações do [rpo] (https://github.com/killerall/advpl-vscode/issues/44)
+ - Inspetor de Objeto, agora é criado o rpoinfo.log com as informações do [rpo](https://github.com/killerall/advpl-vscode/issues/44)
 
 ## 0.4.9
  - Correção da captura da exceção no debug. Quando algum errolog ocorria no debug, o mesmo parava e não [mostrava o erro.](https://github.com/killerall/advpl-vscode/issues/54)

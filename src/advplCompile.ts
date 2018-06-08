@@ -258,13 +258,17 @@ export class advplCompile {
                             if (msgerr.Type == 0) {
                                 lErrorFound = true;
                                 this.outChannel.log(localize("src.advplCompile.errorText", "Error in ") + path.basename(source) + " " + message);
-                                var regex = /\w+\.\w{3}\(\d{1,5}\)\s+(.*)/g
-                                message = regex.exec(message)[1];
+                                let regex = /\w+\.\w{3}\(\d{1,5}\)\s+(.*)/g
+                                const regexResult = regex.exec(message);
+                                if (regexResult != null)
+                                    message = regexResult[1];
                             }
                             else{
                                 this.outChannel.log(localize("src.advplCompile.warningText", "Warning: ") + message);
-                                var regex = /\w+\.\w{3}\(\d{1,5}\)\s+warning\s(.*)/g
-                                message = regex.exec(message)[1];
+                                let regex = /\w+\.\w{3}\(\d{1,5}\)\s+warning\s(.*)/g
+                                const regexResult = regex.exec(message);
+                                if (regexResult != null)
+                                    message = regexResult[1];
                             }
                             let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0 ? vscode.DiagnosticSeverity.Error : vscode.DiagnosticSeverity.Warning);
                             diags.push(diagnosis);

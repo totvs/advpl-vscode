@@ -53,5 +53,6 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Infomraciones de ambinete para Depuración/Debug. Uso interno",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Depurar/Debuguear.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente en inicio de Depuración/Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo"
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo",
+	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA" : "Alpha compile"
 }

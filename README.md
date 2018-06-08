@@ -66,6 +66,7 @@ Atualmente as seguintes linguas estão suportadas:
 
 * Português
 * Inglês
+* Espanhol
 * Russo
 
 Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com/docs/getstarted/locales)

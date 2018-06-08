@@ -21,6 +21,7 @@ import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
+
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
@@ -59,6 +60,10 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
     context.subscriptions.push(DefragRpo());
+    context.subscriptions.push(GetDebugPath());
+
+    //const debugProvider = new AdvplDebugConfigurationProvider();
+    //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
     await ensureRuntimeDependencies();
     //Environment no bar
     env = new Environment();
@@ -339,7 +344,16 @@ function __internal_compile(cSource, editor, lbuildPPO) {
         }
     }
 }
-
+function GetDebugPath()
+{
+    
+    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {        
+        let path = debugBrdige.getAdvplDebugBridge();        
+        return { command: path};
+        
+    });
+    return disposable;
+}
 function addGetDebugInfosCommand() {
     let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context) {
         var workSpaceInfo = vscode.workspace.getConfiguration("advpl");
