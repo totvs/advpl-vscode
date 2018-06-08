@@ -6,7 +6,7 @@
  
  - Correção: [MacOS/Linux - Problema na Execução (sem depuração)](https://github.com/killerall/advpl-vscode/issues/214)
  - Correção: [MacOS/Linux - Erro ao compilar resource](https://github.com/killerall/advpl-vscode/issues/209) 
- - Correção: [MacOS/Linux - Erro Compilação 0.10.3](https://github.com/killerall/advpl-vscode/issues/214)
+ - Correção: [MacOS/Linux - Erro Compilação 0.10.3](https://github.com/killerall/advpl-vscode/issues/223)
  
 Agredecimento especial ao:
 - AleksSyntek
