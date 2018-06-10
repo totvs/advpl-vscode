@@ -1,0 +1,3 @@
+[submodule "language-server"]
+	path = language-server
+	url = https://github.com/advpl/advpl-language-server
