@@ -301,7 +301,6 @@
                 "command": "advpl.getDebugPath",
                 "title": "Path"
             },
-            
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -388,7 +387,7 @@
                         "advpl"
                     ]
                 },
-                "adapterExecutableCommand" :"advpl.getDebugPath",
+                "adapterExecutableCommand": "advpl.getDebugPath",
                 "variables": {
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
@@ -494,7 +493,7 @@
         "figures": "^2.0.0",
         "vscode-debugadapter": "^1.29.0",
         "vscode-debugprotocol": "^1.29.0",
-        "vscode-languageclient": "1.3.1",
+        "vscode-languageclient": "^4.1.4",
         "vscode-nls": "^2.0.2"
     },
     "repository": {

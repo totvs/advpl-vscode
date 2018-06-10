@@ -12,7 +12,7 @@ import { Environment } from './advplEnvironment';
 import EnvObject from './Environment';
 import { spawn, execFile, ChildProcess } from 'child_process';
 import * as path from 'path';
-import { LanguageClient, LanguageClientOptions, StreamInfo } from 'vscode-languageclient';
+import { LanguageClient, LanguageClientOptions, StreamInfo, ServerOptions, TransportKind } from 'vscode-languageclient';
 import * as net from 'net';
 import * as url from 'url';
 import * as fs from 'fs';
@@ -26,6 +26,7 @@ let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
+let client: LanguageClient;
 
 export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getProgramName());
@@ -69,7 +70,7 @@ export async function activate(context: vscode.ExtensionContext) {
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
 
-    //initLanguageServer(context);
+    initLanguageServer(context);
     let api = {
         writeAdvplConsole(cLog) {
             OutPutChannel.log(cLog);
@@ -99,44 +100,33 @@ function getProgramName() {
  * Inicia Language Server
  */
 function initLanguageServer(context: vscode.ExtensionContext) {
-    let executablePath = "C:\\Totvs\\vscode\\advpl-language-server\\bin\\Debug\\advpl-language-server.exe";
-    //let executablePath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath + "\\bin\\advpl-language-server.exe";
+  // The server is implemented in node
+	let serverModule = context.asAbsolutePath(path.join('language-server', 'out', 'server.js'));
+	// The debug options for the server
+	let debugOptions = { execArgv: ["--nolazy", "--inspect=6009"] };
 
-    const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
-        function spawnServer(...args: string[]): ChildProcess {
-            // The server is implemented in C#         
-            const childProcess = spawn(executablePath, args);
-            childProcess.stderr.on('data', (chunk: Buffer) => {
-                console.error(chunk + '');
-            });
-            childProcess.stdout.on('data', (chunk: Buffer) => {
-                console.log(chunk + '');
-            });
-            return childProcess;
-        }
-        resolve(spawnServer());
+	// If the extension is launched in debug mode then the debug server options are used
+	// Otherwise the run options are used
+	let serverOptions: ServerOptions = {
+		run : { module: serverModule, transport: TransportKind.ipc },
+		debug: { module: serverModule, transport: TransportKind.ipc, options: debugOptions }
+	}
 
-    });
+	// Options to control the language client
+	let clientOptions: LanguageClientOptions = {
+		// Register the server for plain text documents
+		documentSelector: [{scheme: 'file', language: 'advpl'}],
+		synchronize: {
+			// Notify the server about file changes to '.clientrc files contain in the workspace
+			fileEvents: vscode.workspace.createFileSystemWatcher('**/.clientrc'),
+		}
+	}
 
-    // Options to control the language client
-    const clientOptions: LanguageClientOptions = {
-        // Register the server for php documents
-        documentSelector: ['advpl'],
+	// Create the language client and start the client.
+	client = new LanguageClient('lsp.advpl', 'Language Server Advpl', serverOptions, clientOptions);
 
-        synchronize: {
-            // Synchronize the setting section 'php' to the server
-            configurationSection: 'advpl'
-            // Notify the server about file changes to composer.json files contain in the workspace
-
-        }
-    };
-
-    // Create the language client and start the client.
-    const disposable = new LanguageClient('Advpl Language Server', serverOptions, clientOptions).start();
-
-    // Push the disposable to the context's subscriptions so that the
-    // client can be deactivated on extension deactivation
-    context.subscriptions.push(disposable);
+	// Start the client. This will also launch the server
+	client.start();
 }
 
 /**
