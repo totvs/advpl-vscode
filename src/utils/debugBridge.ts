@@ -22,11 +22,14 @@ function getAdvplBinPath (alpha){
 
     return path;
 }
-export function getAdvplDebugBridge (){    
+export function getAdvplDebugBridge(){    
     const config = vscode.workspace.getConfiguration("advpl");
-    const alpha = config.get<boolean>("alpha_compile"); 
+    let alpha = config.get<boolean>("alpha_compile"); 
     let path = getAdvplBinPath (alpha);
-
+    if (config.get<string>("totvs_language") === "4gl")
+    {
+        alpha = true;
+    }
     if (process.platform == "win32") {
         if(alpha)        
             path+= "AdvplDebugBridgeC.exe";
@@ -37,6 +40,7 @@ export function getAdvplDebugBridge (){
     {
         path+=  "AdvplDebugBridgeC";        
     }    
+    
     return path;
 }
 function runUnzip(path, args, file ,OutPutChannel)

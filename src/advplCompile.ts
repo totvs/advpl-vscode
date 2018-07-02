@@ -30,7 +30,7 @@ export class advplCompile {
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
-        this.isAlpha = config.get<boolean>("alpha_compile");
+        this.isAlpha = config.get<boolean>("alpha_compile");        
     }
 
     public validateCompile() {
@@ -46,12 +46,12 @@ export class advplCompile {
             selectedEnvironment = parsedEnvInfos.selectedEnvironment;
             foundEnvironment = false;
             for (let entry of parsedEnvInfos.environments) {
-                if
-                (
-                    selectedEnvironment === entry.environment ||
-                    entry.hasOwnProperty('name') && selectedEnvironment === entry.name
-                ) {
-                    foundEnvironment = true;
+                if(selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
+                    foundEnvironment = true;                    
+                    if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl")
+                    {
+                        this.isAlpha = true;
+                    }
                     break;
                 }
             }

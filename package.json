@@ -13,6 +13,7 @@
     ],
     "activationEvents": [
         "onLanguage:advpl",
+        "onLanguage:4gl",
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompileProjet",
@@ -90,6 +91,15 @@
                     "items": {
                         "type": "object",
                         "properties": {
+                            "totvs_language": {
+                                "type": "string",
+                                "enum": [
+                                    "advpl","4gl"
+                                ],
+                                "default": "advpl",
+                                "description": "language"
+                                
+                            },
                             "smartClientPath": {
                                 "type": "string",
                                 "default": "",
@@ -255,6 +265,17 @@
                     "Advpl(APL)"
                 ],
                 "configuration": "./advpl.configuration.json"
+            },
+            {
+                "id": "4gl",
+                "extensions": [
+                    ".4gl"                    
+                ],
+                "aliases": [
+                    "4GL(4gl)"                    
+                ],
+                "configuration": "./4gl.configuration.json"
+
             }
         ],
         "grammars": [
@@ -262,6 +283,11 @@
                 "language": "advpl",
                 "scopeName": "source.advpl",
                 "path": "./syntaxes/advpl.tmLanguage.tmLanguage"
+            },
+            {
+                "language": "4gl",
+                "scopeName": "source.4gl",
+                "path": "./syntaxes/4gl.tmLanguage.tmLanguage"
             }
         ],
         "commands": [
@@ -367,6 +393,13 @@
                 "when": "editorLangId == advpl"
             },
             {
+                "command": "advpl.compile",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9",
+                "when": "editorLangId == 4gl"
+            },
+
+            {
                 "command": "advpl.startSmartClient",
                 "key": "ctrl+f11",
                 "mac": "cmd+f11",
@@ -385,7 +418,7 @@
                 "label": "Advpl Debug",
                 "enableBreakpointsFor": {
                     "languageIds": [
-                        "advpl"
+                        "advpl","4gl"
                     ]
                 },
                 "adapterExecutableCommand" :"advpl.getDebugPath",
