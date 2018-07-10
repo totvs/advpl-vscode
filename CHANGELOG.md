@@ -1,3 +1,15 @@
+## 0.10.5
+ - [Ajuste na sintaxe para wsmethod com quebra de linha](https://github.com/killerall/advpl-vscode/pull/226)
+ - [Changed to use file picker on authorization file select](https://github.com/killerall/advpl-vscode/pull/234)
+ - [Adicionado suporte a selecao de pasta no wizard de criacao de ambiente](https://github.com/killerall/advpl-vscode/pull/235)
+ - Correção: [Compilador não exibe que existe usuário logado](Compilador não exibe que existe usuário logado)
+ - [Suporte a Linguagem 4GL](https://github.com/killerall/advpl-vscode/pull/237)
+ - Correção: [MacOS/Linux - Defrag RPO apresenta mensagem de erro e não finaliza](https://github.com/killerall/advpl-vscode/issues/238)
+ 
+Agredecimento especial ao:
+- Arthur Fucher
+- Izac
+
 ## 0.10.4
  - Melhoria via Pull Request: [Limpa visão de problemas e corrige URI](https://github.com/killerall/advpl-vscode/pull/207)
  - Melhoria via Pull Request: [Localização para Espanhol](https://github.com/killerall/advpl-vscode/pull/215)

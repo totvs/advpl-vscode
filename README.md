@@ -10,6 +10,10 @@ Caso você encontre algum problema, por favor abra uma issue no [GitHub](https:/
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado [aqui](https://github.com/killerall/advpl-vscode/blob/master/TDSProjectToVscode.jar).
 
 
+# 4GL Language Support
+
+Essa extensão adiciona suporte a edição, compilação e debugging de 4GL no Visual Code.
+
 ## Features
 
 Essa extensão possui as seguintes features implementadas:
