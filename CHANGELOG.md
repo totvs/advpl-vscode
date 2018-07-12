@@ -1,3 +1,6 @@
+## 0.10.6
+ - Correção na seleção de ambiente quando utiliza 4GL
+ 
 ## 0.10.5
  - [Ajuste na sintaxe para wsmethod com quebra de linha](https://github.com/killerall/advpl-vscode/pull/226)
  - [Changed to use file picker on authorization file select](https://github.com/killerall/advpl-vscode/pull/234)

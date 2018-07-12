@@ -24,12 +24,19 @@ function getAdvplBinPath (alpha){
 }
 export function getAdvplDebugBridge(){    
     const config = vscode.workspace.getConfiguration("advpl");
-    let alpha = config.get<boolean>("alpha_compile"); 
-    let path = getAdvplBinPath (alpha);
-    if (config.get<string>("totvs_language") === "4gl")
-    {
-        alpha = true;
+    let alpha = config.get<boolean>("alpha_compile");
+    let selectedEnvironment: string;        
+    selectedEnvironment = config.selectedEnvironment;    
+    for (let entry of config.environments) {
+        if(selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
+            if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl")
+            {
+                alpha = true;
+            }
+            break;
+        }
     }
+    let path = getAdvplBinPath (alpha);
     if (process.platform == "win32") {
         if(alpha)        
             path+= "AdvplDebugBridgeC.exe";
