@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.6",
+    "version": "0.10.7",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -187,7 +187,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -255,14 +255,16 @@
                     ".prx",
                     ".prg",
                     ".aph",
-                    ".apl"
+                    ".apl",
+                    ".tlpp"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
                     "Advpl(PRX)",
                     "Advpl(PRG)",
                     "Advpl(APH)",
-                    "Advpl(APL)"
+                    "Advpl(APL)",
+                    "TLPP(tlpp)"
                 ],
                 "configuration": "./advpl.configuration.json"
             },

@@ -1,3 +1,6 @@
+## 0.10.7
+ - Suporte Inicial a TLPP
+
 ## 0.10.6
  - Correção na seleção de ambiente quando utiliza 4GL
  
