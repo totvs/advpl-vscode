@@ -14,6 +14,7 @@
 	"src.advplCompile.errorText": "Ошибка в ",
 	"src.advplCompile.warningText": "Предупреждающий: ",
 	"src.advplCompile.compilationFinishedErrorsText": "Компиляция закончена с ошибками, проверьте вкладку проблемы!",
+	"src.advplCompile.compilationAbortedText": "Компиляция отменена, проверьте журнал или вкладку «Проблемы»!",
 	"src.advplCompile.compilationFinishedOkText": "Компиляция успешно завершена.",
 	"src.advplCompile.informSourcesExclusionText": "Сообщите источники, которые будут исключены:",
 	"src.advplCompile.istartSourcesExclusionText": "Начало исключения источников...",
