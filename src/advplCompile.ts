@@ -232,6 +232,8 @@ export class advplCompile {
 
     private run_callBack(lOk) {
         let lErrorFound;
+        let lAbort;
+
         try {
             if (this._lastAppreMsg != null) {
                 var oEr = JSON.parse(this._lastAppreMsg);
@@ -253,6 +255,10 @@ export class advplCompile {
                         if (source == "NOSOURCE") {
                             //vscode.window.showInformationMessage(message);
                             this.outChannel.log(message);
+                            if(msgerr.Type == 0) {
+                                lErrorFound = true;
+                                lAbort = true;
+                            }
                         }
                         else {
                             if (msgerr.Type == 0) {
@@ -282,7 +288,7 @@ export class advplCompile {
 
             if (lOk) {
                 this.outChannel.log(lErrorFound ?
-                    localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") :
+                    ( lAbort ? localize("src.advplCompile.compilationAbortedText", "Compilation aborted, check the log or the Problems tab!") : localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") ) :
                     localize("src.advplCompile.compilationFinishedOkText", "Compilation finished successfully."));
                 this.afterCompile();
             }

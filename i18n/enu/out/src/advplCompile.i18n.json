@@ -14,6 +14,7 @@
 	"src.advplCompile.errorText": "Error in ",
 	"src.advplCompile.warningText": "Warning: ",
 	"src.advplCompile.compilationFinishedErrorsText": "Compilation finished with errors, check the Problems tab!",
+	"src.advplCompile.compilationAbortedText": "Compilation aborted, check the log or the Problems tab!",
 	"src.advplCompile.compilationFinishedOkText": "Compilation finished successfully.",
 	"src.advplCompile.informSourcesExclusionText": "Inform the sources to be excluded:",
 	"src.advplCompile.istartSourcesExclusionText": "Starting the exclusion of the sources...",
