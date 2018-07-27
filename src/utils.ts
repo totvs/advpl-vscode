@@ -34,7 +34,19 @@ export function checkIfFileExists(filePath: string): boolean {
         return false;
     }
 }
+ 
+export function getConfigurationAsString(): string {
+    let config = {...vscode.workspace.getConfiguration("advpl")}
 
-export function getConfigurationAsString(): string{
-    return JSON.stringify(vscode.workspace.getConfiguration("advpl"));
+    config.pathPatchBuild = resolveWorkspaceRootPath(config.pathPatchBuild)
+
+    for (let entry of config.environments) {
+        entry.includeList = resolveWorkspaceRootPath(entry.includeList)
+    }
+
+    return JSON.stringify(config)
+}
+
+function resolveWorkspaceRootPath(path: string): string {
+    return path.replace("${workspaceRoot}", vscode.workspace.rootPath);
 }
