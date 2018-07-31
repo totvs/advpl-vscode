@@ -1,3 +1,11 @@
+## 0.10.8
+ - [Lobo-Guara - Can't apply patch](https://github.com/killerall/advpl-vscode/issues/240)
+ - [Correção de mensagem em caso de erro de compilação](https://github.com/killerall/advpl-vscode/pull/242)
+ - Correções para compilação e debug em TLPP
+
+Agredecimento especial ao:
+ - Daniel Mendes
+
 ## 0.10.7
  - Suporte Inicial a TLPP
 

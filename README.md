@@ -30,11 +30,12 @@ Essa extensão possui as seguintes features implementadas:
 * Geração de PPO do fonte(Para fazer isso utilize CTRL+SHIFT+F9)
 * Mac OSX 
 * Linux
+* TL++
 
 As próximas planejadas são:
 
-* Language Server
-* TL++
+* [Language Server](https://github.com/advpl/advpl-language-server)
+
 
 ## Requisitos para utilização
 
@@ -53,7 +54,7 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 * F5  - Inicia o Debug
 * CTRL + F5  - Inicia o SmartClient sem debugar
 * CTRL + F9 - Compila o fonte atual
-* CTRL + SHIFT +  F9 - Compila o fonte atual
+* CTRL + SHIFT +  F9 - Gera o PPO do fonte atual
 * CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
 
 # No Debug
