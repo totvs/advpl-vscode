@@ -150,7 +150,7 @@ function startSmartClient() {
 
         if (scPath === undefined || scPath === null) {
             ambientes.forEach(element => {
-                if (element.environment == ambienteAtual)
+                if (element.environment === ambienteAtual || element.name === ambienteAtual)
                     scPath = element.smartClientPath
             });
         }

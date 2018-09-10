@@ -125,9 +125,10 @@ export class advplCompile {
             that._lastAppreMsg = data + "";
         });
 
-        child.on("exit", function (data) {
+        child.on("exit", data => {
             var lRunned = data == 0
             that.outChannel.log(localize("src.advplCompile.idText", "ID:") + that._lastAppreMsg);
+            this.afterCompile();
         });
     }
 
@@ -296,7 +297,9 @@ export class advplCompile {
                 this.onError();
             }
         }
-        catch (ex) {
+        catch (ex) {            
+            this.outChannel.log("Bridge Return:");
+            this.outChannel.log(this._lastAppreMsg);
             this.outChannel.log(ex);
             this.onError();
         }

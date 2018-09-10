@@ -1,3 +1,10 @@
+## 0.10.9
+  - Correção de compilação em andamento, apos se pedir o ID da  chave de compilação.
+  - [4GL - Erro de inicialização do remote](https://github.com/killerall/advpl-vscode/issues/259)
+  - [Erro ao compilar folder no MacOS](https://github.com/killerall/advpl-vscode/issues/254)
+  - [MacOS - Problema na Execução (sem depuração)](https://github.com/killerall/advpl-vscode/issues/214)
+  - [Problema com CTRL + F11](https://github.com/killerall/advpl-vscode/issues/262)
+  
 ## 0.10.8
  - [Lobo-Guara - Can't apply patch](https://github.com/killerall/advpl-vscode/issues/240)
  - [Correção de mensagem em caso de erro de compilação](https://github.com/killerall/advpl-vscode/pull/242)
