@@ -49,22 +49,27 @@
                 },
                 {
                     "command": "advpl.menucompileProjet",
+                    "when": "resourceFilename =~ /.*\\.prj/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.menucompiletextfile",
+                    "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.apply",
+                    "when": "resourceFilename =~ /.*\\.ptm/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.info",
+                    "when": "resourceFilename =~ /.*\\.ptm/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.build",
+                    "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 }
             ]
@@ -301,7 +306,7 @@
                 "command": "advpl.getDebugPath",
                 "title": "Path"
             },
-            
+
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
