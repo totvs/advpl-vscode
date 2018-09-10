@@ -202,5 +202,434 @@
             "FindFunction( ${1:cFunction})"
         ],
         "description": "FindFunction() - Faz a busca de uma determinada função no rpo ou no binário"
+	 },
+	 "Activate":{
+		"prefix": "Activate",
+        "body": [
+            "Activate()"
+        ],
+        "description": "Activate() - Metodo responsável por ativar e validar a classe para uso."
+	 },
+	 "oHelper:AssertFalse":{
+		"prefix": "AssertFalse",
+        "body": [
+            "AssertFalse( lCondition, cErro )"
+        ],
+        "description": "AssertFalse() - Define que o teste espera um retorno falso para passar."
+	 },
+	 "oHelper:AssertTrue":{
+		"prefix": "AssertTrue",
+        "body": [
+            "AssertTrue(lCondition, cHelp) "
+        ],
+        "description": "AssertTrue() - Define que o teste espera uma retorno verdadeiro para passar."
+	 },
+	 "ChangeFil":{
+		"prefix": "ChangeFil",
+        "body": [
+            "ChangeFil(cFilDest)"
+        ],
+		"description": "ChangeFil() - Função que irá alterar a filial logada, quando no cenário do teste for necessário a troca de filiais."
+	 },
+	 "ConvAcento":{
+		"prefix": "ConvAcento",
+        "body": [
+            "ConvAcento(cString)"
+        ],
+		"description": "ConvAcento() - Função que converte os caracteres com acento."
+	 },
+	 "Conv2Hex":{
+		"prefix": "Conv2Hex",
+        "body": [
+            "Conv2Hex(cString)"
+        ],
+		"description": "Conv2Hex() - Função que converte o caractere em Hexadecimal."
+	 },
+	 "DeActivate":{
+		"prefix": "DeActivate",
+        "body": [
+            "DeActivate()"
+        ],
+		"description": "DeActivate() - Metodo que irá desativar a classe."
+	 },
+	 "GetParAuto":{
+		"prefix": "GetParAuto",
+        "body": [
+            "GetParAuto(cProgram, lCabItem, aHeader)"
+        ],
+		"description": "GetParAuto() - Função para programas que não estão preparados para receber informações automáticas, função retorna Array, que deve ser informado no TestCase."
+	 },
+	 "GetReleaseRobo":{
+		"prefix": "GetReleaseRobo",
+        "body": [
+            "GetReleaseRobo()"
+        ],
+		"description": "GetReleaseRobo() - Método para verificar o conteúdo do arquivo advpr.ini, responsável por identificar qual release o ambiente protheus está."
+	 },
+	 "SetCsv":{
+		"prefix": "SetCsv",
+        "body": [
+            "SetCsv(cLayout, cTxtFiel, xAlias)"
+        ],
+		"description": "SetCsv() - Método utilizado para informar um arquivo CSV."
+	 },
+	 "SetModel":{
+		"prefix": "SetModel",
+        "body": [
+            "SetModel(oModel)"
+        ],
+		"description": "SetModel() - Método utilizado para ativar o modelo que será utilizado nas operações em fontes MVC."
+	 },
+	 "SetXml":{
+		"prefix": "SetXml",
+        "body": [
+            "SetXml(cXml)"
+        ],
+		"description": "SetXml() - Método utilizado para informar um layout de importação XML."
+	 },
+	 "TabForTxt":{
+		"prefix": "TabForTxt",
+        "body": [
+            "TabForTxt(cPath, nExtensao, nTipo, aTables)"
+        ],
+		"description": "TabForTxt () - Método para converter dados de tabelas para arquivo de texto."
+	 },
+	 "Txt2Array":{
+		"prefix": "Txt2Array",
+        "body": [
+            "Txt2Array( cArqTxt, cCond, aReplace)"
+        ],
+		"description": "Txt2Array() - Método que transforma um arquivo texto em array."
+	 },
+	 "UTAddLine":{
+		"prefix": "UTAddLine",
+        "body": [
+            "UTAddLine(cModel)"
+        ],
+		"description": "UTAddLine() - Método utilizado para incluir uma linha em um modelo de dados ou em um array."
+	 },
+	 "UTAlterAutoCont":{
+		"prefix": "UTAlterAutoCont",
+        "body": [
+            "UTAlterAutoCont(cTable, nOrder, cSeek, aData)"
+        ],
+		"description": "UTAlterAutoCont() - Método para alterar um campo em alguma tabela autocontida por TestCase tendo em vista que as tabelas autocontidas são sempre recriadas nos appends."
+	 },
+	 "UTAlterSM0":{
+		"prefix": "UTAlterSM0",
+        "body": [
+            "UTAlterSM0(cAltFil, cCampo, xValue)"
+        ],
+		"description": "UTAlterSM0() - Método para alterar um campo  no SIGAMAT do sistema."
+	 },
+	 "UTAppendData":{
+		"prefix": "UTAppendData",
+        "body": [
+            "UTAppendData(cTable, lExcluir,cFile)"
+        ],
+		"description": "UTAppendData() - Apenda os dados para a tabela da base utilizada conforme appServer.ini."
+	 },
+	 "UTArqCompare":{
+		"prefix": "UTArqCompare",
+        "body": [
+            "UTArqCompare(cPath, cFileModel, cFileTest, cIdLinha, aReplace)"
+        ],
+		"description": "UTArqCompare() - Método que compara arquivo inteiro ou parcial."
+	 },
+	 "UTAtzPsw":{
+		"prefix": "UTAtzPsw",
+        "body": [
+            "UTAtzPsw()"
+        ],
+		"description": "UTArqCompare() - Método para atualizar os SIGAPSS.spf, de acordo como o backup da base congelada."
+	 },
+	 "UTAuditField":{
+		"prefix": "UTAuditField",
+        "body": [
+            "UTAuditField(cTable, cField)"
+        ],
+		"description": "UTAuditField() - Método para auditar um campo específico de uma tabela, utilizando o Audit Trail."
+	 },
+	 "UTAuditTable":{
+		"prefix": "UTAuditTable",
+        "body": [
+            "UTAuditTable(cTable)"
+        ],
+		"description": "UTAuditTable() - Método para Auditar uma tabela inteira."
+	 },
+	 "UTChangePergunte":{
+		"prefix": "UTChangePergunte",
+        "body": [
+            "UTChangePergunte( cGrupo, cOrdem, xValue ) "
+        ],
+		"description": "UTChangePergunte() - Metodo que ira alterar o conteúdo das perguntas do SX1."
+	 },
+	 "UTCheckAudit":{
+		"prefix": "UTCheckAudit",
+        "body": [
+            "UTCheckAudit(cRptName, lUseTxt, lConvAcent, cOrder)"
+        ],
+		"description": "UTCheckAudit() - Extrai os dados das tabelas de auditoria e compara com arquivo base."
+	 },
+	 "UTCheckDB":{
+		"prefix": "UTCheckDB",
+        "body": [
+            "UTCheckDB( cAlias, cField, xValue )"
+        ],
+		"description": "UTCheckDB() - Método utilizado para verificações de resultado esperado, valida se o resultado do campo especificado confere com o conteúdo gravado no banco de dados."
+	 },
+	 "UTClearDB":{
+		"prefix": "UTClearDB",
+        "body": [
+            "UTClearDB(aAlias)"
+        ],
+		"description": "UTClearDB() - Método utilizado para limpar os dados de tableas especificas conforme informado no parâmetro."
+	 },
+	 "UTCloseFilial":{
+		"prefix": "UTCloseFilial",
+        "body": [
+            "UTCloseFilial()"
+        ],
+		"description": "UTCloseFilial() - Método utilizado para fechar a empresa após a execução dos casos de testes."
+	 },
+	 "UTCommitData":{
+		"prefix": "UTCommitData",
+        "body": [
+			"UTCommitData( bExec, xParam1, xParam2… xParam20 )"
+        ],
+		"description": "UTCommitData() - Função que executa o commit de teste e captura o erro, se tiver."
+	 },
+	 "UTContDB":{
+		"prefix": "UTContDB",
+        "body": [
+			"UTContDB( cAlias, nCount )"
+        ],
+		"description": "UTContDB() - Método utilizado para contar a quantidade de registros de uma determinada tabela."
+	 },
+	 "UTCountRows":{
+		"prefix": "UTCountRows",
+        "body": [
+			"UTCountRows( cTable, cFilter )"
+        ],
+		"description": "UTCountRows() - Método para contagem de linhas em uma determinada tabela de acordo com um filtro utilizado para pesquisa."
+	 },
+	 "UTDelPsw":{
+		"prefix": "UTDelPsw",
+        "body": [
+			"UTDelPsw()"
+        ],
+		"description": "UTDelPsw() - Método que irá apagar o SIGAPSS.SPF."
+	 },
+	 "UTEAIActivate":{
+		"prefix": "UTDelPsw",
+        "body": [
+			"UTEAIActivate( cProgram, cFormat )"
+        ],
+		"description": "UTEAIActivate() - Metodo que irá ativar a utilização da configuração de Envio do EAI."
+	 },
+	 "UTExecEAI":{
+		"prefix": "UTExecEAI",
+        "body": [
+			"UTExecEAI( cCodigo )"
+        ],
+		"description": "UTExecEAI() - Método de execução da mensagem única de ENVIO."
+	 },
+	 "UTVldEAI":{
+		"prefix": "UTVldEAI",
+        "body": [
+			"UTVldEAI( cProgram, cTestCase, cFormat )"
+        ],
+		"description": "UTVldEAI() - Método utilizado para comparar o arquivo xml gerado na mensagem única de ENVIO."
+	 },
+	 "UTFindReg":{
+		"prefix": "UTFindReg",
+        "body": [
+			"UTFindReg( cTabela, nIndice, cPesq, cFil )"
+        ],
+		"description": "UTFindReg() - Método para encontrar o registro em determinada tabela."
+	 },
+	 "UTGetError":{
+		"prefix": "UTGetError",
+        "body": [
+			"UTGetError()"
+        ],
+		"description": "UTGetError() - Procura e retorna o erro para o MsExecAuto / MVC."
+	 },
+	 "UTGetaCab":{
+		"prefix": "UTGetaCab",
+        "body": [
+			"UTGetaCab()"
+        ],
+		"description": "UTGetaCab() - Metodo para recuperar o aCab declarado através do método UTSetValue()."
+	 },
+	 "UTGetaItens":{
+		"prefix": "UTGetaItens",
+        "body": [
+			"UTGetaItens()"
+        ],
+		"description": "UTGetaItens() - Metodo para recuperar o aItens declarado através do método UTSetValue()."
+	 },
+	 "UTGetWS":{
+		"prefix": "UTGetWS",
+        "body": [
+			"UTGetWS(aHeader,cFile,cGetParms,cURLRest)"
+        ],
+		"description": "UTGetWS() - Método para consumo de APIs via Web Service utilizando GET, o método atende os modelos Rest/JSON e Soap/XML."
+	 },
+	 "UTPostWS":{
+		"prefix": "UTPostWS",
+        "body": [
+			"UTPostWS(cBody,aHeader,cFile,cGetParms,cURLRest)"
+        ],
+		"description": "UTPostWS() - Método para consumo de APIs via Web Service utilizando POST, o método atende os modelos Rest/JSON e Soap/XML."
+	 },
+	 "UTPutWS":{
+		"prefix": "UTPutWS",
+        "body": [
+			"UTPutWS(cBody,aHeader,cFile,cURLRest)"
+        ],
+		"description": "UTPutWS() - Método para consumo de APIs via Web Service utilizando PUT, o método atende os modelos Rest/JSON e Soap/XML."
+	 },
+	 "UTDeleteWS":{
+		"prefix": "UTDeleteWS",
+        "body": [
+			"UTDeleteWS(cBody,aHeader,cFile,cURLRest)"
+        ],
+		"description": "UTDeleteWS() - Método para consumo de APIs via Web Service utilizando DELETE, o método atende os modelos Rest/JSON e Soap/XML."
+	 },
+	 "UTSetAPI":{
+		"prefix": "UTSetAPI",
+        "body": [
+			"UTSetAPI(cApi,cTypeAPI)"
+        ],
+		"description": "UTSetAPI() - Método que define qual será o modelo de API que será consumido, modelos atendidos Rest e Soap."
+	 },
+	 "UTSetAuthorization":{
+		"prefix": "UTSetAuthorization",
+        "body": [
+			"UTSetAuthorization(cUser,cPwd)"
+        ],
+		"description": "UTSetAuthorization() - Método para autenticação de usuário nos scripts de WebService."
+	 },
+	 "UTLoadData":{
+		"prefix": "UTLoadData",
+        "body": [
+			"UTLoadData(lClearDB,aParam )"
+        ],
+		"description": "UTLoadData() - Importação dos layouts XML e execução do layouts CSV."
+	 },
+	 "UTMarkReg":{
+		"prefix": "UTMarkReg",
+        "body": [
+			"UTMarkReg( cTable, cField, cMark )"
+        ],
+		"description": "UTMarkReg() - Método utilizado para marcação física no banco de dados de registros sem a utilização e telas do tipo markBrowse."
+	 },
+	 "UTOpenFilial":{
+		"prefix": "UTOpenFilial",
+        "body": [
+			"UTOpenFilial( cEmpresa, cFil, cMod, aTable, cUser, cPsw )"
+        ],
+		"description": "UTOpenFilial() - Abre a filial de acordo com os parâmetros passados."
+	 },
+	 "UTPrtCompare":{
+		"prefix": "UTPrtCompare",
+        "body": [
+			"UTPrtCompare( cReport )"
+        ],
+		"description": "UTPrtCompare() - Método utilizado para comprar relatórios gerado com baseline."
+	 },
+	 "UTQueryDB":{
+		"prefix": "UTQueryDB",
+        "body": [
+			"UTQueryDB( cTable, cField, cFilter, xValue, cFil )"
+        ],
+		"description": "UTQueryDB() - Método para realizar a query de verificação de resultado esperado."
+	 },
+	 "UTRestParam":{
+		"prefix": "UTRestParam",
+        "body": [
+			"UTRestParam( aParam )"
+        ],
+		"description": "UTRestParam() - Método para restaurar os parâmetros para seus valores default."
+	 },
+	 "UTSetParam":{
+		"prefix": "UTSetParam",
+        "body": [
+			"UTSetParam( cParam, xValue, lChange )"
+        ],
+		"description": "UTSetParam() - Método para alterar os parâmetros (SX6)."
+	 },
+	 "UTSetPE":{
+		"prefix": "UTSetPE",
+        "body": [
+			"UTSetPE(lOption)"
+        ],
+		"description": "UTSetPE() - Método utilizado para habilitar ou desabilitar a execução de pontos de entradas para que seja possível isolar casos de testes do produto padrão e de customizações via ponto de entrada."
+	 },
+	 "UTSerieID":{
+		"prefix": "UTSerieID",
+        "body": [
+			"UTSerieID( cTabela, cCampo, cEspecie, cSerie)"
+        ],
+		"description": "UTSerieID() - Método que verifica novo formato de gravação do ID no campos _SERIE."
+	 },
+	 "UTSetValue":{
+		"prefix": "UTSetValue",
+        "body": [
+			"UTSetValue( cModel, cField, xValue, cAuxiliar )"
+        ],
+		"description": "UTSetValue() - Método utilizado para incluir valor em um campo individualmente ou em um array."
+	 },
+	 "UTStartRpt":{
+		"prefix": "UTStartRpt",
+        "body": [
+			"UTStartRpt( cReport, aListParam, cDef, cPerg, nOrder  )"
+        ],
+		"description": "UTStartRpt() - Método utilizado para a geração de arquivos de relatório."
+	 },
+	 "UTStartTimer":{
+		"prefix": "UTStartTimer",
+        "body": [
+			"UTStartTimer(cOperation )"
+        ],
+		"description": "UTStartTimer() - Método utilizado para marcar o início da marcação de tempo de determinada operação."
+	 },
+	 "UTStopTimer":{
+		"prefix": "UTStopTimer",
+        "body": [
+			"UTStopTimer(cOperation )"
+        ],
+		"description": "UTStopTimer() - Método utilizado para marcar o final da marcação de tempo de determinada operação."
+	 },
+	 "UTPutError":{
+		"prefix": "UTPutError",
+        "body": [
+			"UTPutError(cError)"
+        ],
+		"description": "UTPutError() - Método para incluir um erro manualmente."
+	 },
+	 "UTRestAutoCont":{
+		"prefix": "UTRestAutoCont",
+        "body": [
+			"UTRestAutoCont()"
+        ],
+		"description": "UTRestAutoCont() - Metodo para restaurar as alterações efetuadas na tabela autocontida conforme o método UTAlterAutoCont."
+	 },
+	 "UTRestSM0":{
+		"prefix": "UTRestSM0",
+        "body": [
+			"UTRestSM0(aSM0)"
+        ],
+		"description": "UTRestSM0() - Método para restaurar filial."
+	 },
+	 "UTUpdSpecialKey":{
+		"prefix": "UTUpdSpecialKey",
+        "body": [
+			"UTUpdSpecialKey()"
+        ],
+		"description": "UTUpdSpecialKey() - Método para atualizar a chave SpecialKey do .ini, com o environment+data+hora+segundo. Deverá ser utulizada antes do metódo UTOpenFilial."
 	 }
+	 
+
 }
