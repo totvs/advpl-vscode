@@ -1,3 +1,11 @@
+## 0.10.10
+  - Melhoria via Pull Request: [Menu CleanUp : Adiciona condições para comandos do Menu](https://github.com/killerall/advpl-vscode/pull/267)
+  - Correção da messagem de erro caso o nome do ambiente esteja errado.
+  - Atualização do Alpha para x64 em todos SO.
+
+Agredecimento especial ao:
+ - Izac
+
 ## 0.10.9
   - Correção de compilação em andamento, apos se pedir o ID da  chave de compilação.
   - [4GL - Erro de inicialização do remote](https://github.com/killerall/advpl-vscode/issues/259)
