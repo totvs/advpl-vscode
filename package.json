@@ -78,6 +78,11 @@
                     "default": "",
                     "description": "%advpl.configuration.properties.ADVPLSELECTEDENVIRONMENT%"
                 },
+                "advpl.enableCoverage": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "%advpl.configuration.properties.ADVPLENABLECOVERAGE%"
+                },
                 "advpl.workspaceFolders": {
                     "type": "string",
                     "default": "",
