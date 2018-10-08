@@ -46,6 +46,7 @@
 	"advpl.configuration.properties.ADVPLLOGGER": "Создает лог-файл.",
 	"advpl.configuration.properties.ADVPLPATHPATCHBUILD": "Патч клиента, который должен существовать, чтобы поколение ярославцев. Если файл уже существует, он будет перезаписан.",
 	"advpl.configuration.properties.ADVPLSELECTEDENVIRONMENT": "Среды выбран.",
+	"advpl.configuration.properties.ADVPLENABLECOVERAGE": "Enable or disable coverage system.",
 	"advpl.configuration.properties.ADVPLSTARTPROGRAM": "Начальная программа для Отладки",
 	"advpl.configuration.properties.ADVPLWORKSPACEFOLDERS": "Переменную автоматически обновляется с директории из workspace.",
 	"advpl.configuration.title": "AdvplSuport configuration",

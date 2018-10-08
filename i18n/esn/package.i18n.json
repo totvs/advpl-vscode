@@ -45,6 +45,7 @@
 	"advpl.configuration.properties.ADVPLLOGGER": "Crea archivo de log.",
 	"advpl.configuration.properties.ADVPLPATHPATCHBUILD": "Patch de cliente que debe existir para generación de patchs. En caso que el arquivo ya exista, será sobreescrito.",
 	"advpl.configuration.properties.ADVPLSELECTEDENVIRONMENT": "Ambiente atcual seleccionado.",
+	"advpl.configuration.properties.ADVPLENABLECOVERAGE": "Activar o desactivar el sistema de cobertura.",
 	"advpl.configuration.properties.ADVPLSTARTPROGRAM": "Programa inicial para la Depuración/Debug",
 	"advpl.configuration.properties.ADVPLWORKSPACEFOLDERS": "Variable actualizada automáticamente com los directorios del workspace.",
 	"advpl.configuration.title": "Configuracion Advpl",
