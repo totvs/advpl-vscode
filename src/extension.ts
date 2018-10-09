@@ -21,6 +21,7 @@ import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
+import cmdReplaySelect from './replay/replaySelect';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -61,7 +62,9 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(DeleteSource());
     context.subscriptions.push(DefragRpo());
     context.subscriptions.push(GetDebugPath());
+    context.subscriptions.push(ReplaySelect());
 
+    //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
     //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
     await ensureRuntimeDependencies();
@@ -199,7 +202,10 @@ function createAdvplCompile(cSource: string, cDescription: string) {
 function addAdvplEnvironment() {
     return vscode.commands.registerCommand('advpl.addAdvplEnvironment', cmdAddAdvplEnvironment);
 }
-
+function ReplaySelect()
+{
+    return vscode.commands.registerCommand('advpl.replaySelect', cmdReplaySelect);
+}
 function menucompileProjet() {
     let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', function (context) {
 

@@ -403,6 +403,11 @@
                 "command": "advpl.addAdvplEnvironment",
                 "title": "%advpl.addAdvplEnvironment%"
             }
+            ,
+            {
+                "command": "advpl.replaySelect",
+                "title": "%advpl.replaySelect%"
+            }
         ],
         "keybindings": [
             {
@@ -528,6 +533,72 @@
                         "workspace": "${workspaceRoot}/"
                     }
                 ]
+            },
+            {
+                "type": "advpl-replay",
+                "label": "Advpl Replay Debug",
+                "enableBreakpointsFor": {
+                    "languageIds": [
+                        "advpl","4gl"
+                    ]
+                },
+                "adapterExecutableCommand" :"advpl.getDebugPath",
+                "variables": {
+                    "ReplaySelectFile": "advpl.replaySelect",
+                    "GetEnvInfos": "advpl.getDebugInfos"
+                },
+                "windows": {
+                    "program": "./bin/TdsReplayPlay.exe"
+                },
+                "osx": {
+                    "program": "./bin/alpha/mac/TdsReplayPlay"
+                },
+                "linux": {
+                    "program": "./bin/alpha/linux/TdsReplayPlay"
+                },
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "replayFile",
+                            "enviromentInfo"
+                        ],
+                        "properties": {
+                            "replayFile": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
+                                "default": "${command.ReplaySelectFile}"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
+                                "default": true
+                            },
+                            "enviromentInfo": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
+                                "default": "${command.GetEnvInfos}"
+                            },
+                            "workspace": {
+                                "type": "string",
+                                "default": "${workspaceRoot}/",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.workspace%"
+                            },
+                            "args": {
+                                "type": "array",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.args%",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "default": []
+                            },
+                            "cwd": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.cwd%",
+                                "default": "."
+                            }
+                        }
+                    }
+                }
             }
         ],
         "snippets": [
