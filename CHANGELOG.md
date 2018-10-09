@@ -1,3 +1,9 @@
+## 0.10.11
+  - [MACOS/LINUX/WIN ALPHA](https://github.com/killerall/advpl-vscode/issues/287) Correção de lancamento de Debug por conta do update 1.28.0 do vscode
+  - Melhoria via Pull Request: [Adequacação codereview](https://github.com/killerall/advpl-vscode/pull/284)
+
+Agredecimento especial ao:
+  - Paulo Santos
 ## 0.10.10
   - Melhoria via Pull Request: [Menu CleanUp : Adiciona condições para comandos do Menu](https://github.com/killerall/advpl-vscode/pull/267)
   - Correção da messagem de erro caso o nome do ambiente esteja errado.
