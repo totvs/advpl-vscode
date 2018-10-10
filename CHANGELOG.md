@@ -1,3 +1,6 @@
+## 0.10.12
+ - [LINUX - Compilação - SyntaxError: Unexpected end of JSON input](https://github.com/killerall/advpl-vscode/issues/283)
+ 
 ## 0.10.11
   - [MACOS/LINUX/WIN ALPHA](https://github.com/killerall/advpl-vscode/issues/287) Correção de lancamento de Debug por conta do update 1.28.0 do vscode
   - Melhoria via Pull Request: [Adequacação codereview](https://github.com/killerall/advpl-vscode/pull/284)
