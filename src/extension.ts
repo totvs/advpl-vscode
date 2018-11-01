@@ -20,7 +20,7 @@ import { StringDecoder } from 'string_decoder';
 import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
-import * as debugBrdige from  './utils/debugBridge';
+import * as debugBrdige from './utils/debugBridge';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -32,6 +32,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(startSmartClient());
     context.subscriptions.push(addGetDebugInfosCommand());
     context.subscriptions.push(compile());
+    context.subscriptions.push(compileopenfiles());
     context.subscriptions.push(buildPPO());
     context.subscriptions.push(menucompile());
     context.subscriptions.push(menucompilemulti());
@@ -246,6 +247,37 @@ function menucompiletextfile() {
     return disposable;
 }
 
+function compileopenfiles() {
+    let disposable = vscode.commands.registerCommand('advpl.compileopenfiles', function () {
+        if (isCompiling) {
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+        }
+        else {
+            let fileContent = "";
+            let cSource = vscode.workspace.rootPath + "\\openFilesAdvpl.txt";
+            vscode.workspace.textDocuments.forEach(
+                (document) => {
+                    if (document.languageId === "advpl") {
+                        //Extrair nome do arquivo do caminho dele
+                        let fileNameSplit   = document.fileName.split(/.*[\/|\\]/)[1];
+                        
+                        fileContent += fileNameSplit + "\n";
+                    }
+                }
+            );
+            if (fileContent) {
+                fs.writeFileSync(cSource , fileContent);
+                vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation...') + cSource, 3000);
+                var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source'));
+                if (!(compile == null)) {
+                    compile.compileText(cSource);
+                }
+            }
+        }
+    });
+    return disposable;
+}
+
 function menucompile() {
     let disposable = vscode.commands.registerCommand('advpl.menucompile', function (context) {
 
@@ -344,13 +376,10 @@ function __internal_compile(cSource, editor, lbuildPPO) {
         }
     }
 }
-function GetDebugPath()
-{
-    
-    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {        
-        let path = debugBrdige.getAdvplDebugBridge();        
-        return { command: path};
-        
+function GetDebugPath() {
+    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {
+        let path = debugBrdige.getAdvplDebugBridge();
+        return { command: path };
     });
     return disposable;
 }
@@ -660,8 +689,7 @@ function validEnvironment(environment) {
 
     return msgError;
 }
-async function ensureRuntimeDependencies()
-{
+async function ensureRuntimeDependencies() {
     debugBrdige.installAdvplDebugBridge(OutPutChannel);
-    
+
 }

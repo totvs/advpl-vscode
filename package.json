@@ -399,6 +399,12 @@
         ],
         "keybindings": [
             {
+                "command": "advpl.compileopenfiles",
+                "key": "ctrl+alt+f9",
+                "mac": "cmd+alt+f9",
+                "when": "editorLangId == advpl"
+            },
+            {
                 "command": "advpl.compile",
                 "key": "ctrl+f9",
                 "mac": "cmd+f9",
