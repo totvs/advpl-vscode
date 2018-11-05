@@ -21,5 +21,6 @@
 	"src.advplCompile.startingDefragText": "Запуск дефрагментации RPO...",
 	"src.advplCompile.ppoBuildStartText": "ППО сборка началась в ",
 	"src.advplCompile.ppoBuildFinishedText": "Сборка PPO завершена на ",
-	"src.advplCompile.errorGeneralText": "Ошибка!"
+	"src.advplCompile.errorGeneralText": "Ошибка!",
+	"src.advplCompile.notInformedSource": "Источник для исключения не проинформирован!"
 }

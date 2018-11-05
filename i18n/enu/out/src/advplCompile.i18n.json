@@ -21,5 +21,6 @@
 	"src.advplCompile.startingDefragText": "Starting the defragmentation of the RPO...",
 	"src.advplCompile.ppoBuildStartText": "PPO build started at ",
 	"src.advplCompile.ppoBuildFinishedText": "PPO build finished at ",
-	"src.advplCompile.errorGeneralText": "Error!"
+	"src.advplCompile.errorGeneralText": "Error!",
+	"src.advplCompile.notInformedSource": "Source to be excluded not informed!"
 }
