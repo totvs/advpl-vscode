@@ -104,7 +104,7 @@ function initLanguageServer(context: vscode.ExtensionContext) {
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
-            // The server is implemented in C#         
+            // The server is implemented in C#
             const childProcess = spawn(executablePath, args);
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
@@ -346,11 +346,11 @@ function __internal_compile(cSource, editor, lbuildPPO) {
 }
 function GetDebugPath()
 {
-    
-    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {        
-        let path = debugBrdige.getAdvplDebugBridge();        
+
+    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {
+        let path = debugBrdige.getAdvplDebugBridge();
         return { command: path};
-        
+
     });
     return disposable;
 }
@@ -393,7 +393,7 @@ function CipherPassword() {
 /***
  * Patchs
  */
-/*function PathSelectSource() 
+/*function PathSelectSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectSource', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
@@ -456,8 +456,8 @@ function PathBuild() {
     return disposable;
 }
 
-/*  
-function PathSelectFolder() 
+/*
+function PathSelectFolder()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
@@ -466,7 +466,7 @@ return disposable;
 }
 */
 /*
-function PathFileToBuild() 
+function PathFileToBuild()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', function (context)  {
             var cResource = context._fsPath;
@@ -575,10 +575,9 @@ function selectEnvironment() {
     let disposable = vscode.commands.registerCommand('advpl.selectEnvironment', function (context) {
 
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
-        let envs = obj.map(env => env["environment"]);
+        let envs = obj.filter(env => env["enable"] != false).map(env => env["environment"]); // Filtra somente os ambientes que não estão desabilitados
         let envnames = obj.map(env => env["name"]);
         let list = envs.map((a, i) => envnames[i] == null ? a : envnames[i]);
-
 
         vscode.window.showQuickPick(list).then(function (select) {
             console.log(select);
@@ -663,5 +662,5 @@ function validEnvironment(environment) {
 async function ensureRuntimeDependencies()
 {
     debugBrdige.installAdvplDebugBridge(OutPutChannel);
-    
+
 }

@@ -11,4 +11,5 @@ export default interface IEnvironment{
     language?: string;
     rpoType?: string;
     name?: string;
+    enable?: boolean;
 }
