@@ -1,3 +1,5 @@
+![Version](https://vsmarketplacebadge.apphb.com/version/KillerAll.advpl-vscode.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs/KillerAll.advpl-vscode.svg) ![Rating](https://vsmarketplacebadge.apphb.com/rating-short/KillerAll.advpl-vscode.svg)
+
 # Advpl Language Support
 
 Bem vindo a extensão para desenvolvimento de Advpl no visual code. [VsCode MarketPlace](https://marketplace.visualstudio.com/items?itemName=KillerAll.advpl-vscode)

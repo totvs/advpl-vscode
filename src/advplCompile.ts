@@ -31,6 +31,10 @@ export class advplCompile {
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
         this.isAlpha = config.get<boolean>("alpha_compile");
+        if (process.platform != "win32")        
+        {
+            this.isAlpha = true;
+        }
     }
 
     public validateCompile() {
