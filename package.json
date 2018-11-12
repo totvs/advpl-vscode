@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.12",
+    "version": "0.10.13",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -197,7 +197,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -281,7 +281,9 @@
             {
                 "id": "4gl",
                 "extensions": [
-                    ".4gl"                    
+                    ".4gl",
+                    ".per",
+                    ".msg"
                 ],
                 "aliases": [
                     "4GL(4gl)"                    
@@ -490,6 +492,24 @@
                         }
                     }
                 },
+                "configurationSnippets":[
+                    {
+                        "label": "Advpl Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                    "body": {
+                        "name": "Advpl Debug",
+                        "type": "advpl",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "${workspaceRoot}",
+                        "programRun": "${command:AskForProgramName}",
+                        "stopOnEntry": false,
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "${workspaceRoot}/"
+                    
+                        }
+                    }
+                ],
                 "initialConfigurations": [
                     {
                         "name": "Advpl Debug",
