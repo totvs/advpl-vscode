@@ -1,3 +1,11 @@
+## 0.10.13
+ - Correção da compilação de fontes como ponto(.) no lobo guara.
+ - Adquação do protocolo a pedido do time do Vscode da Microsoft.
+ - [Mac] Compilação.
+ - Debug de JSon Object (Necessario ultimo lobo guara).
+ - [Linux] - Compilação de pasta de resources
+ - [4GL] - Compilação de arquivos per e msg
+ 
 ## 0.10.12
  - [LINUX - Compilação - SyntaxError: Unexpected end of JSON input](https://github.com/killerall/advpl-vscode/issues/283)
  
@@ -7,6 +15,7 @@
 
 Agredecimento especial ao:
   - Paulo Santos
+
 ## 0.10.10
   - Melhoria via Pull Request: [Menu CleanUp : Adiciona condições para comandos do Menu](https://github.com/killerall/advpl-vscode/pull/267)
   - Correção da messagem de erro caso o nome do ambiente esteja errado.
