@@ -108,7 +108,7 @@
                                 ],
                                 "default": "advpl",
                                 "description": "language"
-                                
+
                             },
                             "smartClientPath": {
                                 "type": "string",
@@ -164,6 +164,11 @@
                                 "type": "string",
                                 "default": "",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST%"
+                            },
+                            "enable": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE%"
                             }
                         }
                     }
@@ -286,7 +291,7 @@
                     ".msg"
                 ],
                 "aliases": [
-                    "4GL(4gl)"                    
+                    "4GL(4gl)"
                 ],
                 "configuration": "./4gl.configuration.json"
 

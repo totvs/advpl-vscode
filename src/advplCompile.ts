@@ -51,7 +51,7 @@ export class advplCompile {
             foundEnvironment = false;
             for (let entry of parsedEnvInfos.environments) {
                 if(selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
-                    foundEnvironment = true;                    
+                    foundEnvironment = true;
                     if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl")
                     {
                         this.isAlpha = true;
@@ -301,7 +301,7 @@ export class advplCompile {
                 this.onError();
             }
         }
-        catch (ex) {            
+        catch (ex) {
             this.outChannel.log("Bridge Return:");
             this.outChannel.log(this._lastAppreMsg);
             this.outChannel.log(ex);
@@ -335,6 +335,10 @@ export class advplCompile {
                     that.run_callBack(lRunned);
                 });
 
+            }else{
+                vscode.window.showErrorMessage(localize('src.advplCompile.notInformedSource', 'Source to be excluded not informed!'));
+                this._lastAppreMsg = null
+                this.run_callBack(false);
             }
         });
     }

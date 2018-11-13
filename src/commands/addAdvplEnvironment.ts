@@ -61,7 +61,15 @@ export default function cmdAddAdvplEnvironment(context): any {
         message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password'),
         name: "password",
         type: "password"
-    }, {
+    },
+    {
+        message: localize('src.commands.addAdvplEnvironment.enable', 'Environment Enabled'),
+        name: "enable",
+        type: "list",
+        default: localize('src.extension.yesText', 'Yes'),
+        choices: [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')]
+    },
+    {
         message: localize('src.commands.addAdvplEnvironment.includeListText', 'Selecione as pastas de Include'),
         name: "includeList",
         type: 'folder',
@@ -80,7 +88,9 @@ export default function cmdAddAdvplEnvironment(context): any {
                 passwordCipher: cipher,
                 includeList: answers.includeList,
                 user: answers.user,
-                smartClientPath: answers.smartClientPath
+                smartClientPath: answers.smartClientPath,
+                enable: answers.enable == "Yes" ? true : false
+
             });
             config.update("environments", environments)
         })
