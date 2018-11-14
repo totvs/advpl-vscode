@@ -576,7 +576,7 @@ function selectEnvironment() {
 
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
         let envs = obj.filter(env => env["enable"] != false).map(env => env["environment"]); // Filtra somente os ambientes que não estão desabilitados
-        let envnames = obj.map(env => env["name"]);
+        let envnames = obj.filter(env => env["enable"] != false).map(env => env["name"]); // Filtra somente os ambientes que não estão desabilitados
         let list = envs.map((a, i) => envnames[i] == null ? a : envnames[i]);
 
         vscode.window.showQuickPick(list).then(function (select) {

@@ -89,7 +89,7 @@ export default function cmdAddAdvplEnvironment(context): any {
                 includeList: answers.includeList,
                 user: answers.user,
                 smartClientPath: answers.smartClientPath,
-                enable: answers.enable == "Yes" ? true : false
+                enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false
 
             });
             config.update("environments", environments)
