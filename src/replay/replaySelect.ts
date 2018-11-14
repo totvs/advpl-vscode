@@ -1,15 +1,23 @@
 import CodeAdapter from "../adapter";
 import { window } from "vscode";
+import * as path from 'path';
 
-export default function cmdReplaySelect(context): any {
+let lastFile = null;
 
-  let replay=window.showOpenDialog({canSelectFiles:true});
-  console.log(replay);
-    /*  let adapter = new CodeAdapter();
+export default async function cmdReplaySelect(context): Promise<any>  {
+
+    if( lastFile === null)
+        lastFile= await window.showOpenDialog({canSelectFiles:true});
+  //console.log(replay);
+    let adapter = new CodeAdapter();
+    let filename = path.basename(lastFile[0].fsPath);
+
     const questions = [{
-        message: "Replay file",
+        message: filename,
         name: "server",
-        default: "localhost"
+        type: "list",
+        default: "131227A",
+        choices: ['131227A', '170117A',"Change File"]
     }];
-    adapter.prompt(questions, answers => {});*/
+    adapter.prompt(questions, answers => {});
 }
