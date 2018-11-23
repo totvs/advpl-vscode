@@ -64,8 +64,8 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 Utilizada as teclas padrões do VsCode
 
 * F5 - Run/Contiue
-* F10 - Step Into
-* F11 - Step Over
+* F10 - Step Over
+* F11 - Step Into
 
 ## Localização
 

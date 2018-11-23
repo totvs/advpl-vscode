@@ -1,3 +1,6 @@
+## 0.10.14
+ - [Debug depois de atualização do VS.COD](https://github.com/killerall/advpl-vscode/issues/301)
+ 
 ## 0.10.13
  - Correção da compilação de fontes como ponto(.) no lobo guara.
  - Adquação do protocolo a pedido do time do Vscode da Microsoft.
