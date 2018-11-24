@@ -1,3 +1,6 @@
+## 0.10.15
+ - Correçoes ele relação ao Debug cair depois da atualização do vscode.
+ 
 ## 0.10.14
  - [Debug depois de atualização do VS.COD](https://github.com/killerall/advpl-vscode/issues/301)
  
