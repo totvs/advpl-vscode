@@ -1,3 +1,7 @@
+## 0.10.16
+ - [4GL] Compilação de fonte com Globals.
+ - [4GL] Validação de INI ok com RPOPrefix
+ 
 ## 0.10.15
  - Correçoes ele relação ao Debug cair depois da atualização do vscode.
  
