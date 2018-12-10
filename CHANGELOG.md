@@ -1,3 +1,6 @@
+## 0.10.17
+ - [Linux/MAC/Alpha Windows] Correção de Watch no inicio do debug fazia o debug parar 
+ 
 ## 0.10.16
  - [4GL] Compilação de fonte com Globals.
  - [4GL] Validação de INI ok com RPOPrefix
