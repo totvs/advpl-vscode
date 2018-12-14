@@ -21,6 +21,7 @@ import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
+import * as replayUtil from './replay/replayUtil';
 import cmdReplaySelect from './replay/replaySelect';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
@@ -63,7 +64,8 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(DefragRpo());
     context.subscriptions.push(GetDebugPath());
     context.subscriptions.push(ReplaySelect());
-
+    context.subscriptions.push(getReplayPath());
+    
     //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
     //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
@@ -360,6 +362,17 @@ function GetDebugPath()
     });
     return disposable;
 }
+function getReplayPath()
+{
+
+    let disposable = vscode.commands.registerCommand('advpl.getReplayPath', function (context) {
+        let path = replayUtil.getReplayExec();
+        return { command: path};
+
+    });
+    return disposable;
+}
+
 function addGetDebugInfosCommand() {
     let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context) {
         var workSpaceInfo = vscode.workspace.getConfiguration("advpl");

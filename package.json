@@ -346,6 +346,11 @@
                 "command": "advpl.getDebugPath",
                 "title": "Path"
             },
+            {
+                "command": "advpl.getReplayPath",
+                "title": "Path"
+            },
+            
 
             {
                 "command": "advpl.getAuthorizationId",
@@ -515,7 +520,7 @@
                         "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
                         "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceRoot}/"
+                        "workspace": "${workspaceFolder}/"
                     
                         }
                     }
@@ -542,13 +547,13 @@
                         "advpl","4gl"
                     ]
                 },
-                "adapterExecutableCommand" :"advpl.getDebugPath",
+                "adapterExecutableCommand" :"advpl.getReplayPath",
                 "variables": {
                     "ReplaySelectFile": "advpl.replaySelect",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
                 "windows": {
-                    "program": "./bin/TdsReplayPlay.exe"
+                    "program": "C:/Totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe"
                 },
                 "osx": {
                     "program": "./bin/alpha/mac/TdsReplayPlay"
@@ -566,7 +571,7 @@
                             "replayFile": {
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
-                                "default": "${command.ReplaySelectFile}"
+                                "default": "command.ReplaySelectFile"
                             },
                             "stopOnEntry": {
                                 "type": "boolean",
@@ -580,7 +585,7 @@
                             },
                             "workspace": {
                                 "type": "string",
-                                "default": "${workspaceRoot}/",
+                                "default": "${workspaceFolder}/",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.workspace%"
                             },
                             "args": {
@@ -599,6 +604,35 @@
                         }
                     }
                 }
+                ,"configurationSnippets":[
+                    {
+                        "label": "Replay Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                    "body": {
+                        "name": "Replay Debug",
+                        "type": "advpl-replay",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "^\"\\${workspaceFolder}/\"",
+                        "stopOnEntry": false,
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "^\"\\${workspaceFolder}/\""
+                    
+                        }
+                    }
+                ]
+                ,"initialConfigurations": [
+                {
+                    "name": "Replay Debug",
+                    "type": "advpl-replay",
+                    "request": "launch",
+                    "args": [],
+                    "cwd": "${workspaceFolder}",                    
+                    "stopOnEntry": false,
+                    "enviromentInfo": "${command:GetEnvInfos}",
+                    "workspace": "${workspaceFolder}/"
+                }
+            ]
             }
         ],
         "snippets": [

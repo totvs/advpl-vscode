@@ -36,5 +36,6 @@ export function getReplayExec(){
     {
         path +=  "TdsReplayPlay";        
     }        
-    return path;
+    //return path;
+    return "C:/Totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
 }

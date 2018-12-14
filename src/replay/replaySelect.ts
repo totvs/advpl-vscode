@@ -6,6 +6,7 @@ let lastFile = null;
 
 export default async function cmdReplaySelect(context): Promise<any>  {
 
+    return "teste";
     if( lastFile === null)
         lastFile= await window.showOpenDialog({canSelectFiles:true});
   //console.log(replay);
@@ -20,4 +21,5 @@ export default async function cmdReplaySelect(context): Promise<any>  {
         choices: ['131227A', '170117A',"Change File"]
     }];
     adapter.prompt(questions, answers => {});
+    
 }
