@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.17",
+    "version": "0.10.18",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -569,9 +569,9 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/killerall/advpl-vscode.git"
+        "url": "https://github.com/totvs/advpl-vscode.git"
     },
     "bugs": {
-        "url": "https://github.com/killerall/advpl-vscode/issues"
+        "url": "https://github.com/totvs/advpl-vscode/issues"
     }
 }

@@ -1,3 +1,6 @@
+## 0.10.18
+ - Projeto movido para dentro do repositorio da TOTVS
+ 
 ## 0.10.17
  - [Linux/MAC/Alpha Windows] Correção de Watch no inicio do debug fazia o debug parar 
  
