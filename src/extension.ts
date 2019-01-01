@@ -3,6 +3,7 @@ import * as nls from 'vscode-nls';
 const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
 
 import * as vscode from 'vscode';
+import { WorkspaceFolder, DebugConfiguration, ProviderResult, CancellationToken } from 'vscode';
 import { advplCompile } from './advplCompile';
 import { smartClientLaunch } from './smartClientLaunch';
 import { advplConsole } from './advplConsole';
@@ -21,8 +22,7 @@ import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
-import * as replayUtil from './replay/replayUtil';
-import cmdReplaySelect from './replay/replaySelect';
+import {replayPlay} from './replay/replaySelect';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -64,7 +64,15 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(DefragRpo());
     context.subscriptions.push(GetDebugPath());
     context.subscriptions.push(ReplaySelect());
-    context.subscriptions.push(getReplayPath());
+    //context.subscriptions.push(getReplayPath());
+
+    // register a configuration provider for 'mock' debug type
+	const provider = new ReplayConfigurationProvider();
+    context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
+    
+    const factory = new ReplayDebugAdapterDescriptorFactory();
+		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl-replay', factory));
+		context.subscriptions.push(factory);
     
     //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
@@ -206,7 +214,10 @@ function addAdvplEnvironment() {
 }
 function ReplaySelect()
 {
-    return vscode.commands.registerCommand('advpl.replaySelect', cmdReplaySelect);
+    return vscode.commands.registerCommand('advpl.replaySelect', function (context){
+        let oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+        return oreplayPlay.cmdReplaySelect();
+    });
 }
 function menucompileProjet() {
     let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', function (context) {
@@ -362,7 +373,7 @@ function GetDebugPath()
     });
     return disposable;
 }
-function getReplayPath()
+/*function getReplayPath()
 {
 
     let disposable = vscode.commands.registerCommand('advpl.getReplayPath', function (context) {
@@ -372,7 +383,7 @@ function getReplayPath()
     });
     return disposable;
 }
-
+*/
 function addGetDebugInfosCommand() {
     let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context) {
         var workSpaceInfo = vscode.workspace.getConfiguration("advpl");
@@ -682,4 +693,45 @@ async function ensureRuntimeDependencies()
 {
     debugBrdige.installAdvplDebugBridge(OutPutChannel);
 
+}
+
+class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
+    resolveDebugConfiguration(folder: WorkspaceFolder | undefined, config: DebugConfiguration, token?: CancellationToken): ProviderResult<DebugConfiguration> {
+
+		// if launch.json is missing or empty
+		if (!config.type && !config.request && !config.name) {
+			const editor = vscode.window.activeTextEditor;
+			if (editor && editor.document.languageId === 'advpl') {
+				config.type = 'advpl-replay';
+				config.name = 'Launch';
+				config.request = 'launch';		
+				config.stopOnEntry = true;
+			}
+		}
+
+		/*if (!config.program) {
+			return vscode.window.showInformationMessage("Cannot find a program to debug").then(_ => {
+				return undefined;	// abort launch
+			});
+		}*/
+
+		return config;
+	}
+
+}
+class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
+
+	
+
+	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
+
+        const args = ["--replayInfo","--replayFile=C:/temp/treplay/com_rpc_tdsReplay-2018-11-10.trplay"];
+        const program = "C:/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
+		// make VS Code connect to debug server
+		return new vscode.DebugAdapterExecutable(program, args);
+	}
+
+	dispose() {
+	
+	}
 }
