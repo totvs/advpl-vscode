@@ -12,9 +12,14 @@ const localize = nls.loadMessageBundle();
 export class replayPlay {
     private outChannel: advplConsole;
     private diagnosticCollection: vscode.DiagnosticCollection;
+    private selectedReplay: string;
     private replayPath: string;
     private replayInfos : any;
     public _callResult: string;
+
+    public getSelected() : string {
+        return this.selectedReplay;
+    }
 
     constructor( d?: vscode.DiagnosticCollection, OutPutChannel?) {
         
@@ -84,6 +89,7 @@ export class replayPlay {
             choices
         }];
         adapter.prompt(questions, answers => {
+            this.selectedReplay = answers.Exec.substring(0,answers.Exec.lastIndexOf("-"));
             console.log(answers);
         });  
     }

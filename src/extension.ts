@@ -28,6 +28,7 @@ let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
+let oreplayPlay : replayPlay;
 
 export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getProgramName());
@@ -215,7 +216,8 @@ function addAdvplEnvironment() {
 function ReplaySelect()
 {
     return vscode.commands.registerCommand('advpl.replaySelect', function (context){
-        let oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+        if (oreplayPlay === null)
+            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
         return oreplayPlay.cmdReplaySelect();
     });
 }
@@ -727,6 +729,8 @@ class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescript
 
         const args = ["--replayInfo","--replayFile=C:/temp/treplay/com_rpc_tdsReplay-2018-11-10.trplay"];
         const program = "C:/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
+        //if(oreplayPlay !== null)
+        //    oreplayPlay.getSelected()
 		// make VS Code connect to debug server
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
