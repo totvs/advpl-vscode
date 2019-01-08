@@ -404,7 +404,7 @@
             {
                 "command": "advpl.replaySelect",
                 "title": "%advpl.replaySelect%"
-            }
+            }            
         ],
         "keybindings": [
             {
@@ -541,7 +541,8 @@
                 },
                 
                 "variables": {
-                    "ReplaySelectFile": "advpl.replaySelect",
+                    "ReplayTmpDir": "advpl.replayTmpDir",
+                    "ReplayExecId": "advpl.replayExecId",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
                 "windows": {
@@ -556,14 +557,19 @@
                 "configurationAttributes": {
                     "launch": {
                         "required": [
-                            "replayFile",
+                            "ReplayTmpDir",                            
                             "enviromentInfo"
                         ],
                         "properties": {
-                            "replayFile": {
+                            "ReplayTmpDir": {
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
-                                "default": "command.ReplaySelectFile"
+                                "default": "${command:ReplayTmpDir}"
+                            },
+                            "replayExecId": {
+                                "type": "string",
+                                "description": "Id da execucao",
+                                "default": "${command:ReplayExecId}"
                             },
                             "stopOnEntry": {
                                 "type": "boolean",

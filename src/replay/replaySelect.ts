@@ -15,11 +15,20 @@ export class replayPlay {
     private selectedReplay: string;
     private replayPath: string;
     private replayInfos : any;
+    private replayFile: string;
+    private tmpDir: string;
     public _callResult: string;
 
     public getSelected() : string {
         return this.selectedReplay;
     }
+    public getReplayFile() : string {
+        return this.replayFile;
+    }
+    public getTmpDir() : string {
+        return this.tmpDir;
+    }
+    
 
     constructor( d?: vscode.DiagnosticCollection, OutPutChannel?) {
         
@@ -34,6 +43,7 @@ export class replayPlay {
         _args.push("--replayInfo" );
         _args.push("--replayFile=" + sourceName);
         this._callResult = "";
+        this.replayFile = sourceName;
         var that = this;
         this.outChannel.log("Get Replay Info"); //localize("src.advplCompile.compilationStartedText", "Compilation started at ") + new Date() + "\n");
         var child = child_process.spawn(this.replayPath, _args);
@@ -77,6 +87,7 @@ export class replayPlay {
         let adapter = new CodeAdapter();        
         let choices = new Array<string>();
         console.log(this.replayInfos);
+        this.tmpDir = this.replayInfos.tmpDir;
         this.replayInfos.execs.forEach(element => {
             let start = new Date(element.recordingStart);
             choices.push(element.id + "-"+ start.toLocaleString())
