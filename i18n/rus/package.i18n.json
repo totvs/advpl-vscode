@@ -56,5 +56,6 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Окружающей среды Информация для Отладки. Внутреннего использования",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Программы для Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
+	"advpl.replaySelect": "Advpl - Select replay file "
 }

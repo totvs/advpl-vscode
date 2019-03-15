@@ -11,5 +11,7 @@
 	"src.commands.addAdvplEnvironment.userText": "Пользователь",
 	"src.commands.addAdvplEnvironment.passwordText": "Пароль",
 	"src.commands.addAdvplEnvironment.includeListText": "Include список",
-	"src.commands.addAdvplEnvironment.enable": "Окружающая среда включена для использования?"
+	"src.commands.addAdvplEnvironment.enable": "Окружающая среда включена для использования?",
+	"src.extension.yesText": "да",
+	"src.extension.noText": "Нет"
 }

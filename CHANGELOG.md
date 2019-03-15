@@ -1,3 +1,8 @@
+## 0.11.0
+ - Melhoria: Implmentação da reprodução de arquivos de Replay!
+ - Correção: [WebService Client WS Gerando vazio](https://github.com/totvs/advpl-vscode/issues/312)
+ - Correções de issues menores
+
 ## 0.10.17
  - [Linux/MAC/Alpha Windows] Correção de Watch no inicio do debug fazia o debug parar 
  

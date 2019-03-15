@@ -8,19 +8,20 @@ import * as nls from 'vscode-nls';
 
 const localize = nls.loadMessageBundle();
 
+
 function getReplayBinPath (){
     let path = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
     if (process.platform == "win32") {
-            path+= "\\bin\\";
+        path += "\\bin\\alpha\\win\\";
     }
     else
     {
         if (process.platform == "darwin")
         {
-            path+= "/bin/mac/";
+            path+= "/bin/alpha/mac/";
         }
         else {
-            path+=  "/bin/linux/";
+            path+=  "/bin/alpha/linux/";
         }
     }
 
@@ -36,6 +37,6 @@ export function getReplayExec(){
     {
         path +=  "TdsReplayPlay";        
     }        
-    //return path;
-    return "C:/totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
+    return path;
+    //return "C:/totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
 }

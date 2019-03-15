@@ -11,5 +11,7 @@
 	"src.commands.addAdvplEnvironment.userText": "Usuário",
 	"src.commands.addAdvplEnvironment.passwordText": "Senha",
 	"src.commands.addAdvplEnvironment.includeListText": "Selecione as pastas de Include",
-	"src.commands.addAdvplEnvironment.enable": "Ambiente Habilitado para Uso?"
+	"src.commands.addAdvplEnvironment.enable": "Ambiente Habilitado para Uso?",
+	"src.extension.yesText": "Sim",
+	"src.extension.noText": "Não"
 }

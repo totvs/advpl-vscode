@@ -56,5 +56,6 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Info for Debug. Internal use",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Program for Debugging.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
+	"advpl.replaySelect": "Advpl - Select replay File"
 }

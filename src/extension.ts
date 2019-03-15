@@ -220,6 +220,11 @@ function ReplaySelect()
     return vscode.commands.registerCommand('advpl.replaySelect', function (context){
         if (oreplayPlay === undefined)
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+        else
+        {
+            oreplayPlay.clearReplayInfos();            
+            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+        }
         return oreplayPlay.cmdReplaySelect();
     });
 }
@@ -248,7 +253,7 @@ function getReplayExecId()
 function menucompileProjet() {
     let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', function (context) {
 
-        var cSource = context._fsPath;
+        var cSource = context.fsPath;
         if (isCompiling) {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
@@ -275,7 +280,7 @@ function menucompiletextfile() {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
-            var cSource = context._fsPath;
+            var cSource = context.fsPath;
             if (fs.lstatSync(cSource).isFile()) {
                 vscode.window.setStatusBarMessage(localize('src.extension.projectStartTextFileText', 'Starting project files from text file') + cSource, 3000);
                 var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project'));
@@ -299,7 +304,7 @@ function menucompile() {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
-            var cSource = context._fsPath;
+            var cSource = context.fsPath;
             vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation...') + cSource, 3000);
             var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source'));
             if (!(compile == null)) {
@@ -314,7 +319,7 @@ function menucompilemulti() {
     let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', function (context) {
 
         //var editor = vscode.window.activeTextEditor;
-        var cResource = context._fsPath;
+        var cResource = context.fsPath;
         if (fs.lstatSync(cResource).isDirectory()) {
             if (isCompiling) {
                 OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));

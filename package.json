@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.17",
+    "version": "0.11.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -344,7 +344,7 @@
             {
                 "command": "advpl.getDebugPath",
                 "title": "Path"
-            },            
+            },
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -404,7 +404,7 @@
             {
                 "command": "advpl.replaySelect",
                 "title": "%advpl.replaySelect%"
-            }            
+            }
         ],
         "keybindings": [
             {
@@ -539,7 +539,6 @@
                         "4gl"
                     ]
                 },
-                
                 "variables": {
                     "ReplayTmpDir": "advpl.replayTmpDir",
                     "ReplayExecId": "advpl.replayExecId",
@@ -557,7 +556,7 @@
                 "configurationAttributes": {
                     "launch": {
                         "required": [
-                            "ReplayTmpDir",                            
+                            "ReplayTmpDir",
                             "enviromentInfo"
                         ],
                         "properties": {
@@ -650,12 +649,12 @@
         "@types/mocha": "^2.2.43",
         "@types/node": "^6.0.40",
         "del": "^3.0.0",
-        "mocha": "^4.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
+        "gulp-typescript": "^3.2.2",
+        "mocha": "^4.0.0",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "gulp-typescript": "^3.2.2",
         "vsce": "^1.32.0",
         "vscode": "^1.1.10",
         "vscode-debugadapter-testsupport": "^1.29.0",
