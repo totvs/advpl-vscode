@@ -23,6 +23,7 @@ import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
+import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -84,7 +85,9 @@ export async function activate(context: vscode.ExtensionContext) {
     //Environment no bar
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-
+    
+    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath);
+    vscode.window.registerTreeDataProvider('replayTimeLine', replayTimeLineProvider);
     //initLanguageServer(context);
     let api = {
         writeAdvplConsole(cLog) {

@@ -10,7 +10,7 @@
     },
     "categories": [
         "Programming Languages"
-    ],
+    ],    
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",
@@ -37,6 +37,22 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "replay-time",
+                    "title": "Replay TimeLine Explorer",
+                    "icon": "images/replay.png"
+                }
+            ]
+        },
+        "views": {
+            "replay-time": [
+                {
+                    "id": "replayTimeLine",
+                    "name": "Replay TimeLine"
+                }
+            ]},
         "menus": {
             "explorer/context": [
                 {
