@@ -85,8 +85,8 @@ export async function activate(context: vscode.ExtensionContext) {
     //Environment no bar
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    
-    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath);
+    oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath,oreplayPlay);
     vscode.window.registerTreeDataProvider('replayTimeLine', replayTimeLineProvider);
     //initLanguageServer(context);
     let api = {
@@ -94,7 +94,7 @@ export async function activate(context: vscode.ExtensionContext) {
             OutPutChannel.log(cLog);
         }
     };
-
+    vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine( source, line));
     return api;
 }
 
@@ -218,16 +218,14 @@ function createAdvplCompile(cSource: string, cDescription: string) {
 function addAdvplEnvironment() {
     return vscode.commands.registerCommand('advpl.addAdvplEnvironment', cmdAddAdvplEnvironment);
 }
+
 function ReplaySelect()
 {
     return vscode.commands.registerCommand('advpl.replaySelect', function (context){
-        if (oreplayPlay === undefined)
-            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
-        else
-        {
+        
             oreplayPlay.clearReplayInfos();            
-            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
-        }
+            //oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+        
         return oreplayPlay.cmdReplaySelect();
     });
 }

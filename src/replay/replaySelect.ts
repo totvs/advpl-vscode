@@ -7,6 +7,8 @@ import * as nls from 'vscode-nls';
 import { getReplayExec } from "./replayUtil";
 import CodeAdapter from "../adapter";
 import fs = require('fs');
+import { TimeLine } from "./replaytTimeLineTree";
+import { FileExistsRecursive } from "../utils/filesLocation";
 let lastFile = null;
 
 const localize = nls.loadMessageBundle();
@@ -18,8 +20,12 @@ export class replayPlay {
     private replayInfos : any;
     private replayFile: string;
     private tmpDir: string;
+    private replayTimeLine : TimeLine[];
     public _callResult: string;
 
+	get timeLine(): TimeLine[] {
+		return this.replayTimeLine;
+	}
     public getSelected() : string {
         return this.selectedReplay;
     }
@@ -52,6 +58,11 @@ export class replayPlay {
         {
 
         }
+        this.selectedReplay = undefined;    
+        this.replayInfos = undefined;
+        this.replayFile = undefined;
+        this.tmpDir = undefined;
+    
         lastFile = null;        
     }
     private async getReplayInfo(sourceName: string) {    
@@ -75,11 +86,80 @@ export class replayPlay {
         });
         
     }
+    private async getTimeLine() {    
+        var _args = new Array<string>();
+        _args.push("--getTimeLine" );
+        _args.push("--tempDir=" + this.tmpDir);
+        _args.push("--execId=" + this.selectedReplay);
+        
+        this._callResult = "";        
+        var that = this;
+        this.outChannel.log(localize("src.replay.replaySelect.getReplayInfo", "Getting replay Info...") );
+        var child = child_process.spawn(this.replayPath, _args);
+    
+        child.stdout.on("data", function (data) {
+            that._callResult += data;
+        });
+    
+        child.on("exit", function (data) {
+            var lRunned = data == 0            
+            
+            that.getTimeLinecallBack(lRunned);
+        });
+        
+    }
+    public async openFileInLine(source : string, line : string)
+    {
+        //console.log(source);
+        let rootWorkspace = vscode.workspace.workspaceFolders[0];
+        //let fileLoca : FileCache = new FileCache();
+        let fileLoca = FileExistsRecursive ( rootWorkspace.uri.fsPath, source)
+        if (fileLoca != undefined)
+        {
+            
+            var openPath = vscode.Uri.file(fileLoca); //A request file path
+            vscode.workspace.openTextDocument(openPath).then(doc => {
+               vscode.window.showTextDocument(doc).then(e=> {
+                   let range = e.document.lineAt(parseInt(line)-1).range;
+                   e.selection = new vscode.Selection(range.start,range.end);
+                   e.revealRange(range);
+               })           
+                });
+        }
+        //console.log(fileLoca);
+    }
+    private getTimeLinecallBack(lOk) {
+        try {
+            if (this._callResult != null) {
+                var parserd = JSON.parse(this._callResult);                
+                this.replayTimeLine = [];
+                for (let entry of parserd.timeline) {
+                    let treeItem= new TimeLine(entry.function + "(" + entry.source+")"  + "(" + entry.line+ ")" ,entry.source,entry.line, new Date(entry.timestamp),vscode.TreeItemCollapsibleState.None);
+                    treeItem.command = {
+                        command: 'advpl.replay.openFileInLine',
+                        title: '',
+                        arguments: [treeItem.source,treeItem.line]
+                    };
+                    this.replayTimeLine.push(treeItem);
+
+                }
+                
+                
+            }
+            }
+            catch (ex) {
+                this.outChannel.log("replay Return:");               
+                this.outChannel.log(ex);
+             //   this.onError();
+            }
+
+    }
     private run_callBack(lOk) {
         try {
             if (this._callResult != null) {
                 this.replayInfos = JSON.parse(this._callResult);
                 this.promptInfo();
+                
             }
             }
             catch (ex) {
@@ -119,6 +199,7 @@ export class replayPlay {
             let strDebug =  localize("src.replay.replaySelect.strDebug", " file. Please Launch debug with advplL-type=replay");
             this.selectedReplay = answers.Exec.substring(0,answers.Exec.lastIndexOf("|")-1);            
             this.outChannel.log(strThe +this.selectedReplay + strRec + this.replayFile+ strDebug);
+            this.getTimeLine();
             //console.log(answers);
         });  
     }
