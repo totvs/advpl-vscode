@@ -10,7 +10,7 @@
     },
     "categories": [
         "Programming Languages"
-    ],    
+    ],
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",
@@ -52,7 +52,8 @@
                     "id": "replayTimeLine",
                     "name": "Replay TimeLine"
                 }
-            ]},
+            ]
+        },
         "menus": {
             "explorer/context": [
                 {
@@ -360,7 +361,7 @@
             {
                 "command": "advpl.getDebugPath",
                 "title": "Path"
-            },
+            },            
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -554,21 +555,13 @@
                         "advpl",
                         "4gl"
                     ]
-                },
+                },                
                 "variables": {
                     "ReplayTmpDir": "advpl.replayTmpDir",
                     "ReplayExecId": "advpl.replayExecId",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
-                "windows": {
-                    "program": "C:/Totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe"
-                },
-                "osx": {
-                    "program": "./bin/alpha/mac/TdsReplayPlay"
-                },
-                "linux": {
-                    "program": "./bin/alpha/linux/TdsReplayPlay"
-                },
+                          
                 "configurationAttributes": {
                     "launch": {
                         "required": [
@@ -580,7 +573,7 @@
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
                                 "default": "${command:ReplayTmpDir}"
-                            },
+                            },                             
                             "replayExecId": {
                                 "type": "string",
                                 "description": "Id da execucao",
@@ -628,7 +621,9 @@
                             "args": [],
                             "cwd": "^\"\\${workspaceFolder}/\"",
                             "stopOnEntry": false,
-                            "enviromentInfo": "${command:GetEnvInfos}",
+                            "replayExecId": "^\"\\${command:ReplayExecId}\"",
+                            "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
                             "workspace": "^\"\\${workspaceFolder}/\""
                         }
                     }
@@ -641,8 +636,10 @@
                         "args": [],
                         "cwd": "${workspaceFolder}",
                         "stopOnEntry": false,
-                        "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceFolder}/"
+                        "replayExecId": "^\"\\${command:ReplayExecId}\"",
+                        "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
+                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                        "workspace": "^\"\\${workspaceFolder}/\""
                     }
                 ]
             }

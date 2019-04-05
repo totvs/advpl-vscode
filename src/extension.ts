@@ -23,6 +23,7 @@ import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
+import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
@@ -30,7 +31,10 @@ let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
 let oreplayPlay : replayPlay;
-
+function __getReplayInstance()
+{
+    return oreplayPlay;
+}
 export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());
@@ -231,21 +235,21 @@ function ReplaySelect()
 }
 function getReplayTmpDir()
 {
-    return vscode.commands.registerCommand('advpl.replayTmpDir', async function (context){
-        if (oreplayPlay === undefined){
+    return vscode.commands.registerCommand('advpl.replayTmpDir', function (context){
+        /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        }            
+        } */           
         return oreplayPlay.getTmpDir();
     });
 }
 function getReplayExecId()
 {
-    return vscode.commands.registerCommand('advpl.replayExecId', async function (context){
-        if (oreplayPlay === undefined){
+    return vscode.commands.registerCommand('advpl.replayExecId', function (context){
+        /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        }            
+        } */           
         return oreplayPlay.getSelected();
     });
 }
@@ -409,13 +413,13 @@ function GetDebugPath()
 {
 
     let disposable = vscode.commands.registerCommand('advpl.getReplayPath', function (context) {
-        let path = replayUtil.getReplayExec();
+        let path = getReplayExec();
         return { command: path};
 
     });
     return disposable;
-}
-*/
+}*/
+
 function addGetDebugInfosCommand() {
     let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context) {
         var workSpaceInfo = vscode.workspace.getConfiguration("advpl");
@@ -467,7 +471,7 @@ function PathApply() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        var cResource = context._fsPath;
+        var cResource = context.fsPath;
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
             patch.apply(cResource);
@@ -739,29 +743,32 @@ class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
 				config.request = 'launch';		
 				config.stopOnEntry = true;
 			}
-		}
+        }
+        let instance = __getReplayInstance();
+        let replayExec = instance.getSelected();
 
-		/*if (!config.program) {
-			return vscode.window.showInformationMessage("Cannot find a program to debug").then(_ => {
+		if (replayExec === undefined) {
+			return vscode.window.showInformationMessage("Please select a Replay file before.").then(_ => {
 				return undefined;	// abort launch
 			});
-		}*/
+		}
 
 		return config;
 	}
 
 }
+    
+
 class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
 
 	
 
 	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
 
-        const args = []; //["--replayInfo","--replayFile=C:/temp/treplay/com_rpc_tdsReplay-2018-11-10.trplay"];
-        const program = "C:/Totvs/vscode/c_version/AdvtecMiddleware/build/Debug/TdsReplayPlay.exe";
-        //if(oreplayPlay !== null)
-        //    oreplayPlay.getSelected()
-		// make VS Code connect to debug server
+        const args = []; //Vai os parametros vai onLaunch
+      
+        const program =  getReplayExec(); //"/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/TdsReplayPlay";
+
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
 

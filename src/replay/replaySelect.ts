@@ -7,7 +7,7 @@ import * as nls from 'vscode-nls';
 import { getReplayExec } from "./replayUtil";
 import CodeAdapter from "../adapter";
 import fs = require('fs');
-import { TimeLine } from "./replaytTimeLineTree";
+import { SourceTreeItem} from "./replaytTimeLineTree";
 import { FileExistsRecursive } from "../utils/filesLocation";
 let lastFile = null;
 
@@ -20,10 +20,10 @@ export class replayPlay {
     private replayInfos : any;
     private replayFile: string;
     private tmpDir: string;
-    private replayTimeLine : TimeLine[];
+    private replayTimeLine : SourceTreeItem[];
     public _callResult: string;
 
-	get timeLine(): TimeLine[] {
+	get timeLine(): SourceTreeItem[] {
 		return this.replayTimeLine;
 	}
     public getSelected() : string {
@@ -133,13 +133,27 @@ export class replayPlay {
             if (this._callResult != null) {
                 var parserd = JSON.parse(this._callResult);                
                 this.replayTimeLine = [];
-                for (let entry of parserd.timeline) {
-                    let treeItem= new TimeLine(entry.function + "(" + entry.source+")"  + "(" + entry.line+ ")" ,entry.source,entry.line, new Date(entry.timestamp),vscode.TreeItemCollapsibleState.None);
+                for (let entry of parserd.sources) {
+                    let treeItem : SourceTreeItem = new SourceTreeItem(entry.source,entry.source, entry.compiledate,vscode.TreeItemCollapsibleState.Collapsed);
+                    for (let tm of entry.timelines) {
+
+                        let subItem= new SourceTreeItem(tm.function + "(" + tm.line+ ")" ,entry.source,null,vscode.TreeItemCollapsibleState.Expanded);
+                        subItem.timestamp =  new Date(tm.timestamp);
+                        subItem.line = tm.line;
+                        subItem.command = {
+                            command: 'advpl.replay.openFileInLine',
+                            title: '',
+                            arguments: [subItem.source,subItem.line]
+                        };
+
+                        treeItem.timelines.push(subItem);
+                    }
+                    /*let treeItem= new SourceTreeItem(entry.function + "(" + entry.source+")"  + "(" + entry.line+ ")" ,entry.source,entry.line, new Date(entry.timestamp),vscode.TreeItemCollapsibleState.None);
                     treeItem.command = {
                         command: 'advpl.replay.openFileInLine',
                         title: '',
                         arguments: [treeItem.source,treeItem.line]
-                    };
+                    };*/
                     this.replayTimeLine.push(treeItem);
 
                 }
