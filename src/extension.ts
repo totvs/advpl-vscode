@@ -99,6 +99,7 @@ export async function activate(context: vscode.ExtensionContext) {
         }
     };
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine( source, line));
+    vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
     return api;
 }
 

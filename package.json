@@ -41,7 +41,7 @@
             "activitybar": [
                 {
                     "id": "replay-time",
-                    "title": "Replay TimeLine Explorer",
+                    "title": "Replay",
                     "icon": "images/replay.png"
                 }
             ]
@@ -219,7 +219,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg|ahu)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -288,7 +288,8 @@
                     ".prg",
                     ".aph",
                     ".apl",
-                    ".tlpp"
+                    ".tlpp",
+                    ".ahu"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
@@ -296,7 +297,8 @@
                     "Advpl(PRG)",
                     "Advpl(APH)",
                     "Advpl(APL)",
-                    "TLPP(tlpp)"
+                    "TLPP(tlpp)",
+                    "Advpl(AHU)"
                 ],
                 "configuration": "./advpl.configuration.json"
             },
@@ -421,7 +423,11 @@
             {
                 "command": "advpl.replaySelect",
                 "title": "%advpl.replaySelect%"
-            }
+            },
+            {
+				"command": "advpl.refreshReplay",
+				"title": "Advpl - Replay Refresh TimeLine"				
+			}
         ],
         "keybindings": [
             {

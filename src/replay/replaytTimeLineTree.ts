@@ -2,10 +2,15 @@ import * as vscode from 'vscode';
 import { replayPlay } from './replaySelect';
 
 export class replaytTimeLineTree implements vscode.TreeDataProvider<SourceTreeItem> {
+    private _onDidChangeTreeData: vscode.EventEmitter<SourceTreeItem | undefined> = new vscode.EventEmitter<SourceTreeItem | undefined>();
+    readonly onDidChangeTreeData: vscode.Event<SourceTreeItem | undefined> = this._onDidChangeTreeData.event;
     constructor(private workspaceRoot: string,private oreplayPlay: replayPlay) {
 
-	}    
-    onDidChangeTreeData?: vscode.Event<SourceTreeItem>;
+    }    
+    refresh(): void {
+		this._onDidChangeTreeData.fire();
+	}
+
     getTreeItem(element: SourceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {
         return element;
     }

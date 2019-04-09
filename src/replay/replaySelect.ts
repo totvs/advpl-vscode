@@ -158,7 +158,7 @@ export class replayPlay {
 
                 }
                 
-                
+                vscode.commands.executeCommand("advpl.refreshReplay");
             }
             }
             catch (ex) {
