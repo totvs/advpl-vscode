@@ -1149,7 +1149,7 @@
       <key>declaracao-wsmethod</key>
       <dict>
         <key>begin</key>
-        <string>(?i)^\s*(wsmethod)\s+(\w+)\s+(?=.*(?:wsservice|wsclient|wsrestful))</string>
+        <string>(?i)^\s*(wsmethod)\s+(\w+)</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -1164,7 +1164,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(wsservice|wsclient|wsrestful)\s+(\w+)</string>
+        <string>(?i)(wsservice|wsclient|wsrestful|wsrest)\s+(\w+)</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>

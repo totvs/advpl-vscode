@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>$schema</key>
+    <string>https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json</string>
+    <key>name</key>
+    <string>4GL</string>
+    <key>patterns</key>
+	<array>
+		<dict>
+			<key>begin</key>
+			<string>\{</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>name</key>
+			<string>comment.block.source.4GL</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>.</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>A comment starting with '#'</string>
+			<key>match</key>
+			<string>#.*$</string>
+			<key>name</key>
+			<string>comment.number-sign.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Single quoted string</string>
+			<key>match</key>
+			<string>('(?:\\'|.)*?')</string>
+			<key>name</key>
+			<string>string.single.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Double quoted string</string>
+			<key>match</key>
+			<string>(\"(?:\\"|.)*?\")</string>
+			<key>name</key>
+			<string>string.double.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Operators</string>
+			<key>match</key>
+			<string>(?i)(=|!=|\+|-|/|&lt;|&gt;|,|(\s(or|and|is|mod|not|initialize)(?=(\s|$)))|((\s|^)set(?=\s)))</string>
+			<key>name</key>
+			<string>keyword.operator.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Constants provided by de language</string>
+			<key>match</key>
+			<string>(?i)(dirty read|null|true|false|notfound)</string>
+			<key>name</key>
+			<string>constant.language.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Variables provided by de language</string>
+			<key>match</key>
+			<string>(?i)(isolation|today|\sstatus|pageno)</string>
+			<key>name</key>
+			<string>variable.language.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Control</string>
+			<key>match</key>
+			<string>(?i)((\s|^)case(\s*|$)|continue (.*)|when |otherwise|end case|while |end while|(\s|^)for(\s|$)|foreach | into |end for(each)?|(\s|^)if(?=\s+|$)|(\s+|^)then(\s+|$)|(\s+|^)else(\s+|$)|end if|return(\s+|$)|exit (.*))</string>
+			<key>name</key>
+			<string>keyword.control.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Keywords</string>
+			<key>match</key>
+			<string>(?i)( between |call(?=\s+|$)| clipped|(\s|^)close\s+(form|window)*|(\s|^)create\s+(temp\s+)?(table|index)(?=\s+|$)|database |\sreturning |declare |delete(?=\s|$)|display\s+|((\s|^)drop\s+(table|index)(\s|$))|((\s|^)fetch((\s+|$)|(\s+(first|last)\s+)))|(\s|^)from(\s+|$)|(\s+|^)free\s+|group by\s|(\s+|^)(desc|asc)(\s+|$)|(\s|^)insert\s+into(\s+|$)|((scroll)* cursor(?=\s)(\swith hold)*)|((top|right|bottom|left)\s+margin)|page length|(\s|^)open\s+(form|window)*|(\s|^)prepare |(^|\s)prompt\s|(^|\s)input by name(\s|$)|((start|finish)\s+report)|(\s|^)select(\s+|$)| spaces|(\s|^)update(\s+|$)|(\s|^)where(\s+|$)|(\s|^)output(?=\s|$)|(?&lt;=\s)to(?=\s|$)|order by|format( |$)|(first\s+)*page header|before group of|on (every|last) row|after group of| using |begin\s+work|commit\s+work|rollback\s+work|(\s+|^)values(\s+|$)|((\s|^)whenever\s+(any\s+)?error\s+(continue|stop)(\s|$))|(\s|^)run\s+|end input)</string>
+			<key>name</key>
+			<string>keyword.other.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Constant numeric</string>
+			<key>match</key>
+			<string>(?&lt;!\w)((0(x|X)[0-9a-fA-F]+)|([0-9]+(\.[0-9]+)?))</string>
+			<key>name</key>
+			<string>constant.numeric.source.4GL</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.source.4GL</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.source.4GL</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.function.source.4GL</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Functions definitions</string>
+			<key>match</key>
+			<string>(?i)(?&lt;!\w\s)(function|report)\s+(.*)\s*\((.*)\)</string>
+			<key>name</key>
+			<string>meta.function.source.4GL</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.source.4GL</string>
+				</dict>
+			</dict>
+			<key>comment</key>
+			<string>Main function definition</string>
+			<key>match</key>
+			<string>(?i)(main)(\s*|$)</string>
+			<key>name</key>
+			<string>meta.function.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Functions definitions</string>
+			<key>match</key>
+			<string>(?i)(end function|end main|end report)(\s*|$)</string>
+			<key>name</key>
+			<string>storage.type.function.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Storage types</string>
+			<key>match</key>
+			<string>(?i)(\schar(?=[\s\(,$]))|(\sdate(\s+|$)|decimal|define | smallint| integer| float|let | like |(end)* record|(((^|\s+)|(end\s+))globals))</string>
+			<key>name</key>
+			<string>storage.type.source.4GL</string>
+		</dict>
+		<dict>
+			<key>comment</key>
+			<string>Some functions</string>
+			<key>match</key>
+			<string>(?i)((?&lt;=\s)(length|day|month|year|p_open|p_close)(?=\s*\(.*?\)))</string>
+			<key>name</key>
+			<string>support.function.source.4GL</string>
+		</dict>
+	</array>
+    <key>scopeName</key>
+    <string>source.4gl</string>
+  </dict>
+</plist>

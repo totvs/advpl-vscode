@@ -5,7 +5,7 @@ import { advplConsole } from './advplConsole';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as nls from 'vscode-nls';
-
+import * as debugBrdige from  './utils/debugBridge';
 const localize = nls.loadMessageBundle();
 
 export class advplMonitor {
@@ -17,14 +17,8 @@ export class advplMonitor {
     constructor(jSonInfos: string, _outChannel: advplConsole) {
         this.outChannel = _outChannel;
         this.EnvInfos = jSonInfos;
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-
-        if (process.platform == "darwin") {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
+        this.debugPath = debugBrdige.getAdvplDebugBridge();
+        
     }
 
     public getThreads() {

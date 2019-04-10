@@ -6,6 +6,7 @@ import { advplConsole } from './advplConsole';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as nls from 'vscode-nls';
+import * as debugBrdige from './utils/debugBridge';
 
 const localize = nls.loadMessageBundle();
 
@@ -18,21 +19,22 @@ export class advplCompile {
     private onError;
     private outChannel: advplConsole;
     private encoding: string;
-    private compileStartTime
+    private compileStartTime;
+    private isAlpha;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
         this.outChannel = OutPutChannel;
         this._lastAppreMsg = "";
-        this.debugPath = vscode.extensions.getExtension("KillerAll.advpl-vscode").extensionPath;
-        if (process.platform == "darwin") {
-            this.debugPath += "/bin/AdvplDebugBridgeMac";
-        }
-        else {
-            this.debugPath += "\\bin\\AdvplDebugBridge.exe";
-        }
+        this.debugPath = debugBrdige.getAdvplDebugBridge();
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
+        const config = vscode.workspace.getConfiguration("advpl");
+        this.isAlpha = config.get<boolean>("alpha_compile");
+        if (process.platform != "win32")        
+        {
+            this.isAlpha = true;
+        }
     }
 
     public validateCompile() {
@@ -48,12 +50,12 @@ export class advplCompile {
             selectedEnvironment = parsedEnvInfos.selectedEnvironment;
             foundEnvironment = false;
             for (let entry of parsedEnvInfos.environments) {
-                if
-                (
-                    selectedEnvironment === entry.environment ||
-                    entry.hasOwnProperty('name') && selectedEnvironment === entry.name
-                ) {
+                if(selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
                     foundEnvironment = true;
+                    if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl")
+                    {
+                        this.isAlpha = true;
+                    }
                     break;
                 }
             }
@@ -93,7 +95,10 @@ export class advplCompile {
     public async runCipherPassword(password: string, done: Function) {
         var _args = new Array<string>();
         var that = this;
-        _args.push("--CipherPassword=" + password);
+        if (password === "")
+            _args.push("--CipherPasswordEmpty");
+        else
+            _args.push("--CipherPassword=" + password);
 
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {
@@ -102,6 +107,9 @@ export class advplCompile {
 
         child.on("exit", function (data) {
             var lRunned = data == 0
+            if (that.afterCompile) {
+                that.afterCompile();
+            }
             done(that._lastAppreMsg);
         });
     }
@@ -121,53 +129,68 @@ export class advplCompile {
             that._lastAppreMsg = data + "";
         });
 
-        child.on("exit", function (data) {
+        child.on("exit", data => {
             var lRunned = data == 0
             that.outChannel.log(localize("src.advplCompile.idText", "ID:") + that._lastAppreMsg);
+            this.afterCompile();
         });
     }
 
     public compile(sourceName: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
-        this.genericCompile(sourceName);
+        this.genericCompile(sourceName,0);
     }
 
     public compileText(textFile: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationTXTText", "Starting the compilation of TXT file:") + textFile + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = "TEXTFILE:" + vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = textFile + "ª" + regex;
-        this.genericCompile(files);
+        this.genericCompile(files,4);
     }
 
     public compileFolder(folder: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationFolderText", "Starting recursive compilation of the folder:") + folder + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
-        var files = folder + "ª" + regex;
-        this.genericCompile(files);
+        let files;
+        if (this.isAlpha)
+        {
+            files = folder;
+        }
+        else
+        {
+            files = folder + "ª" + regex;
+        }
+
+        this.genericCompile(files,1);
 
     }
 
     public compileProject(project: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationProjectText", "Starting the compilation of the project:") + project + "\n");
         this.diagnosticCollection.clear();
-        //var regex = /.*\.(prw|prx)/i;        
+        //var regex = /.*\.(prw|prx)/i;
         var regex = "PROJECT";// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
         var files = project + "ª" + regex;
-        this.genericCompile(files);
+        this.genericCompile(files,3);
     }
 
-    private genericCompile(sourceName: string) {
+    private genericCompile(sourceName: string, compileType : number) {
         this.compileStartTime = new Date();
         var _args = new Array<string>()
         var that = this;
+        if(this.isAlpha)
+        {
+            _args.push("--compileType=" + compileType);
+        }
+
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
 
@@ -184,7 +207,7 @@ export class advplCompile {
             that.run_callBack(lRunned);
             var endTime;
             endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms            
+            let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.compilationFinishedText", "Compilation finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
         });
@@ -214,6 +237,8 @@ export class advplCompile {
 
     private run_callBack(lOk) {
         let lErrorFound;
+        let lAbort;
+
         try {
             if (this._lastAppreMsg != null) {
                 var oEr = JSON.parse(this._lastAppreMsg);
@@ -223,7 +248,7 @@ export class advplCompile {
                 for (let x = 0; x < oEr.msgs.length; x++) {
                     let sourceArray = oEr.msgs[x];
                     let diags: vscode.Diagnostic[] = [];
-                    source = sourceArray.Key;
+                    source = decodeURI(sourceArray.Key);
                     for (let y = 0; y < sourceArray.Value.length; y++) {
                         let msgerr = sourceArray.Value[y];
                         let lineIndex = Number(msgerr.Line) - 1;
@@ -235,16 +260,28 @@ export class advplCompile {
                         if (source == "NOSOURCE") {
                             //vscode.window.showInformationMessage(message);
                             this.outChannel.log(message);
+                            if(msgerr.Type == 0) {
+                                lErrorFound = true;
+                                lAbort = true;
+                            }
                         }
                         else {
                             if (msgerr.Type == 0) {
                                 lErrorFound = true;
                                 this.outChannel.log(localize("src.advplCompile.errorText", "Error in ") + path.basename(source) + " " + message);
+                                let regex = /\w+\.\w{3}\(\d{1,5}\)\s+(.*)/g
+                                const regexResult = regex.exec(message);
+                                if (regexResult != null)
+                                    message = regexResult[1];
                             }
-                            else
+                            else{
                                 this.outChannel.log(localize("src.advplCompile.warningText", "Warning: ") + message);
+                                let regex = /\w+\.\w{3}\(\d{1,5}\)\s+warning\s(.*)/g
+                                const regexResult = regex.exec(message);
+                                if (regexResult != null)
+                                    message = regexResult[1];
+                            }
                             let diagnosis = new vscode.Diagnostic(range, message, msgerr.Type == 0 ? vscode.DiagnosticSeverity.Error : vscode.DiagnosticSeverity.Warning);
-                            //vscode.workspace.findFiles(source,"")
                             diags.push(diagnosis);
                         }
                     }
@@ -256,7 +293,7 @@ export class advplCompile {
 
             if (lOk) {
                 this.outChannel.log(lErrorFound ?
-                    localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") :
+                    ( lAbort ? localize("src.advplCompile.compilationAbortedText", "Compilation aborted, check the log or the Problems tab!") : localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") ) :
                     localize("src.advplCompile.compilationFinishedOkText", "Compilation finished successfully."));
                 this.afterCompile();
             }
@@ -265,6 +302,8 @@ export class advplCompile {
             }
         }
         catch (ex) {
+            this.outChannel.log("Bridge Return:");
+            this.outChannel.log(this._lastAppreMsg);
             this.outChannel.log(ex);
             this.onError();
         }
@@ -296,6 +335,10 @@ export class advplCompile {
                     that.run_callBack(lRunned);
                 });
 
+            }else{
+                vscode.window.showErrorMessage(localize('src.advplCompile.notInformedSource', 'Source to be excluded not informed!'));
+                this._lastAppreMsg = null
+                this.run_callBack(false);
             }
         });
     }
@@ -347,7 +390,7 @@ export class advplCompile {
 
             var endTime;
             endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms            
+            let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
 

@@ -3,11 +3,11 @@
 			"prefix": "protheusdoc"
 		,	"body": [
 				"//-------------------------------------------------------------------"
-			,	"/*/{Protheus.doc} ${function}"
-			,	"${description}"
-			,	"@author  ${author}"
-			,	"@since   ${date}"
-			,	"@version ${version}"
+			,	"/*/{Protheus.doc} ${1:function}"
+			,	"${2:description}"
+			,	"@author  ${3:author}"
+			,	"@since   ${4:date}"
+			,	"@version ${5:version}"
 			,	"/*/"
 			,	"//-------------------------------------------------------------------"
 			]
@@ -17,9 +17,10 @@
 	"If": {
 		"prefix": "if",
 		"body": [
-		"If ${lCond}",
-		"	$1",
-		"EndIf"
+		"If ${1:lCond}",
+			"\t$2",
+		"EndIf",
+		"$0"
 		],
 		"description": "If Statement"
 	},
@@ -27,11 +28,12 @@
 	"If Else": {
 		"prefix": "ifelse",
 		"body": [
-		"If ${lCond}",
-		"	$1",
+		"If ${1:lCond}",
+			"\t$2",
 		"Else",
-		"	",
-		"EndIf"
+			"\t$3",
+		"EndIf",
+		"$0"
 		],
 		"description": "If Else Statement"
 	},
@@ -39,11 +41,12 @@
 	"If ElseIf": {
 		"prefix": "ifelseif",
 		"body": [
-		"If ${lCond1}",
-		"	$1",
-		"ElseIf ${lCond2}",
-		"	",
-		"EndIf"
+		"If ${1:lCond1}",
+			"\t$2",
+		"ElseIf ${3:lCond2}",
+			"\t$4",
+		"EndIf",
+		"$0"
 		],
 		"description": "If ElseIf Statement"
 	},
@@ -51,9 +54,10 @@
 	"While": {
 		"prefix": "while",
 		"body": [
-		"While (${lCond})",
-		"	$1",
-		"End"
+		"While (${1:lCond})",
+			"\t$2",
+		"End",
+		"$0"
 		],
 		"description": "While Statement"
 	},
@@ -61,24 +65,25 @@
 	"For": {
 		"prefix": "for",
 		"body": [
-		"For ${nX}:= 1 to Len(${aArray})",
-		"	$1",
-		"Next"
+		"For ${1:nX}:= 1 to Len(${2:aArray})",
+			"\t$3",
+		"Next",
+		"$0"
 		],
 		"description": "For Statement"
 	},
 	"Query":{
 		"prefix": "Query",
 		"body":[
-			"Local ${cQuery} := ''",
-				"${cQuery} := 'query'",
-				"${cQuery} := ChangeQuery(${cQuery})",
-				"dbUseArea(.T.,'TOPCONN', TCGenQry(,,${cQuery}),alias, .F., .T.)",
-				"While alias->(!Eof())",
-					
-					"alias->(dbSkip())",
-				"EndDo",
-				"alias->(dbCloseArea())"
+		"Local ${1:cQuery} := ''",
+			"\t${1:cQuery} := 'query'",
+			"\t${1:cQuery} := ChangeQuery(${1:cQuery})",
+		"dbUseArea(.T., 'TOPCONN', TCGenQry(, , ${1:cQuery}), alias, .F., .T.)",
+		"While alias->(!Eof())",
+			"\t$2",
+			"\talias->(dbSkip())",
+		"EndDo",
+		"alias->(dbCloseArea())"
 		],
 		"description": "Cria a função de Query ja efetuando a conexão com o TOP e efetuando o While"
 	},
@@ -86,27 +91,27 @@
         "prefix": "Help",
         "body":[
 			 
-              "HELP(' ',1,${cabecalho} ,,${descricao},2,0,,,,,, ${solucao})"
+              "HELP(' ',1,${1:cabecalho} ,,${2:descricao},2,0,,,,,, ${3:solucao})"
         ],
         "description":"Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
     },
 	"Static Function":{
 		"prefix": "StaticFunction",
 		"body":[
-			"/*/{Protheus.doc} ${nomeStaticFunction}",
-			"	(long_description)",
-			"	@type  Static Function",
-			"	@author ${user}",
-			"	@since ${date}",
-			"	@version ${version}",
-			"	@param ${param}, ${param_type}, ${param_descr}",
-			"	@return ${returno},${return_type}, ${return_description}",
-			"	@example",
-			"	(examples)",
-			"	@see (links_or_references)",
-			"	/*/",
-			" Static Function ${nomeStaticFunction}",
-			"Return ${returno}"
+			"/*/{Protheus.doc} ${1:nomeStaticFunction}",
+			"\t(long_description)",
+			"\t@type  Static Function",
+			"\t@author ${2:user}",
+			"\t@since ${3:date}",
+			"\t@version ${4:version}",
+			"\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
+			"\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
+			"\t@example",
+			"\t(examples)",
+			"\t@see (links_or_references)",
+			"\t/*/",
+			" Static Function ${1:nomeStaticFunction}",
+			"Return ${8:return}"
 
 
 		],
@@ -116,20 +121,20 @@
 	"Function":{
 		"prefix": "Function",
 		"body":[
-			"/*/{Protheus.doc} ${nomeFunction}",
-			"	(long_description)",
-			"	@type  Function",
-			"	@author ${user}",
-			"	@since ${date}",
-			"	@version ${version}",
-			"	@param ${param}, ${param_type}, ${param_descr}",
-			"	@return ${returno},${return_type}, ${return_description}",
-			"	@example",
-			"	(examples)",
-			"	@see (links_or_references)",
-			"	/*/",
-			" Function ${nomeFunction}",
-			"Return ${returno}"
+			"/*/{Protheus.doc} ${1:nomeFunction}",
+			"\t(long_description)",
+			"\t@type  Function",
+			"\t@author ${2:user}",
+			"\t@since ${3:date}",
+			"\t@version ${4:version}",
+			"\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
+			"\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
+			"\t@example",
+			"\t(examples)",
+			"\t@see (links_or_references)",
+			"\t/*/",
+			" Function ${1:nomeFunction}",
+			"Return ${8:return}"
 
 
 		],
@@ -138,28 +143,28 @@
 	 "Strtokarr2": {
         "prefix": "Strtokarr2",
         "body": [
-            "Strtokarr2( ${cValue}, ${cToken}, ${lEmptyStr})"
+            "Strtokarr2( ${1:cValue}, ${2:cToken}, ${3:lEmptyStr})"
         ],
         "description": "Strtokarr2- Transforma uma String em um array,\n cValue := Caracter a ser separado\n cToken := Caracter a ser ultilizado na quebra \n lEmptyStr:= Se retorna elementos vazios" 					
 	 },
 	 "Year": {
         "prefix": "Year",
         "body": [
-            "Year( ${dData})"
+            "Year( ${1:dData})"
         ],
         "description": "Year - Retorna o Ano no formato 'AAAA' da data informada"
     },
 	 "Type": {
         "prefix": "Type",
         "body": [
-            "Type( ${cVariavel})"
+            "Type( ${1:cVariavel})"
         ],
         "description": "Type() - Retorna o tipo de dado de uma expressao ou variavel."
     },
 	 "ValType": {
         "prefix": "ValType",
         "body": [
-            "ValType( ${cVariavel})"
+            "ValType( ${1:cVariavel})"
         ],
         "description":  "Valtype() - Retorna o tipo de dado de uma expressao ou variavel."						
 	 },
@@ -173,28 +178,28 @@
 	"ConOut": {
         "prefix": "ConOut",
         "body": [
-            "ConOut( ${cText})"
+            "ConOut( ${1:cText})"
         ],
         "description": "ConOut() - Apresenta no console, do Application Server, uma mensagem."
 	},
 	"Decode64": {
         "prefix": "Decode64",
         "body": [
-            "Decode64( ${cText})"
+            "Decode64( ${1:cText})"
         ],
         "description": "Decode64() - Converte uma string de Base64 para Base ASCII"
     },
 	"Encode64": {
         "prefix": "Encode64",
         "body": [
-            "Encode64( ${cText})"
+            "Encode64( ${1:cText})"
         ],
         "description": "Encode64() - Converte uma string de ASCII para base64"
     },
 	 "FindFunction": {
         "prefix": "FindFunction",
         "body": [
-            "FindFunction( ${cFunction})"
+            "FindFunction( ${1:cFunction})"
         ],
         "description": "FindFunction() - Faz a busca de uma determinada função no rpo ou no binário"
 	 }

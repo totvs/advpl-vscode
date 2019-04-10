@@ -14,11 +14,13 @@
 	"src.advplCompile.errorText": "Ошибка в ",
 	"src.advplCompile.warningText": "Предупреждающий: ",
 	"src.advplCompile.compilationFinishedErrorsText": "Компиляция закончена с ошибками, проверьте вкладку проблемы!",
+	"src.advplCompile.compilationAbortedText": "Компиляция отменена, проверьте журнал или вкладку «Проблемы»!",
 	"src.advplCompile.compilationFinishedOkText": "Компиляция успешно завершена.",
 	"src.advplCompile.informSourcesExclusionText": "Сообщите источники, которые будут исключены:",
 	"src.advplCompile.istartSourcesExclusionText": "Начало исключения источников...",
 	"src.advplCompile.startingDefragText": "Запуск дефрагментации RPO...",
 	"src.advplCompile.ppoBuildStartText": "ППО сборка началась в ",
 	"src.advplCompile.ppoBuildFinishedText": "Сборка PPO завершена на ",
-	"src.advplCompile.errorGeneralText": "Ошибка!"
+	"src.advplCompile.errorGeneralText": "Ошибка!",
+	"src.advplCompile.notInformedSource": "Источник для исключения не проинформирован!"
 }

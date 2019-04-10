@@ -2,17 +2,18 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.8.0",
+    "version": "0.10.18",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.17.0"
+        "vscode": "^1.23.0"
     },
     "categories": [
-        "Languages"
+        "Programming Languages"
     ],
     "activationEvents": [
         "onLanguage:advpl_language",
+        "onLanguage:4gl",
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompileProjet",
@@ -49,22 +50,27 @@
                 },
                 {
                     "command": "advpl.menucompileProjet",
+                    "when": "resourceFilename =~ /.*\\.prj/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.menucompiletextfile",
+                    "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.apply",
+                    "when": "resourceFilename =~ /.*\\.ptm/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.info",
+                    "when": "resourceFilename =~ /.*\\.ptm/i",
                     "group": "advpl"
                 },
                 {
                     "command": "advpl.patch.build",
+                    "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 }
             ]
@@ -78,6 +84,11 @@
                     "default": "",
                     "description": "%advpl.configuration.properties.ADVPLSELECTEDENVIRONMENT%"
                 },
+                "advpl.enableCoverage": {
+                    "type": "boolean",
+                    "default": "true",
+                    "description": "%advpl.configuration.properties.ADVPLENABLECOVERAGE%"
+                },
                 "advpl.workspaceFolders": {
                     "type": "string",
                     "default": "",
@@ -90,6 +101,15 @@
                     "items": {
                         "type": "object",
                         "properties": {
+                            "totvs_language": {
+                                "type": "string",
+                                "enum": [
+                                    "advpl","4gl"
+                                ],
+                                "default": "advpl",
+                                "description": "language"
+
+                            },
                             "smartClientPath": {
                                 "type": "string",
                                 "default": "",
@@ -144,6 +164,11 @@
                                 "type": "string",
                                 "default": "",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST%"
+                            },
+                            "enable": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE%"
                             }
                         }
                     }
@@ -177,7 +202,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -229,6 +254,11 @@
                     "type": "number",
                     "default": 4,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_THREADS%"
+                },
+                "advpl.alpha_compile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
                 }
             }
         },
@@ -240,16 +270,31 @@
                     ".prx",
                     ".prg",
                     ".aph",
-                    ".apl"
+                    ".apl",
+                    ".tlpp"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
                     "Advpl(PRX)",
                     "Advpl(PRG)",
                     "Advpl(APH)",
-                    "Advpl(APL)"
+                    "Advpl(APL)",
+                    "TLPP(tlpp)"
                 ],
                 "configuration": "./advpl.configuration.json"
+            },
+            {
+                "id": "4gl",
+                "extensions": [
+                    ".4gl",
+                    ".per",
+                    ".msg"
+                ],
+                "aliases": [
+                    "4GL(4gl)"
+                ],
+                "configuration": "./4gl.configuration.json"
+
             }
         ],
         "grammars": [
@@ -257,6 +302,11 @@
                 "language": "advpl_language",
                 "scopeName": "source.advpl",
                 "path": "./syntaxes/advpl.tmLanguage.tmLanguage"
+            },
+            {
+                "language": "4gl",
+                "scopeName": "source.4gl",
+                "path": "./syntaxes/4gl.tmLanguage.tmLanguage"
             }
         ],
         "commands": [
@@ -292,6 +342,11 @@
                 "command": "advpl.getDebugInfos",
                 "title": "%advpl.getDebugInfos%"
             },
+            {
+                "command": "advpl.getDebugPath",
+                "title": "Path"
+            },
+
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -357,6 +412,13 @@
                 "when": "editorLangId == advpl"
             },
             {
+                "command": "advpl.compile",
+                "key": "ctrl+f9",
+                "mac": "cmd+f9",
+                "when": "editorLangId == 4gl"
+            },
+
+            {
                 "command": "advpl.startSmartClient",
                 "key": "ctrl+f11",
                 "mac": "cmd+f11",
@@ -375,9 +437,10 @@
                 "label": "Advpl Debug",
                 "enableBreakpointsFor": {
                     "languageIds": [
-                        "advpl"
+                        "advpl","4gl"
                     ]
                 },
+                "adapterExecutableCommand" :"advpl.getDebugPath",
                 "variables": {
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
@@ -386,7 +449,10 @@
                     "program": "./bin/AdvplDebugBridge.exe"
                 },
                 "osx": {
-                    "program": "./bin/AdvplDebugBridgeMac"
+                    "program": "./bin/alpha/mac/AdvplDebugBridgeC"
+                },
+                "linux": {
+                    "program": "./bin/alpha/linux/AdvplDebugBridgeC"
                 },
                 "configurationAttributes": {
                     "launch": {
@@ -431,6 +497,24 @@
                         }
                     }
                 },
+                "configurationSnippets":[
+                    {
+                        "label": "Advpl Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                    "body": {
+                        "name": "Advpl Debug",
+                        "type": "advpl",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "${workspaceRoot}",
+                        "programRun": "${command:AskForProgramName}",
+                        "stopOnEntry": false,
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "${workspaceRoot}/"
+                    
+                        }
+                    }
+                ],
                 "initialConfigurations": [
                     {
                         "name": "Advpl Debug",
@@ -469,25 +553,25 @@
         "gulp-filter": "^5.0.1",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "gulp-typescript": "3.2.2",
+        "gulp-typescript": "^3.2.2",
         "vsce": "^1.32.0",
-        "vscode": "^1.0.0",
-        "vscode-debugadapter-testsupport": "^1.12.0",
+        "vscode": "^1.1.10",
+        "vscode-debugadapter-testsupport": "^1.29.0",
         "vscode-nls-dev": "^2.1.3"
     },
     "dependencies": {
         "error-ex": "^1.3.1",
         "figures": "^2.0.0",
-        "vscode-debugadapter": "^1.21.0",
-        "vscode-debugprotocol": "^1.21.0",
+        "vscode-debugadapter": "^1.29.0",
+        "vscode-debugprotocol": "^1.29.0",
         "vscode-languageclient": "1.3.1",
         "vscode-nls": "^2.0.2"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/killerall/advpl-vscode.git"
+        "url": "https://github.com/totvs/advpl-vscode.git"
     },
     "bugs": {
-        "url": "https://github.com/killerall/advpl-vscode/issues"
+        "url": "https://github.com/totvs/advpl-vscode/issues"
     }
 }

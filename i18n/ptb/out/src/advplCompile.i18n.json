@@ -14,11 +14,13 @@
 	"src.advplCompile.errorText": "Erro no ",
 	"src.advplCompile.warningText": "Aviso: ",
 	"src.advplCompile.compilationFinishedErrorsText": "Compilação finalizada com erros, verifique a aba problemas!",
+	"src.advplCompile.compilationAbortedText": "Compilação abortada, verifique o log ou a aba Problemas!",
 	"src.advplCompile.compilationFinishedOkText": "Compilação finalizada com sucesso.",
 	"src.advplCompile.informSourcesExclusionText": "Informe os fontes a serem excluídos:",
 	"src.advplCompile.istartSourcesExclusionText": "Iniciando a exclusão dos fontes...",
 	"src.advplCompile.startingDefragText": "Iniciando a desfragmentação do RPO...",
 	"src.advplCompile.ppoBuildStartText": "Compilação do PPO iniciada em ",
 	"src.advplCompile.ppoBuildFinishedText": "Compilação do PPO finalizada em ",
-	"src.advplCompile.errorGeneralText": "Erro!"
+	"src.advplCompile.errorGeneralText": "Erro!",
+	"src.advplCompile.notInformedSource": "Fonte a excluir não informado!"
 }

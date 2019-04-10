@@ -9,21 +9,44 @@ const localize = nls.loadMessageBundle();
 export default class Environment {
     user: String;
     server: String;
+    cipher : string;
+    language : string;
+    enable : Boolean;
 
     deserialize(input) {
         this.user = input.user;
         this.server = input.server;
+        this.cipher = input.passwordCipher;
+        this.language =  input.totvs_language;
+        this.enable = input.enable != undefined ? input.enable : true;
+
         return this;
     }
 
     getErrors(): Array<String> {
         let errors = [];
-        if (!this.user) {
-            errors.push(localize('src.Environment.userNotFilledText', 'User not filled!'));
+        if(this.language == undefined || this.language == 'advpl')
+        {
+            if (!this.user) {
+                errors.push(localize('src.Environment.userNotFilledText', 'User not filled!'));
+            }
+            if (!this.server) {
+                errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled!'));
+            }
+            if(!this.cipher)
+            {
+                errors.push(localize('src.Environment.cipherNotFilledText', 'Cipher not filled!'));
+            }
+
         }
-        if (!this.server) {
-            errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled!'));
+        else //4GL
+        {
+            if (!this.server) {
+                errors.push(localize('src.Environment.serverNotFilledText', 'Server not filled!'));
+            }
         }
+
         return errors;
+
     }
 }

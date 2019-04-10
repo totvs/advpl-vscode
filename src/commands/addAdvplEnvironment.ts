@@ -37,9 +37,9 @@ export default function cmdAddAdvplEnvironment(context): any {
             return true;
         }
     }, {
-        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Smartclient Path'),
+        message: localize('src.commands.addAdvplEnvironment.smartclientPathText', 'Selecione a pasta do SmartClient'),
         name: "smartClientPath",
-        validate: env => env.length > 0
+        type: 'folder'
     }, {
         message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version'),
         name: "appserverVersion",
@@ -61,9 +61,19 @@ export default function cmdAddAdvplEnvironment(context): any {
         message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password'),
         name: "password",
         type: "password"
-    }, {
-        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Include list'),
-        name: "includeList"
+    },
+    {
+        message: localize('src.commands.addAdvplEnvironment.enable', 'Environment Enabled'),
+        name: "enable",
+        type: "list",
+        default: localize('src.extension.yesText', 'Yes'),
+        choices: [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')]
+    },
+    {
+        message: localize('src.commands.addAdvplEnvironment.includeListText', 'Selecione as pastas de Include'),
+        name: "includeList",
+        type: 'folder',
+        canSelectMany: true
     }]
     adapter.prompt(questions, answers => {
         const compile = new advplCompile();
@@ -78,7 +88,9 @@ export default function cmdAddAdvplEnvironment(context): any {
                 passwordCipher: cipher,
                 includeList: answers.includeList,
                 user: answers.user,
-                smartClientPath: answers.smartClientPath
+                smartClientPath: answers.smartClientPath,
+                enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false
+
             });
             config.update("environments", environments)
         })
