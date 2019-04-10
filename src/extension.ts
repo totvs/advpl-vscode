@@ -116,11 +116,11 @@ function initLanguageServer(context: vscode.ExtensionContext) {
     // Options to control the language client
     const clientOptions: LanguageClientOptions = {
         // Register the server for php documents
-        documentSelector: ['advpl'],
+        documentSelector: ['advpl_language'],
 
         synchronize: {
             // Synchronize the setting section 'php' to the server
-            configurationSection: 'advpl'
+            configurationSection: 'advpl_language'
             // Notify the server about file changes to composer.json files contain in the workspace
 
         }

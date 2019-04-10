@@ -12,7 +12,7 @@
         "Languages"
     ],
     "activationEvents": [
-        "onLanguage:advpl",
+        "onLanguage:advpl_language",
         "onCommand:advpl.startSmartClient",
         "onCommand:advpl.menucompile",
         "onCommand:advpl.menucompileProjet",
@@ -234,7 +234,7 @@
         },
         "languages": [
             {
-                "id": "advpl",
+                "id": "advpl_language",
                 "extensions": [
                     ".prw",
                     ".prx",
@@ -254,7 +254,7 @@
         ],
         "grammars": [
             {
-                "language": "advpl",
+                "language": "advpl_language",
                 "scopeName": "source.advpl",
                 "path": "./syntaxes/advpl.tmLanguage.tmLanguage"
             }
@@ -448,7 +448,7 @@
         ],
         "snippets": [
             {
-                "language": "advpl",
+                "language": "advpl_language",
                 "path": "./snippets/advpl.json"
             }
         ]

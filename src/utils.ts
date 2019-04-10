@@ -3,7 +3,7 @@ import os = require('os');
 import path = require('path');
 import * as vscode from 'vscode';
 
-export let PowerShellLanguageId = 'advpl';
+export let PowerShellLanguageId = 'advpl_language';
 
 export function ensurePathExists(targetPath: string) {
     // Ensure that the path exists
