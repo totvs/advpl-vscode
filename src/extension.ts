@@ -490,7 +490,7 @@ function PathInfo() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        var cResource = context._fsPath;
+        var cResource = context.fsPath;
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(getConfigurationAsString(), OutPutChannel)
             patch.info(cResource);
@@ -509,7 +509,7 @@ function PathBuild() {
             return;
         }
         var patch = new advplPatch(getConfigurationAsString(), OutPutChannel)
-        let fileToBuildPath = context._fsPath;
+        let fileToBuildPath = context.fsPath;
         if (fileToBuildPath == null) {
             vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included!'));
         }

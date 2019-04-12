@@ -186,6 +186,11 @@
                                 "type": "boolean",
                                 "default": true,
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE%"
+                            },
+                            "defragPackAllInfo": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "Erase all old infos on rpo"
                             }
                         }
                     }
@@ -532,10 +537,10 @@
                             "request": "launch",
                             "args": [],
                             "cwd": "${workspaceRoot}",
-                            "programRun": "${command:AskForProgramName}",
+                            "programRun": "^\"\\${command:AskForProgramName}\"",
                             "stopOnEntry": false,
-                            "enviromentInfo": "${command:GetEnvInfos}",
-                            "workspace": "${workspaceFolder}/"
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                            "workspace": "^\"\\${workspaceFolder}/\""                            
                         }
                     }
                 ],
@@ -546,10 +551,10 @@
                         "request": "launch",
                         "args": [],
                         "cwd": "${workspaceRoot}",
-                        "programRun": "${command:AskForProgramName}",
+                        "programRun": "^\"\\${command:AskForProgramName}\"",
                         "stopOnEntry": false,
-                        "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceRoot}/"
+                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                        "workspace": "^\"\\${workspaceFolder}/\""
                     }
                 ]
             },
