@@ -11,5 +11,7 @@
 	"src.commands.addAdvplEnvironment.userText": "Usuario",
 	"src.commands.addAdvplEnvironment.passwordText": "Contraseña",
 	"src.commands.addAdvplEnvironment.includeListText": "Lista de includes",
-	"src.commands.addAdvplEnvironment.enable": "Entorno habilitado para uso?"
+	"src.commands.addAdvplEnvironment.enable": "Entorno habilitado para uso?",
+	"src.extension.yesText": "Si",
+	"src.extension.noText": "No"
 }

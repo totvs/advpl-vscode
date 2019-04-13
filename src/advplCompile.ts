@@ -161,7 +161,7 @@ export class advplCompile {
         let files;
         if (this.isAlpha)
         {
-            files = folder;
+            files = folder + "/";
         }
         else
         {

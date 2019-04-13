@@ -22,6 +22,7 @@
 	"advpl.selectEnvironment": "Advpl - Seleciona o ambiente de compilação/Debug.",
 	"advpl.generateAuthorizationConfig": "Advpl - Gera informações de autorização baseada no arquivo .aut",
 	"advpl.addAdvplEnvironment": "Advpl - Cria environment para conexão",
+	"advpl.replaySelect": "Advpl - Selecione o arquivo do replay",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT": "Environment",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST": "Diretorios de include para compilação separar cada diretorio com ;",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.LANGUAGE": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH",

@@ -56,5 +56,6 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Depurar/Debuguear.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente en inicio de Depuración/Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo",
-	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA" : "Alpha compile"
+	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA" : "Alpha compile",
+	"advpl.replaySelect": "Advpl - Select replay file "
 }

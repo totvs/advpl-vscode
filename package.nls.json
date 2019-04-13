@@ -22,6 +22,7 @@
 	"advpl.selectEnvironment": "Advpl - Selects the environment to build/Debug.",
 	"advpl.generateAuthorizationConfig": "Advpl - Generates authorization information based on the file .aut",
 	"advpl.addAdvplEnvironment": "Advpl - Creates environment for connection",
+	"advpl.replaySelect": "Advpl - Select replay file ",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT": "Environment",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST": "\"include\" folders to build (separate each directory with ;)",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.LANGUAGE": "Repository language, Accepted values:PORTUGUESE,ENGLISH,SPANISH",

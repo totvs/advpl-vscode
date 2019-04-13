@@ -2,11 +2,11 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.18",
+    "version": "0.11.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.30.0"
     },
     "categories": [
         "Programming Languages"
@@ -37,6 +37,23 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "replay-time",
+                    "title": "Replay",
+                    "icon": "images/replay.png"
+                }
+            ]
+        },
+        "views": {
+            "replay-time": [
+                {
+                    "id": "replayTimeLine",
+                    "name": "Replay TimeLine"
+                }
+            ]
+        },
         "menus": {
             "explorer/context": [
                 {
@@ -104,11 +121,11 @@
                             "totvs_language": {
                                 "type": "string",
                                 "enum": [
-                                    "advpl","4gl"
+                                    "advpl",
+                                    "4gl"
                                 ],
                                 "default": "advpl",
                                 "description": "language"
-
                             },
                             "smartClientPath": {
                                 "type": "string",
@@ -169,6 +186,11 @@
                                 "type": "boolean",
                                 "default": true,
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE%"
+                            },
+                            "defragPackAllInfo": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "Erase all old infos on rpo"
                             }
                         }
                     }
@@ -202,7 +224,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg|ahu)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -271,7 +293,8 @@
                     ".prg",
                     ".aph",
                     ".apl",
-                    ".tlpp"
+                    ".tlpp",
+                    ".ahu"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
@@ -279,7 +302,8 @@
                     "Advpl(PRG)",
                     "Advpl(APH)",
                     "Advpl(APL)",
-                    "TLPP(tlpp)"
+                    "TLPP(tlpp)",
+                    "Advpl(AHU)"
                 ],
                 "configuration": "./advpl.configuration.json"
             },
@@ -294,7 +318,6 @@
                     "4GL(4gl)"
                 ],
                 "configuration": "./4gl.configuration.json"
-
             }
         ],
         "grammars": [
@@ -345,8 +368,7 @@
             {
                 "command": "advpl.getDebugPath",
                 "title": "Path"
-            },
-
+            },            
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -402,7 +424,15 @@
             {
                 "command": "advpl.addAdvplEnvironment",
                 "title": "%advpl.addAdvplEnvironment%"
-            }
+            },
+            {
+                "command": "advpl.replaySelect",
+                "title": "%advpl.replaySelect%"
+            },
+            {
+				"command": "advpl.refreshReplay",
+				"title": "Advpl - Replay Refresh TimeLine"				
+			}
         ],
         "keybindings": [
             {
@@ -417,7 +447,6 @@
                 "mac": "cmd+f9",
                 "when": "editorLangId == 4gl"
             },
-
             {
                 "command": "advpl.startSmartClient",
                 "key": "ctrl+f11",
@@ -437,10 +466,11 @@
                 "label": "Advpl Debug",
                 "enableBreakpointsFor": {
                     "languageIds": [
-                        "advpl","4gl"
+                        "advpl",
+                        "4gl"
                     ]
                 },
-                "adapterExecutableCommand" :"advpl.getDebugPath",
+                "adapterExecutableCommand": "advpl.getDebugPath",
                 "variables": {
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
@@ -497,21 +527,20 @@
                         }
                     }
                 },
-                "configurationSnippets":[
+                "configurationSnippets": [
                     {
                         "label": "Advpl Debug: Launch Configuration",
                         "description": "A new configuration for launch advpl program.",
-                    "body": {
-                        "name": "Advpl Debug",
-                        "type": "advpl",
-                        "request": "launch",
-                        "args": [],
-                        "cwd": "${workspaceRoot}",
-                        "programRun": "${command:AskForProgramName}",
-                        "stopOnEntry": false,
-                        "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceRoot}/"
-                    
+                        "body": {
+                            "name": "Advpl Debug",
+                            "type": "advpl",
+                            "request": "launch",
+                            "args": [],
+                            "cwd": "${workspaceRoot}",
+                            "programRun": "^\"\\${command:AskForProgramName}\"",
+                            "stopOnEntry": false,
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                            "workspace": "^\"\\${workspaceFolder}/\""                            
                         }
                     }
                 ],
@@ -522,10 +551,106 @@
                         "request": "launch",
                         "args": [],
                         "cwd": "${workspaceRoot}",
-                        "programRun": "${command:AskForProgramName}",
+                        "programRun": "^\"\\${command:AskForProgramName}\"",
                         "stopOnEntry": false,
-                        "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceRoot}/"
+                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                        "workspace": "^\"\\${workspaceFolder}/\""
+                    }
+                ]
+            },
+            {
+                "type": "advpl-replay",
+                "label": "Advpl Replay Debug",
+                "enableBreakpointsFor": {
+                    "languageIds": [
+                        "advpl",
+                        "4gl"
+                    ]
+                },                
+                "variables": {
+                    "ReplayTmpDir": "advpl.replayTmpDir",
+                    "ReplayExecId": "advpl.replayExecId",
+                    "GetEnvInfos": "advpl.getDebugInfos"
+                },
+                          
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "ReplayTmpDir",
+                            "enviromentInfo"
+                        ],
+                        "properties": {
+                            "ReplayTmpDir": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
+                                "default": "${command:ReplayTmpDir}"
+                            },                             
+                            "replayExecId": {
+                                "type": "string",
+                                "description": "Id da execucao",
+                                "default": "${command:ReplayExecId}"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
+                                "default": true
+                            },
+                            "enviromentInfo": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
+                                "default": "${command.GetEnvInfos}"
+                            },
+                            "workspace": {
+                                "type": "string",
+                                "default": "${workspaceFolder}/",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.workspace%"
+                            },
+                            "args": {
+                                "type": "array",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.args%",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "default": []
+                            },
+                            "cwd": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.cwd%",
+                                "default": "."
+                            }
+                        }
+                    }
+                },
+                "configurationSnippets": [
+                    {
+                        "label": "Replay Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                        "body": {
+                            "name": "Replay Debug",
+                            "type": "advpl-replay",
+                            "request": "launch",
+                            "args": [],
+                            "cwd": "^\"\\${workspaceFolder}/\"",
+                            "stopOnEntry": false,
+                            "replayExecId": "^\"\\${command:ReplayExecId}\"",
+                            "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                            "workspace": "^\"\\${workspaceFolder}/\""
+                        }
+                    }
+                ],
+                "initialConfigurations": [
+                    {
+                        "name": "Replay Debug",
+                        "type": "advpl-replay",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "${workspaceFolder}",
+                        "stopOnEntry": false,
+                        "replayExecId": "^\"\\${command:ReplayExecId}\"",
+                        "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
+                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                        "workspace": "^\"\\${workspaceFolder}/\""
                     }
                 ]
             }
@@ -548,12 +673,12 @@
         "@types/mocha": "^2.2.43",
         "@types/node": "^6.0.40",
         "del": "^3.0.0",
-        "mocha": "^4.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
+        "gulp-typescript": "^3.2.2",
+        "mocha": "^4.0.0",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "gulp-typescript": "^3.2.2",
         "vsce": "^1.32.0",
         "vscode": "^1.1.10",
         "vscode-debugadapter-testsupport": "^1.29.0",

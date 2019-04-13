@@ -11,6 +11,8 @@
 	"src.commands.addAdvplEnvironment.userText": "User",
 	"src.commands.addAdvplEnvironment.passwordText": "Password",
 	"src.commands.addAdvplEnvironment.includeListText": "Include list",
-	"src.commands.addAdvplEnvironment.enable": "Environment Enabled for Use?"
+	"src.commands.addAdvplEnvironment.enable": "Environment Enabled for Use?",
+	"src.extension.yesText": "Yes",
+	"src.extension.noText": "No"
 
 }

@@ -22,6 +22,7 @@
 	"advpl.selectEnvironment": "Advpl - Выбор среды компиляции/Отладки.",
 	"advpl.generateAuthorizationConfig": "Advpl - Генерирует информацию для авторизации на основе файла .aut",
 	"advpl.addAdvplEnvironment": "Advpl - Создание среды для подключения",
+	"advpl.replaySelect": "Advpl - Select replay file ",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENVIRONMENT": "Environment",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST": "Директории include для компиляции разделения каждой директории с ;",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.LANGUAGE": "Repository language, Accepted values:RUSSIAN,ENGLISH,SPANISH",

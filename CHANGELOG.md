@@ -1,6 +1,11 @@
-## 0.10.18
- - Projeto movido para dentro do repositorio da TOTVS
- 
+## 0.11.0
+ - Melhoria: Implmentação da reprodução de arquivos de Replay!
+ - Correção: [WebService Client WS Gerando vazio](https://github.com/totvs/advpl-vscode/issues/312)
+ - Correções de issues menores
+ - Melhoria: Suporte a compilação do AHU
+ - [Linux] - Compilação nativa em X64
+  - Melhoria: [Desfragmentação de RPO](https://github.com/totvs/advpl-vscode/issues/308)
+
 ## 0.10.17
  - [Linux/MAC/Alpha Windows] Correção de Watch no inicio do debug fazia o debug parar 
  

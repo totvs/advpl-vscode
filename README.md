@@ -32,6 +32,7 @@ Essa extensão possui as seguintes features implementadas:
 * Mac OSX 
 * Linux
 * TL++
+* TdsReplay
 
 As próximas planejadas são:
 
@@ -74,6 +75,13 @@ Atualmente as seguintes linguas estão suportadas:
 * Inglês
 * Espanhol
 * Russo
+
+## Replay
+
+Esté plugin tem a capacidade de reproduzir arquivos gerados pelo Totvs Replay.
+Não é possivel gerar o replay pela extensão apenas reproduzir o debug.
+Para maiores informações de como utilizar, veja a wiki.
+
 
 Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com/docs/getstarted/locales)
 
