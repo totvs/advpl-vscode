@@ -1,3 +1,6 @@
+## 0.11.1
+ - Correção: [Geração de Json de launch errado.](https://github.com/totvs/advpl-vscode/issues/322)
+ 
 ## 0.11.0
  - Melhoria: Implmentação da reprodução de arquivos de Replay!
  - Correção: [WebService Client WS Gerando vazio](https://github.com/totvs/advpl-vscode/issues/312)

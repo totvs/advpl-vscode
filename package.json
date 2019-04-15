@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.11.0",
+    "version": "0.11.1",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -551,10 +551,10 @@
                         "request": "launch",
                         "args": [],
                         "cwd": "${workspaceRoot}",
-                        "programRun": "^\"\\${command:AskForProgramName}\"",
+                        "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
-                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
-                        "workspace": "^\"\\${workspaceFolder}/\""
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "${workspaceFolder}/"
                     }
                 ]
             },
@@ -647,10 +647,10 @@
                         "args": [],
                         "cwd": "${workspaceFolder}",
                         "stopOnEntry": false,
-                        "replayExecId": "^\"\\${command:ReplayExecId}\"",
-                        "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
-                        "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
-                        "workspace": "^\"\\${workspaceFolder}/\""
+                        "replayExecId": "${command:ReplayExecId}",
+                        "ReplayTmpDir" : "${command:ReplayTmpDir}",
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "${workspaceFolder}/"
                     }
                 ]
             }
