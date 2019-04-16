@@ -1,3 +1,6 @@
+## 0.11.2
+ - Correção: Replay com caracteres não utf8 falhava a abertura
+
 ## 0.11.1
  - Correção: [Geração de Json de launch errado.](https://github.com/totvs/advpl-vscode/issues/322)
  
