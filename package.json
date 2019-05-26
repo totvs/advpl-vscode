@@ -430,9 +430,13 @@
                 "title": "%advpl.replaySelect%"
             },
             {
-				"command": "advpl.refreshReplay",
-				"title": "Advpl - Replay Refresh TimeLine"				
-			}
+                "command": "advpl.refreshReplay",
+                "title": "Advpl - Replay Refresh TimeLine"
+            },
+            {
+                "command": "advpl.multiThread",
+                "title": "Advpl - Multi-Thread"
+            }
         ],
         "keybindings": [
             {
