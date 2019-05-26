@@ -107,8 +107,13 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
 
+    // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+        // Atualiza o Status Bar de Multi-Thread
         multiThread.changeItem();
+
+        // Atualiza o Status Bar de Ambientes
+        env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
     }));
 
     return api;
