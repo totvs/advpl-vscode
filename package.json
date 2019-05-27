@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.11.2",
+    "version": "0.11.3",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -368,7 +368,7 @@
             {
                 "command": "advpl.getDebugPath",
                 "title": "Path"
-            },            
+            },
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -544,7 +544,7 @@
                             "programRun": "^\"\\${command:AskForProgramName}\"",
                             "stopOnEntry": false,
                             "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
-                            "workspace": "^\"\\${workspaceFolder}/\""                            
+                            "workspace": "^\"\\${workspaceFolder}/\""
                         }
                     }
                 ],
@@ -570,13 +570,12 @@
                         "advpl",
                         "4gl"
                     ]
-                },                
+                },
                 "variables": {
                     "ReplayTmpDir": "advpl.replayTmpDir",
                     "ReplayExecId": "advpl.replayExecId",
                     "GetEnvInfos": "advpl.getDebugInfos"
                 },
-                          
                 "configurationAttributes": {
                     "launch": {
                         "required": [
@@ -588,7 +587,7 @@
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
                                 "default": "${command:ReplayTmpDir}"
-                            },                             
+                            },
                             "replayExecId": {
                                 "type": "string",
                                 "description": "Id da execucao",
@@ -637,7 +636,7 @@
                             "cwd": "^\"\\${workspaceFolder}/\"",
                             "stopOnEntry": false,
                             "replayExecId": "^\"\\${command:ReplayExecId}\"",
-                            "ReplayTmpDir" : "^\"\\${command:ReplayTmpDir}\"",
+                            "ReplayTmpDir": "^\"\\${command:ReplayTmpDir}\"",
                             "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
                             "workspace": "^\"\\${workspaceFolder}/\""
                         }
@@ -652,7 +651,7 @@
                         "cwd": "${workspaceFolder}",
                         "stopOnEntry": false,
                         "replayExecId": "${command:ReplayExecId}",
-                        "ReplayTmpDir" : "${command:ReplayTmpDir}",
+                        "ReplayTmpDir": "${command:ReplayTmpDir}",
                         "enviromentInfo": "${command:GetEnvInfos}",
                         "workspace": "${workspaceFolder}/"
                     }
@@ -693,7 +692,7 @@
         "figures": "^2.0.0",
         "vscode-debugadapter": "^1.29.0",
         "vscode-debugprotocol": "^1.29.0",
-        "vscode-languageclient": "1.3.1",
+        "vscode-languageclient": "^1.3.1",
         "vscode-nls": "^2.0.2"
     },
     "repository": {

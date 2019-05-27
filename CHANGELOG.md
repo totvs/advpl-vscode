@@ -1,3 +1,8 @@
+## 0.11.3
+ - Melhoria via Pull Request: [Alteracao entre debug multi thread ou não](https://github.com/totvs/advpl-vscode/pull/330)
+ Agredecimento especial ao:
+    - Gabriel Alencar
+    
 ## 0.11.2
  - Correção: Replay com caracteres não utf8 falhava a abertura
 
