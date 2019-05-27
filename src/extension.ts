@@ -10,6 +10,7 @@ import { advplConsole } from './advplConsole';
 import { advplPatch } from './advplPatch';
 import { advplMonitor } from './advplMonitor';
 import { Environment } from './advplEnvironment';
+import { MultiThread } from './MultiThread';
 import EnvObject from './Environment';
 import { spawn, execFile, ChildProcess } from 'child_process';
 import * as path from 'path';
@@ -30,9 +31,9 @@ let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
-let oreplayPlay : replayPlay;
-function __getReplayInstance()
-{
+let multiThread: MultiThread;
+let oreplayPlay: replayPlay;
+function __getReplayInstance() {
     return oreplayPlay;
 }
 export async function activate(context: vscode.ExtensionContext) {
@@ -52,6 +53,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(generateAuthorizationConfig());
     context.subscriptions.push(addAdvplEnvironment());
+    context.subscriptions.push(aaddAvplMultiThread());
 
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
@@ -89,8 +91,12 @@ export async function activate(context: vscode.ExtensionContext) {
     //Environment no bar
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
-    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath,oreplayPlay);
+
+    // Multi-Thread no Bar
+    multiThread = new MultiThread();
+
+    oreplayPlay = new replayPlay(advplDiagnosticCollection, OutPutChannel);
+    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath, oreplayPlay);
     vscode.window.registerTreeDataProvider('replayTimeLine', replayTimeLineProvider);
     //initLanguageServer(context);
     let api = {
@@ -98,8 +104,18 @@ export async function activate(context: vscode.ExtensionContext) {
             OutPutChannel.log(cLog);
         }
     };
-    vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine( source, line));
+    vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
+
+    // Evento acionado sempre que uma configuração é alterada no Workspace
+    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+        // Atualiza o Status Bar de Multi-Thread
+        multiThread.changeItem();
+
+        // Atualiza o Status Bar de Ambientes
+        env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+    }));
+
     return api;
 }
 
@@ -224,13 +240,29 @@ function addAdvplEnvironment() {
     return vscode.commands.registerCommand('advpl.addAdvplEnvironment', cmdAddAdvplEnvironment);
 }
 
-function ReplaySelect()
-{
-    return vscode.commands.registerCommand('advpl.replaySelect', function (context){
-        
-            oreplayPlay.clearReplayInfos();            
-            //oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
-        
+function aaddAvplMultiThread() {
+    let disposable = vscode.commands.registerCommand('advpl.multiThread', function (context) {
+
+        let advplConfig = vscode.workspace.getConfiguration("advpl");
+        let newMultiThread = !advplConfig.get<boolean>("debug_multiThread");
+
+        // Inverte a configuração de Multi-Thread
+        advplConfig.update("debug_multiThread", newMultiThread).then(e => {
+            // Atualiza o status bar de Multi-Thread
+            multiThread.changeItem(newMultiThread);
+        });
+
+    });
+
+    return disposable;
+}
+
+function ReplaySelect() {
+    return vscode.commands.registerCommand('advpl.replaySelect', function (context) {
+
+        oreplayPlay.clearReplayInfos();
+        //oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+
         return oreplayPlay.cmdReplaySelect();
     });
 }
