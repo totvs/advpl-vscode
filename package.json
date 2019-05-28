@@ -52,6 +52,12 @@
                     "id": "replayTimeLine",
                     "name": "Replay TimeLine"
                 }
+            ],
+            "explorer": [
+                {
+                    "id": "serversManagement",
+                    "name": "Gerenciador de Servidores"
+                }
             ]
         },
         "menus": {
@@ -89,6 +95,13 @@
                     "command": "advpl.patch.build",
                     "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "serversManagement.AddServer",
+                    "when": "view == serversManagement",
+                    "group": "navigation"
                 }
             ]
         },
@@ -436,6 +449,14 @@
             {
                 "command": "advpl.multiThread",
                 "title": "Advpl - Multi-Thread"
+            },
+            {
+                "command": "serversManagement.AddServer",
+                "title": "Adicionar",
+                "icon": {
+                    "light": "images/light/add.png",
+                    "dark": "images/dark/add.png"
+                }
             }
         ],
         "keybindings": [

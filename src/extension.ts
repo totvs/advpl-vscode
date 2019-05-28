@@ -26,6 +26,7 @@ import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
+import { ServersManagementView, ServerProvider } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -33,6 +34,7 @@ let isCompiling = false;
 let env;
 let multiThread: MultiThread;
 let oreplayPlay: replayPlay;
+let viewServers: ServersManagementView;
 function __getReplayInstance() {
     return oreplayPlay;
 }
@@ -79,11 +81,11 @@ export async function activate(context: vscode.ExtensionContext) {
     // register a configuration provider for 'mock' debug type
 	const provider = new ReplayConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
-    
+
     const factory = new ReplayDebugAdapterDescriptorFactory();
 		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl-replay', factory));
 		context.subscriptions.push(factory);
-    
+
     //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
     //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
@@ -115,6 +117,9 @@ export async function activate(context: vscode.ExtensionContext) {
         // Atualiza o Status Bar de Ambientes
         env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
     }));
+
+    // viewServers = new ServersManagementView(context);
+    vscode.window.registerTreeDataProvider('serversManagement', new ServerProvider(vscode.workspace.rootPath));
 
     return api;
 }
@@ -272,7 +277,7 @@ function getReplayTmpDir()
         /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        } */           
+        } */
         return oreplayPlay.getTmpDir();
     });
 }
@@ -282,7 +287,7 @@ function getReplayExecId()
         /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        } */           
+        } */
         return oreplayPlay.getSelected();
     });
 }
@@ -773,7 +778,7 @@ class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
 			if (editor && editor.document.languageId === 'advpl') {
 				config.type = 'advpl-replay';
 				config.name = 'Launch';
-				config.request = 'launch';		
+				config.request = 'launch';
 				config.stopOnEntry = true;
 			}
         }
@@ -790,22 +795,22 @@ class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
 	}
 
 }
-    
+
 
 class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
 
-	
+
 
 	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
 
         const args = []; //Vai os parametros vai onLaunch
-      
+
         const program =  getReplayExec(); //"/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/TdsReplayPlay";
 
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
 
 	dispose() {
-	
+
 	}
 }
