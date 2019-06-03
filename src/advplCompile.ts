@@ -21,6 +21,7 @@ export class advplCompile {
     private encoding: string;
     private compileStartTime;
     private isAlpha;
+    private iniContent;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
@@ -31,7 +32,7 @@ export class advplCompile {
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
         this.isAlpha = config.get<boolean>("alpha_compile");
-        if (process.platform != "win32")        
+        if (process.platform != "win32")
         {
             this.isAlpha = true;
         }
@@ -410,4 +411,43 @@ export class advplCompile {
             });
         });
     }
+
+    public getINI(): void {
+        // this.outChannel.log(localize("src.advplCompile.startingDefragText", "Starting the defragmentation of the RPO...") + "\n");
+        // this.diagnosticCollection.clear();
+        var _args = new Array<string>()
+        var that = this;
+        // if (this.isAlpha) {
+        //     _args.push("--compileType=" + 1);
+        // }
+
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--getIni");
+
+        var child = child_process.spawn(this.debugPath, _args);
+
+        child.stdout.on("data", function (data) {
+            that._lastAppreMsg += data;
+            that.iniContent = data;
+        });
+
+        child.on("exit", function (data) {
+            const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'getINI' + (new Date()).getMilliseconds().toString() + '.ini'));
+
+            vscode.workspace.openTextDocument(newFile).then(document => {
+                const edit = new vscode.WorkspaceEdit();
+                edit.insert(newFile, new vscode.Position(0, 0), that.iniContent);
+
+                return vscode.workspace.applyEdit(edit).then(success => {
+                    if (success) {
+                        vscode.window.showTextDocument(document);
+                        that.afterCompile();
+                    } else {
+                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
+                    }
+                });
+            });
+        });
+    }
+
 }
