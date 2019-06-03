@@ -48,6 +48,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(menucompileProjet());
     context.subscriptions.push(menucompiletextfile());
+    context.subscriptions.push(GetINI());
 
     context.subscriptions.push(getAuthorizationId());
     context.subscriptions.push(CipherPassword());
@@ -739,6 +740,21 @@ function buildPPO() {
         }
         else {
             __internal_compile(cSource, editor, true);
+        }
+    });
+    return disposable;
+}
+
+function GetINI() {
+    let disposable = vscode.commands.registerCommand('advpl.getINI', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+        let compile = createAdvplCompile(null, localize('src.extension.getINI', 'INI was successfully obtained.'));
+        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+        if (!(compile == null)) {
+            // compile.setEncoding(encoding);
+            compile.getINI();
         }
     });
     return disposable;

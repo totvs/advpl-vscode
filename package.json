@@ -451,6 +451,10 @@
                 "title": "Advpl - Multi-Thread"
             },
             {
+                "command": "advpl.getINI",
+                "title": "Advpl - Get INI"
+            },
+            {
                 "command": "serversManagement.AddServer",
                 "title": "Adicionar",
                 "icon": {
