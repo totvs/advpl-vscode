@@ -21,7 +21,7 @@ export class advplCompile {
     private encoding: string;
     private compileStartTime;
     private isAlpha;
-    private iniContent;
+    private iniContent: string;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
@@ -412,14 +412,9 @@ export class advplCompile {
         });
     }
 
-    public getINI(): void {
-        // this.outChannel.log(localize("src.advplCompile.startingDefragText", "Starting the defragmentation of the RPO...") + "\n");
-        // this.diagnosticCollection.clear();
+    public getINI(done?: Function): void {
         var _args = new Array<string>()
         var that = this;
-        // if (this.isAlpha) {
-        //     _args.push("--compileType=" + 1);
-        // }
 
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--getIni");
@@ -427,26 +422,33 @@ export class advplCompile {
         var child = child_process.spawn(this.debugPath, _args);
 
         child.stdout.on("data", function (data) {
+            var xRet = data + "";
+
             that._lastAppreMsg += data;
-            that.iniContent = data;
+            that.iniContent = xRet;
         });
 
         child.on("exit", function (data) {
-            const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'getINI' + (new Date()).getMilliseconds().toString() + '.ini'));
+            var noFoundIni = false;
 
-            vscode.workspace.openTextDocument(newFile).then(document => {
-                const edit = new vscode.WorkspaceEdit();
-                edit.insert(newFile, new vscode.Position(0, 0), that.iniContent);
+            if (that.iniContent.indexOf("NOSOURCE") > 0) {
+                that.run_callBack(false);
+                noFoundIni = true;
+            }
+            else{
+                // Devolve via evento o INI
+                if (that.afterCompile) {
+                    that.afterCompile(that.iniContent);
+                }
+            }
 
-                return vscode.workspace.applyEdit(edit).then(success => {
-                    if (success) {
-                        vscode.window.showTextDocument(document);
-                        that.afterCompile();
-                    } else {
-                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
-                    }
-                });
-            });
+            if (noFoundIni) {
+                that.iniContent = "";
+            }
+
+            // Devolve via argumento o INI
+            done(that.iniContent);
+
         });
     }
 

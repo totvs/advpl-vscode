@@ -750,13 +750,35 @@ function GetINI() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        let compile = createAdvplCompile(null, localize('src.extension.getINI', 'INI was successfully obtained.'));
-        let encoding = vscode.workspace.getConfiguration("files").get("encoding");
+
+        // Cria o objeto de compilação
+        let compile = createAdvplCompile(null, null);
+
+        // Sobrescreve o evento após compilação do objeto 'compile'
+        compile.setAfterCompileOK(function (iniContent: string) {
+            const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'getIni' + (new Date()).getMilliseconds().toString() + '.ini'));
+
+            vscode.workspace.openTextDocument(newFile).then(document => {
+                const edit = new vscode.WorkspaceEdit();
+                edit.insert(newFile, new vscode.Position(0, 0), iniContent);
+
+                return vscode.workspace.applyEdit(edit).then(success => {
+                    if (success) {
+                        vscode.window.showTextDocument(document);
+                        isCompiling = false;
+                    } else {
+                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
+                    }
+                });
+            });
+        });
+
+        // Chama o método da classe que busca o INI
         if (!(compile == null)) {
-            // compile.setEncoding(encoding);
             compile.getINI();
         }
     });
+
     return disposable;
 }
 
