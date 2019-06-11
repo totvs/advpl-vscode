@@ -26,7 +26,7 @@ import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
-import { ServersManagementView, ServerProvider } from './serversManagementView';
+import { ServerProvider } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -34,7 +34,6 @@ let isCompiling = false;
 let env;
 let multiThread: MultiThread;
 let oreplayPlay: replayPlay;
-let viewServers: ServersManagementView;
 function __getReplayInstance() {
     return oreplayPlay;
 }
@@ -121,6 +120,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
     // viewServers = new ServersManagementView(context);
     vscode.window.registerTreeDataProvider('serversManagement', new ServerProvider(vscode.workspace.rootPath));
+    vscode.commands.registerCommand('advpl.servers.test', (label) => vscode.window.showInformationMessage("=> " + label.label));
 
     return api;
 }

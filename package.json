@@ -96,6 +96,13 @@
                     "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 }
+
+            ],
+            "view/item/context": [
+                {
+                    "command": "advpl.servers.test",
+                    "when": "view == serversManagement && viewItem == environment"
+                }
             ],
             "view/title": [
                 {
@@ -461,6 +468,10 @@
                     "light": "images/light/add.png",
                     "dark": "images/dark/add.png"
                 }
+            },
+            {
+                "command": "advpl.servers.test",
+                "title": "Teste"
             }
         ],
         "keybindings": [
