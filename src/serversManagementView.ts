@@ -1,16 +1,45 @@
+import * as nls from 'vscode-nls';
+const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
+
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import IEnvironment from './utils/IEnvironment';
 
+export default interface IDictionary {
+	name: string;
+	label: string;
+}
+
+export class ServerManagement {
+
+	private _provider: ServerProvider;
+
+	constructor() {
+		// Registra os o TreeView
+		this._provider = new ServerProvider();
+
+		// Registra o comando de conexão ao ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.connect", (element) => this.connect(element));
+	}
+
+	get provider() {
+		return this._provider;
+	}
+
+	public connect(element: Dependency) {
+		let updObj = vscode.workspace.getConfiguration("advpl");
+
+		// Atualiza a configuração de ambiente selecionado
+		updObj.update("selectedEnvironment", element.label);
+		vscode.window.showInformationMessage(localize('src.extension.environmentText', 'Environment') + element.label + localize('src.extension.environmentSelectedText', ' selection was successful.'));
+	}
+}
+
 export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 
 	private _onDidChangeTreeData: vscode.EventEmitter<Dependency | undefined> = new vscode.EventEmitter<Dependency | undefined>();
 	readonly onDidChangeTreeData: vscode.Event<Dependency | undefined> = this._onDidChangeTreeData.event;
-
-	constructor(private workspaceRoot: string) {
-
-	}
 
 	refresh(): void {
 		this._onDidChangeTreeData.fire();
@@ -21,25 +50,9 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 	}
 
 	getChildren(element?: Dependency): Thenable<Dependency[]> {
-		if (!this.workspaceRoot) {
-			vscode.window.showInformationMessage('No dependency in empty workspace');
-			return Promise.resolve([]);
-		}
-
-		// if (element) {
-		// 	return Promise.resolve(this.getDepsInPackageJson(path.join(this.workspaceRoot, 'node_modules', element.label, 'package.json')));
-		// } else {
-		// 	const packageJsonPath = path.join(this.workspaceRoot, 'package.json');
-		// 	if (this.pathExists(packageJsonPath)) {
-		// 		return Promise.resolve(this.getDepsInPackageJson(packageJsonPath));
-		// 	} else {
-		// 		vscode.window.showInformationMessage('Workspace has no package.json');
-		// 		return Promise.resolve([]);
-		// 	}
-		// }
 
 		if (element) {
-			return Promise.resolve(this.getServersInConfiguration(element.label));
+			return Promise.resolve(this.getServersInConfiguration(element.server));
 		} else {
 			return Promise.resolve(this.getServersInConfiguration());
 		}
@@ -48,32 +61,32 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 
 	private getServersInConfiguration(serverChild?: string): Dependency[] {
 		const config = vscode.workspace.getConfiguration("advpl");
-		const environments = config.get<Array<IEnvironment>>("environments");
+		const environments = config.get<Array<IEnvironment>>("environments").filter(env => env.enable !== false);
+		const dictionary = config.get<Array<IDictionary>>("environmentsDictionary");
+		const selectedEnvironment = config.get<string>("selectedEnvironment");
+
 		let servers = Array<Dependency>();
 
 		const toDep = (server: string, isChild?: boolean): Dependency => {
+			let serverLabel = dictionary.find(dic => dic.name.trim() === server.trim());
 
 			if (isChild) {
-				return new Dependency(server, vscode.TreeItemCollapsibleState.None, {
-					command: "advpl.servers.test",
-					title: "Teste",
-					arguments: [server]
-				}, 'environment');
+				return new Dependency(server, server, vscode.TreeItemCollapsibleState.None, 'environment', server.trim() === selectedEnvironment.trim());
 			} else {
-				return new Dependency(server, vscode.TreeItemCollapsibleState.Expanded);
+				return new Dependency(server, serverLabel ? serverLabel.label : server, vscode.TreeItemCollapsibleState.Expanded);
 			}
 
 		};
 
 		if (serverChild) {
 			environments.filter(env => env.server === serverChild).forEach(dep => {
-				if (!servers.find(srv => srv.label === dep.name)) {
-					servers.push(toDep(dep.name, true));
+				if (!servers.find(srv => srv.server === dep.server)) {
+					servers.push(toDep(dep.name ? dep.name : dep.environment, true));
 				}
 			});
 		} else {
 			environments.forEach(dep => {
-				if (!servers.find(srv => srv.label === dep.server)) {
+				if (!servers.find(srv => srv.server === dep.server)) {
 					servers.push(toDep(dep.server));
 				}
 			});
@@ -82,69 +95,38 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 		return servers;
 	}
 
-	/**
-	 * Given the path to package.json, read all its dependencies and devDependencies.
-	 */
-	// private getDepsInPackageJson(packageJsonPath: string): Dependency[] {
-	// 	if (this.pathExists(packageJsonPath)) {
-	// 		const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
-
-	// 		const toDep = (moduleName: string, version: string): Dependency => {
-	// 			if (this.pathExists(path.join(this.workspaceRoot, 'node_modules', moduleName))) {
-	// 				return new Dependency(moduleName, version, vscode.TreeItemCollapsibleState.Collapsed);
-	// 			} else {
-	// 				return new Dependency(moduleName, version, vscode.TreeItemCollapsibleState.None, {
-	// 					command: 'extension.openPackageOnNpm',
-	// 					title: '',
-	// 					arguments: [moduleName]
-	// 				});
-	// 			}
-	// 		};
-
-	// 		const deps = packageJson.dependencies
-	// 			? Object.keys(packageJson.dependencies).map(dep => toDep(dep, packageJson.dependencies[dep]))
-	// 			: [];
-	// 		const devDeps = packageJson.devDependencies
-	// 			? Object.keys(packageJson.devDependencies).map(dep => toDep(dep, packageJson.devDependencies[dep]))
-	// 			: [];
-	// 		return deps.concat(devDeps);
-	// 	} else {
-	// 		return [];
-	// 	}
-	// }
-
-	private pathExists(p: string): boolean {
-		try {
-			fs.accessSync(p);
-		} catch (err) {
-			return false;
-		}
-
-		return true;
-	}
 }
 
 export class Dependency extends vscode.TreeItem {
 
 	constructor(
+		public readonly server: string,
 		public readonly label: string,
 		public readonly collapsibleState: vscode.TreeItemCollapsibleState,
-		public readonly command?: vscode.Command,
-		public readonly contextValue?: string
+		public readonly contextValue?: string,
+		public readonly isConnected?: boolean
 	) {
 		super(label, collapsibleState);
 	}
 
 	get tooltip(): string {
-		return `${this.label}`;
-	}
-
-	get description(): string {
 		return this.label;
 	}
 
+	get description(): string {
+		return this.contextValue === "environment" ? "" : this.server;
+	}
+
 	iconPath = {
-		light: path.join(__filename, '..', '..', '..', 'images', 'light', 'dependency.svg'),
-		dark: path.join(__filename, '..', '..', '..', 'images', 'dark', 'dependency.svg')
+		light: path.join(__filename, '..', '..', '..', 'images', 'light', this.getIcon()),
+		dark: path.join(__filename, '..', '..', '..', 'images', 'dark', this.getIcon())
 	};
+
+	private getIcon(): string {
+		if (this.contextValue === "environment") {
+			return this.isConnected ? "server.connected.svg" : "server.svg";
+		} else {
+			return "dependency.svg";
+		}
+	}
 }

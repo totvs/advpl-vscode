@@ -26,7 +26,7 @@ import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
-import { ServerProvider } from './serversManagementView';
+import { ServerProvider, ServerManagement } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -109,6 +109,10 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
 
+    const serverView = new ServerManagement();
+    vscode.window.registerTreeDataProvider('serversManagement', serverView.provider);
+    vscode.commands.registerCommand('advpl.servers.test', (label) => vscode.window.showInformationMessage("=> " + label.label));
+
     // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
         // Atualiza o Status Bar de Multi-Thread
@@ -116,11 +120,10 @@ export async function activate(context: vscode.ExtensionContext) {
 
         // Atualiza o Status Bar de Ambientes
         env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
-    }));
 
-    // viewServers = new ServersManagementView(context);
-    vscode.window.registerTreeDataProvider('serversManagement', new ServerProvider(vscode.workspace.rootPath));
-    vscode.commands.registerCommand('advpl.servers.test', (label) => vscode.window.showInformationMessage("=> " + label.label));
+        // Atualiza o TreeView de servidores
+        serverView.provider.refresh();
+    }));
 
     return api;
 }

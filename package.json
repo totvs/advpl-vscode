@@ -102,6 +102,10 @@
                 {
                     "command": "advpl.servers.test",
                     "when": "view == serversManagement && viewItem == environment"
+                },
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "view == serversManagement && viewItem == environment"
                 }
             ],
             "view/title": [
@@ -471,7 +475,12 @@
             },
             {
                 "command": "advpl.servers.test",
-                "title": "Teste"
+                "title": "Teste",
+                "enablement": "false"
+            },
+            {
+                "command": "advpl.serversManagement.connect",
+                "title": "Conectar"
             }
         ],
         "keybindings": [
