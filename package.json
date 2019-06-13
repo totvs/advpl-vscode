@@ -101,11 +101,11 @@
             "view/item/context": [
                 {
                     "command": "advpl.servers.test",
-                    "when": "view == serversManagement && viewItem == environment"
+                    "when": "view == serversManagement && viewItem == Environment"
                 },
                 {
                     "command": "advpl.serversManagement.connect",
-                    "when": "view == serversManagement && viewItem == environment"
+                    "when": "view == serversManagement && viewItem == Environment"
                 }
             ],
             "view/title": [
