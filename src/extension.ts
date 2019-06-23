@@ -254,9 +254,15 @@ function aaddAvplMultiThread() {
 
         let advplConfig = vscode.workspace.getConfiguration("advpl");
         let newMultiThread = !advplConfig.get<boolean>("debug_multiThread");
+        let newMultiThreadTarget = undefined;
+
+        // Caso nao haja workspace configurado, altera nas configurações globais
+        if (!vscode.workspace.workspaceFolders){
+            newMultiThreadTarget = true;
+        }
 
         // Inverte a configuração de Multi-Thread
-        advplConfig.update("debug_multiThread", newMultiThread).then(e => {
+        advplConfig.update("debug_multiThread", newMultiThread, newMultiThreadTarget).then(e => {
             // Atualiza o status bar de Multi-Thread
             multiThread.changeItem(newMultiThread);
         });
