@@ -106,6 +106,23 @@
                 {
                     "command": "advpl.serversManagement.connect",
                     "when": "view == serversManagement && viewItem == Environment"
+                },
+                {
+                    "command": "serversManagement.DisableServer",
+                    "when": "view == serversManagement && viewItem == Environment",
+                    "group": "inline"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "view == serversManagement && viewItem == Environment"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "view == serversManagement && viewItem == Environment"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "view == serversManagement && viewItem == Environment"
                 }
             ],
             "view/title": [
@@ -474,6 +491,14 @@
                 }
             },
             {
+                "command": "serversManagement.DisableServer",
+                "title": "Desabilitar",
+                "icon": {
+                    "light": "images/light/delete.png",
+                    "dark": "images/dark/delete.png"
+                }
+            },
+            {
                 "command": "advpl.servers.test",
                 "title": "Teste",
                 "enablement": "false"
@@ -481,6 +506,18 @@
             {
                 "command": "advpl.serversManagement.connect",
                 "title": "Conectar"
+            },
+            {
+                "command": "advpl.serversManagement.Defrag",
+                "title": "Desfragmentar"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoInfos",
+                "title": "Listar objetos do RPO"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoFunctions",
+                "title": "Listar funções do RPO"
             }
         ],
         "keybindings": [
