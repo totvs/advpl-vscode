@@ -26,7 +26,7 @@ import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
-import { ServerProvider, ServerManagement } from './serversManagementView';
+import { ServerManagementView } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -78,6 +78,9 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getReplayExecId());
     //context.subscriptions.push(getReplayPath());
 
+    // Binds do Servers View
+    context.subscriptions.push(addServer(context));
+
     // register a configuration provider for 'mock' debug type
 	const provider = new ReplayConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
@@ -109,7 +112,7 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
 
-    const serverView = new ServerManagement();
+    const serverView = new ServerManagementView();
     vscode.window.registerTreeDataProvider('serversManagement', serverView.provider);
     vscode.commands.registerCommand('advpl.servers.test', (label) => vscode.window.showInformationMessage("=> " + label.label));
 
@@ -215,7 +218,7 @@ function generateAuthorizationConfig() {
     return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
-function createAdvplCompile(cSource: string, cDescription: string) {
+export function createAdvplCompile(cSource: string, cDescription: string) {
     let compile: advplCompile;
 
     try {
@@ -791,7 +794,15 @@ function GetINI() {
     return disposable;
 }
 
-function isEnvironmentSelected(): boolean {
+function addServer(context){
+    let disposable = vscode.commands.registerCommand('advpl.serversManagement.AddServer', async () => {
+        vscode.commands.executeCommand('advpl.addAdvplEnvironment');
+    });
+
+    return disposable;
+}
+
+export function isEnvironmentSelected(): boolean {
     let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
     if (env === "" || env == undefined) {
         vscode.window.showInformationMessage(localize('src.extension.environmentSelectErrorText', 'Please, select an environment!'));

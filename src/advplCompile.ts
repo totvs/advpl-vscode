@@ -412,7 +412,7 @@ export class advplCompile {
         });
     }
 
-    public getINI(done?: Function): void {
+    public getINI(done?: Function) {
         var _args = new Array<string>()
         var that = this;
 
@@ -431,15 +431,22 @@ export class advplCompile {
         child.on("exit", function (data) {
             var noFoundIni = false;
 
-            if (that.iniContent.indexOf("NOSOURCE") > 0) {
+            if (that.iniContent) {
+                if (that.iniContent.indexOf("NOSOURCE") > 0) {
+                    that.run_callBack(false);
+                    noFoundIni = true;
+                }
+                else {
+                    // Devolve via evento o INI
+                    if (that.afterCompile) {
+                        that.afterCompile(that.iniContent);
+                    }
+                }
+
+
+            } else {
                 that.run_callBack(false);
                 noFoundIni = true;
-            }
-            else{
-                // Devolve via evento o INI
-                if (that.afterCompile) {
-                    that.afterCompile(that.iniContent);
-                }
             }
 
             if (noFoundIni) {

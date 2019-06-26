@@ -100,36 +100,74 @@
             ],
             "view/item/context": [
                 {
-                    "command": "advpl.servers.test",
-                    "when": "view == serversManagement && viewItem == Environment"
+                    "command": "advpl.serversManagement.test",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
                 },
                 {
                     "command": "advpl.serversManagement.connect",
                     "when": "view == serversManagement && viewItem == Environment"
                 },
                 {
-                    "command": "serversManagement.DisableServer",
+                    "command": "advpl.serversManagement.DisableServer",
                     "when": "view == serversManagement && viewItem == Environment",
                     "group": "inline"
                 },
                 {
                     "command": "advpl.serversManagement.Defrag",
-                    "when": "view == serversManagement && viewItem == Environment"
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
                 },
                 {
                     "command": "advpl.serversManagement.getRpoInfos",
-                    "when": "view == serversManagement && viewItem == Environment"
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
                 },
                 {
                     "command": "advpl.serversManagement.getRpoFunctions",
-                    "when": "view == serversManagement && viewItem == Environment"
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.renameEnvironment",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "view == serversManagement && viewItem == ServiceConnected"
                 }
             ],
             "view/title": [
                 {
-                    "command": "serversManagement.AddServer",
+                    "command": "advpl.serversManagement.AddServer",
                     "when": "view == serversManagement",
                     "group": "navigation"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.DisableServer",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.renameEnvironment",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "config.noExists"
                 }
             ]
         },
@@ -483,7 +521,7 @@
                 "title": "Advpl - Get INI"
             },
             {
-                "command": "serversManagement.AddServer",
+                "command": "advpl.serversManagement.AddServer",
                 "title": "Adicionar",
                 "icon": {
                     "light": "images/light/add.png",
@@ -491,7 +529,7 @@
                 }
             },
             {
-                "command": "serversManagement.DisableServer",
+                "command": "advpl.serversManagement.DisableServer",
                 "title": "Desabilitar",
                 "icon": {
                     "light": "images/light/delete.png",
@@ -499,7 +537,7 @@
                 }
             },
             {
-                "command": "advpl.servers.test",
+                "command": "advpl.serversManagement.test",
                 "title": "Teste",
                 "enablement": "false"
             },
@@ -518,6 +556,14 @@
             {
                 "command": "advpl.serversManagement.getRpoFunctions",
                 "title": "Listar funções do RPO"
+            },
+            {
+                "command": "advpl.serversManagement.renameEnvironment",
+                "title": "Renomear Ambiente"
+            },
+            {
+                "command": "advpl.serversManagement.getAllEnvironments",
+                "title": "Obter Ambientes do INI"
             }
         ],
         "keybindings": [
