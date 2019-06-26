@@ -37,8 +37,6 @@ export class IniManagement {
     public GetIniContent(): Thenable<void> {
         var that = this;
 
-        // TODO: Utilizar Progress enquanto carrega para melhorar a UX.
-
         return new Promise((resolve) => {
             // Verifica se está selecionado um ambiente
             if (!isEnvironmentSelected()) {

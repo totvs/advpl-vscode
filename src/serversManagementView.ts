@@ -41,36 +41,52 @@ export class ServerManagementView {
 			return;
 		}
 
-		// Busca o conteúdo do INI
-		ini.GetIniContent().then(() => {
+		vscode.window.withProgress({
+			location: vscode.ProgressLocation.Window,
+			title: "Carregando ambientes...",
+			cancellable: false
+		}, (progress, token) => {
+			token.onCancellationRequested(() => {
+				console.log("User canceled the long running operation");
+			});
 
-			// Busca todos os ambientes
-			ini.GetEnvironments().Environments.map(
-				env => {
-					let service = <ServiceView> element.subject;
+			return new Promise(resolve => {
+				// Busca o conteúdo do INI
+				ini.GetIniContent().then(() => {
 
-					// Verifica se o ambiente já está configurado
-					if (!service.environments.find(_env => _env.environment === env.Environment)) {
+					// Busca todos os ambientes
+					ini.GetEnvironments();
 
-						// Adiciona nas configurações os ambientes do INI
-						serverManagement.AddEnvironment(
-							{
-								environment: env.Environment,
-								name: env.Environment,
-								server: service.parent.serverIP,
-								port: service.servicePort,
-								serverVersion: service.serverVersion,
-								passwordCipher: service.passwordCipher,
-								includeList: service.includeList,
-								user: service.user,
-								smartClientPath: service.smartClientPath
+					ini.Environments.map(
+						env => {
+							let service = <ServiceView>element.subject;
 
+							// Verifica se o ambiente já está configurado
+							if (!service.environments.find(_env => _env.environment === env.Environment)) {
+
+								// Adiciona nas configurações os ambientes do INI
+								serverManagement.AddEnvironment(
+									{
+										environment: env.Environment,
+										name: env.Environment,
+										server: service.parent.serverIP,
+										port: service.servicePort,
+										serverVersion: service.serverVersion,
+										passwordCipher: service.passwordCipher,
+										includeList: service.includeList,
+										user: service.user,
+										smartClientPath: service.smartClientPath,
+										enable: true
+									}
+								);
 							}
-						);
+						}
+					);
 
-					}
-				}
-			);
+					resolve();
+				});
+			});
+
 		});
 
 	}
