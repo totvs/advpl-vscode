@@ -218,7 +218,7 @@ export class Dependency extends vscode.TreeItem {
 	};
 
 	private getIcon(): string {
-		if (this.context === Context.Environment) {
+		if (this.context === Context.Environment || this.context === Context.EnvironmentConnected) {
 			return this.isConnected ? "server_green.svg" : "server.svg";
 		} else {
 			return this.isConnected ? "dependency_green.svg" : "dependency.svg";
