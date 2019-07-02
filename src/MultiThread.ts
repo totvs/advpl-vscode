@@ -29,10 +29,10 @@ export class MultiThread {
 
         // Caso a configuração seja Verdadeira, anima o ícone para chaar atenção da configuração que está habilitada
         if (debug_multiThread === true) {
-            this._statusBarItem.text = "$(kebab-horizontal~spin) Multi-Thread: " + localize('src.extension.yesText', 'Yes');
+            this._statusBarItem.text = "$(tasklist) Multi-Thread: " + localize('src.extension.yesText', 'Yes');
         }
         else {
-            this._statusBarItem.text = "$(kebab-horizontal) Multi-Thread: " + localize('src.extension.noText', 'No');
+            this._statusBarItem.text = "$(three-bars) Multi-Thread: " + localize('src.extension.noText', 'No');
         }
     }
 
