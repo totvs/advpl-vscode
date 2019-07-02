@@ -1,11 +1,6 @@
 import * as vscode from 'vscode';
 import IEnvironment from './utils/IEnvironment';
-
-export default interface IDictionary {
-    name: string;
-    label: string;
-    parent: string;
-}
+import IDictionary from './utils/IDictionary';
 
 export enum Context {
     Server = "Server",
@@ -75,7 +70,7 @@ export class ServerManagement {
     constructor(onlyEnabled: boolean) {
         this._config = vscode.workspace.getConfiguration("advpl");
         this._environments = this._config.get<Array<IEnvironment>>("environments");
-        this._dictionary = this._config.get<Array<IDictionary>>("environmentsDictionary");
+        this._dictionary = this._config.get<Array<IDictionary>>("dictionary");
         this._selectedEnvironment = this._config.get<string>("selectedEnvironment");
         this._servers = this.GetServers(onlyEnabled);
     }

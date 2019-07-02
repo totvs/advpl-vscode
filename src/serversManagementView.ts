@@ -5,6 +5,7 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import { ServerManagement, Context, ServerView, ServiceView } from './serverManagement';
 import { IniManagement } from './iniManagement';
+import IDictionary from './utils/IDictionary';
 
 export class ServerManagementView {
 
@@ -18,6 +19,8 @@ export class ServerManagementView {
 		vscode.commands.registerCommand("advpl.serversManagement.connect", (element) => this.connect(element));
 		// Registra o comando para obter e configurar todos os ambientes do INIs
 		vscode.commands.registerCommand("advpl.serversManagement.getAllEnvironments", (element) => this.getAllEnvironments(element));
+		// Registra o comando para renomear os ambientes/servidores ou serviços
+		vscode.commands.registerCommand("advpl.serversManagement.rename", (element) => this.rename(element));
 	}
 
 	get provider() {
@@ -86,6 +89,71 @@ export class ServerManagementView {
 					resolve();
 				});
 			});
+
+		});
+
+	}
+
+	rename(element: Dependency): any {
+		let config = vscode.workspace.getConfiguration("advpl");
+		let oldLabel = element.label;
+
+		let options: vscode.InputBoxOptions = {
+			prompt: "Renomear",
+			placeHolder: oldLabel,
+			validateInput: function (newLabel: string) {
+
+				let dictionary = config.get<Array<IDictionary>>("dictionary");
+
+				if (dictionary.find(dic => dic.label.trim() === newLabel.trim())) {
+					return "Este Label já está sendo utilizado.";
+				}
+
+				return "";
+			}
+		}
+
+		vscode.window.showInputBox(options).then(newLabel => {
+			//FIXME: Não permitir Labels iguais.
+
+			// Caso seja um elemento do nível servidor
+			if (element.subject instanceof ServerView) {
+				let dictionary = config.get<Array<IDictionary>>("dictionary");
+				let obj = <ServerView>element.subject;
+				let dictionaryPos = dictionary.findIndex(dic => dic.name === obj.serverIP);
+
+				if (dictionaryPos > -1) {
+					dictionary[dictionaryPos].label = newLabel;
+				} else {
+					dictionary.push({
+						"label": newLabel,
+						"name": obj.serverIP
+					});
+				}
+
+				// Atualiza o dicionário de elementos
+				// FIXME: Alterar para trocar no workspace
+				config.update('dictionary', dictionary, true);
+
+			} else if (element.subject instanceof ServiceView) {
+				let dictionary = config.get<Array<IDictionary>>("dictionary");
+				let obj = <ServiceView>element.subject;
+				let dictionaryPos = dictionary.findIndex(dic => dic.name === obj.servicePort.toString());
+
+				if (dictionaryPos > -1) {
+					dictionary[dictionaryPos].label = newLabel;
+				} else {
+					dictionary.push({
+						"label": newLabel,
+						"name": obj.servicePort.toString(),
+						"parent": obj.parent.serverIP
+					});
+				}
+
+				// Atualiza o dicionário de elementos
+				// FIXME: Alterar para trocar no workspace
+				config.update('dictionary', dictionary, true);
+			}
 
 		});
 

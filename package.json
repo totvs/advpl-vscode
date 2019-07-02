@@ -125,8 +125,8 @@
                     "when": "view == serversManagement && viewItem == EnvironmentConnected"
                 },
                 {
-                    "command": "advpl.serversManagement.renameEnvironment",
-                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                    "command": "advpl.serversManagement.rename",
+                    "when": "view == serversManagement"
                 },
                 {
                     "command": "advpl.serversManagement.getAllEnvironments",
@@ -162,7 +162,7 @@
                     "when": "config.noExists"
                 },
                 {
-                    "command": "advpl.serversManagement.renameEnvironment",
+                    "command": "advpl.serversManagement.rename",
                     "when": "config.noExists"
                 },
                 {
@@ -360,6 +360,31 @@
                     "type": "boolean",
                     "default": false,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
+                },
+                "advpl.dictionary": {
+                    "type": "array",
+                    "default": [],
+                    "description": "%advpl.configuration.properties.ADVPLDICTIONARY%",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parent": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT%"
+                            },
+                            "name": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME%"
+                            },
+                            "label": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL%"
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -558,8 +583,8 @@
                 "title": "Listar funções do RPO"
             },
             {
-                "command": "advpl.serversManagement.renameEnvironment",
-                "title": "Renomear Ambiente"
+                "command": "advpl.serversManagement.rename",
+                "title": "Renomear"
             },
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
