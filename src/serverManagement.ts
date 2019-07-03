@@ -112,7 +112,18 @@ export class ServerManagement {
 
             if (positionService < 0) {
                 // Busca o Alias configurado para o Serviço
-                let serviceLabel = this._dictionary.find(dic => /*dic.parent.trim() === environment.server.trim() &&*/ dic.name.trim() === environment.port.toString());
+                let serviceLabel = this._dictionary.find(dic => validParent(dic) && dic.name.trim() === environment.port.toString());
+
+                /**
+                 * Valida o atributo parent dessa forma para evitar erros
+                 * caso essa propriedade seja null.
+                 */
+                function validParent(dic: IDictionary) {
+                    if (dic.parent)
+                        return dic.parent.trim() === environment.server.trim();
+                    else
+                        return true;
+                }
 
                 positionService = servers[positionServer].AddService(
                     new ServiceView(

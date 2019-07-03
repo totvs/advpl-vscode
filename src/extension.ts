@@ -114,7 +114,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const serverView = new ServerManagementView();
     vscode.window.registerTreeDataProvider('serversManagement', serverView.provider);
-    vscode.commands.registerCommand('advpl.servers.test', (label) => vscode.window.showInformationMessage("=> " + label.label));
 
     // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {

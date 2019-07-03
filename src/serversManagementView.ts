@@ -3,9 +3,10 @@ const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
 
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { ServerManagement, Context, ServerView, ServiceView } from './serverManagement';
+import { ServerManagement, Context, ServerView, ServiceView, EnvironmentView } from './serverManagement';
 import { IniManagement } from './iniManagement';
 import IDictionary from './utils/IDictionary';
+import IEnvironment from './utils/IEnvironment';
 
 export class ServerManagementView {
 
@@ -96,6 +97,8 @@ export class ServerManagementView {
 
 	rename(element: Dependency): any {
 		let config = vscode.workspace.getConfiguration("advpl");
+		let dictionary = config.get<Array<IDictionary>>("dictionary");
+		let environments = config.get<Array<IEnvironment>>("environments");
 		let oldLabel = element.label;
 
 		let options: vscode.InputBoxOptions = {
@@ -103,58 +106,115 @@ export class ServerManagementView {
 			placeHolder: oldLabel,
 			validateInput: function (newLabel: string) {
 
-				let dictionary = config.get<Array<IDictionary>>("dictionary");
+				// Não permite label vazio
+				if (!newLabel) {
+					return "Informe o Label para alterar."
+				}
 
-				if (dictionary.find(dic => dic.label.trim() === newLabel.trim())) {
+				// Verifica se o Label já foi utilizado no dicionário de Servidores/Serviços
+				if (dictionary.find(dic => dic.label.toUpperCase().trim() === newLabel.toUpperCase().trim())) {
 					return "Este Label já está sendo utilizado.";
+				}
+
+				// Valida se o nome para o ambiente já foi utilizado
+				if (environments.find(env => retEnv(env).toUpperCase().trim() === newLabel.toUpperCase().trim())) {
+					return "Este Label já está sendo utilizado em um ambiente.";
+				}
+
+				/**
+				 * Verifica se no ambiente está informado o atributo nome,
+				 * trata desta forma para evitar erros caso essa propriedade
+				 * seja null.
+				 */
+				function retEnv(env: IEnvironment) {
+					if (env.name)
+						return env.name;
+					else
+						return env.environment;
 				}
 
 				return "";
 			}
 		}
 
+		// Mostra um input para o usuário informar o novo label
 		vscode.window.showInputBox(options).then(newLabel => {
-			//FIXME: Não permitir Labels iguais.
+			// Altera somente quando o Label for prenchido
+			if (newLabel) {
 
-			// Caso seja um elemento do nível servidor
-			if (element.subject instanceof ServerView) {
-				let dictionary = config.get<Array<IDictionary>>("dictionary");
-				let obj = <ServerView>element.subject;
-				let dictionaryPos = dictionary.findIndex(dic => dic.name === obj.serverIP);
+				// Caso seja um elemento do nível servidor
+				if (element.subject instanceof ServerView) {
+					let obj = <ServerView>element.subject;
+					let dictionaryPos = dictionary.findIndex(dic => dic.name === obj.serverIP);
 
-				if (dictionaryPos > -1) {
-					dictionary[dictionaryPos].label = newLabel;
-				} else {
-					dictionary.push({
-						"label": newLabel,
-						"name": obj.serverIP
-					});
+					if (dictionaryPos > -1) {
+						dictionary[dictionaryPos].label = newLabel;
+					} else {
+						dictionary.push({
+							"label": newLabel,
+							"name": obj.serverIP
+						});
+					}
+
+					// Atualiza o dicionário de elementos
+					config.update('dictionary', dictionary);
+
+				} else if (element.subject instanceof ServiceView) {
+					let obj = <ServiceView>element.subject;
+					let dictionaryPos = dictionary.findIndex(dic => validParent(dic) && dic.name === obj.servicePort.toString());
+
+					/**
+                 	 * Valida o atributo parent dessa forma para evitar erros
+                 	 * caso essa propriedade seja null.
+                 	 */
+					function validParent(dic: IDictionary) {
+						if (dic.parent)
+							return dic.parent.trim() === obj.parent.serverIP.trim();
+						else
+							return true;
+					}
+
+					if (dictionaryPos > -1) {
+						dictionary[dictionaryPos].label = newLabel;
+					} else {
+						dictionary.push({
+							"label": newLabel,
+							"name": obj.servicePort.toString(),
+							"parent": obj.parent.serverIP
+						});
+					}
+
+					// Atualiza o dicionário de elementos
+					config.update('dictionary', dictionary);
+
+				} else if (element.subject instanceof EnvironmentView) {
+					let obj = <EnvironmentView>element.subject;
+
+					// Busca o ambiente relacionado ao serviço + servidor
+					environments.find(
+						env => env.environment === obj.environment &&
+							env.port === obj.parent.servicePort &&
+							env.server === obj.parent.parent.serverIP
+					).name = newLabel;
+
+					// Atualiza o dicionário de elementos
+					config.update('environments', environments);
+
+					// Caso o sujeito já esteja conectado, conecta novamente.
+					if (obj.isConnected) {
+						// Cria um novo elemento, para utilizá-lo para conectar no ambiente
+						let newElement = new Dependency(newLabel,
+							element.description,
+							element.tooltip,
+							element.collapsibleState,
+							element.context,
+							element.isConnected,
+							element.owner,
+							element.subject);
+						this.connect(newElement);
+					}
 				}
-
-				// Atualiza o dicionário de elementos
-				// FIXME: Alterar para trocar no workspace
-				config.update('dictionary', dictionary, true);
-
-			} else if (element.subject instanceof ServiceView) {
-				let dictionary = config.get<Array<IDictionary>>("dictionary");
-				let obj = <ServiceView>element.subject;
-				let dictionaryPos = dictionary.findIndex(dic => dic.name === obj.servicePort.toString());
-
-				if (dictionaryPos > -1) {
-					dictionary[dictionaryPos].label = newLabel;
-				} else {
-					dictionary.push({
-						"label": newLabel,
-						"name": obj.servicePort.toString(),
-						"parent": obj.parent.serverIP
-					});
-				}
-
-				// Atualiza o dicionário de elementos
-				// FIXME: Alterar para trocar no workspace
-				config.update('dictionary', dictionary, true);
 			}
-
 		});
 
 	}
@@ -178,10 +238,8 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 
 		if (element) {
 			return Promise.resolve(this.getEnvironments(element, element.context));
-			// return Promise.resolve(this.getServersInConfiguration(element.server, element.context));
 		} else {
 			return Promise.resolve(this.getEnvironments());
-			// return Promise.resolve(this.getServersInConfiguration());
 		}
 
 	}

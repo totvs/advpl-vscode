@@ -100,10 +100,6 @@
             ],
             "view/item/context": [
                 {
-                    "command": "advpl.serversManagement.test",
-                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
-                },
-                {
                     "command": "advpl.serversManagement.connect",
                     "when": "view == serversManagement && viewItem == Environment"
                 },
@@ -560,11 +556,6 @@
                     "light": "images/light/delete.png",
                     "dark": "images/dark/delete.png"
                 }
-            },
-            {
-                "command": "advpl.serversManagement.test",
-                "title": "Teste",
-                "enablement": "false"
             },
             {
                 "command": "advpl.serversManagement.connect",
