@@ -22,6 +22,14 @@ export class ServerManagementView {
 		vscode.commands.registerCommand("advpl.serversManagement.getAllEnvironments", (element) => this.getAllEnvironments(element));
 		// Registra o comando para renomear os ambientes/servidores ou serviços
 		vscode.commands.registerCommand("advpl.serversManagement.rename", (element) => this.rename(element));
+		// Registra o comando para Desfragmentar o Ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.Defrag", (element) => this.defrag(element));
+		// Registra o comando para retornar os arquivos presentes no Ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.getRpoInfos", (element) => this.getRpoInfos(element));
+		// Registra o comando para retornar as funções dos arquivos arquivos presentes no Ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.getRpoFunctions", (element) => this.getRpoFunctions(element));
+
+		// advpl.serversManagement.DisableServer
 	}
 
 	get provider() {
@@ -217,6 +225,18 @@ export class ServerManagementView {
 			}
 		});
 
+	}
+
+	defrag(element: Dependency): any {
+		vscode.commands.executeCommand("advpl.monitor.defragRpo");
+	}
+
+	getRpoInfos(element: Dependency): any {
+		vscode.commands.executeCommand("advpl.monitor.getRpoInfos");
+	}
+
+	getRpoFunctions(element: Dependency): any {
+		vscode.commands.executeCommand("advpl.monitor.getRpoFunctions");
 	}
 
 }

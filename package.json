@@ -56,7 +56,7 @@
             "explorer": [
                 {
                     "id": "serversManagement",
-                    "name": "Gerenciador de Servidores"
+                    "name": "Gerenciador de Ambientes"
                 }
             ]
         },
