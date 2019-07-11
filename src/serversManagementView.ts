@@ -12,6 +12,19 @@ export class ServerManagementView {
 
 	private _provider: ServerProvider;
 
+	private get Config(): vscode.WorkspaceConfiguration {
+		return vscode.workspace.getConfiguration("advpl");
+	}
+
+	private get EnvironmentsConfig(): Array<IEnvironment> {
+		return this.Config.get<Array<IEnvironment>>("environments");
+	}
+
+	private get Dictionary(): Array<IDictionary> {
+		return this.Config.get<Array<IDictionary>>("dictionary");
+	}
+
+
 	constructor() {
 		// Grava a instancia do Server Provider para registrar
 		this._provider = new ServerProvider();
@@ -28,8 +41,8 @@ export class ServerManagementView {
 		vscode.commands.registerCommand("advpl.serversManagement.getRpoInfos", (element) => this.getRpoInfos(element));
 		// Registra o comando para retornar as funções dos arquivos arquivos presentes no Ambiente
 		vscode.commands.registerCommand("advpl.serversManagement.getRpoFunctions", (element) => this.getRpoFunctions(element));
-
-		// advpl.serversManagement.DisableServer
+		// Registra o comando para desabilitar o Ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.DisableServer", (element) => this.disable(element));
 	}
 
 	get provider() {
@@ -104,9 +117,9 @@ export class ServerManagementView {
 	}
 
 	rename(element: Dependency): any {
-		let config = vscode.workspace.getConfiguration("advpl");
-		let dictionary = config.get<Array<IDictionary>>("dictionary");
-		let environments = config.get<Array<IEnvironment>>("environments");
+		let config = this.Config;
+		let dictionary = this.Dictionary;
+		let environments = this.EnvironmentsConfig;
 		let oldLabel = element.label;
 
 		let options: vscode.InputBoxOptions = {
@@ -205,7 +218,7 @@ export class ServerManagementView {
 							env.server === obj.parent.parent.serverIP
 					).name = newLabel;
 
-					// Atualiza o dicionário de elementos
+					// Atualiza a configuração de ambientes
 					config.update('environments', environments);
 
 					// Caso o sujeito já esteja conectado, conecta novamente.
@@ -237,6 +250,36 @@ export class ServerManagementView {
 
 	getRpoFunctions(element: Dependency): any {
 		vscode.commands.executeCommand("advpl.monitor.getRpoFunctions");
+	}
+
+	disable(element: Dependency): any {
+		let config = this.Config;
+		let environments = this.EnvironmentsConfig;
+
+		vscode.window.showQuickPick([
+			localize('src.extension.yesText', 'Yes'),
+			localize('src.extension.noText', 'No')
+		]).then(option => {
+			// Confirma se o usuário realmente deseja desabilitar o ambiente
+			if (option === localize('src.extension.yesText', 'Yes')) {
+				if (element.subject instanceof EnvironmentView) {
+					let obj = <EnvironmentView>element.subject;
+
+					// Busca o ambiente relacionado ao serviço + servidor
+					environments.find(
+						env => env.environment === obj.environment &&
+							env.port === obj.parent.servicePort &&
+							env.server === obj.parent.parent.serverIP
+					).enable = false;
+
+					// Atualiza a configuração de ambientes
+					config.update('environments', environments).then(() => {
+						vscode.window.showInformationMessage("Ambiente " + element.label + " desabilitado.");
+					});
+
+				}
+			}
+		});
 	}
 
 }
