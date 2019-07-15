@@ -42,7 +42,7 @@ export class ServerManagementView {
 		// Registra o comando para retornar as funções dos arquivos arquivos presentes no Ambiente
 		vscode.commands.registerCommand("advpl.serversManagement.getRpoFunctions", (element) => this.getRpoFunctions(element));
 		// Registra o comando para desabilitar o Ambiente
-		vscode.commands.registerCommand("advpl.serversManagement.DisableServer", (element) => this.disable(element));
+		vscode.commands.registerCommand("advpl.serversManagement.DisableEnvironment", (element) => this.disable(element));
 	}
 
 	get provider() {
@@ -54,7 +54,7 @@ export class ServerManagementView {
 
 		// Atualiza a configuração de ambiente selecionado
 		updObj.update("selectedEnvironment", element.label);
-		vscode.window.showInformationMessage(localize('src.extension.environmentText', 'Environment') + element.label + localize('src.extension.environmentSelectedText', ' selection was successful.'));
+		vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', 'Environment ') + element.label + localize('src.ServerManagementView.environmentSelectedText', ' selection was successful.'));
 	}
 
 	public getAllEnvironments(element: Dependency) {
@@ -62,13 +62,13 @@ export class ServerManagementView {
 		let ini = new IniManagement();
 
 		if (element.context !== Context.ServiceConnected) {
-			vscode.window.showErrorMessage("Esta opção só pode ser utilizada para um item de Serviço.");
+			vscode.window.showErrorMessage(localize('src.ServerManagementView.CONTEXTVALID', "This option can only be used for a Service type item."));
 			return;
 		}
 
 		vscode.window.withProgress({
 			location: vscode.ProgressLocation.Window,
-			title: "Carregando ambientes...",
+			title: localize('src.ServerManagementView.CARREGANDO', "Loading environments..."),
 			cancellable: false
 		}, (progress, token) => {
 			token.onCancellationRequested(() => {
@@ -123,23 +123,23 @@ export class ServerManagementView {
 		let oldLabel = element.label;
 
 		let options: vscode.InputBoxOptions = {
-			prompt: "Renomear",
+			prompt: localize('src.ServerManagementView.RENAME', "Rename"),
 			placeHolder: oldLabel,
 			validateInput: function (newLabel: string) {
 
 				// Não permite label vazio
 				if (!newLabel) {
-					return "Informe o Label para alterar."
+					return localize('src.ServerManagementView.INFORMELABEL', "Enter the Label to change.");
 				}
 
 				// Verifica se o Label já foi utilizado no dicionário de Servidores/Serviços
 				if (dictionary.find(dic => dic.label.toUpperCase().trim() === newLabel.toUpperCase().trim())) {
-					return "Este Label já está sendo utilizado.";
+					return localize('src.ServerManagementView.LABELINUSE', "This Label is already in use.");
 				}
 
 				// Valida se o nome para o ambiente já foi utilizado
 				if (environments.find(env => retEnv(env).toUpperCase().trim() === newLabel.toUpperCase().trim())) {
-					return "Este Label já está sendo utilizado em um ambiente.";
+					return localize('src.ServerManagementView.NAMEINUSE', "This Label is already being used in an environment.");
 				}
 
 				/**
@@ -257,11 +257,11 @@ export class ServerManagementView {
 		let environments = this.EnvironmentsConfig;
 
 		vscode.window.showQuickPick([
-			localize('src.extension.yesText', 'Yes'),
-			localize('src.extension.noText', 'No')
+			localize('src.ServerManagementView.yesText', 'Yes'),
+			localize('src.ServerManagementView.noText', 'No')
 		]).then(option => {
 			// Confirma se o usuário realmente deseja desabilitar o ambiente
-			if (option === localize('src.extension.yesText', 'Yes')) {
+			if (option === localize('src.ServerManagementView.yesText', 'Yes')) {
 				if (element.subject instanceof EnvironmentView) {
 					let obj = <EnvironmentView>element.subject;
 
@@ -274,7 +274,7 @@ export class ServerManagementView {
 
 					// Atualiza a configuração de ambientes
 					config.update('environments', environments).then(() => {
-						vscode.window.showInformationMessage("Ambiente " + element.label + " desabilitado.");
+						vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', "Environment ") + element.label + localize('src.ServerManagementView.DISABLED', " disabled"));
 					});
 
 				}

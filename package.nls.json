@@ -56,6 +56,20 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Info for Debug. Internal use",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Program for Debugging.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Stop automatically at the beginning of Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
+	"advpl.selectEnvironment.title": "Environment Manager",
+	"advpl.configuration.properties.ADVPLDICTIONARY": "Subtitles Dictionary of Servers and Services",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Server IP address related to the Service (if omitted, this caption will serve for all attributes with the same name)",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "If the configuration is for Server: Use the IP address, if it is for service: Use the Service Port",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Label to display for element 'NAME' in environments view",
+	"advpl.getINI": "Advpl - Get INI",
+	"advpl.serversManagement.AddServer": "Add new environment",
+	"advpl.serversManagement.DisableEnvironment": "Disable",
+	"advpl.serversManagement.connect": "To connect",
+	"advpl.serversManagement.Defrag": "Defragment",
+	"advpl.serversManagement.getRpoInfos": "List RPO objects",
+	"advpl.serversManagement.getRpoFunctions": "List RPO roles",
+	"advpl.serversManagement.rename": "Rename",
+	"advpl.serversManagement.getAllEnvironments": "Get INI environments"
 
 }

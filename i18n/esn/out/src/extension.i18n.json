@@ -24,5 +24,6 @@
 	"src.extension.environmentNotFoundText": "Ambiente no encontrado!",
 	"src.extension.modifiedPpoText": "El archivo fué modificado y se encuentra sin grabar. Desea grabarlo antes de iniciar la generación del PPO?",
 	"src.extension.userCancelPpoText": "Acción cancelada por el usuario, el PPO no fué generado!",
-	"src.extension.environmentSelectErrorText": "Por favor, seleccione un ambiente!"
+	"src.extension.environmentSelectErrorText": "Por favor, seleccione un ambiente!",
+	"src.advplMonitor.errorText": "Error!"
 }

@@ -57,5 +57,19 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente en inicio de Depuración/Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo",
 	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA" : "Alpha compile",
-	"advpl.replaySelect": "Advpl - Select replay file "
+	"advpl.replaySelect": "Advpl - Select replay file ",
+	"advpl.selectEnvironment.title": "Gerente de medio Ambiente",
+	"advpl.configuration.properties.ADVPLDICTIONARY": "Diccionario de Subtítulos de Servidores y Servicios",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Dirección IP del servidor relacionada con el Servicio (si se omite, este título servirá para todos los atributos con el mismo nombre)",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Si la configuración es para el servidor: use la dirección IP, si es para el servicio: use el puerto de servicio",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Etiqueta para mostrar para el elemento 'NAME' en la vista de entornos",
+	"advpl.getINI": "Advpl - Obtener INI",
+	"advpl.serversManagement.AddServer": "Agregar nuevo entorno",
+	"advpl.serversManagement.DisableEnvironment": "Inhabilitar",
+	"advpl.serversManagement.connect": "Para conectar",
+	"advpl.serversManagement.Defrag": "Desfragmentar",
+	"advpl.serversManagement.getRpoInfos": "Listar objetos RPO",
+	"advpl.serversManagement.getRpoFunctions": "Enumerar roles de RPO",
+	"advpl.serversManagement.rename": "Rebautizar",
+	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI"
 }

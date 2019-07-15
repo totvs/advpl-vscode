@@ -56,7 +56,7 @@
             "explorer": [
                 {
                     "id": "serversManagement",
-                    "name": "Gerenciador de Ambientes"
+                    "name": "%advpl.selectEnvironment.title%"
                 }
             ]
         },
@@ -104,7 +104,7 @@
                     "when": "view == serversManagement && viewItem == Environment"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableServer",
+                    "command": "advpl.serversManagement.DisableEnvironment",
                     "when": "view == serversManagement && viewItem == Environment",
                     "group": "inline"
                 },
@@ -142,7 +142,7 @@
                     "when": "config.noExists"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableServer",
+                    "command": "advpl.serversManagement.DisableEnvironment",
                     "when": "config.noExists"
                 },
                 {
@@ -539,19 +539,19 @@
             },
             {
                 "command": "advpl.getINI",
-                "title": "Advpl - Get INI"
+                "title": "%advpl.getINI%"
             },
             {
                 "command": "advpl.serversManagement.AddServer",
-                "title": "Adicionar",
+                "title": "%advpl.serversManagement.AddServer%",
                 "icon": {
                     "light": "images/light/add.png",
                     "dark": "images/dark/add.png"
                 }
             },
             {
-                "command": "advpl.serversManagement.DisableServer",
-                "title": "Desabilitar",
+                "command": "advpl.serversManagement.DisableEnvironment",
+                "title": "%advpl.serversManagement.DisableEnvironment%",
                 "icon": {
                     "light": "images/light/delete.png",
                     "dark": "images/dark/delete.png"
@@ -559,27 +559,27 @@
             },
             {
                 "command": "advpl.serversManagement.connect",
-                "title": "Conectar"
+                "title": "%advpl.serversManagement.connect%"
             },
             {
                 "command": "advpl.serversManagement.Defrag",
-                "title": "Desfragmentar"
+                "title": "%advpl.serversManagement.Defrag%"
             },
             {
                 "command": "advpl.serversManagement.getRpoInfos",
-                "title": "Listar objetos do RPO"
+                "title": "%advpl.serversManagement.getRpoInfos%"
             },
             {
                 "command": "advpl.serversManagement.getRpoFunctions",
-                "title": "Listar funções do RPO"
+                "title": "%advpl.serversManagement.getRpoFunctions%"
             },
             {
                 "command": "advpl.serversManagement.rename",
-                "title": "Renomear"
+                "title": "%advpl.serversManagement.rename%"
             },
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
-                "title": "Obter Ambientes do INI"
+                "title": "%advpl.serversManagement.getAllEnvironments%"
             }
         ],
         "keybindings": [
