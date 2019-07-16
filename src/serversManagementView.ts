@@ -53,8 +53,9 @@ export class ServerManagementView {
 		let updObj = vscode.workspace.getConfiguration("advpl");
 
 		// Atualiza a configuração de ambiente selecionado
-		updObj.update("selectedEnvironment", element.label);
-		vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', 'Environment ') + element.label + localize('src.ServerManagementView.environmentSelectedText', ' selection was successful.'));
+		updObj.update("selectedEnvironment", element.label).then(() => {
+			vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', 'Environment ') + element.label + localize('src.ServerManagementView.environmentSelectedText', ' selection was successful.'));
+		});
 	}
 
 	public getAllEnvironments(element: Dependency) {

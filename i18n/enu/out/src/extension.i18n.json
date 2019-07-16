@@ -25,5 +25,7 @@
 	"src.extension.modifiedPpoText": "The file is not saved and was modified. Save file before generation of PPO?",
 	"src.extension.userCancelPpoText": "Action canceled by the user, the PPO was not generated!",
 	"src.extension.environmentSelectErrorText": "Please, select an environment!",
-	"src.advplMonitor.errorText": "Error!"
+	"src.advplMonitor.errorText": "Error!",
+	"src.extension.startingGetINI": "Starting INI File Search...",
+	"src.extension.getINIOkText": "Obtaining the successful INI."
 }

@@ -25,5 +25,7 @@
 	"src.extension.modifiedPpoText": "El archivo fué modificado y se encuentra sin grabar. Desea grabarlo antes de iniciar la generación del PPO?",
 	"src.extension.userCancelPpoText": "Acción cancelada por el usuario, el PPO no fué generado!",
 	"src.extension.environmentSelectErrorText": "Por favor, seleccione un ambiente!",
-	"src.advplMonitor.errorText": "Error!"
+	"src.advplMonitor.errorText": "Error!",
+	"src.extension.startingGetINI": "Iniciando la búsqueda de archivos INI ...",
+	"src.extension.getINIOkText": "Obtención del INI exitoso."
 }

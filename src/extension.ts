@@ -782,10 +782,13 @@ function GetINI() {
                     }
                 });
             });
+
+            OutPutChannel.log(localize('src.extension.getINIOkText', 'Obtaining the successful INI.') + "\n");
         });
 
         // Chama o método da classe que busca o INI
         if (!(compile == null)) {
+            OutPutChannel.log(localize("src.extension.startingGetINI", "Starting INI File Search...") + "\n");
             compile.getINI();
         }
     });

@@ -25,5 +25,7 @@
 	"src.extension.modifiedPpoText": "Файл не сохраняется и был изменен. Сохранить файл перед генерацией PPO?",
 	"src.extension.userCancelPpoText": "Действие отменено пользователем, PPO не сгенерировано!",
 	"src.extension.environmentSelectErrorText": "Пожалуйста, выберите среду!",
-	"src.advplMonitor.errorText": "Ошибка!"
+	"src.advplMonitor.errorText": "Ошибка!",
+	"src.extension.startingGetINI": "Запуск поиска файла INI...",
+	"src.extension.getINIOkText": "Получение успешного INI."
 }
