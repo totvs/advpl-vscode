@@ -1,6 +1,6 @@
 {
 	"src.commands.addAdvplEnvironment.envAppserverText": "Окружающая среда AppServer",
-	"src.commands.addAdvplEnvironment.envExistsErrorText": "Введенная среда уже существует!",
+	"src.commands.addAdvplEnvironment.envExistsErrorText": " уже настроен для этого AppServer",
 	"src.commands.addAdvplEnvironment.mandatoryText": "Обязательный!",
 	"src.commands.addAdvplEnvironment.nameText": "Имя",
 	"src.commands.addAdvplEnvironment.existsText": " уже существовать!",
