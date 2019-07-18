@@ -818,7 +818,6 @@
     "devDependencies": {
         "@types/mocha": "^2.2.43",
         "@types/node": "^6.14.7",
-        "@types/vscode": "^1.30.0",
         "del": "^3.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
