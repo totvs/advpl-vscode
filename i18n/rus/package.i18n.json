@@ -66,7 +66,7 @@
 	"advpl.getINI": "Advpl - получить INI",
 	"advpl.serversManagement.AddServer": "Добавить новую среду",
 	"advpl.serversManagement.DisableEnvironment": "Отключить",
-	"advpl.serversManagement.connect": "Для подключения",
+	"advpl.serversManagement.connect": "Подключения",
 	"advpl.serversManagement.Defrag": "Дефрагментация",
 	"advpl.serversManagement.getRpoInfos": "Список объектов RPO",
 	"advpl.serversManagement.getRpoFunctions": "Список ролей RPO",

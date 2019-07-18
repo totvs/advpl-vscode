@@ -66,7 +66,7 @@
 	"advpl.getINI": "Advpl - Get INI",
 	"advpl.serversManagement.AddServer": "Add new environment",
 	"advpl.serversManagement.DisableEnvironment": "Disable",
-	"advpl.serversManagement.connect": "To connect",
+	"advpl.serversManagement.connect": "Connect",
 	"advpl.serversManagement.Defrag": "Defragment",
 	"advpl.serversManagement.getRpoInfos": "List RPO objects",
 	"advpl.serversManagement.getRpoFunctions": "List RPO roles",
