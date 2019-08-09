@@ -1,13 +1,19 @@
 {
 	"iconDefinitions": {
-		"prw": {
-			"iconPath": "./images/icons/icon_prw.svg"
+		"advpl": {
+			"iconPath": "./images/icons/icon_advpl.svg"
 		},
-		"prx": {
-			"iconPath": "./images/icons/icon_prx.svg"
+		"tlpp": {
+			"iconPath": "./images/icons/icon_tlpp.svg"
 		},
 		"ptm": {
 			"iconPath": "./images/icons/icon_ptm.svg"
+		},
+		"include": {
+			"iconPath": "./images/icons/icon_include.svg"
+		},
+		"http": {
+			"iconPath": "./images/icons/icon_http.svg"
 		},
 		"_root_folder_dark": {
 			"iconPath": "./images/icons/root-folder-dark.svg"
@@ -46,9 +52,14 @@
 	"rootFolderExpanded": "_root_folder_open_dark",
 	"rootFolder": "_root_folder_dark",
 	"fileExtensions": {
-		"prw": "prw",
-		"prx": "prx",
-		"ptm": "ptm"
+		"prw": "advpl",
+		"prx": "advpl",
+		"prg": "advpl",
+		"tlpp": "tlpp",
+		"ptm": "ptm",
+		"ch": "include",
+		"aph": "http",
+		"apw": "http"
 	},
 	"fileNames": {
 		// icons by file name
@@ -61,9 +72,14 @@
 		"rootFolder": "_root_folder",
 		"file": "_file_light",
 		"fileExtensions": {
-			"prw": "prw",
-			"prx": "prx",
-			"ptm": "ptm"
+			"prw": "advpl",
+			"prx": "advpl",
+			"prg": "advpl",
+			"tlpp": "tlpp",
+			"ptm": "ptm",
+			"ch": "include",
+			"aph": "http",
+			"apw": "http"
 		},
 		"fileNames": {
 			// icons by file name
