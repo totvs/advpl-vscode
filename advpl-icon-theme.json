@@ -10,34 +10,34 @@
 			"iconPath": "./images/icons/icon_ptm.svg"
 		},
 		"_root_folder_dark": {
-			"iconPath": "./images/icons/RootFolder_16x_inverse.svg"
+			"iconPath": "./images/icons/root-folder-dark.svg"
 		},
 		"_root_folder_open_dark": {
-			"iconPath": "./images/icons/RootFolderOpen_16x_inverse.svg"
+			"iconPath": "./images/icons/root-folder-open-dark.svg"
 		},
 		"_folder_dark": {
-			"iconPath": "./images/icons/Folder_16x_inverse.svg"
+			"iconPath": "./images/icons/folder-dark.svg"
 		},
 		"_folder_open_dark": {
-			"iconPath": "./images/icons/FolderOpen_16x_inverse.svg"
+			"iconPath": "./images/icons/folder-open-dark.svg"
 		},
 		"_file_dark": {
-			"iconPath": "./images/icons/Document_16x_inverse.svg"
+			"iconPath": "./images/icons/document-dark.svg"
 		},
 		"_root_folder": {
-			"iconPath": "./images/icons/RootFolder_16x.svg"
+			"iconPath": "./images/icons/root-folder-light.svg"
 		},
 		"_root_folder_open": {
-			"iconPath": "./images/icons/RootFolderOpen_16x.svg"
+			"iconPath": "./images/icons/root-folder-open-light.svg"
 		},
 		"_folder_light": {
-			"iconPath": "./images/icons/Folder_16x.svg"
+			"iconPath": "./images/icons/folder-light.svg"
 		},
 		"_folder_open_light": {
-			"iconPath": "./images/icons/FolderOpen_16x.svg"
+			"iconPath": "./images/icons/folder-open-light.svg"
 		},
 		"_file_light": {
-			"iconPath": "./images/icons/Document_16x.svg"
+			"iconPath": "./images/icons/document-light.svg"
 		}
 	},
 	"folderExpanded": "_folder_open_dark",
