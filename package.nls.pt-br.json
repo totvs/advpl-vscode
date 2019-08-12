@@ -56,5 +56,19 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Infos para o Debug. Uso interno",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente no inicio do Debug?",
-	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory"
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
+	"advpl.selectEnvironment.title": "Gerenciador de Ambientes",
+	"advpl.configuration.properties.ADVPLDICTIONARY": "Dicionário de legendas dos Servidores e Serviços",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Endereço IP do Servidor relacionado ao Serviço (caso seja omitido, esta legenda servirá para todos os atributos com mesmo nome)",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Caso a configuração seja para Servidor: Usar o endereço IP, caso seja para serviço: Usar a Porta do Serviço",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Label a ser apresentado para o elemento 'NAME' na visão de ambientes",
+	"advpl.getINI": "Advpl - Obter INI",
+	"advpl.serversManagement.AddServer": "Adicionar novo ambiente",
+	"advpl.serversManagement.DisableEnvironment": "Desabilitar",
+	"advpl.serversManagement.connect": "Conectar",
+	"advpl.serversManagement.Defrag": "Desfragmentar",
+	"advpl.serversManagement.getRpoInfos": "Listar objetos do RPO",
+	"advpl.serversManagement.getRpoFunctions": "Listar funções do RPO",
+	"advpl.serversManagement.rename": "Renomear",
+	"advpl.serversManagement.getAllEnvironments": "Obter ambientes do INI"
 }

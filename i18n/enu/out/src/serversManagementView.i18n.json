@@ -1,0 +1,13 @@
+{
+    "src.ServerManagementView.CONTEXTVALID": "This option can only be used for a Service type item.",
+    "src.ServerManagementView.CARREGANDO": "Loading environments...",
+    "src.ServerManagementView.INFORMELABEL": "Enter the Label to change.",
+    "src.ServerManagementView.LABELINUSE": "This Label is already in use.",
+    "src.ServerManagementView.NAMEINUSE": "This Label is already being used in an environment.",
+    "src.ServerManagementView.DISABLED": " disabled",
+    "src.ServerManagementView.environmentText": "Environment ",
+    "src.ServerManagementView.yesText": "Yes",
+    "src.ServerManagementView.noText": "No",
+    "src.ServerManagementView.environmentSelectedText": " selected successfully.",
+    "src.ServerManagementView.RENAME": "Rename"
+}
