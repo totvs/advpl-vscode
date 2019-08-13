@@ -1,0 +1,94 @@
+{
+	"iconDefinitions": {
+		"advpl": {
+			"iconPath": "./images/icons/icon_advpl.svg"
+		},
+		"tlpp": {
+			"iconPath": "./images/icons/icon_tlpp.svg"
+		},
+		"ptm": {
+			"iconPath": "./images/icons/icon_ptm.svg"
+		},
+		"include": {
+			"iconPath": "./images/icons/icon_include.svg"
+		},
+		"http": {
+			"iconPath": "./images/icons/icon_http.svg"
+		},
+		"_root_folder_dark": {
+			"iconPath": "./images/icons/root-folder-dark.svg"
+		},
+		"_root_folder_open_dark": {
+			"iconPath": "./images/icons/root-folder-open-dark.svg"
+		},
+		"_folder_dark": {
+			"iconPath": "./images/icons/folder-dark.svg"
+		},
+		"_folder_open_dark": {
+			"iconPath": "./images/icons/folder-open-dark.svg"
+		},
+		"_file_dark": {
+			"iconPath": "./images/icons/document-dark.svg"
+		},
+		"_root_folder": {
+			"iconPath": "./images/icons/root-folder-light.svg"
+		},
+		"_root_folder_open": {
+			"iconPath": "./images/icons/root-folder-open-light.svg"
+		},
+		"_folder_light": {
+			"iconPath": "./images/icons/folder-light.svg"
+		},
+		"_folder_open_light": {
+			"iconPath": "./images/icons/folder-open-light.svg"
+		},
+		"_file_light": {
+			"iconPath": "./images/icons/document-light.svg"
+		}
+	},
+	"folderExpanded": "_folder_open_dark",
+	"folder": "_folder_dark",
+	"file": "_file_dark",
+	"rootFolderExpanded": "_root_folder_open_dark",
+	"rootFolder": "_root_folder_dark",
+	"fileExtensions": {
+		"prw": "advpl",
+		"prx": "advpl",
+		"prg": "advpl",
+		"tlpp": "tlpp",
+		"ptm": "ptm",
+		"ch": "include",
+		"aph": "http",
+		"apw": "http"
+	},
+	"fileNames": {
+		// icons by file name
+	},
+	"languageIds": {},
+	"light": {
+		"folderExpanded": "_folder_open_light",
+		"folder": "_folder_light",
+		"rootFolderExpanded": "_root_folder_open",
+		"rootFolder": "_root_folder",
+		"file": "_file_light",
+		"fileExtensions": {
+			"prw": "advpl",
+			"prx": "advpl",
+			"prg": "advpl",
+			"tlpp": "tlpp",
+			"ptm": "ptm",
+			"ch": "include",
+			"aph": "http",
+			"apw": "http"
+		},
+		"fileNames": {
+			// icons by file name
+		},
+		"languageIds": {
+			// icons by language id
+		}
+	},
+	"highContrast": {
+		// overrides for high contrast
+	}
+}
