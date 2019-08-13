@@ -421,11 +421,13 @@ export class advplCompile {
 
         var child = child_process.spawn(this.debugPath, _args);
 
+        that.iniContent = "";
+
         child.stdout.on("data", function (data) {
             var xRet = data + "";
 
             that._lastAppreMsg += data;
-            that.iniContent = xRet;
+            that.iniContent += xRet;
         });
 
         child.on("exit", function (data) {
