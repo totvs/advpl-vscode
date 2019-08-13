@@ -18,7 +18,7 @@ export default class InputPrompt extends Prompt {
 		};
 	}
 
-	public render() {
+	public render(answers) {
 		let placeHolder = this._question.default;
 
 		if (this._question.default instanceof Error) {
@@ -38,12 +38,12 @@ export default class InputPrompt extends Prompt {
 					result = this._question.default || '';
 				}
 
-				const valid = this._question.validate ? this._question.validate(result || '') : true;
+				const valid = this._question.validate ? this._question.validate(result || '', answers) : true;
 
 				if (valid !== true) {
 					this._question.default = new Error(`${figures.warning} ${valid}`);
 
-					return this.render();
+					return this.render(answers);
 				}
 
 				return result;

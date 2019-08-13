@@ -1,6 +1,6 @@
 {
 	"src.commands.addAdvplEnvironment.envAppserverText": "Environment AppServer",
-	"src.commands.addAdvplEnvironment.envExistsErrorText": "The inputted environment already exists!",
+	"src.commands.addAdvplEnvironment.envExistsErrorText": " already configured for this AppServer",
 	"src.commands.addAdvplEnvironment.mandatoryText": "Mandatory!",
 	"src.commands.addAdvplEnvironment.nameText": "Name",
 	"src.commands.addAdvplEnvironment.existsText": " already exists!",
