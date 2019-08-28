@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.11.3",
+    "version": "0.12.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -52,6 +52,12 @@
                     "id": "replayTimeLine",
                     "name": "Replay TimeLine"
                 }
+            ],
+            "explorer": [
+                {
+                    "id": "serversManagement",
+                    "name": "%advpl.selectEnvironment.title%"
+                }
             ]
         },
         "menus": {
@@ -89,6 +95,74 @@
                     "command": "advpl.patch.build",
                     "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "view == serversManagement && viewItem == Environment"
+                },
+                {
+                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "when": "view == serversManagement && viewItem == Environment",
+                    "group": "inline"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.rename",
+                    "when": "view == serversManagement"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "view == serversManagement && viewItem == ServiceConnected"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "advpl.serversManagement.AddServer",
+                    "when": "view == serversManagement",
+                    "group": "navigation"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.rename",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "config.noExists"
                 }
             ]
         },
@@ -281,6 +355,31 @@
                     "type": "boolean",
                     "default": false,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
+                },
+                "advpl.dictionary": {
+                    "type": "array",
+                    "default": [],
+                    "description": "%advpl.configuration.properties.ADVPLDICTIONARY%",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parent": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT%"
+                            },
+                            "name": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME%"
+                            },
+                            "label": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL%"
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -436,6 +535,50 @@
             {
                 "command": "advpl.multiThread",
                 "title": "Advpl - Multi-Thread"
+            },
+            {
+                "command": "advpl.getINI",
+                "title": "%advpl.getINI%"
+            },
+            {
+                "command": "advpl.serversManagement.AddServer",
+                "title": "%advpl.serversManagement.AddServer%",
+                "icon": {
+                    "light": "images/light/add.png",
+                    "dark": "images/dark/add.png"
+                }
+            },
+            {
+                "command": "advpl.serversManagement.DisableEnvironment",
+                "title": "%advpl.serversManagement.DisableEnvironment%",
+                "icon": {
+                    "light": "images/light/delete.png",
+                    "dark": "images/dark/delete.png"
+                }
+            },
+            {
+                "command": "advpl.serversManagement.connect",
+                "title": "%advpl.serversManagement.connect%"
+            },
+            {
+                "command": "advpl.serversManagement.Defrag",
+                "title": "%advpl.serversManagement.Defrag%"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoInfos",
+                "title": "%advpl.serversManagement.getRpoInfos%"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoFunctions",
+                "title": "%advpl.serversManagement.getRpoFunctions%"
+            },
+            {
+                "command": "advpl.serversManagement.rename",
+                "title": "%advpl.serversManagement.rename%"
+            },
+            {
+                "command": "advpl.serversManagement.getAllEnvironments",
+                "title": "%advpl.serversManagement.getAllEnvironments%"
             }
         ],
         "keybindings": [
@@ -663,6 +806,13 @@
                 "language": "advpl",
                 "path": "./snippets/advpl.json"
             }
+        ],
+        "iconThemes": [
+            {
+                "id": "advplIcons",
+                "label": "AdvPL Icons",
+                "path": "./advpl-icon-theme.json"
+            }
         ]
     },
     "scripts": {
@@ -674,7 +824,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.43",
-        "@types/node": "^6.0.40",
+        "@types/node": "^6.14.7",
         "del": "^3.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
@@ -682,15 +832,16 @@
         "mocha": "^4.0.0",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "vsce": "^1.32.0",
+        "vsce": "^1.65.0",
         "vscode": "^1.1.10",
-        "vscode-debugadapter-testsupport": "^1.29.0",
+        "vscode-debugadapter-testsupport": "^1.35.0",
         "vscode-nls-dev": "^2.1.3"
     },
     "dependencies": {
         "error-ex": "^1.3.1",
         "figures": "^2.0.0",
-        "vscode-debugadapter": "^1.29.0",
+        "ini": "^1.3.5",
+        "vscode-debugadapter": "^1.35.0",
         "vscode-debugprotocol": "^1.29.0",
         "vscode-languageclient": "^1.3.1",
         "vscode-nls": "^2.0.2"

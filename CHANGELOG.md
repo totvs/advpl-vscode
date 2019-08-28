@@ -1,3 +1,9 @@
+## 0.12.0
+ -Melhoria via Pull Request: [Gerenciador de Ambientes](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
+ -Melhoria via Pull Request: [Conjunto de icones](https://github.com/totvs/advpl-vscode/wiki/Suporte-a-%C3%8Dcones)
+ Agredecimento especial ao:
+    - Gabriel Alencar
+
 ## 0.11.3
  - Melhoria via Pull Request: [Alteracao entre debug multi thread ou não](https://github.com/totvs/advpl-vscode/pull/330)
  Agredecimento especial ao:

@@ -14,8 +14,9 @@ export default function cmdAddAdvplEnvironment(context): any {
     const questions = [{
         message: localize('src.commands.addAdvplEnvironment.envAppserverText', 'Environment AppServer'),
         validate: (env) => {
-            if (environments.find(environment => environment.environment == env))
-                return localize('src.commands.addAdvplEnvironment.envExistsErrorText', 'The inputted environment already exists!');
+            // Comentado pois podem existir cenários onde o usuário possui o mesmo nome de Environment em diferentes serviços.
+            // if (environments.find(environment => environment.environment == env))
+            //     return localize('src.commands.addAdvplEnvironment.envExistsErrorText', 'The inputted environment already exists!');
             if (env.length <= 0)
                 return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
             return true;
@@ -29,11 +30,26 @@ export default function cmdAddAdvplEnvironment(context): any {
             return true;
         },
         default: '',
-        validate: (name) => {
-            if (environments.find(environment => environment.name == name))
+        validate: (name, answers) => {
+
+            /**
+             * Tratamento para evitar duplicidade de environment e erros quando não se é utilizado o atributo name
+             */
+            function trataEnv(environment) {
+                if (environment)
+                    return environment.toUpperCase().trim();
+                else
+                    return environment;
+            }
+
+            // Não permite ambientes com o mesmo Nome (Label)
+            if (environments.find(environment => trataEnv(environment.name) == name.toUpperCase().trim() )){
                 return `${name}` + localize('src.commands.addAdvplEnvironment.existsText', ' already exists!');
+            }
+
             if (name.length <= 0)
                 return localize('src.commands.addAdvplEnvironment.mandatoryText', 'Mandatory!');
+
             return true;
         }
     }, {
@@ -52,7 +68,19 @@ export default function cmdAddAdvplEnvironment(context): any {
         default: "localhost"
     }, {
         message: localize('src.commands.addAdvplEnvironment.appserverPortText', 'AppServer Port'),
-        name: "port"
+        name: "port",
+        validate: (port, answers) => {
+            // Não permite utilizar um Environment já configurado para o mesmo servidor + serviço (IP + Porta)
+            if (environments.find(env =>
+                env.environment.toUpperCase().trim() == answers.environment.toUpperCase().trim() &&
+                env.server.toUpperCase().trim() == answers.server.toUpperCase().trim() &&
+                env.port.toString() == port.toUpperCase().trim()
+            )) {
+                return answers.environment + localize('src.commands.addAdvplEnvironment.envExistsErrorText', ' already configured for this AppServer');;
+            }
+
+            return true;
+        }
     }, {
         message: localize('src.commands.addAdvplEnvironment.userText', 'User'),
         name: "user",

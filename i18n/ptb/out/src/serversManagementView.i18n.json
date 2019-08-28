@@ -1,0 +1,13 @@
+{
+    "src.ServerManagementView.CONTEXTVALID": "Esta opção só pode ser utilizada para um item do tipo Serviço.",
+    "src.ServerManagementView.CARREGANDO": "Carregando ambientes...",
+    "src.ServerManagementView.INFORMELABEL": "Informe o Label para alterar.",
+    "src.ServerManagementView.LABELINUSE": "Este Label já está sendo utilizado.",
+    "src.ServerManagementView.NAMEINUSE": "Este Label já está sendo utilizado em um ambiente.",
+    "src.ServerManagementView.DISABLED": " desabilitado",
+    "src.ServerManagementView.environmentText": "Ambiente ",
+    "src.ServerManagementView.yesText": "Sim",
+    "src.ServerManagementView.noText": "Não",
+    "src.ServerManagementView.environmentSelectedText": " selecionado com sucesso.",
+    "src.ServerManagementView.RENAME": "Renomear"
+}
