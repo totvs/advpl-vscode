@@ -1,3 +1,6 @@
+## 0.12.1
+ - Correção: [MACOS não debuga nem compila depois da ultima atualização](https://github.com/totvs/advpl-vscode/issues/355)
+ 
 ## 0.12.0
  -Melhoria via Pull Request: [Gerenciador de Ambientes](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
  -Melhoria via Pull Request: [Conjunto de icones](https://github.com/totvs/advpl-vscode/wiki/Suporte-a-%C3%8Dcones)
