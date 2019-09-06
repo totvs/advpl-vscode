@@ -1,3 +1,6 @@
+## 0.12.2
+ - Correção: [Lentidão na compilação](https://github.com/totvs/advpl-vscode/issues/358)
+
 ## 0.12.1
  - Correção: [MACOS não debuga nem compila depois da ultima atualização](https://github.com/totvs/advpl-vscode/issues/355)
  
