@@ -8,7 +8,7 @@ abstract class Prompt {
 		this._question = question;
 	}
 
-	public abstract render();
+	public abstract render(answers?);
 }
 
 export default Prompt;

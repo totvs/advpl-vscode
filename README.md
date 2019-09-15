@@ -34,11 +34,6 @@ Essa extensão possui as seguintes features implementadas:
 * TL++
 * TdsReplay
 
-As próximas planejadas são:
-
-* [Language Server](https://github.com/advpl/advpl-language-server)
-
-
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.
@@ -50,6 +45,13 @@ Veja a seguinte pagina na [Wiki](https://github.com/killerall/advpl-vscode/wiki/
 ## Configurações
 
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
+## Gerenciador de Ambiente
+
+Agora é possível Gerenciar de forma intuitiva todos os ambientes já configurados e até mesmo os novos que forem sendo criados:
+
+![Demo Gerenciador de Ambientes](https://user-images.githubusercontent.com/10109480/62988989-b4037d00-be1c-11e9-81df-1adae1f71e19.png)
+
+[Leia mais](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
 
 ## Teclas de Atalho padrões
 

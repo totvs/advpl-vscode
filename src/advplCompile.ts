@@ -21,6 +21,7 @@ export class advplCompile {
     private encoding: string;
     private compileStartTime;
     private isAlpha;
+    private iniContent: string;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
@@ -31,7 +32,7 @@ export class advplCompile {
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
         this.isAlpha = config.get<boolean>("alpha_compile");
-        if (process.platform != "win32")        
+        if (process.platform != "win32")
         {
             this.isAlpha = true;
         }
@@ -410,4 +411,54 @@ export class advplCompile {
             });
         });
     }
+
+    public getINI(done?: Function) {
+        var _args = new Array<string>()
+        var that = this;
+
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--getIni");
+
+        var child = child_process.spawn(this.debugPath, _args);
+
+        that.iniContent = "";
+
+        child.stdout.on("data", function (data) {
+            var xRet = data + "";
+
+            that._lastAppreMsg += data;
+            that.iniContent += xRet;
+        });
+
+        child.on("exit", function (data) {
+            var noFoundIni = false;
+
+            if (that.iniContent) {
+                if (that.iniContent.indexOf("NOSOURCE") > 0) {
+                    that.run_callBack(false);
+                    noFoundIni = true;
+                }
+                else {
+                    // Devolve via evento o INI
+                    if (that.afterCompile) {
+                        that.afterCompile(that.iniContent);
+                    }
+                }
+
+
+            } else {
+                that.run_callBack(false);
+                noFoundIni = true;
+            }
+
+            if (noFoundIni) {
+                that.iniContent = "";
+            }
+
+            // Devolve via argumento o INI
+            done(that.iniContent);
+
+        });
+    }
+
 }

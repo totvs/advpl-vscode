@@ -26,6 +26,7 @@ import * as debugBrdige from  './utils/debugBridge';
 import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
+import { ServerManagementView } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -46,6 +47,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(menucompileProjet());
     context.subscriptions.push(menucompiletextfile());
+    context.subscriptions.push(GetINI());
 
     context.subscriptions.push(getAuthorizationId());
     context.subscriptions.push(CipherPassword());
@@ -76,14 +78,17 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getReplayExecId());
     //context.subscriptions.push(getReplayPath());
 
+    // Binds do Servers View
+    context.subscriptions.push(addServer(context));
+
     // register a configuration provider for 'mock' debug type
 	const provider = new ReplayConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
-    
+
     const factory = new ReplayDebugAdapterDescriptorFactory();
 		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl-replay', factory));
 		context.subscriptions.push(factory);
-    
+
     //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
     //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
@@ -107,6 +112,9 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
 
+    const serverView = new ServerManagementView();
+    vscode.window.registerTreeDataProvider('serversManagement', serverView.provider);
+
     // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
         // Atualiza o Status Bar de Multi-Thread
@@ -114,6 +122,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
         // Atualiza o Status Bar de Ambientes
         env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+
+        // Atualiza o TreeView de servidores
+        serverView.provider.refresh();
     }));
 
     return api;
@@ -206,7 +217,7 @@ function generateAuthorizationConfig() {
     return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
-function createAdvplCompile(cSource: string, cDescription: string) {
+export function createAdvplCompile(cSource: string, cDescription: string) {
     let compile: advplCompile;
 
     try {
@@ -278,7 +289,7 @@ function getReplayTmpDir()
         /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        } */           
+        } */
         return oreplayPlay.getTmpDir();
     });
 }
@@ -288,7 +299,7 @@ function getReplayExecId()
         /*if (oreplayPlay === undefined){
             oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
             await oreplayPlay.cmdReplaySelect();
-        } */           
+        } */
         return oreplayPlay.getSelected();
     });
 }
@@ -745,7 +756,55 @@ function buildPPO() {
     return disposable;
 }
 
-function isEnvironmentSelected(): boolean {
+function GetINI() {
+    let disposable = vscode.commands.registerCommand('advpl.getINI', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        // Cria o objeto de compilação
+        let compile = createAdvplCompile(null, null);
+
+        // Sobrescreve o evento após compilação do objeto 'compile'
+        compile.setAfterCompileOK(function (iniContent: string) {
+            const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'getIni' + (new Date()).getMilliseconds().toString() + '.ini'));
+
+            vscode.workspace.openTextDocument(newFile).then(document => {
+                const edit = new vscode.WorkspaceEdit();
+                edit.insert(newFile, new vscode.Position(0, 0), iniContent);
+
+                return vscode.workspace.applyEdit(edit).then(success => {
+                    if (success) {
+                        vscode.window.showTextDocument(document);
+                        isCompiling = false;
+                    } else {
+                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
+                    }
+                });
+            });
+
+            OutPutChannel.log(localize('src.extension.getINIOkText', 'Obtaining the successful INI.') + "\n");
+        });
+
+        // Chama o método da classe que busca o INI
+        if (!(compile == null)) {
+            OutPutChannel.log(localize("src.extension.startingGetINI", "Starting INI File Search...") + "\n");
+            compile.getINI();
+        }
+    });
+
+    return disposable;
+}
+
+function addServer(context){
+    let disposable = vscode.commands.registerCommand('advpl.serversManagement.AddServer', async () => {
+        vscode.commands.executeCommand('advpl.addAdvplEnvironment');
+    });
+
+    return disposable;
+}
+
+export function isEnvironmentSelected(): boolean {
     let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
     if (env === "" || env == undefined) {
         vscode.window.showInformationMessage(localize('src.extension.environmentSelectErrorText', 'Please, select an environment!'));
@@ -779,7 +838,7 @@ class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
 			if (editor && editor.document.languageId === 'advpl') {
 				config.type = 'advpl-replay';
 				config.name = 'Launch';
-				config.request = 'launch';		
+				config.request = 'launch';
 				config.stopOnEntry = true;
 			}
         }
@@ -796,22 +855,22 @@ class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
 	}
 
 }
-    
+
 
 class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
 
-	
+
 
 	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
 
         const args = []; //Vai os parametros vai onLaunch
-      
+
         const program =  getReplayExec(); //"/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/TdsReplayPlay";
 
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
 
 	dispose() {
-	
+
 	}
 }

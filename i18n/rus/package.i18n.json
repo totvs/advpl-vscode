@@ -57,5 +57,19 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Программы для Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
-	"advpl.replaySelect": "Advpl - Select replay file "
+	"advpl.replaySelect": "Advpl - Select replay file ",
+	"advpl.selectEnvironment.title": "Менеджер среды",
+	"advpl.configuration.properties.ADVPLDICTIONARY": "Словарь субтитров серверов и сервисов",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "IP-адрес сервера, связанный с Сервисом (если не указан, этот заголовок будет использоваться для всех атрибутов с одинаковым именем)",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Если конфигурация предназначена для сервера: используйте IP-адрес, если он для службы: используйте порт службы",
+	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Метка, отображаемая для элемента 'NAME' в представлении сред",
+	"advpl.getINI": "Advpl - получить INI",
+	"advpl.serversManagement.AddServer": "Добавить новую среду",
+	"advpl.serversManagement.DisableEnvironment": "Отключить",
+	"advpl.serversManagement.connect": "Подключения",
+	"advpl.serversManagement.Defrag": "Дефрагментация",
+	"advpl.serversManagement.getRpoInfos": "Список объектов RPO",
+	"advpl.serversManagement.getRpoFunctions": "Список ролей RPO",
+	"advpl.serversManagement.rename": "Переименовать",
+	"advpl.serversManagement.getAllEnvironments": "Получить среды INI"
 }

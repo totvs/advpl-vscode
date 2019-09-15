@@ -1,6 +1,6 @@
 {
 	"src.commands.addAdvplEnvironment.envAppserverText": "Ambiente AppServer",
-	"src.commands.addAdvplEnvironment.envExistsErrorText": "O ambiente digitado já está cadastrado!",
+	"src.commands.addAdvplEnvironment.envExistsErrorText": " já configurado para este AppServer",
 	"src.commands.addAdvplEnvironment.mandatoryText": "Obrigatório!",
 	"src.commands.addAdvplEnvironment.nameText": "Nome",
 	"src.commands.addAdvplEnvironment.existsText": " já está cadastrado!",

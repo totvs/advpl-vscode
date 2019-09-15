@@ -14,7 +14,7 @@ export default class CodeAdapter {
                 return PromptFactory.createPrompt(question);
             }).then(prompt => {
                 if (!question.when || question.when(answers) === true) {
-                    return prompt.render().then(result => answers[question.name] = question.filter ? question.filter(result) : result);
+                    return prompt.render(answers).then(result => answers[question.name] = question.filter ? question.filter(result) : result);
                 }
             });
         }, Promise.resolve());
