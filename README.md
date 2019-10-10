@@ -33,6 +33,7 @@ Essa extensão possui as seguintes features implementadas:
 * Linux
 * TL++
 * TdsReplay
+* Suporte ao remote WEBAPP
 
 ## Requisitos para utilização
 

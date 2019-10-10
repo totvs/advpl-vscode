@@ -1,3 +1,10 @@
+## 0.12.3
+- Melhoria: [Suporte ao SmartClient com WEBAPP](https://github.com/totvs/advpl-vscode/issues/370)
+- Correção: [Erro Compilação 4GL](https://github.com/totvs/advpl-vscode/issues/366)
+- Correção: [Linux|Mac|Windows(alpha)] - Debug mostrando tipo corretamente na interface
+- Correção: [Linux|Mac|Windows(alpha)] - Compilação de fontes baseado em .TXT de paths
+
+
 ## 0.12.2
  - Correção: [Lentidão na compilação](https://github.com/totvs/advpl-vscode/issues/358)
 
