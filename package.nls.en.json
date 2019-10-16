@@ -35,6 +35,7 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH": "Smartclient?s folder",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "User with Administration privilege to connect to server.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE": "Enables or disables an Environment from the list.",
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Webapp Port",
 	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Number of threads used to build folder.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Regex of the types of files that will be compiled when you select build folder",
