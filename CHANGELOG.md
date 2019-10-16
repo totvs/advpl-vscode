@@ -3,6 +3,7 @@
 - Correção: [Erro Compilação 4GL](https://github.com/totvs/advpl-vscode/issues/366)
 - Correção: [Linux|Mac|Windows(alpha)] - Debug mostrando tipo corretamente na interface
 - Correção: [Linux|Mac|Windows(alpha)] - Compilação de fontes baseado em .TXT de paths
+- Correção: [Linux|Mac|Windows(alpha)] - BreakPoint Condicional
 
 
 ## 0.12.2
