@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.12.2",
+    "version": "0.12.3",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -265,6 +265,11 @@
                                 "type": "boolean",
                                 "default": true,
                                 "description": "Erase all old infos on rpo"
+                            },
+                            "webappPort": {
+                                "type": "string",
+                                "default": "8486",
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT%"
                             }
                         }
                     }
@@ -638,6 +643,11 @@
                             "enviromentInfo"
                         ],
                         "properties": {
+                            "webapp": {
+                                "type": "boolean",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.webapp%",
+                                "default": true
+                            },
                             "programRun": {
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
