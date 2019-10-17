@@ -88,7 +88,7 @@ export class ServerManagementView {
 							let service = <ServiceView>element.subject;
 
 							// Verifica se o ambiente já está configurado
-							if (!service.environments.find(_env => _env.environment === env.Environment)) {
+							if (!service.environments.find(_env => _env.environment.toUpperCase() === env.Environment.toUpperCase())) {
 
 								// Adiciona nas configurações os ambientes do INI
 								serverManagement.AddEnvironment(

@@ -69,7 +69,7 @@
 	"advpl.serversManagement.connect": "Conectar",
 	"advpl.serversManagement.Defrag": "Desfragmentar",
 	"advpl.serversManagement.getRpoInfos": "Listar objetos RPO",
-	"advpl.serversManagement.getRpoFunctions": "Enumerar roles de RPO",
+	"advpl.serversManagement.getRpoFunctions": "Lista de funciones de RPO",
 	"advpl.serversManagement.rename": "Rebautizar",
 	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI"
 }
