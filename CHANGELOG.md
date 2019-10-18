@@ -4,9 +4,9 @@
 - Correção: [Linux|Mac|Windows(alpha)] - Debug mostrando tipo corretamente na interface
 - Correção: [Linux|Mac|Windows(alpha)] - Compilação de fontes baseado em .TXT de paths
 - Correção: [Linux|Mac|Windows(alpha)] - BreakPoint Condicional
+- Correção: [Linux|Mac|Windows(alpha)] - Compilação de fonte com função duplicada, messagem nao era exibida.
 - Correção via Pull Request: [Listar as funções esta traduzido errado](https://github.com/totvs/advpl-vscode/issues/354)
 - Correção via Pull Request: [Importação de ambientes não trata o Case Sensitive](https://github.com/totvs/advpl-vscode/issues/360)
-
 
 ## 0.12.2
  - Correção: [Lentidão na compilação](https://github.com/totvs/advpl-vscode/issues/358)
