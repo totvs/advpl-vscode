@@ -113,7 +113,11 @@ export async function activate(context: vscode.ExtensionContext) {
     vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
 
     const serverView = new ServerManagementView();
-    vscode.window.registerTreeDataProvider('serversManagement', serverView.provider);
+
+    vscode.window.createTreeView("serversManagement", {
+        treeDataProvider : serverView.provider,
+        showCollapseAll : true
+    });
 
     // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
