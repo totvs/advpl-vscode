@@ -20,7 +20,8 @@ export default class CheckboxPrompt extends Prompt {
 		}, {});
 
 		const options: QuickPickOptions = {
-			placeHolder: this._question.message
+			placeHolder: this._question.message,
+			ignoreFocusOut: true
 		};
 
 		let quickPickOptions = Object.keys(choices);

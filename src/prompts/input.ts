@@ -27,6 +27,7 @@ export default class InputPrompt extends Prompt {
 		}
 
 		this._options.placeHolder = placeHolder;
+		this._options.ignoreFocusOut = true;
 
 		return window.showInputBox(this._options)
 			.then(result => {
