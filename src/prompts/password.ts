@@ -8,5 +8,6 @@ export default class PasswordPrompt extends InputPrompt {
 		super(question);
 
 		this._options.password = true;
+		this._options.ignoreFocusOut = true;
 	}
 }

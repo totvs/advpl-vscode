@@ -17,7 +17,8 @@ export default class ConfirmPrompt extends Prompt {
 		};
 
 		const options: QuickPickOptions = {
-			placeHolder: this._question.message
+			placeHolder: this._question.message,
+			ignoreFocusOut: true
 		};
 
 		return window.showQuickPick(Object.keys(choices), options)
