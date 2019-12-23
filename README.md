@@ -35,6 +35,10 @@ Essa extensão possui as seguintes features implementadas:
 * TdsReplay
 * Suporte ao remote WEBAPP
 
+## Build 191205P
+
+ A Build 191205P utiliza SSL na conexão, para maiores informações consulte [aqui.](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)
+
 ## Requisitos para utilização
 
 Para utilizar os recursos de compilação e debug é necessário que o AppServer esteja na build 131227A ou superior, tendo essa versão de binário tanto o Protheus 11 e 12 são suportados.

@@ -1,3 +1,10 @@
+## 0.13.0
+ - Melhoria: [Suporte ao Binário 191205P](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)
+ - Correção via Pull Request: [Assistente de criação de ambientes fecha ao perder o foco](https://github.com/totvs/advpl-vscode/issues/386) 
+    - Gabriel Alencar
+ - Correção: Habilitado a extensão para uso de APW.
+ - Correção: Monitor cortava o Json de retorno 
+
 ## 0.12.3
 - Melhoria: [Suporte ao SmartClient com WEBAPP](https://github.com/totvs/advpl-vscode/issues/370)
 - Correção: [Erro Compilação 4GL](https://github.com/totvs/advpl-vscode/issues/366)

@@ -35,7 +35,7 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH": "Directorio donde está el smartclient.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "Usuario con privilegio de Administración para conectar con el servidor.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE": "Habilita o no un Ambiente de lista.",
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Webapp Port",
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP",
 	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha compile",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Numero de threads utilizada para compilación de carpeta.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Regex de los tipos de archivos que serán compilados cuando selecione compilación de carpeta",

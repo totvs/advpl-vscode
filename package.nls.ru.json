@@ -35,7 +35,7 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SMARTCLIENTPATH": "Директории, куда это в smartclient.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "Пользователь с возможность Администрирования для подключения на сервере.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE": "Включает или отключает среду из списка.",
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Webapp Port",
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP",
 	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Количество потоков, используемых для построения folder.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Регулярное типов файлов, которые будут собраны при выборе сборки папки",

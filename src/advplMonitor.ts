@@ -32,7 +32,7 @@ export class advplMonitor {
         child.stdout.on("data", function (data) {
             var xRet = data + "";
 
-            that.consoleReturn = xRet;
+            that.consoleReturn += xRet;
         });
 
         child.on("exit", function (data) {

@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.12.3",
+    "version": "0.13.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
@@ -213,7 +213,8 @@
                             },
                             "serverVersion": {
                                 "type": "string",
-                                "default": "131227A",
+                                "enum": ["131227A","170117A","191205P"],
+                                "default": "170117A",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION%"
                             },
                             "server": {
@@ -264,12 +265,18 @@
                             "defragPackAllInfo": {
                                 "type": "boolean",
                                 "default": true,
-                                "description": "Erase all old infos on rpo"
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.DEFRAGPACK%"
                             },
                             "webappPort": {
                                 "type": "string",
                                 "default": "8486",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT%"
+                            }
+                            ,
+                            "ssl": {
+                                "type": "boolean",
+                                "default": "false",
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL%"
                             }
                         }
                     }
@@ -303,7 +310,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg|ahu)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg|ahu|app)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -398,7 +405,8 @@
                     ".aph",
                     ".apl",
                     ".tlpp",
-                    ".ahu"
+                    ".ahu",
+                    ".apw"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
@@ -407,7 +415,8 @@
                     "Advpl(APH)",
                     "Advpl(APL)",
                     "TLPP(tlpp)",
-                    "Advpl(AHU)"
+                    "Advpl(AHU)",
+                    "Advpl(APW)"
                 ],
                 "configuration": "./advpl.configuration.json"
             },
