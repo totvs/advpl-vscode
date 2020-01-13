@@ -561,16 +561,16 @@
                 "command": "advpl.serversManagement.AddServer",
                 "title": "%advpl.serversManagement.AddServer%",
                 "icon": {
-                    "light": "images/light/add.png",
-                    "dark": "images/dark/add.png"
+                    "light": "images/light/add.svg",
+                    "dark": "images/dark/add.svg"
                 }
             },
             {
                 "command": "advpl.serversManagement.DisableEnvironment",
                 "title": "%advpl.serversManagement.DisableEnvironment%",
                 "icon": {
-                    "light": "images/light/delete.png",
-                    "dark": "images/dark/delete.png"
+                    "light": "images/light/trash.svg",
+                    "dark": "images/dark/trash.svg"
                 }
             },
             {
