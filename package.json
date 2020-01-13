@@ -213,7 +213,11 @@
                             },
                             "serverVersion": {
                                 "type": "string",
-                                "enum": ["131227A","170117A","191205P"],
+                                "enum": [
+                                    "131227A",
+                                    "170117A",
+                                    "191205P"
+                                ],
                                 "default": "170117A",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION%"
                             },
@@ -271,11 +275,10 @@
                                 "type": "string",
                                 "default": "8486",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT%"
-                            }
-                            ,
+                            },
                             "ssl": {
                                 "type": "boolean",
-                                "default": "false",
+                                "default": false,
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL%"
                             }
                         }

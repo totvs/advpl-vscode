@@ -10,7 +10,8 @@ const localize = nls.loadMessageBundle();
 export default function cmdAddAdvplEnvironment(context): any {
     const config = vscode.workspace.getConfiguration("advpl");
     const environments = config.get<Array<IEnvironment>>("environments");
-    let adapter = new CodeAdapter()
+    let adapter = new CodeAdapter();
+
     const questions = [{
         message: localize('src.commands.addAdvplEnvironment.envAppserverText', 'Environment AppServer'),
         validate: (env) => {
@@ -61,7 +62,7 @@ export default function cmdAddAdvplEnvironment(context): any {
         name: "appserverVersion",
         type: "list",
         default: '131227A',
-        choices: ['131227A', '170117A']
+        choices: ['131227A', '170117A','191205P']
     }, {
         message: localize('src.commands.addAdvplEnvironment.serverIpText', 'Server IP'),
         name: "server",
@@ -81,11 +82,13 @@ export default function cmdAddAdvplEnvironment(context): any {
 
             return true;
         }
-    }, {
+    },
+    {
         message: localize('src.commands.addAdvplEnvironment.userText', 'User'),
         name: "user",
         default: "Admin"
-    }, {
+    },
+    {
         message: localize('src.commands.addAdvplEnvironment.passwordText', 'Password'),
         name: "password",
         type: "password"
@@ -102,7 +105,18 @@ export default function cmdAddAdvplEnvironment(context): any {
         name: "includeList",
         type: 'folder',
         canSelectMany: true
-    }]
+    },
+    {
+        message: localize('src.commands.addAdvplEnvironment.SSL', 'SSL?'),
+        name: "ssl",
+        when: function (answers) {
+            return answers.appserverVersion == '191205P';
+        },
+        type: "list",
+        default: false,
+        choices: [false, true]
+    }];
+
     adapter.prompt(questions, answers => {
         const compile = new advplCompile();
         compile.runCipherPassword(answers.password, cipher => {
@@ -117,11 +131,11 @@ export default function cmdAddAdvplEnvironment(context): any {
                 includeList: answers.includeList,
                 user: answers.user,
                 smartClientPath: answers.smartClientPath,
-                enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false
-
+                enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false,
+                ssl: answers.ssl
             });
             config.update("environments", environments)
         })
 
-    })
+    });
 }
