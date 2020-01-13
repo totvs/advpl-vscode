@@ -12,4 +12,5 @@ export default interface IEnvironment{
     rpoType?: string;
     name?: string;
     enable?: boolean;
+    ssl?: boolean;
 }
