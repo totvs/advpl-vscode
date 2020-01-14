@@ -125,7 +125,8 @@ export class ServerManagementView {
 
 		let options: vscode.InputBoxOptions = {
 			prompt: localize('src.ServerManagementView.RENAME', "Rename"),
-			placeHolder: oldLabel,
+			placeHolder: localize('src.ServerManagementView.INFORMELABEL', "Enter the Label to change."),
+			value: oldLabel,
 			validateInput: function (newLabel: string) {
 
 				// Não permite label vazio
