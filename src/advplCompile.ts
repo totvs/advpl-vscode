@@ -461,4 +461,8 @@ export class advplCompile {
         });
     }
 
+    public getIsAlpha() : boolean {
+        return this.isAlpha;
+    }
+
 }
