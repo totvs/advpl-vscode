@@ -71,6 +71,7 @@
 	"advpl.serversManagement.getRpoInfos": "List RPO objects",
 	"advpl.serversManagement.getRpoFunctions": "List RPO functions",
 	"advpl.serversManagement.rename": "Rename",
-	"advpl.serversManagement.getAllEnvironments": "Get INI environments"
+	"advpl.serversManagement.getAllEnvironments": "Get INI environments",
+	"advpl.compileFilesOpened": "Advpl - Compile open files"
 
 }

@@ -27,5 +27,6 @@
 	"src.extension.environmentSelectErrorText": "Por favor, selecione um ambiente!",
 	"src.advplMonitor.errorText": "Erro!",
 	"src.extension.startingGetINI": "Iniciando a busca do arquivo INI...",
-	"src.extension.getINIOkText": "INI obtido com sucesso."
+	"src.extension.getINIOkText": "INI obtido com sucesso.",
+	"src.extension.compiling": "Compilando "
 }
