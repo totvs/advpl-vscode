@@ -20,6 +20,7 @@
         "onCommand:advpl.menucompilemulti",
         "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
+        "onCommand:advpl.compileFilesOpened",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
         "onCommand:advpl.getAuthorizationId",
@@ -133,6 +134,32 @@
                     "command": "advpl.serversManagement.AddServer",
                     "when": "view == serversManagement",
                     "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                },
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "navigation",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
                 }
             ],
             "commandPalette": [
@@ -596,6 +623,14 @@
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
                 "title": "%advpl.serversManagement.getAllEnvironments%"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "title": "%advpl.compileFilesOpened%",
+                "icon": {
+                    "light": "images/light/build.svg",
+                    "dark": "images/dark/build.svg"
+                }
             }
         ],
         "keybindings": [
@@ -621,6 +656,12 @@
                 "command": "advpl.createPPO",
                 "key": "ctrl+shift+f9",
                 "mac": "cmd+f4",
+                "when": "editorLangId == advpl"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "key": "shift+f9",
+                "mac": "shift+f9",
                 "when": "editorLangId == advpl"
             }
         ],

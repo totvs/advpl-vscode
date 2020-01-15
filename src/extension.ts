@@ -48,6 +48,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompileProjet());
     context.subscriptions.push(menucompiletextfile());
     context.subscriptions.push(GetINI());
+    context.subscriptions.push(compileFilesOpened());
 
     context.subscriptions.push(getAuthorizationId());
     context.subscriptions.push(CipherPassword());
@@ -221,7 +222,7 @@ function generateAuthorizationConfig() {
     return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
-export function createAdvplCompile(cSource: string, cDescription: string) {
+export function createAdvplCompile(cSource: string, cDescription: string, ignoreEvents: Boolean = false) {
     let compile: advplCompile;
 
     try {
@@ -230,19 +231,25 @@ export function createAdvplCompile(cSource: string, cDescription: string) {
             advplDiagnosticCollection,
             OutPutChannel
         );
-        compile.setonError(function () {
-            isCompiling = false;
-        });
-        compile.setAfterCompileOK(function () {
-            if (!(cSource == null)) {
-                vscode.window.setStatusBarMessage(
-                    cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
-                );
-            } else if (!(cDescription == null)) {
-                OutPutChannel.log(cDescription)
-            }
-            isCompiling = false;
-        });
+
+        if (!ignoreEvents) {
+
+            compile.setonError(function () {
+                isCompiling = false;
+            });
+            compile.setAfterCompileOK(function () {
+                if (!(cSource == null)) {
+                    vscode.window.setStatusBarMessage(
+                        cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
+                    );
+                } else if (!(cDescription == null)) {
+                    OutPutChannel.log(cDescription)
+                }
+
+                isCompiling = false;
+            });
+        }
+
         isCompiling = true;
     } catch (e) {
         OutPutChannel.log(localize('src.extension.compileInitializationErrorText', 'Error in compilation initialization:') + (<Error>e).message);
@@ -453,8 +460,116 @@ function __internal_compile(cSource, editor, lbuildPPO) {
         }
     }
 }
-function GetDebugPath()
-{
+
+function compileFilesOpened() {
+    let disposable = vscode.commands.registerCommand('advpl.compileFilesOpened', function (context) {
+        let hasDirty = false;
+
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        if (isCompiling) {
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+            return;
+        }
+
+        // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
+        let textDocuments = vscode.workspace.textDocuments.filter(file => file.languageId === "advpl");
+
+        if (textDocuments.find(file => file.isDirty)) {
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+
+            // Força o usuário a salvar as alterações antes de continuar
+            vscode.window.showQuickPick(list, { placeHolder: "Existem arquivos abertos não salvos. Deseja salvar para continuar?" }).then(function (select) {
+                if (select === list[0]) {
+                    textDocuments.forEach(element => {
+                        element.save();
+                    });
+                } else {
+                    // vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled!'), 5000);
+                    hasDirty = true;
+                }
+            });
+        }
+
+        // Caso não hajam arquivos pendentes de salvamento continua a compilação
+        if (!hasDirty) {
+
+            vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                // title: "Compilando arquivos...",
+                cancellable: false
+            }, (progress, token) => {
+
+                return new Promise(resolve => {
+                    progress.report({ increment: 0 });
+
+                    __internal_compile_callback(textDocuments, progress).then(() => {
+                        resolve();
+                    });
+
+                });
+            });
+        }
+
+    });
+
+    return disposable;
+}
+
+async function __internal_compile_callback(documents: vscode.TextDocument[],
+    progress: vscode.Progress<{ message?: string; increment?: number }>) {
+
+    // Verifica se está selecionado um ambiente
+    if (!isEnvironmentSelected()) {
+        return;
+    }
+
+    if (isCompiling) {
+        OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+        return;
+    }
+
+    // Cria o objeto de compilação
+    let compile = createAdvplCompile(null, null, true);
+
+    if (!(compile == null)) {
+
+        // Limpa a aba de problemas aqui, pois a função de compilação utilizada irá fazer várias compilações em Loop.
+        advplDiagnosticCollection.clear();
+
+        // Percorre os arquivos abertos do Workspace para compilar. A função "For Of" aguarda a finalização de cada operação await.
+        for (const element of documents) {
+
+            // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
+            let fileSplited = element.fileName.split("\\");
+            progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + fileSplited[fileSplited.length-1] });
+
+            // Aguarda o retorno da chamada de compilação pelo Bridge
+            await new Promise(function (resolve, reject) {
+                // Chama o método da classe que compila o arquivo com Callback
+                compile.setonError(function () {
+                    reject();
+                });
+
+                compile.compileCallBack(element.fileName,
+                    function (compile) {
+                        // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
+                        compile._lastAppreMsg = "";
+                        resolve();
+                    }
+                );
+            });
+        }
+
+        // Retira o modo de compilação da Extensão
+        isCompiling = false;
+    }
+
+}
+
+function GetDebugPath() {
 
     let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {
         let path = debugBrdige.getAdvplDebugBridge();
