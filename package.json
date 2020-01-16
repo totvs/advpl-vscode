@@ -660,8 +660,8 @@
             },
             {
                 "command": "advpl.compileFilesOpened",
-                "key": "shift+f9",
-                "mac": "shift+f9",
+                "key": "alt+f9",
+                "mac": "alt+f9",
                 "when": "editorLangId == advpl"
             }
         ],
