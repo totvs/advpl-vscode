@@ -559,7 +559,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
                         compile._lastAppreMsg = "";
                         resolve();
                     }
-                    );
+                );
             }).catch(() => console.log("Error on Promise of __internal_compile_callback"));
         }
 
