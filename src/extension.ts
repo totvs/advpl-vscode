@@ -414,7 +414,7 @@ function compile() {
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
 
-        if (editor.document.isDirty) {
+        if (editor.document.isDirty || editor.document.isUntitled) {
             let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
             vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveConfirmationText', 'The file is not saved and was modified. Save file before compilation?') }).then(function (select) {
                 console.log(select);
@@ -477,7 +477,7 @@ function compileFilesOpened() {
         // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
         let textDocuments = vscode.workspace.textDocuments.filter(file => file.languageId === "advpl");
 
-        if (textDocuments.find(file => file.isDirty)) {
+        if (textDocuments.find(file => file.isDirty || file.isUntitled)) {
             let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
 
             // Força o usuário a salvar as alterações antes de continuar
@@ -559,8 +559,8 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
                         compile._lastAppreMsg = "";
                         resolve();
                     }
-                );
-            });
+                    );
+            }).catch(() => console.log("Error on Promise of __internal_compile_callback"));
         }
 
         // Retira o modo de compilação da Extensão
