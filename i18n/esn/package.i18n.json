@@ -35,8 +35,8 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "Usuario con privilegio de Administración para conectar con el servidor.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE": "Habilita o no un Ambiente de lista.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.DEFRAGPACK": "Erase all old infos on rpo",
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP", 
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL": "Habilita o uso de SSL na comunicação com o appserver.", 
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP",
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL": "Habilita o uso de SSL na comunicação com o appserver.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Numero de threads utilizada para compilación de carpeta.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Regex de los tipos de archivos que serán compilados cuando selecione compilación de carpeta",
 	"advpl.configuration.properties.ADVPLDEBUG_IGNORESOURCENOTFOUND": "Ignorar los fuentes no encontrados al depurar.",
@@ -74,5 +74,6 @@
 	"advpl.serversManagement.getRpoInfos": "Listar objetos RPO",
 	"advpl.serversManagement.getRpoFunctions": "Lista de funciones de RPO",
 	"advpl.serversManagement.rename": "Rebautizar",
-	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI"
+	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI",
+	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos"
 }
