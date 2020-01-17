@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import IEnvironment from '../utils/IEnvironment';
 import { advplCompile } from '../advplCompile'
 import * as nls from 'vscode-nls';
+import * as path from 'path';
 
 const localize = nls.loadMessageBundle();
 
@@ -130,7 +131,7 @@ export default function cmdAddAdvplEnvironment(context): any {
                 passwordCipher: cipher,
                 includeList: answers.includeList,
                 user: answers.user,
-                smartClientPath: answers.smartClientPath + (compile.getIsAlpha() ? "\\" : ""),
+                smartClientPath: answers.smartClientPath + (compile.getIsAlpha() ? path.sep  : ""),
                 enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false,
                 ssl: answers.ssl
             });
