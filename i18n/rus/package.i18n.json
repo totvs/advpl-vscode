@@ -61,7 +61,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
 	"advpl.replaySelect": "Advpl - Select replay file ",
-	"advpl.selectEnvironment.title": "Менеджер среды",
+	"advpl.selectEnvironment.title": "AdvPL - Менеджер среды",
 	"advpl.configuration.properties.ADVPLDICTIONARY": "Словарь субтитров серверов и сервисов",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "IP-адрес сервера, связанный с Сервисом (если не указан, этот заголовок будет использоваться для всех атрибутов с одинаковым именем)",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Если конфигурация предназначена для сервера: используйте IP-адрес, если он для службы: используйте порт службы",

@@ -61,7 +61,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente no inicio do Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
 	"advpl.replaySelect": "Advpl - Selecione o arquivo do replay",
-	"advpl.selectEnvironment.title": "Gerenciador de Ambientes",
+	"advpl.selectEnvironment.title": "AdvPL - Gerenciador de Ambientes",
 	"advpl.configuration.properties.ADVPLDICTIONARY": "Dicionário de legendas dos Servidores e Serviços",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Endereço IP do Servidor relacionado ao Serviço (caso seja omitido, esta legenda servirá para todos os atributos com mesmo nome)",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Caso a configuração seja para Servidor: Usar o endereço IP, caso seja para serviço: Usar a Porta do Serviço",
