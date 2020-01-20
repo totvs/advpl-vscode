@@ -1,206 +1,4381 @@
 {
-	"Protheus doc" : {
-			"prefix": "protheusdoc"
-		,	"body": [
-				"//-------------------------------------------------------------------"
-			,	"/*/{Protheus.doc} ${1:function}"
-			,	"${2:description}"
-			,	"@author  ${3:author}"
-			,	"@since   ${4:date}"
-			,	"@version ${5:version}"
-			,	"/*/"
-			,	"//-------------------------------------------------------------------"
-			]
-		,	"description": "Protheus doc"
-	},
-	
-	"If": {
-		"prefix": "if",
-		"body": [
-		"If ${1:lCond}",
-			"\t$2",
-		"EndIf",
-		"$0"
-		],
-		"description": "If Statement"
-	},
-	
-	"If Else": {
-		"prefix": "ifelse",
-		"body": [
-		"If ${1:lCond}",
-			"\t$2",
-		"Else",
-			"\t$3",
-		"EndIf",
-		"$0"
-		],
-		"description": "If Else Statement"
-	},
-
-	"If ElseIf": {
-		"prefix": "ifelseif",
-		"body": [
-		"If ${1:lCond1}",
-			"\t$2",
-		"ElseIf ${3:lCond2}",
-			"\t$4",
-		"EndIf",
-		"$0"
-		],
-		"description": "If ElseIf Statement"
-	},
-	
-	"While": {
-		"prefix": "while",
-		"body": [
-		"While (${1:lCond})",
-			"\t$2",
-		"End",
-		"$0"
-		],
-		"description": "While Statement"
-	},
-
-	"For": {
-		"prefix": "for",
-		"body": [
-		"For ${1:nX}:= 1 to Len(${2:aArray})",
-			"\t$3",
-		"Next",
-		"$0"
-		],
-		"description": "For Statement"
-	},
-	"Query":{
-		"prefix": "Query",
-		"body":[
-		"Local ${1:cQuery} := ''",
-			"\t${1:cQuery} := 'query'",
-			"\t${1:cQuery} := ChangeQuery(${1:cQuery})",
-		"dbUseArea(.T., 'TOPCONN', TCGenQry(, , ${1:cQuery}), alias, .F., .T.)",
-		"While alias->(!Eof())",
-			"\t$2",
-			"\talias->(dbSkip())",
-		"EndDo",
-		"alias->(dbCloseArea())"
-		],
-		"description": "Cria a função de Query ja efetuando a conexão com o TOP e efetuando o While"
-	},
-    "Help":{
-        "prefix": "Help",
-        "body":[
-			 
-              "HELP(' ',1,${1:cabecalho} ,,${2:descricao},2,0,,,,,, ${3:solucao})"
+    "Protheus doc": {
+        "prefix": "protheusdoc",
+        "body": [
+            "//-------------------------------------------------------------------",
+            "/*/{Protheus.doc} ${1:function}",
+            "${2:description}",
+            "@author  ${3:author}",
+            "@since   ${4:date}",
+            "@version ${5:version}",
+            "/*/",
+            "//-------------------------------------------------------------------"
         ],
-        "description":"Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
+        "description": "Protheus doc"
     },
-	"Static Function":{
-		"prefix": "StaticFunction",
-		"body":[
-			"/*/{Protheus.doc} ${1:nomeStaticFunction}",
-			"\t(long_description)",
-			"\t@type  Static Function",
-			"\t@author ${2:user}",
-			"\t@since ${3:date}",
-			"\t@version ${4:version}",
-			"\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
-			"\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
-			"\t@example",
-			"\t(examples)",
-			"\t@see (links_or_references)",
-			"\t/*/",
-			" Static Function ${1:nomeStaticFunction}",
-			"Return ${8:return}"
-
-
-		],
-		"description": "Declaração de uma Static Function ja com o Protheus.doc"
-		
-	},
-	"Function":{
-		"prefix": "Function",
-		"body":[
-			"/*/{Protheus.doc} ${1:nomeFunction}",
-			"\t(long_description)",
-			"\t@type  Function",
-			"\t@author ${2:user}",
-			"\t@since ${3:date}",
-			"\t@version ${4:version}",
-			"\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
-			"\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
-			"\t@example",
-			"\t(examples)",
-			"\t@see (links_or_references)",
-			"\t/*/",
-			" Function ${1:nomeFunction}",
-			"Return ${8:return}"
-
-
-		],
-		"description": "Declaração de uma Function ja com o Protheus.doc"
-	},
-	 "Strtokarr2": {
+    "If": {
+        "prefix": "if",
+        "body": [
+            "If ${1:lCond}",
+            "\t$2",
+            "EndIf",
+            "$0"
+        ],
+        "description": "If Statement"
+    },
+    "If Else": {
+        "prefix": "ifelse",
+        "body": [
+            "If ${1:lCond}",
+            "\t$2",
+            "Else",
+            "\t$3",
+            "EndIf",
+            "$0"
+        ],
+        "description": "If Else Statement"
+    },
+    "If ElseIf": {
+        "prefix": "ifelseif",
+        "body": [
+            "If ${1:lCond1}",
+            "\t$2",
+            "ElseIf ${3:lCond2}",
+            "\t$4",
+            "EndIf",
+            "$0"
+        ],
+        "description": "If ElseIf Statement"
+    },
+    "While": {
+        "prefix": "while",
+        "body": [
+            "While (${1:lCond})",
+            "\t$2",
+            "End",
+            "$0"
+        ],
+        "description": "While Statement"
+    },
+    "For": {
+        "prefix": "for",
+        "body": [
+            "For ${1:nX}:= 1 to Len(${2:aArray})",
+            "\t$3",
+            "Next",
+            "$0"
+        ],
+        "description": "For Statement"
+    },
+    "Query": {
+        "prefix": "Query",
+        "body": [
+            "Local ${1:cQuery} := ''",
+            "\t${1:cQuery} := 'query'",
+            "\t${1:cQuery} := ChangeQuery(${1:cQuery})",
+            "dbUseArea(.T., 'TOPCONN', TCGenQry(, , ${1:cQuery}), alias, .F., .T.)",
+            "While alias->(!Eof())",
+            "\t$2",
+            "\talias->(dbSkip())",
+            "EndDo",
+            "alias->(dbCloseArea())"
+        ],
+        "description": "Cria a função de Query ja efetuando a conexão com o TOP e efetuando o While"
+    },
+    "Help": {
+        "prefix": "Help",
+        "body": [
+            "HELP(' ',1,${1:cabecalho} ,,${2:descricao},2,0,,,,,, ${3:solucao})"
+        ],
+        "description": "Função de Help\nExemplo\nHELP(' ',1,'Help1' ,,'campo nao preenchido',2,0,,,,,, {'preencha o campo'})"
+    },
+    "Static Function": {
+        "prefix": "StaticFunction",
+        "body": [
+            "/*/{Protheus.doc} ${1:nomeStaticFunction}",
+            "\t(long_description)",
+            "\t@type  Static Function",
+            "\t@author ${2:user}",
+            "\t@since ${3:date}",
+            "\t@version ${4:version}",
+            "\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
+            "\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
+            "\t@example",
+            "\t(examples)",
+            "\t@see (links_or_references)",
+            "\t/*/",
+            " Static Function ${1:nomeStaticFunction}",
+            "Return ${8:return}"
+        ],
+        "description": "Declaração de uma Static Function ja com o Protheus.doc"
+    },
+    "Function": {
+        "prefix": "Function",
+        "body": [
+            "/*/{Protheus.doc} ${1:nomeFunction}",
+            "\t(long_description)",
+            "\t@type  Function",
+            "\t@author ${2:user}",
+            "\t@since ${3:date}",
+            "\t@version ${4:version}",
+            "\t@param ${5:param}, ${6:param_type}, ${7:param_descr}",
+            "\t@return ${8:return}, ${9:return_type}, ${10:return_description}",
+            "\t@example",
+            "\t(examples)",
+            "\t@see (links_or_references)",
+            "\t/*/",
+            " Function ${1:nomeFunction}",
+            "Return ${8:return}"
+        ],
+        "description": "Declaração de uma Function ja com o Protheus.doc"
+    },
+    "Strtokarr2": {
         "prefix": "Strtokarr2",
         "body": [
             "Strtokarr2( ${1:cValue}, ${2:cToken}, ${3:lEmptyStr})"
         ],
-        "description": "Strtokarr2- Transforma uma String em um array,\n cValue := Caracter a ser separado\n cToken := Caracter a ser ultilizado na quebra \n lEmptyStr:= Se retorna elementos vazios" 					
-	 },
-	 "Year": {
+        "description": "Strtokarr2- Transforma uma String em um array,\n cValue := Caracter a ser separado\n cToken := Caracter a ser ultilizado na quebra \n lEmptyStr:= Se retorna elementos vazios"
+    },
+    "Year": {
         "prefix": "Year",
         "body": [
             "Year( ${1:dData})"
         ],
         "description": "Year - Retorna o Ano no formato 'AAAA' da data informada"
     },
-	 "Type": {
+    "Type": {
         "prefix": "Type",
         "body": [
             "Type( ${1:cVariavel})"
         ],
         "description": "Type() - Retorna o tipo de dado de uma expressao ou variavel."
     },
-	 "ValType": {
+    "ValType": {
         "prefix": "ValType",
         "body": [
             "ValType( ${1:cVariavel})"
         ],
-        "description":  "Valtype() - Retorna o tipo de dado de uma expressao ou variavel."						
-	 },
-	 "ComputerName": {
+        "description": "Valtype() - Retorna o tipo de dado de uma expressao ou variavel."
+    },
+    "ComputerName": {
         "prefix": "ComputerName",
         "body": [
             "ComputerName()"
         ],
         "description": "ComputerName() - Retorna o nome do computador em que o SmartClient esta sendo executado"
     },
-	"ConOut": {
+    "ConOut": {
         "prefix": "ConOut",
         "body": [
             "ConOut( ${1:cText})"
         ],
         "description": "ConOut() - Apresenta no console, do Application Server, uma mensagem."
-	},
-	"Decode64": {
+    },
+    "Decode64": {
         "prefix": "Decode64",
         "body": [
             "Decode64( ${1:cText})"
         ],
         "description": "Decode64() - Converte uma string de Base64 para Base ASCII"
     },
-	"Encode64": {
+    "Encode64": {
         "prefix": "Encode64",
         "body": [
             "Encode64( ${1:cText})"
         ],
         "description": "Encode64() - Converte uma string de ASCII para base64"
     },
-	 "FindFunction": {
+    "FindFunction": {
         "prefix": "FindFunction",
         "body": [
             "FindFunction( ${1:cFunction})"
         ],
         "description": "FindFunction() - Faz a busca de uma determinada função no rpo ou no binário"
-	 }
+    },
+    "MSParse": {
+        "prefix": "MSParse",
+        "body": [
+            "MSParse(${cSQL},${cBD},${1|.T.,.F.,/*lIsQuery*/|})"
+        ],
+        "description": "MSParse-Parses and converts a string SQL - Structured Query Language, write in MSSQL - Microsoft Structured Query Language, for relational databases approved. MSParse(<cSQL>,<cBD>,[lIsQuery])"
+    },
+    "MSParseError": {
+        "prefix": "MSParseError",
+        "body": [
+            "MSParseError()"
+        ],
+        "description": "MSParseError-Returns the last error found when running the function MSParse(). MSParseError()"
+    },
+    "MSParseFull": {
+        "prefix": "MSParseFull",
+        "body": [
+            "MSParseFull(${cSQL},${cBD},${cError},${cOut},${1|.T.,.F.,/*lIsQuery*/|})"
+        ],
+        "description": "MSParseFull-Parses a string SQL - Structured Query Language, write in MSSQL - Microsoft Structured Query Language, and converts it to the syntax of relational databases approved. MSParseFull(<cSQL>,<cBD>,<cError>,<cOut>,[lIsQuery])"
+    },
+    "TCAPIBuild": {
+        "prefix": "TCAPIBuild",
+        "body": [
+            "TCAPIBuild()"
+        ],
+        "description": "TCAPIBuild-Returns the build of the library client DBAccess, the DBAPI. TCAPIBuild()"
+    },
+    "TCAlter": {
+        "prefix": "TCAlter",
+        "body": [
+            "TCAlter(${cTable},${aEstruturaAtual},${aEstruturaNova},@${1:/*nErro*/})"
+        ],
+        "description": "TCAlter-Change the structure of a table. TCAlter(<cTable>,<aEstruturaAtual>,<aEstruturaNova>,[@nErro])"
+    },
+    "TCCanOpen": {
+        "prefix": "TCCanOpen",
+        "body": [
+            "TCCanOpen(${cTable},${1:/*cIndex*/})"
+        ],
+        "description": "TCCanOpen-Checks if a table and/or index exists. TCCanOpen(<cTable>,[cIndex])"
+    },
+    "TCCommit": {
+        "prefix": "TCCommit",
+        "body": [
+            "TCCommit(${nOption},${1:/*xParam*/})"
+        ],
+        "description": "TCCommit-Performs the control of transaction in DBAccess TCCommit(<nOption>,[xParam])"
+    },
+    "TCDelFile": {
+        "prefix": "TCDelFile",
+        "body": [
+            "TCDelFile(${cTabela})"
+        ],
+        "description": "TCDelFile-Deletes a file from the relational database through DBAccess. TCDelFile(<cTabela>)"
+    },
+    "TCDelIndex": {
+        "prefix": "TCDelIndex",
+        "body": [
+            "TCDelIndex(${cTable},${cIndex})"
+        ],
+        "description": "TCDelIndex-Deletes an index from a file of the relational database through DBAccess. TCDelIndex(<cTable>,<cIndex>)"
+    },
+    "TCGenQry": {
+        "prefix": "TCGenQry",
+        "body": [
+            "TCGenQry(${xPar1},${xPar2},${cQuery})"
+        ],
+        "description": "TCGenQry-Allows for the openness of a query directly in the database used in the current connection, by use of the RDD TOPCONN. The return of this function should be passed as 3rd parameter of the function DbUseArea, as in the example below. TCGenQry(<xPar1>,<xPar2>,<cQuery>)"
+    },
+    "TCGetBuild": {
+        "prefix": "TCGetBuild",
+        "body": [
+            "TCGetBuild(${1|.T.,.F.,/*lDate*/|})"
+        ],
+        "description": "TCGetBuild-Returns the build of DBAccess to which it is connected. TCGetBuild([lDate])"
+    },
+    "TCGetConn": {
+        "prefix": "TCGetConn",
+        "body": [
+            "TCGetConn()"
+        ],
+        "description": "TCGetConn-Retrieves the number of active connection with DBAccess. TCGetConn()"
+    },
+    "TCGetDB": {
+        "prefix": "TCGetDB",
+        "body": [
+            "TCGetDB()"
+        ],
+        "description": "TCGetDB-Retrieves the type of the relational database, in use by the current connection with DBAccess. TCGetDB()"
+    },
+    "TCGetDBSID": {
+        "prefix": "TCGetDBSID",
+        "body": [
+            "TCGetDBSID()"
+        ],
+        "description": "TCGetDBSID-Returns a string that identifies the connection currently in use in the SGDB used. TCGetDBSID()"
+    },
+    "TCGetInfo": {
+        "prefix": "TCGetInfo",
+        "body": [
+            "TCGetInfo(${1:/*nInfo*/},${2:/*cParam*/})"
+        ],
+        "description": "TCGetInfo-Returns information about the DBAccess currently logged in TCGetInfo([nInfo],[cParam])"
+    },
+    "TCGetSID": {
+        "prefix": "TCGetSID",
+        "body": [
+            "TCGetSID()"
+        ],
+        "description": "TCGetSID-Returns the number of the process in use at TOTVS | DBAccess for the current connection. TCGetSID()"
+    },
+    "TCIsConnected": {
+        "prefix": "TCIsConnected",
+        "body": [
+            "TCIsConnected(${1:/*nHwnd*/})"
+        ],
+        "description": "TCIsConnected-Function to check if it is logged in the database. TCIsConnected([nHwnd])"
+    },
+    "TCIsVLock": {
+        "prefix": "TCIsVLock",
+        "body": [
+            "TCIsVLock()"
+        ],
+        "description": "TCIsVLock-Indicates if it is the DBAccess has the feature of Virtual Locks. TCIsVLock()"
+    },
+    "TCLink": {
+        "prefix": "TCLink",
+        "body": [
+            "TCLink(${1:/*cConn*/},${2:/*cServerAddr*/},${3:/*nPort*/})"
+        ],
+        "description": "TCLink-Creates a new connection with a database DBMS through DBAccess. TCLink([cConn],[cServerAddr],[nPort])"
+    },
+    "TCMaxMap": {
+        "prefix": "TCMaxMap",
+        "body": [
+            "TCMaxMap(${cNum})"
+        ],
+        "description": "TCMaxMap-Changes the minimum value of the fields from the table to perform the TCSrvMap TCMaxMap(<cNum>)"
+    },
+    "TCObject": {
+        "prefix": "TCObject",
+        "body": [
+            "TCObject(${cObject},@${1:/*cType*/})"
+        ],
+        "description": "TCObject-Tells you whether an object exists in the DBMS connected. TCObject(<cObject>,[@cType])"
+    },
+    "TCPing": {
+        "prefix": "TCPing",
+        "body": [
+            "TCPing(${nCount})"
+        ],
+        "description": "TCPing-Retrieves the latency between the DBAccess and the SGDB TCPing(<nCount>)"
+    },
+    "TCQuit": {
+        "prefix": "TCQuit",
+        "body": [
+            "TCQuit()"
+        ],
+        "description": "TCQuit-Terminates all active connections. TCQuit()"
+    },
+    "TCRefresh": {
+        "prefix": "TCRefresh",
+        "body": [
+            "TCRefresh(${cTable})"
+        ],
+        "description": "TCRefresh-Updates the global settings in a table in the cache settings of DBAccess. TCRefresh(<cTable>)"
+    },
+    "TCSPExec": {
+        "prefix": "TCSPExec",
+        "body": [
+            "TCSPExec(${cStoredProcedure},${1:/*xParam*/})"
+        ],
+        "description": "TCSPExec-Function that runs a stored procedure in the current database. TCSPExec(<cStoredProcedure>,[xParam])"
+    },
+    "TCSPExist": {
+        "prefix": "TCSPExist",
+        "body": [
+            "TCSPExist(${cStoredProc})"
+        ],
+        "description": "TCSPExist-The function checks for the existence of a stored procedure in the current database. TCSPExist(<cStoredProc>)"
+    },
+    "TCSqlError": {
+        "prefix": "TCSqlError",
+        "body": [
+            "TCSqlError()"
+        ],
+        "description": "TCSqlError-Retrieves a string containing the last occurrence of execution error statement and/or operation. TCSqlError()"
+    },
+    "TCSqlExec": {
+        "prefix": "TCSqlExec",
+        "body": [
+            "TCSqlExec(${cStatement})"
+        ],
+        "description": "TCSqlExec-Run a sentence syntax SQL (Structured Query Language). TCSqlExec(<cStatement>)"
+    },
+    "TCSQLReplay": {
+        "prefix": "TCSQLReplay",
+        "body": [
+            "TCSQLReplay(${nOption},@${cMessage})"
+        ],
+        "description": "TCSQLReplay-Allows you to enable and disable the collection of logs of the trace of executions of the DBaccess via TOTVS | Application Server of the active connections of the current process. TCSQLReplay(<nOption>,<@cMessage>)"
+    },
+    "TCSetConn": {
+        "prefix": "TCSetConn",
+        "body": [
+            "TCSetConn(${nHandle})"
+        ],
+        "description": "TCSetConn-Allows you to switch between the active connections with the DBAccess. TCSetConn(<nHandle>)"
+    },
+    "TCSetDummy": {
+        "prefix": "TCSetDummy",
+        "body": [
+            "TCSetDummy(${1|.T.,.F.,/*lOn*/|})"
+        ],
+        "description": "TCSetDummy-Function deprecated on build equal to or greater than 42.20160402 with date generation equal to 20160525. TCSetDummy(<lOn>)"
+    },
+    "TCSetField": {
+        "prefix": "TCSetField",
+        "body": [
+            "TCSetField(${cAlias},${cField},${cType},${1:/*nSize*/},${2:/*nPrecision*/})"
+        ],
+        "description": "TCSetField-Changes the treatment, the type of data or precision, for a field/column returned by a query. TCSetField(<cAlias>,<cField>,<cType>,[nSize],[nPrecision])"
+    },
+    "TCSetParam": {
+        "prefix": "TCSetParam",
+        "body": [
+            "TCSetParam(${cParam},${cValue})"
+        ],
+        "description": "TCSetParam-Inserts or updates a parameter in the TOP_PARAM. TCSetParam(<cParam>,<cValue>)"
+    },
+    "TCSetVIdx": {
+        "prefix": "TCSetVIdx",
+        "body": [
+            "TCSetVIdx(${1|.T.,.F.,/*lSet*/|})"
+        ],
+        "description": "TCSetVIdx-Turns on or off the mode of automatic virtualization of the indexes at run-time. TCSetVIdx(<lSet>)"
+    },
+    "TCSrvMap": {
+        "prefix": "TCSrvMap",
+        "body": [
+            "TCSrvMap(${cAlias},${1:/*cMap*/},${2:/*bRefresh*/})"
+        ],
+        "description": "TCSrvMap-Maps of the selection fields in the database. TCSrvMap(<cAlias>,[cMap],[bRefresh])"
+    },
+    "TCSrvType": {
+        "prefix": "TCSrvType",
+        "body": [
+            "TCSrvType()"
+        ],
+        "description": "TCSrvType-Returns a string that identifies the type of the platform of the connection active/current DBAccess. TCSrvType()"
+    },
+    "TCStruct": {
+        "prefix": "TCStruct",
+        "body": [
+            "TCStruct(${cName})"
+        ],
+        "description": "TCStruct-Returns an array containing the structure of the table or view in the DBMS. TCStruct(<cName>)"
+    },
+    "TCUnique": {
+        "prefix": "TCUnique",
+        "body": [
+            "TCUnique(${cAlias},${1:/*cColumn*/})"
+        ],
+        "description": "TCUnique-Creates a unique key for the current table. TCUnique(<cAlias>,[cColumn])"
+    },
+    "TCUnlink": {
+        "prefix": "TCUnlink",
+        "body": [
+            "TCUnlink(${2:/*nHandle*/},${1|.T.,.F.,/*lVerbose*/|})"
+        ],
+        "description": "TCUnlink-Closes the specified connection with the DBAccess. TCUnlink([nHandle],[lVerbose])"
+    },
+    "TCVLock": {
+        "prefix": "TCVLock",
+        "body": [
+            "TCVLock(${cName})"
+        ],
+        "description": "TCVLock-Makes lock named virtual in DBAccess. TCVLock(<cName>)"
+    },
+    "TCVUnlock": {
+        "prefix": "TCVUnlock",
+        "body": [
+            "TCVUnlock(${1:/*cName*/})"
+        ],
+        "description": "TCVUnlock-Done unlock one or more locks virtual in DBAccess TCVUnlock([cName])"
+    },
+    "GetPort": {
+        "prefix": "GetPort",
+        "body": [
+            "GetPort(${nType})"
+        ],
+        "description": "GetPort-Returns the port number that the application server, license, http or https is listening on. GetPort(<nType>)"
+    },
+    "SocketConn": {
+        "prefix": "SocketConn",
+        "body": [
+            "SocketConn(${cIP},${nPort},${cReq},${1:/*nTimeOut*/})"
+        ],
+        "description": "SocketConn-Creates a TCP connection with a target application, through the use of a Socket from the operating system SocketConn(<cIP>,<nPort>,<cReq>,[nTimeOut])"
+    },
+    "ADUserValid": {
+        "prefix": "ADUserValid",
+        "body": [
+            "ADUserValid(${cDomainName},${cUserName},${cPassword})"
+        ],
+        "description": "ADUserValid-Does the authentication of a user account of a domain-based Microsoft Windows Active Directory. ADUserValid(<cDomainName>,<cUserName>,<cPassword>)"
+    },
+    "GetAuthArgs": {
+        "prefix": "GetAuthArgs",
+        "body": [
+            "GetAuthArgs()"
+        ],
+        "description": "GetAuthArgs-Retrieves the parameters that are used for authentication. GetAuthArgs()"
+    },
+    "GetCredential": {
+        "prefix": "GetCredential",
+        "body": [
+            "GetCredential()"
+        ],
+        "description": "GetCredential-Gets the credential of the user, in the operating system, on which it is authenticated. GetCredential()"
+    },
+    "GetUserFromSID": {
+        "prefix": "GetUserFromSID",
+        "body": [
+            "GetUserFromSID(${cSID},${cDomainName},${cUserName})"
+        ],
+        "description": "GetUserFromSID-Retrieves the name of the domain and user name from a code in the standard SID (Security Identifier) from Microsoft that represents. GetUserFromSID(<cSID>,<cDomainName>,<cUserName>)"
+    },
+    "LogUserName": {
+        "prefix": "LogUserName",
+        "body": [
+            "LogUserName()"
+        ],
+        "description": "LogUserName-Gets the name of the logged in user in the operating system of the station that is running the Smart Client LogUserName()"
+    },
+    "ExUserException": {
+        "prefix": "ExUserException",
+        "body": [
+            "ExUserException(${cTexto})"
+        ],
+        "description": "ExUserException-Displays the window registry errors found (Error log) with the desired message and abort the application. ExUserException(<cTexto>)"
+    },
+    "GetPrograms": {
+        "prefix": "GetPrograms",
+        "body": [
+            "GetPrograms()"
+        ],
+        "description": "GetPrograms-Returns an array containing the name of the programs AdvPl loaded in memory. GetPrograms()"
+    },
+    "JobInfo": {
+        "prefix": "JobInfo",
+        "body": [
+            "JobInfo()"
+        ],
+        "description": "JobInfo-Returns information about the Jobs currently running. JobInfo()"
+    },
+    "KillApp": {
+        "prefix": "KillApp",
+        "body": [
+            "KillApp(${1|.T.,.F.,/*lKill*/|})"
+        ],
+        "description": "KillApp-This function can be used for:\\n\\n1º - When you call the function KillApp(), no value of the parameter, the same will return if the thread received a call to be terminated.\\n\\n2º - To pass a boolean value in the parameter, the function terminates the thread in which it was carried out the call of the function KillApp(). KillApp([lKill])"
+    },
+    "KillUser": {
+        "prefix": "KillUser",
+        "body": [
+            "KillUser(${UserName},${ComputerName},${ThreadId},${ServerName})"
+        ],
+        "description": "KillUser-Terminates the connection to a session of a Smart Client. KillUser(<UserName>,<ComputerName>,<ThreadId>,<ServerName>)"
+    },
+    "LogMsg": {
+        "prefix": "LogMsg",
+        "body": [
+            "LogMsg(${cFunc},${nFacility},${nSeverity},${nVersao},${cMsgId},${cStrData},${uMsg1},${uMsg2},${...})"
+        ],
+        "description": "LogMsg-Logs a log message with the system information in the format of SysLog (RFC 5424), and automatically inserts information such as: date and time of generation of the message, the hostname and id of the thread. LogMsg(<cFunc>,<nFacility>,<nSeverity>,<nVersao>,<cMsgId>,<cStrData>,<uMsg1>,<uMsg2>,...)"
+    },
+    "PCount": {
+        "prefix": "PCount",
+        "body": [
+            "PCount()"
+        ],
+        "description": "PCount-Returns the number of parameters passed to a function AdvPL. PCount()"
+    },
+    "ProcLine": {
+        "prefix": "ProcLine",
+        "body": [
+            "ProcLine(${1:/*nAtivacao*/})"
+        ],
+        "description": "ProcLine-Returns the line number of the source code, the activation current and the previous. ProcLine([nAtivacao])"
+    },
+    "ProcName": {
+        "prefix": "ProcName",
+        "body": [
+            "ProcName(${1:/*nAtivacao*/})"
+        ],
+        "description": "ProcName-Returns the name of the routine or function defined by the user, current or previous. ProcName([nAtivacao])"
+    },
+    "ReleaseProgs": {
+        "prefix": "ReleaseProgs",
+        "body": [
+            "ReleaseProgs()"
+        ],
+        "description": "ReleaseProgs-Immediately shuts down the context of the programs of the process AdvPL current, without stopping the process. Means by the closing of the context of the cleaning of the contents of the static variables allocated after the first execution of the function on the connection and the cleaning of the interface class dynamic allocated by the current process.  ReleaseProgs()"
+    },
+    "SetFinishAppHandler": {
+        "prefix": "SetFinishAppHandler",
+        "body": [
+            "SetFinishAppHandler(${1:/*cNome_Funcao*/},${2:/*Parâmetros*/})"
+        ],
+        "description": "SetFinishAppHandler-TOTVS Application Server in builds higher than the 7.00.131227 P - 20150508. SetFinishAppHandler([cNome_Funcao],[Parâmetros])"
+    },
+    "Sleep": {
+        "prefix": "Sleep",
+        "body": [
+            "Sleep(${nSleep})"
+        ],
+        "description": "Sleep-Has the goal of make the current thread leave be executed according to the value entered as the parameter. Sleep(<nSleep>)"
+    },
+    "StartJob": {
+        "prefix": "StartJob",
+        "body": [
+            "StartJob(${cName},${cEnv},${1|.T.,.F.,/*lWait*/|},${2:/*parm*/},${parm2},${...parm25]})"
+        ],
+        "description": "StartJob-Executes a routine on a second thread without the interface. StartJob(<cName>,<cEnv>,<lWait>,[parm1,parm2,...parm25])"
+    },
+    "SysRefresh": {
+        "prefix": "SysRefresh",
+        "body": [
+            "SysRefresh()"
+        ],
+        "description": "SysRefresh-Updates all pending messages in the connection. SysRefresh()"
+    },
+    "ThreadTimeout": {
+        "prefix": "ThreadTimeout",
+        "body": [
+            "ThreadTimeout(${1:/*<segundos>*/})"
+        ],
+        "description": "ThreadTimeout-Amount of seconds to enable the timeout of the thread ThreadTimeout([<segundos>])"
+    },
+    "UserException": {
+        "prefix": "UserException",
+        "body": [
+            "UserException(${cDescricao})"
+        ],
+        "description": "UserException-Force an error, in the language AdvPL, so that it can be treated later. To do so, this function receives a string with the error description that will be displayed in accordance with the environment that you are running. UserException(<cDescricao>)"
+    },
+    "WaitRun": {
+        "prefix": "WaitRun",
+        "body": [
+            "WaitRun(${cExeName},${1:/*nOpc*/})"
+        ],
+        "description": "WaitRun-Executes and waits for completion of an external program (executable file) through the operating system of the station where the SmartClient is running WaitRun(<cExeName>,[nOpc])"
+    },
+    "Bin2D": {
+        "prefix": "Bin2D",
+        "body": [
+            "Bin2D(${cString})"
+        ],
+        "description": "Bin2D-Converts a character to the 64-bit flagged for a numeric floating-point. Bin2D(<cString>)"
+    },
+    "Bin2F": {
+        "prefix": "Bin2F",
+        "body": [
+            "Bin2F(${cString})"
+        ],
+        "description": "Bin2F-Converts a character to the 32-bit flagged for a numeric floating-point. Bin2F(<cString>)"
+    },
+    "Bin2I": {
+        "prefix": "Bin2I",
+        "body": [
+            "Bin2I(${cString})"
+        ],
+        "description": "Bin2I-Converts a 16 bit character flagged for a numeric. Bin2I(<cString>)"
+    },
+    "Bin2L": {
+        "prefix": "Bin2L",
+        "body": [
+            "Bin2L(${cString})"
+        ],
+        "description": "Bin2L-Converts a character to the 32-bit flagged for a numeric. Bin2L(<cString>)"
+    },
+    "Bin2Str": {
+        "prefix": "Bin2Str",
+        "body": [
+            "Bin2Str(${cString})"
+        ],
+        "description": "Bin2Str-Converts a string of characters to a string with the binary value of each character. Bin2Str(<cString>)"
+    },
+    "Bin2W": {
+        "prefix": "Bin2W",
+        "body": [
+            "Bin2W(${cString})"
+        ],
+        "description": "Bin2W-Converts a 16 bit character is not flagged for a numeric. Bin2W(<cString>)"
+    },
+    "BmpToJpg": {
+        "prefix": "BmpToJpg",
+        "body": [
+            "BmpToJpg(${cFileOld},${cFileNew})"
+        ],
+        "description": "BmpToJpg-Converts an image of type BMP (Bitmap) JPG (Joint Photographic Group). BmpToJpg(<cFileOld>,<cFileNew>)"
+    },
+    "CtoD": {
+        "prefix": "CtoD",
+        "body": [
+            "CtoD(${cData})"
+        ],
+        "description": "CtoD-<ac:image><ri:url ri:value=\"http://tdn.totvs.com/download/attachments/6063609/Mon+May+21+15%3A50%3A43+BRT+2012temp?version=1&modificationDate=1337626243676\" /></ac:image> CtoD(<cData>)"
+    },
+    "ColorToRGB": {
+        "prefix": "ColorToRGB",
+        "body": [
+            "ColorToRGB(${nColor})"
+        ],
+        "description": "ColorToRGB-From the numeric value that represents a color, returns a list of numbers that represent the RGB. ColorToRGB(<nColor>)"
+    },
+    "D2Bin": {
+        "prefix": "D2Bin",
+        "body": [
+            "D2Bin(${nDouble})"
+        ],
+        "description": "D2Bin-Converts the number entered as the parameter to a string of 8 characters, corresponding to the binary representation of the floating point number. D2Bin(<nDouble>)"
+    },
+    "DToC": {
+        "prefix": "DToC",
+        "body": [
+            "DToC(${dData})"
+        ],
+        "description": "DToC-Converts a date value to a string with the format month, day, and year (mm/dd/yy). DToC(<dData>)"
+    },
+    "DToS": {
+        "prefix": "DToS",
+        "body": [
+            "DToS(${dData})"
+        ],
+        "description": "DToS-Converts a date value to a string with the format year, month, and day (yyyymmdd). DToS(<dData>)"
+    },
+    "Dbl2Dt": {
+        "prefix": "Dbl2Dt",
+        "body": [
+            "Dbl2Dt(${nDt})"
+        ],
+        "description": "Dbl2Dt-Converts a Date in the double (decimal floating point) for date in the format \"YYYYMMDD hh:mm:ss.fff\" Dbl2Dt(<nDt>)"
+    },
+    "Dt2Dbl": {
+        "prefix": "Dt2Dbl",
+        "body": [
+            "Dt2Dbl(${cExp})"
+        ],
+        "description": "Dt2Dbl-Converts a Date in the format \"YYYYMMDD hh:mm:ss.fff\" to a double (decimal floating point) Dt2Dbl(<cExp>)"
+    },
+    "F2Bin": {
+        "prefix": "F2Bin",
+        "body": [
+            "F2Bin(${nFloat})"
+        ],
+        "description": "F2Bin-Converts the number entered as the parameter in a string of 4 characters corresponding to the binary representation of the floating point number. F2Bin(<nFloat>)"
+    },
+    "GetDtoDate": {
+        "prefix": "GetDtoDate",
+        "body": [
+            "GetDtoDate(${cData})"
+        ],
+        "description": "GetDtoDate-Converts a string to date type. GetDtoDate(<cData>)"
+    },
+    "I2Bin": {
+        "prefix": "I2Bin",
+        "body": [
+            "I2Bin(${nInt})"
+        ],
+        "description": "I2Bin-Converts an integer to a string formatted as a 16-bit integer. I2Bin(<nInt>)"
+    },
+    "L2Bin": {
+        "prefix": "L2Bin",
+        "body": [
+            "L2Bin(${nInt})"
+        ],
+        "description": "L2Bin-Converts an integer to a string formatted as a 32-bit integer. L2Bin(<nInt>)"
+    },
+    "SToD": {
+        "prefix": "SToD",
+        "body": [
+            "SToD(${cData})"
+        ],
+        "description": "SToD-Returns the date from a string of eight characters, in the format year, month, and day (yyyymmdd). SToD(<cData>)"
+    },
+    "Str": {
+        "prefix": "Str",
+        "body": [
+            "Str(${nNumero},${1:/*nTamanho*/},${2:/*nDecimais*/})"
+        ],
+        "description": "Str-From a numeric this function returns a string formatted by inserting spaces (\" \") to the left and/or the decimal point symbol (\".\") in their homes, according to the information of the parameter. Str(<nNumero>,[nTamanho],[nDecimais])"
+    },
+    "StrZero": {
+        "prefix": "StrZero",
+        "body": [
+            "StrZero(${nValor},${nTamanho},${1:/*nDecimal*/})"
+        ],
+        "description": "StrZero-From a numeric this function returns a formatted string, inserting leading zeros and/or decimal symbol (\".\") in their homes, according to the information of the parameter. StrZero(<nValor>,<nTamanho>,[nDecimal])"
+    },
+    "Val": {
+        "prefix": "Val",
+        "body": [
+            "Val(${cString})"
+        ],
+        "description": "Val-Converts a string containing digits into a numeric value. Val(<cString>)"
+    },
+    "W2Bin": {
+        "prefix": "W2Bin",
+        "body": [
+            "W2Bin(${nInt})"
+        ],
+        "description": "W2Bin-Converts an integer to a string formatted as a 16-bit integer is not flagged. W2Bin(<nInt>)"
+    },
+    "cValToChar": {
+        "prefix": "cValToChar",
+        "body": [
+            "cValToChar(${xParametro})"
+        ],
+        "description": "cValToChar-Converts a information of the type character, date, logical or numeric to string without adding spaces in the information cValToChar(<xParametro>)"
+    },
+    "DEC_ADD": {
+        "prefix": "DEC_ADD",
+        "body": [
+            "DEC_ADD(${dLeft},${dRight})"
+        ],
+        "description": "DEC_ADD-Done the sum of the decimal places specified in the parameters <dLeft> e <dRight>, and returns a new decimal with the value of the result. DEC_ADD(<dLeft>,<dRight>)"
+    },
+    "DEC_CREATE": {
+        "prefix": "DEC_CREATE",
+        "body": [
+            "DEC_CREATE(${xValue},${iPrecision},${iScale})"
+        ],
+        "description": "DEC_CREATE-This function allows you to create a decimal with the initial value, the precision and scale specified. DEC_CREATE(<xValue>,<iPrecision>,<iScale>)"
+    },
+    "DEC_DIV": {
+        "prefix": "DEC_DIV",
+        "body": [
+            "DEC_DIV(${dLeft},${dRight})"
+        ],
+        "description": "DEC_DIV-Performs the division of decimal fixed-point. DEC_DIV(<dLeft>,<dRight>)"
+    },
+    "DEC_MOD": {
+        "prefix": "DEC_MOD",
+        "body": [
+            "DEC_MOD(${dLeft},${dRight})"
+        ],
+        "description": "DEC_MOD-Returns the remainder of division of decimal fixed-point. DEC_MOD(<dLeft>,<dRight>)"
+    },
+    "DEC_MUL": {
+        "prefix": "DEC_MUL",
+        "body": [
+            "DEC_MUL(${dLeft},${dRight})"
+        ],
+        "description": "DEC_MUL-Performs the multiplication of decimal fixed-point. DEC_MUL(<dLeft>,<dRight>)"
+    },
+    "DEC_POW": {
+        "prefix": "DEC_POW",
+        "body": [
+            "DEC_POW(${dLeft},${dRight})"
+        ],
+        "description": "DEC_POW-Returns the empowerment of decimal fixed-point. DEC_POW(<dLeft>,<dRight>)"
+    },
+    "DEC_RESCALE": {
+        "prefix": "DEC_RESCALE",
+        "body": [
+            "DEC_RESCALE(${dNum},${nScale},${1:/*nRound*/})"
+        ],
+        "description": "DEC_RESCALE-Performs a rescale of a decimal fixed-point DEC_RESCALE(<dNum>,<nScale>,[nRound])"
+    },
+    "DEC_RESIZE": {
+        "prefix": "DEC_RESIZE",
+        "body": [
+            "DEC_RESIZE(${dNum},${nPrecision},${nScale},${1:/*nRound*/})"
+        ],
+        "description": "DEC_RESIZE-Allows you to change the precision and scale of a decimal fixed-point. DEC_RESIZE(<dNum>,<nPrecision>,<nScale>,[nRound])"
+    },
+    "DEC_ROUND": {
+        "prefix": "DEC_ROUND",
+        "body": [
+            "DEC_ROUND(${dNum},${nRound})"
+        ],
+        "description": "DEC_ROUND-Rounds a decimal fixed point without changing the amount of digits in total, or the amount of decimal places. DEC_ROUND(<dNum>,<nRound>)"
+    },
+    "DEC_SUB": {
+        "prefix": "DEC_SUB",
+        "body": [
+            "DEC_SUB(${dLeft},${dRight})"
+        ],
+        "description": "DEC_SUB-Performs the subtraction of decimal fixed-point. DEC_SUB(<dLeft>,<dRight>)"
+    },
+    "DEC_TO_DBL": {
+        "prefix": "DEC_TO_DBL",
+        "body": [
+            "DEC_TO_DBL(${dVar})"
+        ],
+        "description": "DEC_TO_DBL-Returns the result of the conversion of a DECIMAL type to NUMERIC DEC_TO_DBL(<dVar>)"
+    },
+    "IPCCount": {
+        "prefix": "IPCCount",
+        "body": [
+            "IPCCount(${cSemaforo})"
+        ],
+        "description": "IPCCount-Gets all threads that are in the air, in a given environment, and returns an integer indicating the total number of free threads. IPCCount(<cSemaforo>)"
+    },
+    "IPCGo": {
+        "prefix": "IPCGo",
+        "body": [
+            "IPCGo(${cSemaforo})"
+        ],
+        "description": "IPCGo-Sends a call to a thread, which need not necessarily be of the same environment, that is on hold. IPCGo(<cSemaforo>)"
+    },
+    "IPCWaitEx": {
+        "prefix": "IPCWaitEx",
+        "body": [
+            "IPCWaitEx(${cSemaforo},${nTimeOut})"
+        ],
+        "description": "IPCWaitEx-Put it into standby mode the thread is running, creating a semaphore named, and waits for a certain period of time by the release of this semaphore. The release of the semaphore can occur for time-out, or through calling the function IPCGo() by another process, using as a parameter the name of the semaphore named created by IPCWaitEx(). In addition, the release semaphore function IPCGo() you can send additional parameters, retrieved by the function IPCWaitEx() IPCWaitEx(<cSemaforo>,<nTimeOut>)"
+    },
+    "FWFilterRelation": {
+        "prefix": "FWFilterRelation",
+        "body": [
+            "FWFilterRelation()"
+        ],
+        "description": "FWFilterRelation-\nAllows you to define the relationships for the filter  FWFilterRelation()"
+    },
+    "GetBuild": {
+        "prefix": "GetBuild",
+        "body": [
+            "GetBuild(${1|.T.,.F.,/*lType*/|})"
+        ],
+        "description": "GetBuild-Returns a string with information of the build ID of the build) in use by the Application Server. GetBuild([lType])"
+    },
+    "GetClientIP": {
+        "prefix": "GetClientIP",
+        "body": [
+            "GetClientIP()"
+        ],
+        "description": "GetClientIP-Returns the number IP - Internet Protocol of the server that the SmartClient is installed. GetClientIP()"
+    },
+    "GetComputerName": {
+        "prefix": "GetComputerName",
+        "body": [
+            "GetComputerName()"
+        ],
+        "description": "GetComputerName-Returns the machine name (Hostname) where the SmartClient is running. GetComputerName()"
+    },
+    "GetEnv": {
+        "prefix": "GetEnv",
+        "body": [
+            "GetEnv(${cVarEnv})"
+        ],
+        "description": "GetEnv-Determines the contents of an environment variable (environment) of the operating system in use on the Application Server. GetEnv(<cVarEnv>)"
+    },
+    "GetEnvHost": {
+        "prefix": "GetEnvHost",
+        "body": [
+            "GetEnvHost()"
+        ],
+        "description": "GetEnvHost-Returns the host (name/address), when a Web environment, from the calling page. GetEnvHost()"
+    },
+    "GetEnvServer": {
+        "prefix": "GetEnvServer",
+        "body": [
+            "GetEnvServer()"
+        ],
+        "description": "GetEnvServer-Returns a string with the name of the environment (environment) running on the Application Server. GetEnvServer()"
+    },
+    "GetHardwareId": {
+        "prefix": "GetHardwareId",
+        "body": [
+            "GetHardwareId()"
+        ],
+        "description": "GetHardwareId-Returns the serial number of the drive where you are running the TOTVS | Application Server. GetHardwareId()"
+    },
+    "GetImpWindows": {
+        "prefix": "GetImpWindows",
+        "body": [
+            "GetImpWindows(${1|.T.,.F.,/*lDirect*/|})"
+        ],
+        "description": "GetImpWindows-Returns an array with the names of the available printers. GetImpWindows(<lDirect>)"
+    },
+    "GetRemoteIniName": {
+        "prefix": "GetRemoteIniName",
+        "body": [
+            "GetRemoteIniName()"
+        ],
+        "description": "GetRemoteIniName-Returns the full path of the configuration file (*.INI) from the SmartClient. GetRemoteIniName()"
+    },
+    "GetRemoteType": {
+        "prefix": "GetRemoteType",
+        "body": [
+            "GetRemoteType(@${1:/*cLibVersion*/})"
+        ],
+        "description": "GetRemoteType-Identifies the type and version of the Smart Client is running. GetRemoteType([@cLibVersion])"
+    },
+    "GetRmtDate": {
+        "prefix": "GetRmtDate",
+        "body": [
+            "GetRmtDate()"
+        ],
+        "description": "GetRmtDate-Returns the current system date set on the machine where the SmartClient is running. GetRmtDate()"
+    },
+    "GetRmtInfo": {
+        "prefix": "GetRmtInfo",
+        "body": [
+            "GetRmtInfo()"
+        ],
+        "description": "GetRmtInfo-Returns an array with the settings of the computer that the SmartClient is running. GetRmtInfo()"
+    },
+    "GetRmtTime": {
+        "prefix": "GetRmtTime",
+        "body": [
+            "GetRmtTime()"
+        ],
+        "description": "GetRmtTime-Returns the current system time set on the machine where the SmartClient is running. GetRmtTime()"
+    },
+    "GetRmtVersion": {
+        "prefix": "GetRmtVersion",
+        "body": [
+            "GetRmtVersion()"
+        ],
+        "description": "GetRmtVersion-Returns a string with the current version of SmartClient GetRmtVersion()"
+    },
+    "GetServerIP": {
+        "prefix": "GetServerIP",
+        "body": [
+            "GetServerIP(${1|.T.,.F.,/*lGetAllAddress*/|})"
+        ],
+        "description": "GetServerIP-Returns the IP number of the server where the application Advpl is being performed. GetServerIP([lGetAllAddress])"
+    },
+    "GetServerType": {
+        "prefix": "GetServerType",
+        "body": [
+            "GetServerType()"
+        ],
+        "description": "GetServerType-Returns an integer that represents the type of execution of the Application Server. GetServerType()"
+    },
+    "GetSrvGlbInfo": {
+        "prefix": "GetSrvGlbInfo",
+        "body": [
+            "GetSrvGlbInfo()"
+        ],
+        "description": "GetSrvGlbInfo-Returns a string containing a summary of the current status of the service Application Server, including the breakdown of internal processes, user processes, service memory, memory pools kernel of the Application Server, process memory and accumulators global. GetSrvGlbInfo()"
+    },
+    "GetSrvInfo": {
+        "prefix": "GetSrvInfo",
+        "body": [
+            "GetSrvInfo()"
+        ],
+        "description": "GetSrvInfo-Returns an array with the settings of the server where the TOTVS | Application Server has been instantiated. GetSrvInfo()"
+    },
+    "GetSrvIniName": {
+        "prefix": "GetSrvIniName",
+        "body": [
+            "GetSrvIniName()"
+        ],
+        "description": "GetSrvIniName-Returns the name of the configuration file (*.INI) of the Application Server. GetSrvIniName()"
+    },
+    "GetSrvMemInfo": {
+        "prefix": "GetSrvMemInfo",
+        "body": [
+            "GetSrvMemInfo()"
+        ],
+        "description": "GetSrvMemInfo-Retrieves the status memory of the machine where the Application Server is running. GetSrvMemInfo()"
+    },
+    "GetSrvOSInfo": {
+        "prefix": "GetSrvOSInfo",
+        "body": [
+            "GetSrvOSInfo()"
+        ],
+        "description": "GetSrvOSInfo-Returns information from the operating system where the Application Server is running. GetSrvOSInfo()"
+    },
+    "getSrvVersion": {
+        "prefix": "getSrvVersion",
+        "body": [
+            "getSrvVersion()"
+        ],
+        "description": "getSrvVersion-Name getSrvVersion()"
+    },
+    "GetTempPath": {
+        "prefix": "GetTempPath",
+        "body": [
+            "GetTempPath(${1|.T.,.F.,/*lLocal*/|})"
+        ],
+        "description": "GetTempPath-Returns the path to the temporary folder of the current system. GetTempPath([lLocal])"
+    },
+    "GetUserInfoArray": {
+        "prefix": "GetUserInfoArray",
+        "body": [
+            "GetUserInfoArray(${1|.T.,.F.,/*lShowMoreInfo**/|})"
+        ],
+        "description": "GetUserInfoArray-Returns a multidimensional array with the information of each of the processes running on the Protheus 8 Server and/or Application Server. GetUserInfoArray([lShowMoreInfo*])"
+    },
+    "GetWebJob": {
+        "prefix": "GetWebJob",
+        "body": [
+            "GetWebJob()"
+        ],
+        "description": "GetWebJob-Returns the user name of the thread in which it was performed. GetWebJob()"
+    },
+    "IsPlugin": {
+        "prefix": "IsPlugin",
+        "body": [
+            "IsPlugin()"
+        ],
+        "description": "IsPlugin-Returns if the Smart Client is running in a plug-in ActiveX. IsPlugin()"
+    },
+    "IsPrinter2": {
+        "prefix": "IsPrinter2",
+        "body": [
+            "IsPrinter2(${1:/*cPorta*/},${2:/*uParam2*/},${3:/*nDirect*/})"
+        ],
+        "description": "IsPrinter2-Indicates the status of a particular port of print. IsPrinter2([cPorta],[uParam2],[nDirect])"
+    },
+    "IsRmt64": {
+        "prefix": "IsRmt64",
+        "body": [
+            "IsRmt64()"
+        ],
+        "description": "IsRmt64-Returns if the binary TOTVS | SmartClient running on the station is architecture 64-bit or not. IsRmt64()"
+    },
+    "IsSecure": {
+        "prefix": "IsSecure",
+        "body": [
+            "IsSecure()"
+        ],
+        "description": "IsSecure-Returns a boolean value stating whether the connection is secured or not. IsSecure()"
+    },
+    "IsSrvUnix": {
+        "prefix": "IsSrvUnix",
+        "body": [
+            "IsSrvUnix()"
+        ],
+        "description": "IsSrvUnix-Informs if the Application Server is running on Unix environment, Linux or Microsoft Windows. IsSrvUnix()"
+    },
+    "RemoteXVersion": {
+        "prefix": "RemoteXVersion",
+        "body": [
+            "RemoteXVersion()"
+        ],
+        "description": "RemoteXVersion-Returns the build of Smart Client ActiveX. RemoteXVersion()"
+    },
+    "SerialNumber": {
+        "prefix": "SerialNumber",
+        "body": [
+            "SerialNumber(${1:/*cDrive*/})"
+        ],
+        "description": "SerialNumber-Returns the serial number of a drive on Windows machine where is running the TOTVS | Application Server. SerialNumber([cDrive])"
+    },
+    "Set": {
+        "prefix": "Set",
+        "body": [
+            "Set(${nParam},${1:/*xValue*/})"
+        ],
+        "description": "Set-Performs the setting of some parameters of the system, allows you to also return the value previously set. Set(<nParam>,[xValue])"
+    },
+    "ShowInfMem": {
+        "prefix": "ShowInfMem",
+        "body": [
+            "ShowInfMem(${param1},${param2})"
+        ],
+        "description": "ShowInfMem-The function ShowInfMem aims to assist in the verification of the increase, accumulate, or simply to a memory management to the programmer to check in a particular \"instance\" of your program like this the memory counters by Smartheap. ShowInfMem(<param1>,<param2>)"
+    },
+    "SrvDisplay": {
+        "prefix": "SrvDisplay",
+        "body": [
+            "SrvDisplay()"
+        ],
+        "description": "SrvDisplay-Returns true (.T.), if the <ac:structured-macro ac:name=\"excerpt-include\"><ac:parameter ac:name=\"nopanel\">true</ac:parameter><ac:parameter ac:name=\"\"><ac:link><ri:page ri:content-title=\"Application Server\" /></ac:link></ac:parameter></ac:structured-macro> is running in a session with a graphical user interface, otherwise, it returns false (.F.). SrvDisplay()"
+    },
+    "ThreadCount": {
+        "prefix": "ThreadCount",
+        "body": [
+            "ThreadCount()"
+        ],
+        "description": "ThreadCount-Returns the number of threads/processes active in the service of the Application Server where the function has been executed. ThreadCount()"
+    },
+    "ThreadID": {
+        "prefix": "ThreadID",
+        "body": [
+            "ThreadID()"
+        ],
+        "description": "ThreadID-Returns the ID (identification number) of the thread in which the function call was performed. ThreadID()"
+    },
+    "__Quit": {
+        "prefix": "__Quit",
+        "body": [
+            "__Quit()"
+        ],
+        "description": "__Quit-Closes the application. __Quit()"
+    },
+    "__SetPicture": {
+        "prefix": "__SetPicture",
+        "body": [
+            "__SetPicture(${1:/*cPictMode*/})"
+        ],
+        "description": "__SetPicture-Defines the behavior of application picture number in the system, for data entry operations via statement in the [ @ ... SAY/GET ... PICTURE ] , as well as the behavior in the formatting of numeric data in string via the function Advpl Transform(), when we use the function of picture \"@E\", to format a given numeric string using the European format ( where the comma is used as decimal separator and point(s) used(s) as the separator(s) of thousands ). __SetPicture([cPictMode])"
+    },
+    "AppBringToFront": {
+        "prefix": "AppBringToFront",
+        "body": [
+            "AppBringToFront()"
+        ],
+        "description": "AppBringToFront-Allows a dialog running in the Smart Client, stay in the foreground, that is, above all other applications that are running on the workstation. AppBringToFront()"
+    },
+    "CalcFieldSize": {
+        "prefix": "CalcFieldSize",
+        "body": [
+            "CalcFieldSize(${1:/*cTipo*/},${2:/*nTaman*/},${3:/*nDecimal*/},${4:/*cPicture*/},${5:/*cTitulo*/},${6:/*oFont*/})"
+        ],
+        "description": "CalcFieldSize-Calculates the pixel size of the area occupied by the object TSay/TGet in the editing area. CalcFieldSize([cTipo],[nTaman],[nDecimal],[cPicture],[cTitulo],[oFont])"
+    },
+    "ChkBmpRlt": {
+        "prefix": "ChkBmpRlt",
+        "body": [
+            "ChkBmpRlt(${cFile})"
+        ],
+        "description": "ChkBmpRlt-Checks if the image file exists. ChkBmpRlt(<cFile>)"
+    },
+    "CreateSession": {
+        "prefix": "CreateSession",
+        "body": [
+            "CreateSession(${cThead},${oWorkSpace},${cFunction},${1:/*cArg1*/},${2:/*cArg2*/},${3:/*cArg3*/},${4:/*cArg4*/},${5:/*cArg5*/},${6:/*cArg6*/},${7:/*cArg7*/},${8:/*cArg8*/},${9:/*cArg9*/},${*:/*cArg10*/},${*:/*cArg11*/},${*:/*cArg12*/},${*:/*cArg13*/},${*:/*cArg14*/},${*:/*cArg15*/},${*:/*cArg16*/},${*:/*cArg17*/},${*:/*cArg18*/},${*:/*cArg19*/},${*:/*cArg20*/})"
+        ],
+        "description": "CreateSession-Runs two programs, written in the language AdvPL, at the same time. CreateSession(<cThead>,<oWorkSpace>,<cFunction>,[cArg1],[cArg2],[cArg3],[cArg4],[cArg5],[cArg6],[cArg7],[cArg8],[cArg9],[cArg10],[cArg11],[cArg12],[cArg13],[cArg14],[cArg15],[cArg16],[cArg17],[cArg18],[cArg19],[cArg20])"
+    },
+    "CursorArrow": {
+        "prefix": "CursorArrow",
+        "body": [
+            "CursorArrow()"
+        ],
+        "description": "CursorArrow-Sets the mouse pointer as the arrow. CursorArrow()"
+    },
+    "CursorWait": {
+        "prefix": "CursorWait",
+        "body": [
+            "CursorWait()"
+        ],
+        "description": "CursorWait-Sets the mouse pointer to the hourglass. CursorWait()"
+    },
+    "ExeDLLRun2": {
+        "prefix": "ExeDLLRun2",
+        "body": [
+            "ExeDLLRun2(${nHandle},${nOpc},${cBuffer})"
+        ],
+        "description": "ExeDLLRun2-Executes functions or procedures in a DLL (Dynamic-link library , or link Library dynamic). ExeDLLRun2(<nHandle>,<nOpc>,<cBuffer>)"
+    },
+    "ExeDLLRun3": {
+        "prefix": "ExeDLLRun3",
+        "body": [
+            "ExeDLLRun3(${nHandle},${nOpc},${cBuffer})"
+        ],
+        "description": "ExeDLLRun3-Executes functions or procedures in a DLL (Dynamic-link library , or link Library dynamic). ExeDLLRun3(<nHandle>,<nOpc>,<cBuffer>)"
+    },
+    "ExecInClient": {
+        "prefix": "ExecInClient",
+        "body": [
+            "ExecInClient()"
+        ],
+        "description": "ExecInClient-Performs a set of pre-defined actions in the Smart Client, such as specific treatments for each operating system (Windows/Linux). ExecInClient()"
+    },
+    "ExecInDllClose": {
+        "prefix": "ExecInDllClose",
+        "body": [
+            "ExecInDllClose(${nHandle})"
+        ],
+        "description": "ExecInDllClose-Closes the connection to a DLL (Dynamic-link library , or link Library dynamic). ExecInDllClose(<nHandle>)"
+    },
+    "ExecInDllOpen": {
+        "prefix": "ExecInDllOpen",
+        "body": [
+            "ExecInDllOpen(${cDLLName})"
+        ],
+        "description": "ExecInDllOpen-<ac:image><ri:url ri:value=\"http://tdn.totvs.com/download/attachments/6063490/Mon+May+21+15%3A46%3A54+BRT+2012temp?version=1&modificationDate=1337626014107\" /></ac:image> ExecInDllOpen(<cDLLName>)"
+    },
+    "ExecInDllRun": {
+        "prefix": "ExecInDllRun",
+        "body": [
+            "ExecInDllRun(${nHandle},${nOpc},${cStrInput})"
+        ],
+        "description": "ExecInDllRun-  ExecInDllRun(<nHandle>,<nOpc>,<cStrInput>)"
+    },
+    "GetChildCt": {
+        "prefix": "GetChildCt",
+        "body": [
+            "GetChildCt(${oWindow})"
+        ],
+        "description": "GetChildCt-GetChildCt returns the number of child objects present in a window. GetChildCt(<oWindow>)"
+    },
+    "MSCalculator": {
+        "prefix": "MSCalculator",
+        "body": [
+            "MSCalculator()"
+        ],
+        "description": "MSCalculator-Run the calculator program of the operating system. MSCalculator()"
+    },
+    "MessageBox": {
+        "prefix": "MessageBox",
+        "body": [
+            "MessageBox(${cMensagem},${cCabec},${nOpc})"
+        ],
+        "description": "MessageBox-Displays a window with message option. MessageBox(<cMensagem>,<cCabec>,<nOpc>)"
+    },
+    "MsgInfo": {
+        "prefix": "MsgInfo",
+        "body": [
+            "MsgInfo(${cMensagem},${cTitulo})"
+        ],
+        "description": "MsgInfo-Displays an information message. MsgInfo(<cMensagem>,<cTitulo>)"
+    },
+    "MsgNoYes": {
+        "prefix": "MsgNoYes",
+        "body": [
+            "MsgNoYes(${cPergunta},${cTitulo})"
+        ],
+        "description": "MsgNoYes-Displays a message with the options of No and Yes. MsgNoYes(<cPergunta>,<cTitulo>)"
+    },
+    "MsgRetryCal": {
+        "prefix": "MsgRetryCal",
+        "body": [
+            "MsgRetryCal(${cPergunta},${cTitulo})"
+        ],
+        "description": "MsgRetryCal-Displays a message with the options of Yes and No. MsgRetryCal(<cPergunta>,<cTitulo>)"
+    },
+    "MsgRun": {
+        "prefix": "MsgRun",
+        "body": [
+            "MsgRun(${cText},${1:/*cHeader*/},${2:/*bBlock*/})"
+        ],
+        "description": "MsgRun-Displays a window with a message during the processing. MsgRun(<cText>,[cHeader],[bBlock])"
+    },
+    "PtGetTheme": {
+        "prefix": "PtGetTheme",
+        "body": [
+            "PtGetTheme()"
+        ],
+        "description": "PtGetTheme-Returns the subject defined for the Smart Client. PtGetTheme()"
+    },
+    "PtSetAcento": {
+        "prefix": "PtSetAcento",
+        "body": [
+            "PtSetAcento(${1|.T.,.F.,/*lsAcento*/|})"
+        ],
+        "description": "PtSetAcento-It defines the use of accented characters in Smart Client. PtSetAcento(<lsAcento>)"
+    },
+    "PtSetTheme": {
+        "prefix": "PtSetTheme",
+        "body": [
+            "PtSetTheme(${cTema})"
+        ],
+        "description": "PtSetTheme-Sets the theme to the section of the Smart Client. PtSetTheme(<cTema>)"
+    },
+    "SendToFore": {
+        "prefix": "SendToFore",
+        "body": [
+            "SendToFore()"
+        ],
+        "description": "SendToFore-Allows a dialog running, in the SmartClient, you will stay in the foreground, that is, above all other applications that are running on the workstation. SendToFore()"
+    },
+    "SetDefCaption": {
+        "prefix": "SetDefCaption",
+        "body": [
+            "SetDefCaption(${cTitle})"
+        ],
+        "description": "SetDefCaption-Sets the default title of the application window. SetDefCaption(<cTitle>)"
+    },
+    "SetDefFont": {
+        "prefix": "SetDefFont",
+        "body": [
+            "SetDefFont()"
+        ],
+        "description": "SetDefFont-Sets the default font for the Smart Client. SetDefFont()"
+    },
+    "SetFlatControls": {
+        "prefix": "SetFlatControls",
+        "body": [
+            "SetFlatControls(${1|.T.,.F.,/*lOpc*/|})"
+        ],
+        "description": "SetFlatControls-Defines whether objects will be created with the theme Flat. SetFlatControls(<lOpc>)"
+    },
+    "SetFocus": {
+        "prefix": "SetFocus",
+        "body": [
+            "SetFocus(${1:/*nHandle*/})"
+        ],
+        "description": "SetFocus-Sets the focus of the application in a given object. SetFocus([nHandle])"
+    },
+    "SetRmtDate": {
+        "prefix": "SetRmtDate",
+        "body": [
+            "SetRmtDate(${dData})"
+        ],
+        "description": "SetRmtDate-Sets and current date in the Smart Client. SetRmtDate(<dData>)"
+    },
+    "SetTransparentColor": {
+        "prefix": "SetTransparentColor",
+        "body": [
+            "SetTransparentColor(${nColor},${nAlpha})"
+        ],
+        "description": "SetTransparentColor-Calculates the transparency of a color. SetTransparentColor(<nColor>,<nAlpha>)"
+    },
+    "SetWndDefault": {
+        "prefix": "SetWndDefault",
+        "body": [
+            "SetWndDefault(${1:/*oWndDef*/})"
+        ],
+        "description": "SetWndDefault-Sets the default window of the application. SetWndDefault([oWndDef])"
+    },
+    "ShowHelpCpo": {
+        "prefix": "ShowHelpCpo",
+        "body": [
+            "ShowHelpCpo(${1:/*cCabec*/},${2:/*aAjuda*/},${3:/*nLinAjuda*/},${4:/*aValid*/},${5:/*nLinValid*/})"
+        ],
+        "description": "ShowHelpCpo-Displays the help message for the field. ShowHelpCpo([cCabec],[aAjuda],[nLinAjuda],[aValid],[nLinValid])"
+    },
+    "ShowHelpDlg": {
+        "prefix": "ShowHelpDlg",
+        "body": [
+            "ShowHelpDlg(${1:/*cCabec*/},${2:/*aProbl*/},${3:/*nLinProbl*/},${4:/*aSolucao*/},${5:/*nLinSoluc*/})"
+        ],
+        "description": "ShowHelpDlg-Displays the help message from the system. ShowHelpDlg([cCabec],[aProbl],[nLinProbl],[aSolucao],[nLinSoluc])"
+    },
+    "WinExec": {
+        "prefix": "WinExec",
+        "body": [
+            "WinExec(${cExec})"
+        ],
+        "description": "WinExec-Run an external application at the station where the SmartClient is running WinExec(<cExec>)"
+    },
+    "Alias": {
+        "prefix": "Alias",
+        "body": [
+            "Alias(${1:/*nWorkArea*/})"
+        ],
+        "description": "Alias-Returns the alias of a work area specified. Alias([nWorkArea])"
+    },
+    "Bof": {
+        "prefix": "Bof",
+        "body": [
+            "Bof()"
+        ],
+        "description": "Bof-Tells you if you are at the beginning of the File/Table. Bof()"
+    },
+    "DBAppend": {
+        "prefix": "DBAppend",
+        "body": [
+            "DBAppend(${1|.T.,.F.,/*lUnlock*/|})"
+        ],
+        "description": "DBAppend-Adds a new empty record in the current table. DBAppend([lUnlock])"
+    },
+    "DBChangeAlias": {
+        "prefix": "DBChangeAlias",
+        "body": [
+            "DBChangeAlias(${cOldAlias},${cNewAlias})"
+        ],
+        "description": "DBChangeAlias-Changes the alias of an open workspace. DBChangeAlias(<cOldAlias>,<cNewAlias>)"
+    },
+    "DBClearAllFilter": {
+        "prefix": "DBClearAllFilter",
+        "body": [
+            "DBClearAllFilter()"
+        ],
+        "description": "DBClearAllFilter-Clean all the filter conditions of all the open tables. DBClearAllFilter()"
+    },
+    "DBClearFilter": {
+        "prefix": "DBClearFilter",
+        "body": [
+            "DBClearFilter()"
+        ],
+        "description": "DBClearFilter-Clears all filter conditions. DBClearFilter()"
+    },
+    "DBClearIndex": {
+        "prefix": "DBClearIndex",
+        "body": [
+            "DBClearIndex()"
+        ],
+        "description": "DBClearIndex-Closes all indexes on the desktop the current. DBClearIndex()"
+    },
+    "DBCloseAll": {
+        "prefix": "DBCloseAll",
+        "body": [
+            "DBCloseAll()"
+        ],
+        "description": "DBCloseAll-Closes all work areas in use. DBCloseAll()"
+    },
+    "DBCloseArea": {
+        "prefix": "DBCloseArea",
+        "body": [
+            "DBCloseArea()"
+        ],
+        "description": "DBCloseArea-Closes the desktop current. DBCloseArea()"
+    },
+    "DBCommit": {
+        "prefix": "DBCommit",
+        "body": [
+            "DBCommit()"
+        ],
+        "description": "DBCommit-Saves to disk all pending updates in the area of current working. DBCommit()"
+    },
+    "DBCommitAll": {
+        "prefix": "DBCommitAll",
+        "body": [
+            "DBCommitAll()"
+        ],
+        "description": "DBCommitAll-Saves to disk all pending updates in the area of current working. DBCommitAll()"
+    },
+    "DBCreate": {
+        "prefix": "DBCreate",
+        "body": [
+            "DBCreate(${cName},${aStruct},${1:/*cDriver*/})"
+        ],
+        "description": "DBCreate-Defines a new table or a new file of type table and its structure (fields). DBCreate(<cName>,<aStruct>,[cDriver])"
+    },
+    "DBCreateIndex": {
+        "prefix": "DBCreateIndex",
+        "body": [
+            "DBCreateIndex(${cName},${cExprKey},${2:/*bExprKey*/},${1|.T.,.F.,/*lUnique*/|})"
+        ],
+        "description": "DBCreateIndex-<ac:structured-macro ac:name=\"pagetitle\"><ac:parameter ac:name=\"\">DBCreateIndex</ac:parameter></ac:structured-macro> DBCreateIndex(<cName>,<cExprKey>,[bExprKey],[lUnique])"
+    },
+    "DBDelete": {
+        "prefix": "DBDelete",
+        "body": [
+            "DBDelete()"
+        ],
+        "description": "DBDelete-Marks the current record for deletion. DBDelete()"
+    },
+    "DBFieldInfo": {
+        "prefix": "DBFieldInfo",
+        "body": [
+            "DBFieldInfo(${nType},${nField})"
+        ],
+        "description": "DBFieldInfo-Gets information for a particular field of the current table. DBFieldInfo(<nType>,<nField>)"
+    },
+    "DBFilter": {
+        "prefix": "DBFilter",
+        "body": [
+            "DBFilter()"
+        ],
+        "description": "DBFilter-Returns the expression of the active filter in the area of current working. DBFilter()"
+    },
+    "DBFilterCB": {
+        "prefix": "DBFilterCB",
+        "body": [
+            "DBFilterCB()"
+        ],
+        "description": "DBFilterCB-Returns the codeblock of the filter active in the area of current working. DBFilterCB()"
+    },
+    "DBGetActFld": {
+        "prefix": "DBGetActFld",
+        "body": [
+            "DBGetActFld()"
+        ],
+        "description": "DBGetActFld-  DBGetActFld()"
+    },
+    "DBGoBottom": {
+        "prefix": "DBGoBottom",
+        "body": [
+            "DBGoBottom()"
+        ],
+        "description": "DBGoBottom-Position the current table on the last logical record. DBGoBottom()"
+    },
+    "DBGoTo": {
+        "prefix": "DBGoTo",
+        "body": [
+            "DBGoTo(${nPos})"
+        ],
+        "description": "DBGoTo-Positions the table current in a particular record, according to the physical order (sequence about the recno). DBGoTo(<nPos>)"
+    },
+    "DBGoTop": {
+        "prefix": "DBGoTop",
+        "body": [
+            "DBGoTop()"
+        ],
+        "description": "DBGoTop-Position the current table in the first logical record. DBGoTop()"
+    },
+    "DBInInsert": {
+        "prefix": "DBInInsert",
+        "body": [
+            "DBInInsert()"
+        ],
+        "description": "DBInInsert-Returns if the table is in insert mode records or not. DBInInsert()"
+    },
+    "DBInfo": {
+        "prefix": "DBInfo",
+        "body": [
+            "DBInfo(${nInfo})"
+        ],
+        "description": "DBInfo-Get information about the current table. DBInfo(<nInfo>)"
+    },
+    "DBNickIndexKey": {
+        "prefix": "DBNickIndexKey",
+        "body": [
+            "DBNickIndexKey(${cNick})"
+        ],
+        "description": "DBNickIndexKey-Returns the IndexKey, that is, the expression of the index identified by the nickname. DBNickIndexKey(<cNick>)"
+    },
+    "DBOrderInfo": {
+        "prefix": "DBOrderInfo",
+        "body": [
+            "DBOrderInfo(${nTipoInfo})"
+        ],
+        "description": "DBOrderInfo-Get information about the particular order of the index. DBOrderInfo(<nTipoInfo>)"
+    },
+    "DBOrderNickname": {
+        "prefix": "DBOrderNickname",
+        "body": [
+            "DBOrderNickname(${cApelido})"
+        ],
+        "description": "DBOrderNickname-Selects the index order active through your nickname. DBOrderNickname(<cApelido>)"
+    },
+    "DBRLock": {
+        "prefix": "DBRLock",
+        "body": [
+            "DBRLock(${1:/*nRec*/})"
+        ],
+        "description": "DBRLock-Locks the current record or the specified. DBRLock([nRec])"
+    },
+    "DBRLockList": {
+        "prefix": "DBRLockList",
+        "body": [
+            "DBRLockList()"
+        ],
+        "description": "DBRLockList-Returns an array with the list of records locked in the table the current by the current process. DBRLockList()"
+    },
+    "DBRUnlock": {
+        "prefix": "DBRUnlock",
+        "body": [
+            "DBRUnlock(${1:/*nRec*/})"
+        ],
+        "description": "DBRUnlock-Frees the given record locked. DBRUnlock([nRec])"
+    },
+    "DBRecall": {
+        "prefix": "DBRecall",
+        "body": [
+            "DBRecall()"
+        ],
+        "description": "DBRecall-Clears the current record if it has been marked for deletion. DBRecall()"
+    },
+    "DBRecordInfo": {
+        "prefix": "DBRecordInfo",
+        "body": [
+            "DBRecordInfo(${nInfoType},@${1:/*nRecord*/})"
+        ],
+        "description": "DBRecordInfo-Get information about the current record of the current table. DBRecordInfo(<nInfoType>,[@nRecord])"
+    },
+    "DBReindex": {
+        "prefix": "DBReindex",
+        "body": [
+            "DBReindex()"
+        ],
+        "description": "DBReindex-Rebuilds all indexes, from the desktop, current, and position the tables in the first logical record. DBReindex()"
+    },
+    "DBSeek": {
+        "prefix": "DBSeek",
+        "body": [
+            "DBSeek(${xExp},${1|.T.,.F.,/*lSoftSeek*/|},${2|.T.,.F.,/*lLast*/|})"
+        ],
+        "description": "DBSeek-Finds a record with a particular value of the index key expression. DBSeek(<xExp>,[lSoftSeek],[lLast])"
+    },
+    "DBSelectArea": {
+        "prefix": "DBSelectArea",
+        "body": [
+            "DBSelectArea(${xArea})"
+        ],
+        "description": "DBSelectArea-Sets the specified workspace as active. DBSelectArea(<xArea>)"
+    },
+    "DBSetActFld": {
+        "prefix": "DBSetActFld",
+        "body": [
+            "DBSetActFld(${cCampos},${1|.T.,.F.,/*lAtivo*/|})"
+        ],
+        "description": "DBSetActFld-One or more field names, separated by commas, to be enabled or disabled, or \"*\" (asterisk) to reference all the fields. DBSetActFld(<cCampos>,<lAtivo>)"
+    },
+    "DBSetDriver": {
+        "prefix": "DBSetDriver",
+        "body": [
+            "DBSetDriver(${1:/*cRDD*/})"
+        ],
+        "description": "DBSetDriver-Returns the RDD standard that is used, and can change it. DBSetDriver([cRDD])"
+    },
+    "DBSetFilter": {
+        "prefix": "DBSetFilter",
+        "body": [
+            "DBSetFilter(${bCond},${cCond})"
+        ],
+        "description": "DBSetFilter-Set a display filter of the alias chain. DBSetFilter(<bCond>,<cCond>)"
+    },
+    "DBSetIndex": {
+        "prefix": "DBSetIndex",
+        "body": [
+            "DBSetIndex(${cIndex})"
+        ],
+        "description": "DBSetIndex-Adds one or more orders of a given index to the active work area. DBSetIndex(<cIndex>)"
+    },
+    "DBSetNickname": {
+        "prefix": "DBSetNickname",
+        "body": [
+            "DBSetNickname(${cIndex},${1:/*cNickname*/})"
+        ],
+        "description": "DBSetNickname-Defines an alias for a given order. DBSetNickname(<cIndex>,[cNickname])"
+    },
+    "DBSetOrder": {
+        "prefix": "DBSetOrder",
+        "body": [
+            "DBSetOrder(${1:/*nOrdem*/})"
+        ],
+        "description": "DBSetOrder-Selects the order of the active desktop.\\n This order is responsible for the logical sequence of the records from the current table. DBSetOrder([nOrdem])"
+    },
+    "DBSkip": {
+        "prefix": "DBSkip",
+        "body": [
+            "DBSkip(${1:/*nReg*/})"
+        ],
+        "description": "DBSkip-Move to another record in the current table. DBSkip([nReg])"
+    },
+    "DBSqlExec": {
+        "prefix": "DBSqlExec",
+        "body": [
+            "DBSqlExec(${cAlias},${cQuery},${cDriver})"
+        ],
+        "description": "DBSqlExec-The Alias that will point to the area of data resulting from the execution of the query. DBSqlExec(cAlias,cQuery,cDriver)"
+    },
+    "DBStruct": {
+        "prefix": "DBStruct",
+        "body": [
+            "DBStruct()"
+        ],
+        "description": "DBStruct-Returns an array containing the structure of the table opened under the Alias current. DBStruct()"
+    },
+    "DBTblCopy": {
+        "prefix": "DBTblCopy",
+        "body": [
+            "DBTblCopy(${cSourceAlias},${cDestAlias})"
+        ],
+        "description": "DBTblCopy-Alias for the data area that will receive the copy. DBTblCopy(cSourceAlias,cDestAlias)"
+    },
+    "DBUnlock": {
+        "prefix": "DBUnlock",
+        "body": [
+            "DBUnlock()"
+        ],
+        "description": "DBUnlock-Removes all locks of the records and files of the current table. DBUnlock()"
+    },
+    "DBUnlockAll": {
+        "prefix": "DBUnlockAll",
+        "body": [
+            "DBUnlockAll()"
+        ],
+        "description": "DBUnlockAll-Removes the block of all registry files and all the tables open in a work area. DBUnlockAll()"
+    },
+    "DBUseArea": {
+        "prefix": "DBUseArea",
+        "body": [
+            "DBUseArea(${1|.T.,.F.,/*lNewArea*/|},${4:/*cDriver*/},${cFile},${cAlias},${2|.T.,.F.,/*lShared*/|},${3|.T.,.F.,/*lReadOnly*/|})"
+        ],
+        "description": "DBUseArea-Opens a data table in the current work area or on the first available work area. DBUseArea([lNewArea],[cDriver],<cFile>,<cAlias>,[lShared],[lReadOnly])"
+    },
+    "Dbf": {
+        "prefix": "Dbf",
+        "body": [
+            "Dbf()"
+        ],
+        "description": "Dbf-Returns the Alias of the work area the current.(*) This function is obsolete and has been replaced by the function Alias() Dbf()"
+    },
+    "Deleted": {
+        "prefix": "Deleted",
+        "body": [
+            "Deleted()"
+        ],
+        "description": "Deleted-Checks if the current record is marked for deletion. Deleted()"
+    },
+    "Eof": {
+        "prefix": "Eof",
+        "body": [
+            "Eof()"
+        ],
+        "description": "Eof-\\n Eof()"
+    },
+    "FCount": {
+        "prefix": "FCount",
+        "body": [
+            "FCount()"
+        ],
+        "description": "FCount-Returns the number of fields existing in the structure of the active desktop. FCount()"
+    },
+    "FLock": {
+        "prefix": "FLock",
+        "body": [
+            "FLock()"
+        ],
+        "description": "FLock-Locks a table or file. FLock()"
+    },
+    "Field": {
+        "prefix": "Field",
+        "body": [
+            "Field(${nPos})"
+        ],
+        "description": "Field-Returns the name of a field from an open table. Field(<nPos>)"
+    },
+    "FieldBlock": {
+        "prefix": "FieldBlock",
+        "body": [
+            "FieldBlock(${cField})"
+        ],
+        "description": "FieldBlock-Returns a block of code for a given field of the current table. FieldBlock(<cField>)"
+    },
+    "FieldGet": {
+        "prefix": "FieldGet",
+        "body": [
+            "FieldGet(${nPos})"
+        ],
+        "description": "FieldGet-Retrieves the contents of a field of the record currently positioned at the selected alias, from their ordinal position in the structure of the table. FieldGet(<nPos>)"
+    },
+    "FieldName": {
+        "prefix": "FieldName",
+        "body": [
+            "FieldName(${nPos})"
+        ],
+        "description": "FieldName-Returns the name of a field from an open table. FieldName(<nPos>)"
+    },
+    "FieldPos": {
+        "prefix": "FieldPos",
+        "body": [
+            "FieldPos(${cField})"
+        ],
+        "description": "FieldPos-Returns the position of a particular field within the area of current working. FieldPos(<cField>)"
+    },
+    "FieldPut": {
+        "prefix": "FieldPut",
+        "body": [
+            "FieldPut(${nPos},${xValue})"
+        ],
+        "description": "FieldPut-Allows you to set the value of a field in a table using the ordinal position of the field in the table structure. FieldPut(<nPos>,<xValue>)"
+    },
+    "FieldWBlock": {
+        "prefix": "FieldWBlock",
+        "body": [
+            "FieldWBlock(${cField},${nWokArea})"
+        ],
+        "description": "FieldWBlock-Returns a block of code to a field in a work area open. FieldWBlock(<cField>,<nWokArea>)"
+    },
+    "Found": {
+        "prefix": "Found",
+        "body": [
+            "Found()"
+        ],
+        "description": "Found-Retrieves the result for the last search operation carried out by the processing chain. Found()"
+    },
+    "GetDBExtension": {
+        "prefix": "GetDBExtension",
+        "body": [
+            "GetDBExtension()"
+        ],
+        "description": "GetDBExtension-Returns the extension of the database files. GetDBExtension()"
+    },
+    "Header": {
+        "prefix": "Header",
+        "body": [
+            "Header()"
+        ],
+        "description": "Header-Returns the size of the header of the database file current. Header()"
+    },
+    "IndexKey": {
+        "prefix": "IndexKey",
+        "body": [
+            "IndexKey(${1:/*nOrdem*/})"
+        ],
+        "description": "IndexKey-Identifies the expression of the index key specified in the area of work current, and returns it in the form of a string. IndexKey([nOrdem])"
+    },
+    "IndexOrd": {
+        "prefix": "IndexOrd",
+        "body": [
+            "IndexOrd()"
+        ],
+        "description": "IndexOrd-Checks the position of the index current; and returns the position occupied by the index stream in the index list. IndexOrd()"
+    },
+    "LastRec": {
+        "prefix": "LastRec",
+        "body": [
+            "LastRec()"
+        ],
+        "description": "LastRec-Returns the number of the last record inserted in the current table. LastRec()"
+    },
+    "NetErr": {
+        "prefix": "NetErr",
+        "body": [
+            "NetErr(${1|.T.,.F.,/*lValor*/|})"
+        ],
+        "description": "NetErr-Returns a boolean value to identify if the previous operation caused an error. NetErr([lValor])"
+    },
+    "OrdBagExt": {
+        "prefix": "OrdBagExt",
+        "body": [
+            "OrdBagExt(${1:/**/})"
+        ],
+        "description": "OrdBagExt-Maintenance function index that returns an expression character matching the default extension of the file indexes used by the alias current. This extension is determined according to the driver RDD is used by the alias current. OrdBagExt([])"
+    },
+    "OrdBagName": {
+        "prefix": "OrdBagName",
+        "body": [
+            "OrdBagName(${xExp})"
+        ],
+        "description": "OrdBagName-Returns a string with the alias of the Order of the Index searched. OrdBagName(<xExp>)"
+    },
+    "OrdDescend": {
+        "prefix": "OrdDescend",
+        "body": [
+            "OrdDescend(${xExp},${2:/*cIndex*/},${1|.T.,.F.,/*lDesc*/|})"
+        ],
+        "description": "OrdDescend-Changes the flag of the order (ascending/descending) of the index, but does not change the physical order of the records in the table. OrdDescend(<xExp>,[cIndex],[lDesc])"
+    },
+    "OrdKey": {
+        "prefix": "OrdKey",
+        "body": [
+            "OrdKey(${cOrdem},${1:/*nPosicao*/},${2:/*cArqIndice*/})"
+        ],
+        "description": "OrdKey-Checks which key expression of the order. OrdKey(<cOrdem>,[nPosicao],[cArqIndice])"
+    },
+    "OrdName": {
+        "prefix": "OrdName",
+        "body": [
+            "OrdName(${nOrd},${1:/*xParam*/})"
+        ],
+        "description": "OrdName-Returns the name of the index in the order configured. OrdName(<nOrd>,[xParam])"
+    },
+    "OrdNumber": {
+        "prefix": "OrdNumber",
+        "body": [
+            "OrdNumber(${cOrdem},${1:/*cArqIndice*/})"
+        ],
+        "description": "OrdNumber-Returns the position of the order by the name. OrdNumber(<cOrdem>,[cArqIndice])"
+    },
+    "OrdSetFocus": {
+        "prefix": "OrdSetFocus",
+        "body": [
+            "OrdSetFocus(${1:/*xExp*/},${2:/*cOrdBagName*/})"
+        ],
+        "description": "OrdSetFocus-The function OrdSetFocus returns the index order of the chain, and, optionally, sets the focus to an new order. OrdSetFocus([xExp],[cOrdBagName])"
+    },
+    "RDDName": {
+        "prefix": "RDDName",
+        "body": [
+            "RDDName()"
+        ],
+        "description": "RDDName-Returns the name of the RDD used. RDDName()"
+    },
+    "RDDSetDefault": {
+        "prefix": "RDDSetDefault",
+        "body": [
+            "RDDSetDefault(${1:/*cRDD*/})"
+        ],
+        "description": "RDDSetDefault-Returns the RDD standard that is used, and can change it. RDDSetDefault([cRDD])"
+    },
+    "RLock": {
+        "prefix": "RLock",
+        "body": [
+            "RLock()"
+        ],
+        "description": "RLock-Only locks the current record. RLock()"
+    },
+    "RealRDD": {
+        "prefix": "RealRDD",
+        "body": [
+            "RealRDD()"
+        ],
+        "description": "RealRDD-Returns the driver that is actually being using for opening local tables (ISAM). RealRDD()"
+    },
+    "RecSize": {
+        "prefix": "RecSize",
+        "body": [
+            "RecSize()"
+        ],
+        "description": "RecSize-Returns the size of a record of the open table. RecSize()"
+    },
+    "Recno": {
+        "prefix": "Recno",
+        "body": [
+            "Recno()"
+        ],
+        "description": "Recno-Returns the number of the record currently positioned in the active work area. Recno()"
+    },
+    "Select": {
+        "prefix": "Select",
+        "body": [
+            "Select(${1:/*cAlias*/})"
+        ],
+        "description": "Select-Returns the area number of a specified alias. Select([cAlias])"
+    },
+    "Used": {
+        "prefix": "Used",
+        "body": [
+            "Used()"
+        ],
+        "description": "Used-Determines if there is a database file in use in the area of work specified Used()"
+    },
+    "HTTPCTDisp": {
+        "prefix": "HTTPCTDisp",
+        "body": [
+            "HTTPCTDisp()"
+        ],
+        "description": "HTTPCTDisp-Provides information about how to display a message or part of a package. HTTPCTDisp()"
+    },
+    "HTTPCTLen": {
+        "prefix": "HTTPCTLen",
+        "body": [
+            "HTTPCTLen(${1:/*nTamanho*/})"
+        ],
+        "description": "HTTPCTLen-Indicates the size of the package HTTP - the HyperText Transfer Protocol (Hypertext Transfer Protocol) that will be sent to the browser, according to a request performed by the browser. HTTPCTLen([nTamanho])"
+    },
+    "HTTPCTType": {
+        "prefix": "HTTPCTType",
+        "body": [
+            "HTTPCTType(${1:/*cType*/})"
+        ],
+        "description": "HTTPCTType-Indicates the type of package HTTP - the HyperText Transfer Protocol (Hypertext Transfer Protocol), that will be returned for a given HTTP request. HTTPCTType([cType])"
+    },
+    "HTTPExitProc": {
+        "prefix": "HTTPExitProc",
+        "body": [
+            "HTTPExitProc(${cFunction})"
+        ],
+        "description": "HTTPExitProc-Arrow a function that will be called when an HTTP session is terminated by timeout. HTTPExitProc(<cFunction>)"
+    },
+    "HTTPFreeSession": {
+        "prefix": "HTTPFreeSession",
+        "body": [
+            "HTTPFreeSession()"
+        ],
+        "description": "HTTPFreeSession-Eliminates memory of the application server all session variables of the current user. HTTPFreeSession()"
+    },
+    "HttpGet": {
+        "prefix": "HttpGet",
+        "body": [
+            "HttpGet(${cUrl},${1:/*cGetParms*/},${2:/*nTimeOut*/},${3:/*aHeadStr*/},@${4:/*cHeaderGet*/})"
+        ],
+        "description": "HttpGet-Allows you to emulate a client HTTP - Hypertext Transfer Protocol, through a function of the language AdvPL, accessing a particular HTML document, published on a Web server, using the GET method, allowing to pass parameters via the URL and waiting for a certain time (time-out) for a response from the requested server. HttpGet(<cUrl>,[cGetParms],[nTimeOut],[aHeadStr],[@cHeaderGet])"
+    },
+    "HTTPGetPart": {
+        "prefix": "HTTPGetPart",
+        "body": [
+            "HTTPGetPart()"
+        ],
+        "description": "HTTPGetPart-Returns if the send partial content to the browser is enabled or not. HTTPGetPart()"
+    },
+    "HTTPGetStatus": {
+        "prefix": "HTTPGetStatus",
+        "body": [
+            "HTTPGetStatus(@${cError},@${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HTTPGetStatus-Returns the connection status of HTTP - the HyperText Transfer Protocol (Hypertext Transfer Protocol) request. HTTPGetStatus(<@cError>,[lClient])"
+    },
+    "HTTPIsAPW": {
+        "prefix": "HTTPIsAPW",
+        "body": [
+            "HTTPIsAPW()"
+        ],
+        "description": "HTTPIsAPW-Tells whether the WEB environment - the World Wide Web at runtime is an APW - Advanced Program the Web. HTTPIsAPW()"
+    },
+    "HTTPIsConnected": {
+        "prefix": "HTTPIsConnected",
+        "body": [
+            "HTTPIsConnected()"
+        ],
+        "description": "HTTPIsConnected-Tells if the browser is logged on waiting for response from the Application Server. HTTPIsConnected()"
+    },
+    "HTTPLeaveSession": {
+        "prefix": "HTTPLeaveSession",
+        "body": [
+            "HTTPLeaveSession()"
+        ],
+        "description": "HTTPLeaveSession-Releases the processing of the request to update the contents of variables, of the type HTTPSession, requests for consultation and/or concurrent updates to the current user. HTTPLeaveSession()"
+    },
+    "HTTPLogonUser": {
+        "prefix": "HTTPLogonUser",
+        "body": [
+            "HTTPLogonUser()"
+        ],
+        "description": "HTTPLogonUser-Gets the login of the current user, when you use the Advanced Protheus Server (ISAPI advplIsapi.dll) in conjunction with Microsoft IIS - Internet Information Services. HTTPLogonUser()"
+    },
+    "HTTPOtherContent": {
+        "prefix": "HTTPOtherContent",
+        "body": [
+            "HTTPOtherContent()"
+        ],
+        "description": "HTTPOtherContent-Returns the contents of the package, the HTML received. HTTPOtherContent()"
+    },
+    "HttpPost": {
+        "prefix": "HttpPost",
+        "body": [
+            "HttpPost(${cUrl},${1:/*cGetParms*/},${2:/*cPostParms*/},${3:/*nTimeOut*/},${4:/*aHeadStr*/},@${5:/*cHeaderGet*/})"
+        ],
+        "description": "HttpPost-Allows you to emulate a client HTTP - Hypertext Transfer Protocol, via a AdvPL, posting a block of information to a particular URL on a Web server, using the POST method, allowing to pass additional parameters via the URL and waiting for a certain time (time-out) for a response from the requested server. HttpPost(<cUrl>,[cGetParms],[cPostParms],[nTimeOut],[aHeadStr],[@cHeaderGet])"
+    },
+    "HTTPPostXml": {
+        "prefix": "HTTPPostXml",
+        "body": [
+            "HTTPPostXml(${cURL},${1:/*cParam*/},${cFile},${nTimeOut})"
+        ],
+        "description": "HTTPPostXml-Allows you to emulate a client HTTP - HyperText Transfer Protocol (Hypertext Transfer Protocol) through a function AdvPL - Advanced Protheus Language. HTTPPostXml(<cURL>,[cParam],<cFile>,<nTimeOut>)"
+    },
+    "HTTPPragma": {
+        "prefix": "HTTPPragma",
+        "body": [
+            "HTTPPragma(${cPragma})"
+        ],
+        "description": "HTTPPragma-Resets the tag PRAGMA, header reset request HTTP - HyperText Transfer Protocol (Hypertext Transfer Protocol), overlaying the standard definition of the return PRAGMA, optionally, defined in the configuration of the HTTP host in the configuration file of the Application Server. HTTPPragma(<cPragma>)"
+    },
+    "HTTPQuote": {
+        "prefix": "HTTPQuote",
+        "body": [
+            "HTTPQuote(${cUrl},${cMethod},${1:/*cGETParms*/},${2:/*cPOSTParms*/},${3:/*nTimeOut*/},${4:/*aHeadStr*/},@${5:/*cHeaderRet*/})"
+        ],
+        "description": "HTTPQuote-Allows the emulation of a Client HTTP through a function AdvPL, in which the HTTP method is informed to the role, posting a block of information for a particular document published on a Web server, allowing you to pass additional parameters via the URL and waiting for a certain time (time-out) for a response from the requested server. HTTPQuote(<cUrl>,<cMethod>,[cGETParms],[cPOSTParms],[nTimeOut],[aHeadStr],[@cHeaderRet])"
+    },
+    "HTTPRCTDisp": {
+        "prefix": "HTTPRCTDisp",
+        "body": [
+            "HTTPRCTDisp()"
+        ],
+        "description": "HTTPRCTDisp-Returns the content identifier for the Content-disposition header, HTTP, when used in a thread-mounted and/or initialized to satisfy the request HTTP - HyperText Transfer Protocol (Hypertext Transfer Protocol) (.APL, .APW). HTTPRCTDisp()"
+    },
+    "HTTPRCTLen": {
+        "prefix": "HTTPRCTLen",
+        "body": [
+            "HTTPRCTLen()"
+        ],
+        "description": "HTTPRCTLen-Returns the content identifier for the Content-length header, HTTP - HyperText Transfer Protocol (Hypertext Transfer Protocol), such as a numeric data, when used in a thread-mounted and/or initialized to service a request (HTTP.APL, .APW). HTTPRCTLen()"
+    },
+    "HTTPRCTType": {
+        "prefix": "HTTPRCTType",
+        "body": [
+            "HTTPRCTType()"
+        ],
+        "description": "HTTPRCTType-Returns the content identifier for the Content-type header, HTTP, when used in a thread-mounted and/or initialized to service a request (HTTP.APL, .APW). HTTPRCTType()"
+    },
+    "HTTPSGet": {
+        "prefix": "HTTPSGet",
+        "body": [
+            "HTTPSGet(${cURL},${cCertificate},${cPrivKey},${cPassword},${2:/*cGETParms*/},${3:/*nTimeOut*/},${4:/*aHeadStr*/},@${5:/*cHeaderRet*/},@${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HTTPSGet-Allows you to emulate a Client HTTP - Hypertext Transfer Protocol, using HTTPS protocol through a function AdvPL, posting a block of information for a particular document published on a Web server, using the GET method, allowing to pass additional parameters via the URL and waiting for a certain time (time-out) for a response from the requested server. HTTPSGet(<cURL>,<cCertificate>,<cPrivKey>,<cPassword>,[cGETParms],[nTimeOut],[aHeadStr],[@cHeaderRet],[lClient])"
+    },
+    "HTTPSPost": {
+        "prefix": "HTTPSPost",
+        "body": [
+            "HTTPSPost(${cURL},${cCertificate},${cPrivKey},${cPassword},${2:/*cGETParms*/},${3:/*cPOSTParms*/},${4:/*nTimeOut*/},${5:/*aHeadStr*/},@${6:/*cHeaderRet*/},@${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HTTPSPost-Allows you to emulate a Client HTTP - Hypertext Transfer Protocol, using HTTPS protocol through a function AdvPL, posting a block of information for a particular document published on a Web server, using the POST method, allowing to pass additional parameters via the URL and waiting for a certain time (time-out) for a response from the requested server. HTTPSPost(<cURL>,<cCertificate>,<cPrivKey>,<cPassword>,[cGETParms],[cPOSTParms],[nTimeOut],[aHeadStr],[@cHeaderRet],[lClient])"
+    },
+    "HTTPSend": {
+        "prefix": "HTTPSend",
+        "body": [
+            "HTTPSend(${cHtmlSend})"
+        ],
+        "description": "HTTPSend-Returns a string of HTML - the Hypertext Markup Language to a browser during the processing of a request made via a link APW - Advanced Program Web, using the Working Threads during the processing. HTTPSend(<cHtmlSend>)"
+    },
+    "HTTPSetPart": {
+        "prefix": "HTTPSetPart",
+        "body": [
+            "HTTPSetPart(${1|.T.,.F.,/*lHttpSend*/|})"
+        ],
+        "description": "HTTPSetPart-Enables/Disables sending partial HTML - the HyperText Markup Language. HTTPSetPart(<lHttpSend>)"
+    },
+    "HTTPSetPass": {
+        "prefix": "HTTPSetPass",
+        "body": [
+            "HTTPSetPass(${cUser},${cPass},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HTTPSetPass-Sets the user and password for HTTP authentication. HTTPSetPass(<cUser>,<cPass>,[lClient])"
+    },
+    "HttpCache": {
+        "prefix": "HttpCache",
+        "body": [
+            "HttpCache(${cCacheControl})"
+        ],
+        "description": "HttpCache-Reset the tag Cache Control response header of the request HTTP - HyperText Transfer Protocol (Hypertext Transfer Protocol), overlaying the standard definition of return that is set in the configuration of the HTTP Host, in the configuration file, the application server (Application Server). HttpCache(<cCacheControl>)"
+    },
+    "HttpCountSession": {
+        "prefix": "HttpCountSession",
+        "body": [
+            "HttpCountSession()"
+        ],
+        "description": "HttpCountSession-Returns the total number of sessions (HTTP sessions) that are active on the Application Server. HttpCountSession()"
+    },
+    "HttpSRCode": {
+        "prefix": "HttpSRCode",
+        "body": [
+            "HttpSRCode(${nCode},${cReason})"
+        ],
+        "description": "HttpSRCode-Allows you to change the return code status of the HTTP request string and the supplementary return, for executions of applications Advpl via links .APL and/or .APW. HttpSRCode(<nCode>,<cReason>)"
+    },
+    "SetNoProxyFor": {
+        "prefix": "SetNoProxyFor",
+        "body": [
+            "SetNoProxyFor(${cDomainList},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "SetNoProxyFor-Configure a list of domains or IPs that should not use proxy. SetNoProxyFor(<cDomainList>,[lClient])"
+    },
+    "SetProxy": {
+        "prefix": "SetProxy",
+        "body": [
+            "SetProxy(${cServer},${nPort},${2:/*cUser*/},${3:/*cPass*/},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "SetProxy-Defines the settings to use HTTP proxy SetProxy(<cServer>,<nPort>,[cUser],[cPass],[lClient])"
+    },
+    "DeleteKeyIni": {
+        "prefix": "DeleteKeyIni",
+        "body": [
+            "DeleteKeyIni( ${cSecTION}, ${cKey}, ${cIniFile})"
+        ],
+        "description": "DeleteKeyIni-Deletes the key of a particular section of the configuration file (*.INI). DeleteKeyIni( ${cSecTION}, ${cKey}, ${cIniFile})"
+    },
+    "DeleteSectionIni": {
+        "prefix": "DeleteSectionIni",
+        "body": [
+            "DeleteSectionIni( ${cSecTION}, ${cIniFile})"
+        ],
+        "description": "DeleteSectionIni-Deletes a given section of the configuration file (*.INI). DeleteSectionIni( <cSecTION>, <cIniFile>)"
+    },
+    "GetINISessions": {
+        "prefix": "GetINISessions",
+        "body": [
+            "GetINISessions(${cIni},${1:/*uParam1*/})"
+        ],
+        "description": "GetINISessions-Returns an array with the names of all the sections of a particular configuration file (.INI), such as, for example, TCP, GENERAL, and DRIVERS. GetINISessions(<cIni>,[uParam1])"
+    },
+    "GetProfInt": {
+        "prefix": "GetProfInt",
+        "body": [
+            "GetProfInt(${cSecao},${cChave},${nPadrao})"
+        ],
+        "description": "GetProfInt-Retrieves the numeric contents of a key file win.ini (file used to store the basic settings of the boot) of the operating system. GetProfInt(<cSecao>,<cChave>,<nPadrao>)"
+    },
+    "GetProfString": {
+        "prefix": "GetProfString",
+        "body": [
+            "GetProfString(${cSecao},${cChave},${cPadrao})"
+        ],
+        "description": "GetProfString-Retrieves the content character of a key file win.ini (file used to store the basic settings of the boot) of the operating system. GetProfString(<cSecao>,<cChave>,<cPadrao>)"
+    },
+    "GetPvProfString": {
+        "prefix": "GetPvProfString",
+        "body": [
+            "GetPvProfString(${cSecao},${cChave},${cPadrao},${cNomeArqCfg},${1:/*uParam5*/},${2:/*uParam6*/})"
+        ],
+        "description": "GetPvProfString-Retrieves the content character of a key of a configuration file (*.INI) any. GetPvProfString(<cSecao>,<cChave>,<cPadrao>,<cNomeArqCfg>,[uParam5],[uParam6])"
+    },
+    "GetPvProfileInt": {
+        "prefix": "GetPvProfileInt",
+        "body": [
+            "GetPvProfileInt(${cSecao},${cChave},${nPadrao},${cNomeArqCfg},${1:/*uParam5*/},${2:/*uParam6*/})"
+        ],
+        "description": "GetPvProfileInt-Retrieves the numeric contents of a key, the configuration file (*.INI) any. GetPvProfileInt(<cSecao>,<cChave>,<nPadrao>,<cNomeArqCfg>,[uParam5],[uParam6])"
+    },
+    "GetSrvProfString": {
+        "prefix": "GetSrvProfString",
+        "body": [
+            "GetSrvProfString(${cChave},${cDefault})"
+        ],
+        "description": "GetSrvProfString-Retrieves the contents of a configuration key, the environment in use, in the configuration file (.INI) of TOTVS Application Server. GetSrvProfString(<cChave>,<cDefault>)"
+    },
+    "WritePProString": {
+        "prefix": "WritePProString",
+        "body": [
+            "WritePProString(${cSecao},${cChave},${cConteudo},${cArqIni})"
+        ],
+        "description": "WritePProString-Allows you to create and/or change a section/key configuration in the configuration file (.INI). However, if the file does not exist it will be created. \n\nYou can optionally set an absolute path, with drive disc, so that the configuration file (.INI) will be updated in the station where the TOTVS Smart Client is running. WritePProString(<cSecao>,<cChave>,<cConteudo>,<cArqIni>)"
+    },
+    "WriteProfString": {
+        "prefix": "WriteProfString",
+        "body": [
+            "WriteProfString(${cSecao},${cChave},${cValor})"
+        ],
+        "description": "WriteProfString-Creates or changes the content of a key in the file win.ini (file used to store the basic settings of the boot) of the operating system. WriteProfString(<cSecao>,<cChave>,<cValor>)"
+    },
+    "WriteSrvProfString": {
+        "prefix": "WriteSrvProfString",
+        "body": [
+            "WriteSrvProfString(${cChave},${cValor})"
+        ],
+        "description": "WriteSrvProfString-Creates or changes a key in the configuration file (*.INI), in the section on the environment in use WriteSrvProfString(<cChave>,<cValor>)"
+    },
+    "ADir": {
+        "prefix": "ADir",
+        "body": [
+            "ADir(${2:/*cEspecArq*/},@${3:/*aNomesArq*/},@${4:/*aTamanhos*/},@${5:/*aDatas*/},@${6:/*aHoras*/},@${7:/*aAtributos*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "ADir-Fills a series of arrays with info of files and directories (names of files, sizes, dates, times, and attributes). ADir([cEspecArq],[@aNomesArq],[@aTamanhos],[@aDatas],[@aHoras],[@aAtributos],[lChangeCase])"
+    },
+    "CHMOD": {
+        "prefix": "CHMOD",
+        "body": [
+            "CHMOD(${cFileName},${nFileMode},${2:/*uParam3*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "CHMOD-Changes the permissions of a file. CHMOD(<cFileName>,<nFileMode>,[uParam3],[lChangeCase])"
+    },
+    "CpyS2T": {
+        "prefix": "CpyS2T",
+        "body": [
+            "CpyS2T(${cFile},${cFolder},${1|.T.,.F.,/*lCompress*/|},${2|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "CpyS2T-Copy a file from the server environment, from the rootpath to a directory on the machine where you are running the SmartClient. CpyS2T(<cFile>,<cFolder>,[lCompress],[lChangeCase])"
+    },
+    "CpyS2TW": {
+        "prefix": "CpyS2TW",
+        "body": [
+            "CpyS2TW(${cOrigem},${1|.T.,.F.,/*lSendToBrowser*/|})"
+        ],
+        "description": "CpyS2TW-Copies a file from the server to the client (SmartClient HTML). CpyS2TW(<cOrigem>,[lSendToBrowser])"
+    },
+    "CpyT2S": {
+        "prefix": "CpyT2S",
+        "body": [
+            "CpyT2S(${cFile},${cFolder},${1|.T.,.F.,/*lCompress*/|},${2|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "CpyT2S-Copies a file from the machine where is running the SmartClient, to a directory on the server environment, from the rootpath. CpyT2S(<cFile>,<cFolder>,[lCompress],[lChangeCase])"
+    },
+    "CurDir": {
+        "prefix": "CurDir",
+        "body": [
+            "CurDir(${1:/*cNovoPath*/})"
+        ],
+        "description": "CurDir-Displays the current directory server. \\in this directory is relative to RootPath, defined in the configuration file (appserver.ini), of the Application Server, to identify the home directory of the running system. CurDir([cNovoPath])"
+    },
+    "DirRemove": {
+        "prefix": "DirRemove",
+        "body": [
+            "DirRemove(${cPath},${2:/*uParam2*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "DirRemove-Removes a specific directory. DirRemove(<cPath>,[uParam2],[lChangeCase])"
+    },
+    "Directory": {
+        "prefix": "Directory",
+        "body": [
+            "Directory(${cDirEsp},${2:/*cAtributos*/},${3:/*uParam1*/},${1|.T.,.F.,/*lCaseSensitive*/|},${4:/*nTypeOrder*/})"
+        ],
+        "description": "Directory-Create a bidimensional array with the contents of a directory. \\n To do so, returns information about the files in the current directory or specified. This function is similar to ADir(), but returns a single array instead of adding values to a series of arrays existing passed by reference. Directory(<cDirEsp>,[cAtributos],[uParam1],[lCaseSensitive],[nTypeOrder])"
+    },
+    "ExistDir": {
+        "prefix": "ExistDir",
+        "body": [
+            "ExistDir(${cPath},${2:/*uParam2*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "ExistDir-Determines if a directory exists and is valid. ExistDir(<cPath>,[uParam2],[lChangeCase])"
+    },
+    "FClose": {
+        "prefix": "FClose",
+        "body": [
+            "FClose(${1:/*nHandle*/})"
+        ],
+        "description": "FClose-Closes a binary file open FClose([nHandle])"
+    },
+    "FCreate": {
+        "prefix": "FCreate",
+        "body": [
+            "FCreate(${cArquivo},${2:/*nAtributo*/},${3:/*xParam3*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "FCreate-Creates an empty file on the disk for write operation in the exclusive mode, with the size of 0 ( zero ) bytes. If the specified file already exists on disk, the file is opened in exclusive mode, and its contents is deleted ( truncated to 0 bytes ). If the operation does not complete successfully, the function returns the handler -1, otherwise it is returned to the handler access to the file for write operations. FCreate(<cArquivo>,[nAtributo],[xParam3],[lChangeCase])"
+    },
+    "FErase": {
+        "prefix": "FErase",
+        "body": [
+            "FErase(${cArquivo},${2:/*xParam*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "FErase-Deletes a file from disk. FErase(<cArquivo>,[xParam],[lChangeCase])"
+    },
+    "FError": {
+        "prefix": "FError",
+        "body": [
+            "FError()"
+        ],
+        "description": "FError-The function FError() is used to retrieve an error code after a failure in the operation with files ( File I/O ). When used functions of file manipulation on low level ( FCreate, FOpen, FSeek ... ), and an operation of this nature has failed and/or was not successfully performed, use the function FError() to retrieve a code instance that points out the failure condition of the last operation. FError()"
+    },
+    "FListzip": {
+        "prefix": "FListzip",
+        "body": [
+            "FListzip(${cArquivoZip},@${1:/*nRet*/},@${2:/*cSenha*/})"
+        ],
+        "description": "FListzip-Versions of the binary greater than or equal to the 7.00.131227 The - 13.2.3.17. FListzip(<cArquivoZip>,[@nRet],[cSenha])"
+    },
+    "FOpen": {
+        "prefix": "FOpen",
+        "body": [
+            "FOpen(${cArq},${2:/*nModo*/},${3:/*xParam3*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "FOpen-Opens a binary file.\\n Is a function of the treatment of low-level file that opens a file existing binary so that it can be read and written, depending on the argument in the parameter <nModo>. FOpen(<cArq>,[nModo],[xParam3],[lChangeCase])"
+    },
+    "FRead": {
+        "prefix": "FRead",
+        "body": [
+            "FRead(${nHandle},${cBufferVar},${nQtdBytes})"
+        ],
+        "description": "FRead-Reads characters from a binary file to a variable buffer. FRead(<nHandle>,<cBufferVar>,<nQtdBytes>)"
+    },
+    "FReadStr": {
+        "prefix": "FReadStr",
+        "body": [
+            "FReadStr(${nHandle},${nQtdBytes})"
+        ],
+        "description": "FReadStr-Reads characters from a binary file. FReadStr(<nHandle>,<nQtdBytes>)"
+    },
+    "FRename": {
+        "prefix": "FRename",
+        "body": [
+            "FRename(${cArquivo},${cNovoArq},${2:/*nParam3*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "FRename-Renames a file. FRename(<cArquivo>,<cNovoArq>,[nParam3],[lChangeCase])"
+    },
+    "FRenameEx": {
+        "prefix": "FRenameEx",
+        "body": [
+            "FRenameEx(${cArquivo},${cNovoArq},${1:/*nParam3*/})"
+        ],
+        "description": "FRenameEx-Renames a file on the Application Server, and/or Smart Client respecting the case of the file name indicated in the second parameter. (By default, the first parameter continues changing the case) FRenameEx(<cArquivo>,<cNovoArq>,[nParam3])"
+    },
+    "FSeek": {
+        "prefix": "FSeek",
+        "body": [
+            "FSeek(${nHandle},${nOffSet},${1:/*nOrigem*/})"
+        ],
+        "description": "FSeek-Positions the file pointer for the next read or write operations. FSeek(<nHandle>,<nOffSet>,[nOrigem])"
+    },
+    "FT_FEOF": {
+        "prefix": "FT_FEOF",
+        "body": [
+            "FT_FEOF()"
+        ],
+        "description": "FT_FEOF-Indicates if the pointer is positioned at the end of the text file. FT_FEOF()"
+    },
+    "FT_FGoTop": {
+        "prefix": "FT_FGoTop",
+        "body": [
+            "FT_FGoTop()"
+        ],
+        "description": "FT_FGoTop-Positions at the beginning (first character of the first line) from text file opened by the function FT_FUse(). FT_FGoTop()"
+    },
+    "FT_FGoto": {
+        "prefix": "FT_FGoto",
+        "body": [
+            "FT_FGoto(${nPos})"
+        ],
+        "description": "FT_FGoto-Moves the pointer that indicates the reading of the text file, to the absolute position specified in the parameter <nPos>. FT_FGoto(<nPos>)"
+    },
+    "FT_FLastRec": {
+        "prefix": "FT_FLastRec",
+        "body": [
+            "FT_FLastRec()"
+        ],
+        "description": "FT_FLastRec-Reads and returns the total number of lines of the text file opened by the function FT_FUse(). FT_FLastRec()"
+    },
+    "FT_FReadLn": {
+        "prefix": "FT_FReadLn",
+        "body": [
+            "FT_FReadLn()"
+        ],
+        "description": "FT_FReadLn-Reads and returns a line of text from the file opened by the function FT_FUse(). The lines of text are delimited by the character sequence CRLF (chr(13)+chr(10)) or just LF (chr(10)), and the maximum size of each line is 1022 bytes. FT_FReadLn()"
+    },
+    "FT_FRecno": {
+        "prefix": "FT_FRecno",
+        "body": [
+            "FT_FRecno()"
+        ],
+        "description": "FT_FRecno-Reads and returns the current position of the pointer of the text file opened by the function FT_FUse(). FT_FRecno()"
+    },
+    "FT_FSkip": {
+        "prefix": "FT_FSkip",
+        "body": [
+            "FT_FSkip(${1:/*nLinhas*/})"
+        ],
+        "description": "FT_FSkip-Move the pointer, a text file opened by the function FT_FUse(), to a new position. FT_FSkip([nLinhas])"
+    },
+    "FT_FUse": {
+        "prefix": "FT_FUse",
+        "body": [
+            "FT_FUse(${1:/*cTXTFile*/})"
+        ],
+        "description": "FT_FUse-Opens and closes a text file to provide the functions FT_F*. FT_FUse([cTXTFile])"
+    },
+    "FUnzip": {
+        "prefix": "FUnzip",
+        "body": [
+            "FUnzip(${cArquivoZip},${cPasta},${1:/*cSenha*/})"
+        ],
+        "description": "FUnzip-Versions of the binary greater than or equal to the 7.00.131227 The - 13.2.3.17 FUnzip(<cArquivoZip>,<cPasta>,[cSenha])"
+    },
+    "FWrite": {
+        "prefix": "FWrite",
+        "body": [
+            "FWrite(${nHandle},${cBuffer},${1:/*nQtdBytes*/})"
+        ],
+        "description": "FWrite-Writes data from a buffer string in a binary file. For this, you can type all or part of the contents of the buffer, limiting the amount of bytes. FWrite(<nHandle>,<cBuffer>,[nQtdBytes])"
+    },
+    "FZip": {
+        "prefix": "FZip",
+        "body": [
+            "FZip(${cArquivoZip},${aArquivos},${1:/*cBaseDir*/},${2:/*cSenha*/})"
+        ],
+        "description": "FZip-Compact a list of files in the Zip format. FZip(<cArquivoZip>,<aArquivos>,[cBaseDir],[cSenha])"
+    },
+    "File": {
+        "prefix": "File",
+        "body": [
+            "File(${cArquivo},${2:/*nWhere*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "File-Determines if file exists in directory or path AdvPL standard. File(<cArquivo>,[nWhere],[lChangeCase])"
+    },
+    "GzCompress": {
+        "prefix": "GzCompress",
+        "body": [
+            "GzCompress(${cFile},${2:/*cGzip*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "GzCompress-Compact a file server environment, from the rootpath to a file in the gzip format. GzCompress(<cFile>,[cGzip],[lChangeCase])"
+    },
+    "GzDecomp": {
+        "prefix": "GzDecomp",
+        "body": [
+            "GzDecomp(${cGzip},${cOutDir},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "GzDecomp-Unpacks the contents of a file in the format of gzip (GNU zip) of the server environment, from the rootpath to a directory on the server. GzDecomp(<cGzip>,<cOutDir>,[lChangeCase])"
+    },
+    "ListDrives": {
+        "prefix": "ListDrives",
+        "body": [
+            "ListDrives(@${1:/*aUnits*/},@${2:/*aTypes*/},@${nWhere})"
+        ],
+        "description": "ListDrives-Returns the units (drives), and/or their respective types, the machine that is running the TOTVS | Application Server or the TOTVS | SmartClient. ListDrives([@aUnits],[@aTypes],<nWhere>)"
+    },
+    "MakeDir": {
+        "prefix": "MakeDir",
+        "body": [
+            "MakeDir(${cPath},${2:/*uParam2*/},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "MakeDir-Creates a directory. MakeDir(<cPath>,[uParam2],[lChangeCase])"
+    },
+    "MemoLine": {
+        "prefix": "MemoLine",
+        "body": [
+            "MemoLine(${cText},${1:/*nLineLength*/},${2:/*nLineNumber*/})"
+        ],
+        "description": "MemoLine-Returns the contents of a field, of type memo or string with multiple lines. MemoLine(<cText>,[nLineLength],[nLineNumber])"
+    },
+    "MemoRead": {
+        "prefix": "MemoRead",
+        "body": [
+            "MemoRead(${cFile},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "MemoRead-Returns the content of a file of type text. MemoRead(<cFile>,[lChangeCase])"
+    },
+    "MemoWrite": {
+        "prefix": "MemoWrite",
+        "body": [
+            "MemoWrite(${cFile},${cText})"
+        ],
+        "description": "MemoWrite-Allows you to write and save a text file. MemoWrite(<cFile>,<cText>)"
+    },
+    "MsCRC32": {
+        "prefix": "MsCRC32",
+        "body": [
+            "MsCRC32(${cString})"
+        ],
+        "description": "MsCRC32-Calculates a CRC - Cyclic Redundancy Code Cyclic Redundancy check) of a string and returns a number/result. MsCRC32(<cString>)"
+    },
+    "MsCRC32Str": {
+        "prefix": "MsCRC32Str",
+        "body": [
+            "MsCRC32Str(${cString})"
+        ],
+        "description": "MsCRC32Str-Calculates a CRC - Cyclic Redundancy Code Cyclic Redundancy check) of a string and returns a string with the result. MsCRC32Str(<cString>)"
+    },
+    "MsCompress": {
+        "prefix": "MsCompress",
+        "body": [
+            "MsCompress(${cArquivo|aArquivos},${1:/*cDestino*/},${2:/*cSenha*/})"
+        ],
+        "description": "MsCompress-Compresses one or several files into a single file in the format Microsiga Zip (extension .mzp). MsCompress(<cArquivo|aArquivos>,[cDestino],[cSenha])"
+    },
+    "MsDecomp": {
+        "prefix": "MsDecomp",
+        "body": [
+            "MsDecomp(${cArquivo},${1:/*cPathDestino*/},${2:/*cSenha*/})"
+        ],
+        "description": "MsDecomp-Decompresses a compressed file, in the format Microsiga Zip (extension .mzp), in the directory informed. MsDecomp(<cArquivo>,[cPathDestino],[cSenha])"
+    },
+    "SplitPath": {
+        "prefix": "SplitPath",
+        "body": [
+            "SplitPath(${cArquivo},@${1:/*cDrive*/},@${2:/*cDiretorio*/},@${3:/*cNome*/},@${4:/*cExtensao*/})"
+        ],
+        "description": "SplitPath-Splits a path the entire disk in all of its subparts (drive, directory, name and extension). SplitPath(<cArquivo>,[@cDrive],[@cDiretorio],[@cNome],[@cExtensao])"
+    },
+    "TarCompress": {
+        "prefix": "TarCompress",
+        "body": [
+            "TarCompress(${aItens},${cDest},${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "TarCompress-Stores files and directories in a single archive in TAR format (Tape ARchive). TarCompress(<aItens>,<cDest>,[lChangeCase])"
+    },
+    "TarDecomp": {
+        "prefix": "TarDecomp",
+        "body": [
+            "TarDecomp(${cTarFile},${cOutDir},@${2:/*nFilesOut*/},@${1|.T.,.F.,/*lChangeCase*/|})"
+        ],
+        "description": "TarDecomp-Restores the files and directories contained in a file in the TAR format (Tape ARchive) TarDecomp(<cTarFile>,<cOutDir>,[@nFilesOut],[lChangeCase])"
+    },
+    "cGetFile": {
+        "prefix": "cGetFile",
+        "body": [
+            "cGetFile(${4:/*cMascara*/},${5:/*cTitulo*/},${6:/*nMascpadrao*/},${7:/*cDirinicial*/},${1|.T.,.F.,/*lSalvar*/|},${8:/*nOpcoes*/},${2|.T.,.F.,/*lArvore*/|},${3|.T.,.F.,/*lKeepCase*/|})"
+        ],
+        "description": "cGetFile-Displays a window with the directories available in the station and on the server, and returns the name of the item cGetFile([cMascara],[cTitulo],[nMascpadrao],[cDirinicial],[lSalvar],[nOpcoes],[lArvore],[lKeepCase])"
+    },
+    "ClassDataArr": {
+        "prefix": "ClassDataArr",
+        "body": [
+            "ClassDataArr(${oObj},${1|.T.,.F.,/*lParent*/|})"
+        ],
+        "description": "ClassDataArr-Returns a multidimensional array with all the information of the properties of the instance of the class contained in the object specified as parameter ClassDataArr(<oObj>,[lParent])"
+    },
+    "ClassMethArr": {
+        "prefix": "ClassMethArr",
+        "body": [
+            "ClassMethArr(${oObj},${1|.T.,.F.,/*lParent*/|})"
+        ],
+        "description": "ClassMethArr-Returns a multidimensional array with all the information of the methods of the class instance contained in the object specified as parameter ClassMethArr(<oObj>,[lParent])"
+    },
+    "DelClassIntf": {
+        "prefix": "DelClassIntf",
+        "body": [
+            "DelClassIntf()"
+        ],
+        "description": "DelClassIntf-Deletes all interface classes of the thread. DelClassIntf()"
+    },
+    "FindClass": {
+        "prefix": "FindClass",
+        "body": [
+            "FindClass(${cClassName})"
+        ],
+        "description": "FindClass-Indicates if a class, informed through a string for a parameter exists in the binary and/or repository of the environment acts. FindClass(<cClassName>)"
+    },
+    "FreeObj": {
+        "prefix": "FreeObj",
+        "body": [
+            "FreeObj(${1:/*oObj*/})"
+        ],
+        "description": "FreeObj-Deletes from memory the instance of the object specified as the parameter. FreeObj([oObj])"
+    },
+    "GetClassName": {
+        "prefix": "GetClassName",
+        "body": [
+            "GetClassName(${oObjeto})"
+        ],
+        "description": "GetClassName-Returns the name of the class. GetClassName(<oObjeto>)"
+    },
+    "GetParentTree": {
+        "prefix": "GetParentTree",
+        "body": [
+            "GetParentTree(${oObjeto})"
+        ],
+        "description": "GetParentTree-Returns an array with the name of the class and the inherited classes in order of inheritance. GetParentTree(<oObjeto>)"
+    },
+    "MethlsMemberOf": {
+        "prefix": "MethlsMemberOf",
+        "body": [
+            "MethlsMemberOf(${oObj},${cMethName},${1|.T.,.F.,/*lRecursive*/|})"
+        ],
+        "description": "MethlsMemberOf-Indicates if the method informed through a string for a parameter exists in the class MethlsMemberOf(<oObj>,<cMethName>,[lRecursive])"
+    },
+    "CDow": {
+        "prefix": "CDow",
+        "body": [
+            "CDow(${dExp})"
+        ],
+        "description": "CDow-Returns the day of week of a given date. CDow(<dExp>)"
+    },
+    "CMonth": {
+        "prefix": "CMonth",
+        "body": [
+            "CMonth(${dData})"
+        ],
+        "description": "CMonth-Returns the month as string from a date passed as a parameter. CMonth(<dData>)"
+    },
+    "Date": {
+        "prefix": "Date",
+        "body": [
+            "Date()"
+        ],
+        "description": "Date-Returns the system date as a value of type date.\\n This function provides a means of initializing memory variables with the current date, comparing other values of type date and performing arithmetic operations on the current date. Date()"
+    },
+    "Day": {
+        "prefix": "Day",
+        "body": [
+            "Day(${dData})"
+        ],
+        "description": "Day-Returns the day of the month of a given date. Day(<dData>)"
+    },
+    "Dow": {
+        "prefix": "Dow",
+        "body": [
+            "Dow(${dData})"
+        ],
+        "description": "Dow-Returns the day of the week in the numeric format. Dow(<dData>)"
+    },
+    "ElapTime": {
+        "prefix": "ElapTime",
+        "body": [
+            "ElapTime(${cHoraInicial},${cHoraFinal})"
+        ],
+        "description": "ElapTime-Returns a string, with the number of seconds elapsed between two times (start time and end) different, in the format hh:mm:ss. ElapTime(<cHoraInicial>,<cHoraFinal>)"
+    },
+    "LocalToUTC": {
+        "prefix": "LocalToUTC",
+        "body": [
+            "LocalToUTC(${cDate},${cTime},${1:/*nDST*/})"
+        ],
+        "description": "LocalToUTC-Converts the date and local time to UTC - Coordinated Universal Time. LocalToUTC(<cDate>,<cTime>,[nDST])"
+    },
+    "Seconds": {
+        "prefix": "Seconds",
+        "body": [
+            "Seconds()"
+        ],
+        "description": "Seconds-Returns the system time in seconds. Seconds()"
+    },
+    "Time": {
+        "prefix": "Time",
+        "body": [
+            "Time()"
+        ],
+        "description": "Time-Returns the time of the operating system. This function is used to display or print the operating system time on a report or screen. Time()"
+    },
+    "UTCToLocal": {
+        "prefix": "UTCToLocal",
+        "body": [
+            "UTCToLocal(${cDate},${cTime},${1:/*nDST*/})"
+        ],
+        "description": "UTCToLocal-Converts the UTC date and time to local date and time. UTCToLocal(<cDate>,<cTime>,[nDST])"
+    },
+    "Array": {
+        "prefix": "Array",
+        "body": [
+            "Array(${nElementos1},${1:/*xElemento*/},${xElemento3...xElemento16]})"
+        ],
+        "description": "Array-Creates an uninitialized array with the specified amount of elements. Array(<nElementos1>,[xElemento2,xElemento3...xElemento16])"
+    },
+    "AAdd": {
+        "prefix": "AAdd",
+        "body": [
+            "AAdd(${aDest},${xExpr})"
+        ],
+        "description": "AAdd-Includes an element in the array and to the element of the array is newly created, it is assigned the value specified by the parameter. AAdd(<aDest>,<xExpr>)"
+    },
+    "AClone": {
+        "prefix": "AClone",
+        "body": [
+            "AClone(${aSource})"
+        ],
+        "description": "AClone-Replicates an array (structure and elements). AClone(<aSource>)"
+    },
+    "ACopy": {
+        "prefix": "ACopy",
+        "body": [
+            "ACopy(${aOrigem},${aDestino},${1:/*nInicio*/},${2:/*nCont*/},${3:/*nPosDestino*/})"
+        ],
+        "description": "ACopy-Copies elements of one array to another. ACopy(<aOrigem>,<aDestino>,[nInicio],[nCont],[nPosDestino])"
+    },
+    "ADel": {
+        "prefix": "ADel",
+        "body": [
+            "ADel(${aSource},${nPos})"
+        ],
+        "description": "ADel-Deletes an array element and \"drag\" the other to the back making it null in the last element. ADel(<aSource>,<nPos>)"
+    },
+    "AFill": {
+        "prefix": "AFill",
+        "body": [
+            "AFill(${aDest},${xValue},${1:/*nStart*/},${2:/*nCount*/})"
+        ],
+        "description": "AFill-Fills an array with a single value of any data type (including arrays, code blocks, or null) in the specified range. AFill(<aDest>,<xValue>,[nStart],[nCount])"
+    },
+    "AIns": {
+        "prefix": "AIns",
+        "body": [
+            "AIns(${aDest},${nPos})"
+        ],
+        "description": "AIns-Includes an element to zero in a defined position and 'pushes' the other to the front by discarding the last element. AIns(<aDest>,<nPos>)"
+    },
+    "AScan": {
+        "prefix": "AScan",
+        "body": [
+            "AScan(${aDest},${xExpr},${1:/*nStart*/},${2:/*nCount*/})"
+        ],
+        "description": "AScan-Loops through an array looking for a value specified. Can be specified a value to be searched, or can be informed, a condition of the search through a block of code. AScan(<aDest>,<xExpr>,[nStart],[nCount])"
+    },
+    "AScanX": {
+        "prefix": "AScanX",
+        "body": [
+            "AScanX(${aDest},${bSearch},${1:/*nStart*/},${2:/*nCount*/})"
+        ],
+        "description": "AScanX-Done reading the array looking for a specific value. Works in the same way that the AScan, but when you used a code block to perform the search, the same is called with a second parameter, telling you what is the element of the array in question that is being checked in the call chain of the block of code. AScanX(<aDest>,<bSearch>,[nStart],[nCount])"
+    },
+    "ASize": {
+        "prefix": "ASize",
+        "body": [
+            "ASize(${aDestino},${nTamanho})"
+        ],
+        "description": "ASize-Increases or decreases an array to a specified size ASize(<aDestino>,<nTamanho>)"
+    },
+    "ASort": {
+        "prefix": "ASort",
+        "body": [
+            "ASort(${aVetor},${1:/*nInicio*/},${2:/*nCont*/},${3:/*bOrdem*/})"
+        ],
+        "description": "ASort-Puts in order all or part of an array. ASort(<aVetor>,[nInicio],[nCont],[bOrdem])"
+    },
+    "ATail": {
+        "prefix": "ATail",
+        "body": [
+            "ATail(${aArray})"
+        ],
+        "description": "ATail-Returns the last element of the arra ATail(<aArray>)"
+    },
+    "AToHM": {
+        "prefix": "AToHM",
+        "body": [
+            "AToHM(${aMatriz},${1:/*nColuna_1*/},${2:/*nTrim_1*/},${3:/*nColuna_N*/},${4:/*nTrim_N*/})"
+        ],
+        "description": "AToHM-Converts an array of data (Array) in a tHashMap, and can combine the columns for the search key. AToHM(<aMatriz>,[nColuna_1],[nTrim_1],[nColuna_N],[nTrim_N])"
+    },
+    "HMAdd": {
+        "prefix": "HMAdd",
+        "body": [
+            "HMAdd(${oHash},${aVal},${1:/*nColuna_1*/},${2:/*nTrim_1*/},${3:/*nColuna_N*/},${4:/*nTrim_N*/})"
+        ],
+        "description": "HMAdd-Adds a new item to the object tHashMap, indicating which field of the search key. HMAdd(<oHash>,<aVal>,[nColuna_1],[nTrim_1],[nColuna_N],[nTrim_N])"
+    },
+    "HMClean": {
+        "prefix": "HMClean",
+        "body": [
+            "HMClean(${oHash})"
+        ],
+        "description": "HMClean-Clean all the allocated data in an object of class tHashMap. HMClean(<oHash>)"
+    },
+    "HMDel": {
+        "prefix": "HMDel",
+        "body": [
+            "HMDel(${oHash},${yKey})"
+        ],
+        "description": "HMDel-Removes the value stored corresponding to the key in an object of class tHashMap. HMDel(<oHash>,<yKey>)"
+    },
+    "HMGet": {
+        "prefix": "HMGet",
+        "body": [
+            "HMGet(${oHash},${yKey},@${aVal})"
+        ],
+        "description": "HMGet-Gets the stored value corresponding to the key in an object of class tHashMap. HMGet(<oHash>,<yKey>,<@aVal>)"
+    },
+    "HMGetN": {
+        "prefix": "HMGetN",
+        "body": [
+            "HMGetN(${oHash},${nKey},@${aVal})"
+        ],
+        "description": "HMGetN-Gets the stored value corresponding to the key in an object of class tHashMap. HMGetN(<oHash>,<nKey>,<@aVal>)"
+    },
+    "HMKey": {
+        "prefix": "HMKey",
+        "body": [
+            "HMKey(${aArray},${1:/*nColuna_1*/},${2:/*n_Trim_1*/},${3:/*nColuna_N*/},${4:/*n_Trim_N*/})"
+        ],
+        "description": "HMKey-Get the key value simple or composite from the columns selected from the array. The key obtained can be used in functions: HMGet, HMSet, HMDel. HMKey(<aArray>,[nColuna_1],[n_Trim_1],[nColuna_N],[n_Trim_N])"
+    },
+    "HMList": {
+        "prefix": "HMList",
+        "body": [
+            "HMList(${oHash},@${aElem})"
+        ],
+        "description": "HMList-List all the elements of the object HashMap in an array. HMList(<oHash>,<@aElem>)"
+    },
+    "HMNew": {
+        "prefix": "HMNew",
+        "body": [
+            "HMNew()"
+        ],
+        "description": "HMNew-Creates an object of class tHashMap. HMNew()"
+    },
+    "HMSet": {
+        "prefix": "HMSet",
+        "body": [
+            "HMSet(${oHash},${yKey},${xVal})"
+        ],
+        "description": "HMSet-Updates the value corresponding to the key in an object of class tHashMap. HMSet(<oHash>,<yKey>,<xVal>)"
+    },
+    "HMSetN": {
+        "prefix": "HMSetN",
+        "body": [
+            "HMSetN(${oHash},${nKey},${nVal})"
+        ],
+        "description": "HMSetN-Updates or creates the value corresponding to the key in an object of class tHashMap HMSetN(<oHash>,<nKey>,<nVal>)"
+    },
+    "__ClearRmt": {
+        "prefix": "__ClearRmt",
+        "body": [
+            "__ClearRmt()"
+        ],
+        "description": "__ClearRmt-Deletes all the content lists of variables created with the function __SaveRmt() and stored in the TOTVS Smart Client. __ClearRmt([])"
+    },
+    "__DeleteRmt": {
+        "prefix": "__DeleteRmt",
+        "body": [
+            "__DeleteRmt(${cIdentificador})"
+        ],
+        "description": "__DeleteRmt-Deletes the list with a content identifier of the variables created by the function __SaveRmt(). __DeleteRmt(<cIdentificador>)"
+    },
+    "__ListRmt": {
+        "prefix": "__ListRmt",
+        "body": [
+            "__ListRmt()"
+        ],
+        "description": "__ListRmt-Returns an array with the identifiers of the lists of the contents of the variables stored in the TOTVS Smart Client with the function __SaveRmt(). __ListRmt([])"
+    },
+    "__LoadRmt": {
+        "prefix": "__LoadRmt",
+        "body": [
+            "__LoadRmt(${cIdentificador},${1:/*Param1*/},${2:/*Param2*/},${3:/*...*/},${4:/*Param10*/})"
+        ],
+        "description": "__LoadRmt-Retrieves the contents of the variables stored in the TOTVS Smart Client with the use of the function __SaveRmt(). For this reason, it is recommended that the number of variables stored with the function __SaveRmt() is the same for the function __LoadRmt(). If the number is different, only the number of variables saved will be recovered. __LoadRmt(<cIdentificador>,[Param1],[Param2],[...],[Param10])"
+    },
+    "__SaveRmt": {
+        "prefix": "__SaveRmt",
+        "body": [
+            "__SaveRmt(${cIdentificador},${1:/*Param1*/},${2:/*Param2*/},${3:/*...*/},${4:/*Param3*/})"
+        ],
+        "description": "__SaveRmt-Saves the contents of variables in the memory of TOTVS Smart Client __SaveRmt(<cIdentificador>,[Param1],[Param2],[...],[Param3])"
+    },
+    "ChkRpoChg": {
+        "prefix": "ChkRpoChg",
+        "body": [
+            "ChkRpoChg()"
+        ],
+        "description": "ChkRpoChg-Checks to see if there was a change in the setting SourcePath (RPO Active) after the start of the current process. ChkRpoChg()"
+    },
+    "GetApoInfo": {
+        "prefix": "GetApoInfo",
+        "body": [
+            "GetApoInfo(${cFonte})"
+        ],
+        "description": "GetApoInfo-Microsiga Protheus 8.11 , Protheus 10 , TOTVS Application Server 10 , ByYou Application Server GetApoInfo(<cFonte>)"
+    },
+    "GetApoRes": {
+        "prefix": "GetApoRes",
+        "body": [
+            "GetApoRes(${cRes})"
+        ],
+        "description": "GetApoRes-Returns the content of a resource from the repository. GetApoRes(<cRes>)"
+    },
+    "GetFuncArray": {
+        "prefix": "GetFuncArray",
+        "body": [
+            "GetFuncArray(${cMascara},@${1:/*aTipo*/},@${2:/*aArquivo*/},@${3:/*aLinha*/},@${4:/*aData*/},@${5:/*aHora*/})"
+        ],
+        "description": "GetFuncArray-Returns one or more arrays containing the data of the functions contained in the RPO - Repository Portable Object, from a mask. GetFuncArray(<cMascara>,[@aTipo],[@aArquivo],[@aLinha],[@aData],[@aHora])"
+    },
+    "GetRpoLog": {
+        "prefix": "GetRpoLog",
+        "body": [
+            "GetRpoLog()"
+        ],
+        "description": "GetRpoLog-Returns an array with the data of all the patches applied.  GetRpoLog()"
+    },
+    "GetSrcArray": {
+        "prefix": "GetSrcArray",
+        "body": [
+            "GetSrcArray(${cNome})"
+        ],
+        "description": "GetSrcArray-Returns an array with the name of the sources compiled. GetSrcArray(<cNome>)"
+    },
+    "Resource2File": {
+        "prefix": "Resource2File",
+        "body": [
+            "Resource2File(${cResource},${cFile})"
+        ],
+        "description": "Resource2File-Saves an image of the repository in a file on disk \nfrom the rootpath of the environment on the server Resource2File(<cResource>,<cFile>)"
+    },
+    "RetImgType": {
+        "prefix": "RetImgType",
+        "body": [
+            "RetImgType(${cPath})"
+        ],
+        "description": "RetImgType-Returns the type of image ( BMP or JPG ) from a path informed by the parameter RetImgType(<cPath>)"
+    },
+    "AnsiToOEM": {
+        "prefix": "AnsiToOEM",
+        "body": [
+            "AnsiToOEM(${cStringAnsi})"
+        ],
+        "description": "AnsiToOEM-Advanced Protheus 6.09 , Advanced Protheus 7.10 , Microsiga Protheus 8.11 , Protheus 10 , TOTVS Application Server 10 , ByYou Application Server AnsiToOEM(<cStringAnsi>)"
+    },
+    "AllTrim": {
+        "prefix": "AllTrim",
+        "body": [
+            "AllTrim(${cText})"
+        ],
+        "description": "AllTrim-Removes blank spaces to the right and to the left of a string. AllTrim(<cText>)"
+    },
+    "Asc": {
+        "prefix": "Asc",
+        "body": [
+            "Asc(${cString})"
+        ],
+        "description": "Asc-Converts a character to its ASCII value more to the left in a string. Asc(<cString>)"
+    },
+    "At": {
+        "prefix": "At",
+        "body": [
+            "At(${cPesquisa},${cDestino},${1:/*nStart*/})"
+        ],
+        "description": "At-Returns the position of the first occurrence of a substring in a string. For this, the function searches the string target from the right At(<cPesquisa>,<cDestino>,[nStart])"
+    },
+    "BitOn": {
+        "prefix": "BitOn",
+        "body": [
+            "BitOn(${cStr},${nStart},${nTest},${nLength})"
+        ],
+        "description": "BitOn-Checks to see if it has the first bits of a string are 0-based. BitOn(<cStr>,<nStart>,<nTest>,<nLength>)"
+    },
+    "Chr": {
+        "prefix": "Chr",
+        "body": [
+            "Chr(${nCodigo})"
+        ],
+        "description": "Chr-Converts an ASCII code to the character. Chr(<nCodigo>)"
+    },
+    "Compress": {
+        "prefix": "Compress",
+        "body": [
+            "Compress(@${cBufferOut},@${nLenghtOut},@${cBufferIn},@${nLenghtIn})"
+        ],
+        "description": "Compress-Compact a buffer received through a proprietary algorithm. Compress(<@cBufferOut>,<@nLenghtOut>,<cBufferIn>,<nLenghtIn>)"
+    },
+    "DecodeUtf16": {
+        "prefix": "DecodeUtf16",
+        "body": [
+            "DecodeUtf16(${cText},${1:/*nEndian*/})"
+        ],
+        "description": "DecodeUtf16-Converts a string from UTF-16 (16-bit Unicode Transformation Format) for encoding CP1252. DecodeUtf16(<cText>,[nEndian])"
+    },
+    "Descend": {
+        "prefix": "Descend",
+        "body": [
+            "Descend(${cString})"
+        ],
+        "description": "Descend-Converts and returns the form complemented the expression string specified. Descend(<cString>)"
+    },
+    "EncodeUtf8": {
+        "prefix": "EncodeUtf8",
+        "body": [
+            "EncodeUtf8(${cText})"
+        ],
+        "description": "EncodeUtf8-Microsiga Protheus 8.11 , Protheus 10, Protheus 11 EncodeUtf8(<cText>)"
+    },
+    "EncodeUtf16": {
+        "prefix": "EncodeUtf16",
+        "body": [
+            "EncodeUtf16(${cText},${1:/*nEndian*/})"
+        ],
+        "description": "EncodeUtf16-Converts a source string in CP1252 ( Windows 1252 code page ) to UTF-16 ( 16-bit Unicode Transformation Format ). EncodeUtf16(<cText>,[nEndian])"
+    },
+    "GetDtoVal": {
+        "prefix": "GetDtoVal",
+        "body": [
+            "GetDtoVal(${cDtoVal})"
+        ],
+        "description": "GetDtoVal-Converts a string that contains a numeric value for a formatted number. GetDtoVal(<cDtoVal>)"
+    },
+    "GzStrComp": {
+        "prefix": "GzStrComp",
+        "body": [
+            "GzStrComp(${cSource},@${cTarget},@${nTargetLen})"
+        ],
+        "description": "GzStrComp-Compact a string in gzip format. GzStrComp(<cSource>,<@cTarget>,<@nTargetLen>)"
+    },
+    "GzStrDecomp": {
+        "prefix": "GzStrDecomp",
+        "body": [
+            "GzStrDecomp(${cSource},${nSourceLen},@${cTarget})"
+        ],
+        "description": "GzStrDecomp-Decompresses a string in gzip format. GzStrDecomp(<cSource>,<nSourceLen>,<@cTarget>)"
+    },
+    "IsAlpha": {
+        "prefix": "IsAlpha",
+        "body": [
+            "IsAlpha(${cString})"
+        ],
+        "description": "IsAlpha-Determines if the character to the left of a string is alphabetic. IsAlpha(<cString>)"
+    },
+    "IsDigit": {
+        "prefix": "IsDigit",
+        "body": [
+            "IsDigit(${cString})"
+        ],
+        "description": "IsDigit-Determines whether the leftmost character of a string is a digit. IsDigit(<cString>)"
+    },
+    "IsLower": {
+        "prefix": "IsLower",
+        "body": [
+            "IsLower(${cString})"
+        ],
+        "description": "IsLower-Determines whether the leftmost character of a string is a lowercase letter. IsLower(<cString>)"
+    },
+    "IsUpper": {
+        "prefix": "IsUpper",
+        "body": [
+            "IsUpper(${cString})"
+        ],
+        "description": "IsUpper-Determines whether the leftmost character of a string is a capital letter. IsUpper(<cString>)"
+    },
+    "LTrim": {
+        "prefix": "LTrim",
+        "body": [
+            "LTrim(${cText})"
+        ],
+        "description": "LTrim-Removes the leading white spaces from a string. LTrim(<cText>)"
+    },
+    "Left": {
+        "prefix": "Left",
+        "body": [
+            "Left(${cText},${nCount})"
+        ],
+        "description": "Left-Returns a given number of characters to the left of a string. Left(<cText>,<nCount>)"
+    },
+    "Len": {
+        "prefix": "Len",
+        "body": [
+            "Len(${xParam})"
+        ],
+        "description": "Len-Returns the size of a variable. Len(<xParam>)"
+    },
+    "Look4Bit": {
+        "prefix": "Look4Bit",
+        "body": [
+            "Look4Bit(${cStr},${nStart},${nTest},${nLength})"
+        ],
+        "description": "Look4Bit-Returns the amount of bits that are 1 in a string. Look4Bit(<cStr>,<nStart>,<nTest>,<nLength>)"
+    },
+    "Lower": {
+        "prefix": "Lower",
+        "body": [
+            "Lower(${cText})"
+        ],
+        "description": "Lower-Converts the text to lowercase letters. Lower(<cText>)"
+    },
+    "MLCount": {
+        "prefix": "MLCount",
+        "body": [
+            "MLCount(${cText},${2:/*nLinLen*/},${3:/*nTabSize*/},${1|.T.,.F.,/*lQuebra*/|})"
+        ],
+        "description": "MLCount-Account the amount of lines in a memo field or string with multiple lines, whereas a maximum number of letters per line, estimated size for tab characters, and line breaks (CRLF jump line) within the text. MLCount(<cText>,[nLinLen],[nTabSize],[lQuebra])"
+    },
+    "Match": {
+        "prefix": "Match",
+        "body": [
+            "Match(${cValue},${cMask})"
+        ],
+        "description": "Match-Validates if a string is formatted according to a particular pattern. Match(<cValue>,<cMask>)"
+    },
+    "MathC": {
+        "prefix": "MathC",
+        "body": [
+            "MathC(${cNum1},${cOperacao},${cNum2})"
+        ],
+        "description": "MathC-Performs mathematical operations (Sum, Subtraction, Division, Multiplication and Exponentiation) with strings that contains a numeric value. MathC(<cNum1>,<cOperacao>,<cNum2>)"
+    },
+    "NotBit": {
+        "prefix": "NotBit",
+        "body": [
+            "NotBit(@${cStr},@${nLength})"
+        ],
+        "description": "NotBit-Inverts the bits of the characters of a string. NotBit(<@cStr>,<nLength>)"
+    },
+    "OEMToAnsi": {
+        "prefix": "OEMToAnsi",
+        "body": [
+            "OEMToAnsi(${cStringOEM})"
+        ],
+        "description": "OEMToAnsi-Advanced Protheus 6.09 , Advanced Protheus 7.10 , Microsiga Protheus 8.11 , Protheus 10 , TOTVS Application Server 10 , ByYou Application Server OEMToAnsi(<cStringOEM>)"
+    },
+    "Pad": {
+        "prefix": "Pad",
+        "body": [
+            "Pad(${xExp},${nLen},${1:/*cFill*/})"
+        ],
+        "description": "Pad-Adds padding characters to the right of the content of a variable. Pad(<xExp>,<nLen>,[cFill])"
+    },
+    "PadC": {
+        "prefix": "PadC",
+        "body": [
+            "PadC(${xExp},${nLen},${1:/*cFill*/})"
+        ],
+        "description": "PadC-Centers the contents of a variable by adding padding characters to the right and to the left. PadC(<xExp>,<nLen>,[cFill])"
+    },
+    "PadL": {
+        "prefix": "PadL",
+        "body": [
+            "PadL(${xExp},${nLen},${1:/*cFill*/})"
+        ],
+        "description": "PadL-Adds padding characters to the left of the contents of a variable. PadL(<xExp>,<nLen>,[cFill])"
+    },
+    "PadR": {
+        "prefix": "PadR",
+        "body": [
+            "PadR(${xExp},${nLen},${1:/*cFill*/})"
+        ],
+        "description": "PadR-Adds padding characters to the right of the content of a variable. PadR(<xExp>,<nLen>,[cFill])"
+    },
+    "RAt": {
+        "prefix": "RAt",
+        "body": [
+            "RAt(${cSearch},${cSource})"
+        ],
+        "description": "RAt-Returns the position of the last occurrence of a substring in a string. For this, the function searches the string target from the right. RAt(<cSearch>,<cSource>)"
+    },
+    "RTrim": {
+        "prefix": "RTrim",
+        "body": [
+            "RTrim(${cText})"
+        ],
+        "description": "RTrim-Removes the trailing blanks from a string. RTrim(<cText>)"
+    },
+    "Replicate": {
+        "prefix": "Replicate",
+        "body": [
+            "Replicate(${cString},${nCount})"
+        ],
+        "description": "Replicate-Generates a string repeated from the other. Replicate(<cString>,<nCount>)"
+    },
+    "Right": {
+        "prefix": "Right",
+        "body": [
+            "Right(${cText},${nCount})"
+        ],
+        "description": "Right-Returns a given number of trailing characters of a string. Right(<cText>,<nCount>)"
+    },
+    "StrIConv": {
+        "prefix": "StrIConv",
+        "body": [
+            "StrIConv(${cText},${fromCodePage},${toCodePage})"
+        ],
+        "description": "StrIConv-Converts a string from one codepage to another. StrIConv(<cText>,<fromCodePage>,<toCodePage>)"
+    },
+    "Space": {
+        "prefix": "Space",
+        "body": [
+            "Space(${nCount})"
+        ],
+        "description": "Space-Returns a string with a specified amount of spaces. Space(<nCount>)"
+    },
+    "StrTokArr": {
+        "prefix": "StrTokArr",
+        "body": [
+            "StrTokArr(${cValue},${cToken})"
+        ],
+        "description": "StrTokArr-Returns an array, according to the data passed as a parameter to the function. In this way, the function will receive a string and a sequence of one or more characters, that represents a tab, where each portion of the string between tabs will be a element of the returned array. StrTokArr(<cValue>,<cToken>)"
+    },
+    "StrTokArr2": {
+        "prefix": "StrTokArr2",
+        "body": [
+            "StrTokArr2(${cValue},${cToken},${1|.T.,.F.,/*lEmptyStr*/|})"
+        ],
+        "description": "StrTokArr2-Returns an array, according to the data passed as a parameter to the function. In this way, the function will receive a string and a sequence of one or more characters, that represents a tab, where each portion of the string between tabs will be a element of the returned array. StrTokArr2(<cValue>,<cToken>,[lEmptyStr])"
+    },
+    "StrTran": {
+        "prefix": "StrTran",
+        "body": [
+            "StrTran(${cString},${cSearch},${1:/*cReplace*/},${2:/*nStart*/},${3:/*nCount*/})"
+        ],
+        "description": "StrTran-Search and replace a set of characters from a string. StrTran(<cString>,<cSearch>,[cReplace],[nStart],[nCount])"
+    },
+    "Stuff": {
+        "prefix": "Stuff",
+        "body": [
+            "Stuff(${cString},${nInicio},${nElimina},${cInsere})"
+        ],
+        "description": "Stuff-Deletes and inserts characters into a string. For this, the function deletes <nElimina> caracteres a partir da posição inicial <nInicio>. After, insert <cInsere> na string resultante a partir do início <nInicio>, to form the string that will be returned. Stuff(<cString>,<nInicio>,<nElimina>,<cInsere>)"
+    },
+    "StuffBit": {
+        "prefix": "StuffBit",
+        "body": [
+            "StuffBit(@${cStr},@${nStart},@${nTest},@${nLength})"
+        ],
+        "description": "StuffBit-Alters a sequence of bits from a string to 1. StuffBit(<@cStr>,<nStart>,<nTest>,<nLength>)"
+    },
+    "SubStr": {
+        "prefix": "SubStr",
+        "body": [
+            "SubStr(${cText},${nIndex},${1:/*nLen*/})"
+        ],
+        "description": "SubStr-Returns a specific part of the string. SubStr(<cText>,<nIndex>,[nLen])"
+    },
+    "Transform": {
+        "prefix": "Transform",
+        "body": [
+            "Transform(${xExp},${1:/*cSayPicture*/})"
+        ],
+        "description": "Transform-Converts any value to a formatted string. To do this, format the values, of type character, date, logical and numeric, as a string of the specified mask that includes a combination of strings of template and functions picture. Transform(<xExp>,[cSayPicture])"
+    },
+    "UnCompress": {
+        "prefix": "UnCompress",
+        "body": [
+            "UnCompress(@${cBufferOut},@${nLenghtOut},@${cBufferIn},@${nLenghtIn})"
+        ],
+        "description": "UnCompress-Unpack a buffer (generated by the function Compress) received through the proprietary algorithm. UnCompress(<@cBufferOut>,<@nLenghtOut>,<cBufferIn>,<nLenghtIn>)"
+    },
+    "UnStuff": {
+        "prefix": "UnStuff",
+        "body": [
+            "UnStuff(@${cStr},@${nStart},@${nTest},@${nLength})"
+        ],
+        "description": "UnStuff-Alters a sequence of bits of a string to 0. UnStuff(<@cStr>,<nStart>,<nTest>,<nLength>)"
+    },
+    "Upper": {
+        "prefix": "Upper",
+        "body": [
+            "Upper(${cText})"
+        ],
+        "description": "Upper-Converts the text to uppercase letters Upper(<cText>)"
+    },
+    "ClearGlbValue": {
+        "prefix": "ClearGlbValue",
+        "body": [
+            "ClearGlbValue(${cGlbName},${1:/*nTimeOut*/})"
+        ],
+        "description": "ClearGlbValue-Clears a content stored in a global variable. ClearGlbValue(<cGlbName>,[nTimeOut])"
+    },
+    "GetGlbValue": {
+        "prefix": "GetGlbValue",
+        "body": [
+            "GetGlbValue(${cGlbName})"
+        ],
+        "description": "GetGlbValue-Returns the value of a global variable. GetGlbValue(<cGlbName>)"
+    },
+    "GetGlbVars": {
+        "prefix": "GetGlbVars",
+        "body": [
+            "GetGlbVars(${cGlbName},${1:/*xValue*/},${...xValueN]})"
+        ],
+        "description": "GetGlbVars-Retrieves the contents of one or more variables, which are stored in a global variable through the function PutGlbVars() GetGlbVars(<cGlbName>,[xValue1,...xValueN])"
+    },
+    "MemGlbSize": {
+        "prefix": "MemGlbSize",
+        "body": [
+            "MemGlbSize()"
+        ],
+        "description": "MemGlbSize-Returns the amount of memory, in bytes, being consumed by the list of global variables in memory. MemGlbSize()"
+    },
+    "PutGlbValue": {
+        "prefix": "PutGlbValue",
+        "body": [
+            "PutGlbValue(${cGlbName},${cValue})"
+        ],
+        "description": "PutGlbValue-Creates and sets a value ( string ) to a global variable. PutGlbValue(<cGlbName>,<cValue>)"
+    },
+    "PutGlbVars": {
+        "prefix": "PutGlbVars",
+        "body": [
+            "PutGlbVars(${cGlbName},${1:/*xValue*/},${...xValueN]})"
+        ],
+        "description": "PutGlbVars-Stores under the name of a global identifier, the content of one or more variables reported as parameter. PutGlbVars(<cGlbName>,[xValue1,...xValueN])"
+    },
+    "SetVarNameLen-INTERNA": {
+        "prefix": "SetVarNameLen-INTERNA",
+        "body": [
+            "SetVarNameLen-INTERNA(${1:/*nValue*/})"
+        ],
+        "description": "SetVarNameLen-INTERNA-Sets the size of a variable AdvPL. SetVarNameLen-INTERNA([nValue])"
+    },
+    "TimeGlbValue": {
+        "prefix": "TimeGlbValue",
+        "body": [
+            "TimeGlbValue(${cGlbName})"
+        ],
+        "description": "TimeGlbValue-Returns the amount of seconds elapsed since the last access ( create, update, or read ) a global variable TimeGlbValue(<cGlbName>)"
+    },
+    "Abs": {
+        "prefix": "Abs",
+        "body": [
+            "Abs(${nExp})"
+        ],
+        "description": "Abs-Returns the absolute value (independent of sign) of a numeric expression. Abs(<nExp>)"
+    },
+    "Int": {
+        "prefix": "Int",
+        "body": [
+            "Int(${nValue})"
+        ],
+        "description": "Int-Returns a numeric value for full from a numeric value with the integer part and the decimal that you entered as the parameter, disregarding all the digits right of the decimal point. Int(<nValue>)"
+    },
+    "Max": {
+        "prefix": "Max",
+        "body": [
+            "Max(${xExp1},${xExp2})"
+        ],
+        "description": "Max-Returns the higher of two numeric values, or date. Max(<xExp1>,<xExp2>)"
+    },
+    "Min": {
+        "prefix": "Min",
+        "body": [
+            "Min(${xExp1},${xExp2})"
+        ],
+        "description": "Min-Returns the smaller of two numeric values, or date. Min(<xExp1>,<xExp2>)"
+    },
+    "NAnd": {
+        "prefix": "NAnd",
+        "body": [
+            "NAnd(${nNum1},${nNum2},${1:/*nNumN*/},${...})"
+        ],
+        "description": "NAnd-Performs the binary operation And between 2 or more numbers. NAnd(<nNum1>,<nNum2>,[nNumN],...)"
+    },
+    "NOr": {
+        "prefix": "NOr",
+        "body": [
+            "NOr(${nNum1},${nNum2},${1:/*nNumN*/},${...})"
+        ],
+        "description": "NOr-Performs the binary operation OR between 2 or more numbers. NOr(<nNum1>,<nNum2>,[nNumN],...)"
+    },
+    "NXor": {
+        "prefix": "NXor",
+        "body": [
+            "NXor(${nNum1},${nNum2},${1:/*nNumN*/},${...})"
+        ],
+        "description": "NXor-Performs the binary operation XOR between 2 or more numbers. NXor(<nNum1>,<nNum2>,[nNumN],...)"
+    },
+    "NoRound": {
+        "prefix": "NoRound",
+        "body": [
+            "NoRound(${1:/*nValor*/},${2:/*nCasas*/})"
+        ],
+        "description": "NoRound-Returns a numeric value with a particular precision of the decimal point (truncated or rounded).NoRound([nValor],[nCasas])"
+    },
+    "Randomize": {
+        "prefix": "Randomize",
+        "body": [
+            "Randomize(${nMinimo},${nMaximo})"
+        ],
+        "description": "Randomize-Generates a random integer between the range, lower and upper received via the parameters (nMinimo and nMaximo). Randomize(<nMinimo>,<nMaximo>)"
+    },
+    "Round": {
+        "prefix": "Round",
+        "body": [
+            "Round(${nValue},${nPoint})"
+        ],
+        "description": "Round-Rounds a decimal value to the specified amount of digits Round(<nValue>,<nPoint>)"
+    },
+    "AEval": {
+        "prefix": "AEval",
+        "body": [
+            "AEval(${aArray},${bBlock},${1:/*nStart*/},${2:/*nCount*/})"
+        ],
+        "description": "AEval-Executes a block of code for each element of an array. AEval(<aArray>,<bBlock>,[nStart],[nCount])"
+    },
+    "DBEval": {
+        "prefix": "DBEval",
+        "body": [
+            "DBEval(${bBlock},${2:/*bFirstCondition*/},${3:/*bSecondCondition*/},${4:/*nCount*/},${5:/*nRecno*/},${1|.T.,.F.,/*lRest*/|})"
+        ],
+        "description": "DBEval-Evaluates a code block for each record that meets a defined scope, through the blocks of the first and second condition. DBEval(<bBlock>,[bFirstCondition],[bSecondCondition],[nCount],[nRecno],[lRest])"
+    },
+    "Eval": {
+        "prefix": "Eval",
+        "body": [
+            "Eval(${bBloco},${1:/*xVariavel*/})"
+        ],
+        "description": "Eval-Executes a block of code Eval(<bBloco>,[xVariavel])"
+    },
+    "GetCBSource": {
+        "prefix": "GetCBSource",
+        "body": [
+            "GetCBSource(${bBlocoDeCodigo})"
+        ],
+        "description": "GetCBSource- GetCBSource(<bBlocoDeCodigo>)"
+    },
+    "Ceiling": {
+        "prefix": "Ceiling",
+        "body": [
+            "Ceiling(${nValor})"
+        ],
+        "description": "Ceiling-Calculates the arrendodamento (up) of the value of the floating point Ceiling(<nValor>)"
+    },
+    "Exp": {
+        "prefix": "Exp",
+        "body": [
+            "Exp(${nExpoente})"
+        ],
+        "description": "Exp-Calculates the value of the antilogaritmo base 'e' (the base of natural logarithm) of a numeric value. Exp(<nExpoente>)"
+    },
+    "Log": {
+        "prefix": "Log",
+        "body": [
+            "Log(${nValue})"
+        ],
+        "description": "Log-Calculates the natural logarithm of a numeric value. Log(<nValue>)"
+    },
+    "Log10": {
+        "prefix": "Log10",
+        "body": [
+            "Log10(${nValue})"
+        ],
+        "description": "Log10-Calculates the logarithm of a numeric value. Log10(<nValue>)"
+    },
+    "Mod": {
+        "prefix": "Mod",
+        "body": [
+            "Mod(${nDividend},${nDivisor})"
+        ],
+        "description": "Mod-Returns a number that represents the remainder of division of the first parameter (nDividend) by the second (nDivisor). The modulo operator (%) AdvPL have the same functionality as the function Mod. Mod(<nDividend>,<nDivisor>)"
+    },
+    "Sqrt": {
+        "prefix": "Sqrt",
+        "body": [
+            "Sqrt(${nRadicand})"
+        ],
+        "description": "Sqrt-Calculates the value of the square root of a positive number Sqrt(<nRadicand>)"
+    },
+    "FWBuildFeature": {
+        "prefix": "FWBuildFeature",
+        "body": [
+            "FWBuildFeature(${1:/*nTipo*/},${2:/*cExprAdvPL*/})"
+        ],
+        "description": "FWBuildFeature-\nBuild a code block related to some attributes of the structures of the Model and the View. Should be used when the data structure is coming from the dictionary, because this function performs the treatments to the MicrosigaProtheus  \n FWBuildFeature([nTipo],[cExprAdvPL])"
+    },
+    "FWCalcStruct": {
+        "prefix": "FWCalcStruct",
+        "body": [
+            "FWCalcStruct(${oModelCalc})"
+        ],
+        "description": "FWCalcStruct-\nThis function provides the object data structure of the type calculation to be used in the view.  The structures are fornecidadas based on the calcs of the Model, added through the method AddCalc.  \n FWCalcStruct(<oModelCalc>)"
+    },
+    "FWExecModalView": {
+        "prefix": "FWExecModalView",
+        "body": [
+            "FWExecModalView(${1:/*cTitulo*/},${cPrograma},${2:/*nOperation*/},${3:/*bOk*/},${4:/*bCancel*/},${5:/*nWidth*/},${nHeigth})"
+        ],
+        "description": "FWExecModalView-\nFunction that displays a window displaying the View(FWFormView) of a given source program, in the form of the modal. The format of the modal does not show all the fields from the View, it restricts the display only for fields that can be displayed nese type of form. This type of form should be used when it is desired to display a registration summary to the user.  \n FWExecModalView([cTitulo],<cPrograma>,[nOperation],[bOk],[bCancel],[nWidth],<nHeigth>)"
+    },
+    "FWExecView": {
+        "prefix": "FWExecView",
+        "body": [
+            "FWExecView(${1:/*cTitulo*/},${cPrograma},${2:/*nOperation*/},${3:/*oDlg*/},${4:/*bCloseOnOK*/},${5:/*bOk*/},${6:/*nPercReducao*/},${7:/*aEnableButtons*/},${8:/*bCancel*/},${9:/*cOperatId*/},${*:/*cToolBar*/},${*:/*oModelAct*/})"
+        ],
+        "description": "FWExecView-\nFunction that displays a window displaying the View(FWFormView) of a given source program.  \n FWExecView([cTitulo],<cPrograma>,[nOperation],[oDlg],[bCloseOnOK],[bOk],[nPercReducao],[aEnableButtons],[bCancel],[cOperatId],[cToolBar],[oModelAct])"
+    },
+    "FWFldGet": {
+        "prefix": "FWFldGet",
+        "body": [
+            "FWFldGet(${cCampo},${2:/*nLinha*/},${3:/*oModel*/},${1|.T.,.F.,/*lShowMsg*/|})"
+        ],
+        "description": "FWFldGet-Function aims to return the value of a field in the Model.<span class=\"diff-contents-container\"><span class=\"content-modified\">Esta <span class=\"content-modified\"> FWFldGet(<cCampo>,[nLinha],[oModel],[lShowMsg])"
+    },
+    "FWFldPut": {
+        "prefix": "FWFldPut",
+        "body": [
+            "FWFldPut(${cCampo},${xConteudo},${3:/*nLinha*/},${4:/*oModel*/},${1|.T.,.F.,/*lShowMsg*/|},${2|.T.,.F.,/*lLoad*/|})"
+        ],
+        "description": "FWFldPut-\nAssign a content of a field of the Model.  \n FWFldPut(<cCampo>,<xConteudo>,[nLinha],[oModel],[lShowMsg],[lLoad])"
+    },
+    "FWFormCancel": {
+        "prefix": "FWFormCancel",
+        "body": [
+            "FWFormCancel(${oModel})"
+        ],
+        "description": "FWFormCancel-\nThis function performs the necessary treatments to the cancellation of the forms of edition of Microsiga Protheus.  \n FWFormCancel(<oModel>)"
+    },
+    "FWFormCommit": {
+        "prefix": "FWFormCommit",
+        "body": [
+            "FWFormCommit(${oModel},${1:/*bBefore*/},${2:/*bAfter*/},${3:/*bAfterSTTS*/},${bInTTS},${4:/*bABeforeTTS*/},${bIntegEAI})"
+        ],
+        "description": "FWFormCommit-\nThis function performs the necessary treatments to the recording of the submodels of edition of Microsiga Protheus. The recording is carried out in levels where the first element of the model and later on, his children are recorded. The transaction control is opened by this function and there is a control of RollBack to return the problem to the interface.  \n FWFormCommit(<oModel>,[bBefore],[bAfter],[bAfterSTTS],<bInTTS>,[bABeforeTTS],<bIntegEAI>)"
+    },
+    "FWFormEAI": {
+        "prefix": "FWFormEAI",
+        "body": [
+            "FWFormEAI(${cXML},${1:/*cError*/},${2:/*cWarning*/},${cProgram})"
+        ],
+        "description": "FWFormEAI-\nThis function performs the necessary treatments for the recording of the submodels editing Microsiga Protheus when you use the integration with the EAI.  \n FWFormEAI(<cXML>,[cError],[cWarning],<cProgram>)"
+    },
+    "FWFormStruct": {
+        "prefix": "FWFormStruct",
+        "body": [
+            "FWFormStruct(${nType},${cAliasSX2},${1:/*bSX3*/})"
+        ],
+        "description": "FWFormStruct-\nThis function provides the object with the structures of metadata from the data dictionary, used by the classes in the Model and the View.  \n FWFormStruct(<nType>,<cAliasSX2>,[bSX3])"
+    },
+    "FWHASMVC": {
+        "prefix": "FWHASMVC",
+        "body": [
+            "FWHASMVC()"
+        ],
+        "description": "FWHASMVC-\nChecks to see if the binary supports the MVC. The build should be greater than or equal to 7.00.081215 P-20081216.  \n FWHASMVC()"
+    },
+    "FwLoadBrw": {
+        "prefix": "FwLoadBrw",
+        "body": [
+            "FwLoadBrw(${cProgram})"
+        ],
+        "description": "FwLoadBrw-Function that returns an object Browse of a routine. FwLoadBrw(<cProgram>)"
+    },
+    "FWLoadByAlias": {
+        "prefix": "FWLoadByAlias",
+        "body": [
+            "FWLoadByAlias(${oObj},${cAlias},${3:/*cAliasReal*/},${4:/*cFieldRecno*/},${1|.T.,.F.,/*lCopy*/|},${2|.T.,.F.,/*lQuery*/|})"
+        ],
+        "description": "FWLoadByAlias-\nFunction that performs the load of a sub-template based on an existing alias  \n FWLoadByAlias(<oObj>,<cAlias>,[cAliasReal],[cFieldRecno],[lCopy],[lQuery])"
+    },
+    "FWLoadMenuDef": {
+        "prefix": "FWLoadMenuDef",
+        "body": [
+            "FWLoadMenuDef(${cProgram})"
+        ],
+        "description": "FWLoadMenuDef-\nFunction that returns the array with the data of the menu routine.  \n FWLoadMenuDef(<cProgram>)"
+    },
+    "FWLoadModel": {
+        "prefix": "FWLoadModel",
+        "body": [
+            "FWLoadModel(${cProgram})"
+        ],
+        "description": "FWLoadModel-\nFunction that returns an object model of a particular source.  \n FWLoadModel(<cProgram>)"
+    },
+    "FWLoadView": {
+        "prefix": "FWLoadView",
+        "body": [
+            "FWLoadView(${cProgram})"
+        ],
+        "description": "FWLoadView-\nFunction that returns an object view of the given source.  \n FWLoadView(<cProgram>)"
+    },
+    "FWMVCMenu": {
+        "prefix": "FWMVCMenu",
+        "body": [
+            "FWMVCMenu(${cRotina})"
+        ],
+        "description": "FWMVCMenu-\nReturns the options standard to the MeuDef a routine in MVC. Standard options: View Include Change Delete Print Copy  \n FWMVCMenu(<cRotina>)"
+    },
+    "FWMemoVirtual": {
+        "prefix": "FWMemoVirtual",
+        "body": [
+            "FWMemoVirtual(${oStruct},${aMemoVirtual})"
+        ],
+        "description": "FWMemoVirtual-\nSome fields of type MEMO, use of tables for recording their values (SYP3), these fields must be informed in the structure so that the MVC be able to take their treatment correctly.  For these MEMO fields always should be another field that will contain the code that the MEMO field was stored in the auxiliary table.  \n FWMemoVirtual(<oStruct>,<aMemoVirtual>)"
+    },
+    "FWModelActive": {
+        "prefix": "FWModelActive",
+        "body": [
+            "FWModelActive()"
+        ],
+        "description": "FWModelActive-\nThis function provides the last object of the class FWFormModel active, to be used in the rules of validation of the system Microsiga Protheus.  \n FWModelActive()"
+    },
+    "FWRestRows": {
+        "prefix": "FWRestRows",
+        "body": [
+            "FWRestRows(${1:/*aIDs*/},${2:/*oModel*/})"
+        ],
+        "description": "FWRestRows-\nRestores the positions of the FWFormGrids of the Model  \n FWRestRows([aIDs],[oModel])"
+    },
+    "FWSaveRows": {
+        "prefix": "FWSaveRows",
+        "body": [
+            "FWSaveRows(${1:/*oModel*/})"
+        ],
+        "description": "FWSaveRows-\nSaves the positions of the FWFormGrids of the Model  \n FWSaveRows([oModel])"
+    },
+    "FWUMessage": {
+        "prefix": "FWUMessage",
+        "body": [
+            "FWUMessage(${cXML},${1:/*cError*/},${2:/*cWarning*/},${cTypeMessage})"
+        ],
+        "description": "FWUMessage-\nThis function performs the processing of Messages Only uses the integration with the EAI.  \n FWUMessage(<cXML>,[cError],[cWarning],<cTypeMessage>)"
+    },
+    "FWmBrwActive": {
+        "prefix": "FWmBrwActive",
+        "body": [
+            "FWmBrwActive()"
+        ],
+        "description": "FWmBrwActive-\nProvides the object of the class FWMBROWSE active.  \n FWmBrwActive()"
+    },
+    "FormLoadField": {
+        "prefix": "FormLoadField",
+        "body": [
+            "FormLoadField(${oField},${1|.T.,.F.,/*lCopy*/|})"
+        ],
+        "description": "FormLoadField-\nThis function performs the loading of the data of the sub-model editing of the type FormField.  \n FormLoadField(<oField>,<lCopy>)"
+    },
+    "FormLoadGrid": {
+        "prefix": "FormLoadGrid",
+        "body": [
+            "FormLoadGrid(${oGrid},${1|.T.,.F.,/*lCopy*/|})"
+        ],
+        "description": "FormLoadGrid-\nThis function performs the loading of the data of the sub-model editing of the type FormGrid.  \n FormLoadGrid(<oGrid>,[lCopy])"
+    },
+    "FwStruTrigger": {
+        "prefix": "FwStruTrigger",
+        "body": [
+            "FwStruTrigger(${cDom},${cCDom},${cRegra},${1|.T.,.F.,/*lSeek*/|},${cAlias},${2:/*nOrdem*/},${3:/*cChave*/},${4:/*cCondic*/},${5:/*cSequen*/})"
+        ],
+        "description": "FwStruTrigger-\nThe function provides an array with the structure for creating a trigger in the data structure of a submodel (FWFormModelStruct). It should be used when you want to create a trigger in the data structure, based on the parameters informed the function returns the information that is necessary to create a trigger using the method AddTrigger.  FwStruTrigger(<cDom>,<cCDom>,<cRegra>,[lSeek],<cAlias>,[nOrdem],[cChave],[cCondic],[cSequen])"
+    },
+    "AddCSSRule": {
+        "prefix": "AddCSSRule",
+        "body": [
+            "AddCSSRule(${cObjeto},${cRegraCSS})"
+        ],
+        "description": "AddCSSRule-Creates a list of rules, CSS - Cascading Style Sheets to be applied to the objects in the moment of its creation. AddCSSRule(<cObjeto>,<cRegraCSS>)"
+    },
+    "AddFontAlias": {
+        "prefix": "AddFontAlias",
+        "body": [
+            "AddFontAlias(${cOrigem},${cDestino})"
+        ],
+        "description": "AddFontAlias-Creates a conversion table of sources with the source and destination. Thus, if the source origin is used on an object, the system automatically assumes the source to the destination. AddFontAlias(<cOrigem>,<cDestino>)"
+    },
+    "Beep": {
+        "prefix": "Beep",
+        "body": [
+            "Beep()"
+        ],
+        "description": "Beep-  Beep()"
+    },
+    "CSSDictAdd": {
+        "prefix": "CSSDictAdd",
+        "body": [
+            "CSSDictAdd(${cObj},${cCSS})"
+        ],
+        "description": "CSSDictAdd-Defines the CSS (Cascading Style Sheet) a standard for a particular object. CSSDictAdd(<cObj>,<cCSS>)"
+    },
+    "CopytoClipboard": {
+        "prefix": "CopytoClipboard",
+        "body": [
+            "CopytoClipboard(${1:/*cTexto*/})"
+        ],
+        "description": "CopytoClipboard-Puts a text in the area of the transfer station. CopytoClipboard([cTexto])"
+    },
+    "GetClientDir": {
+        "prefix": "GetClientDir",
+        "body": [
+            "GetClientDir()"
+        ],
+        "description": "GetClientDir-Returns the path of the directory where the Smart Client is installed. GetClientDir()"
+    },
+    "GetFocus": {
+        "prefix": "GetFocus",
+        "body": [
+            "GetFocus()"
+        ],
+        "description": "GetFocus-Returns the handle of the object in focus. GetFocus()"
+    },
+    "GetFontList": {
+        "prefix": "GetFontList",
+        "body": [
+            "GetFontList()"
+        ],
+        "description": "GetFontList-Returns an array with the name of the fonts that are installed in station that is using the Smart Client. GetFontList()"
+    },
+    "GetFontPixWidths": {
+        "prefix": "GetFontPixWidths",
+        "body": [
+            "GetFontPixWidths(${cFontName},${nTamanho},${1|.T.,.F.,/*lBold*/|},${2|.T.,.F.,/*lItalic*/|},${3|.T.,.F.,/*lUnderline*/|})"
+        ],
+        "description": "GetFontPixWidths-Returns an array with the width in pixels of a given font. GetFontPixWidths(<cFontName>,<nTamanho>,[lBold],[lItalic],[lUnderline])"
+    },
+    "GetHeightFont": {
+        "prefix": "GetHeightFont",
+        "body": [
+            "GetHeightFont(${cFont},${nTamanho},${1|.T.,.F.,/*lnegrito*/|},${2|.T.,.F.,/*lItalico*/|},${3|.T.,.F.,/*lSublinhado*/|})"
+        ],
+        "description": "GetHeightFont-Returns the height of the desired font. GetHeightFont(<cFont>,<nTamanho>,[lnegrito],[lItalico],[lSublinhado])"
+    },
+    "GetResArray": {
+        "prefix": "GetResArray",
+        "body": [
+            "GetResArray(${cMask})"
+        ],
+        "description": "GetResArray-Returns an array with the resources from the repository based on the search by name or mask. GetResArray(<cMask>)"
+    },
+    "getScreenRes": {
+        "prefix": "getScreenRes",
+        "body": [
+            "getScreenRes()"
+        ],
+        "description": "getScreenRes-Retrieves the screen resolution of the workstation. getScreenRes()"
+    },
+    "GetSenhAp": {
+        "prefix": "GetSenhAp",
+        "body": [
+            "GetSenhAp(${cUser},${cPsw},${cServiceName})"
+        ],
+        "description": "GetSenhAp-Displays the window SenhaP for password validation. GetSenhAp(<cUser>,<cPsw>,<cServiceName>)"
+    },
+    "GetStringPixSize": {
+        "prefix": "GetStringPixSize",
+        "body": [
+            "GetStringPixSize(${cString},${cFontName},${nTamanho},${1|.T.,.F.,/*lBold*/|},${2|.T.,.F.,/*lItalic*/|},${3|.T.,.F.,/*lUnderline*/|})"
+        ],
+        "description": "GetStringPixSize-Returns an array with the height and the total width in pixels of a given string, given a specific font, size, and modifiers (bold, italic, underline). GetStringPixSize(<cString>,<cFontName>,<nTamanho>,[lBold],[lItalic],[lUnderline])"
+    },
+    "GetWndDefault": {
+        "prefix": "GetWndDefault",
+        "body": [
+            "GetWndDefault()"
+        ],
+        "description": "GetWndDefault-Returns the default window in the display. GetWndDefault()"
+    },
+    "IntIncProc": {
+        "prefix": "IntIncProc",
+        "body": [
+            "IntIncProc(${1:/*cMsg*/})"
+        ],
+        "description": "IntIncProc-Increments and displays a text for a ruler of progress. IntIncProc([cMsg])"
+    },
+    "ProcessMessage": {
+        "prefix": "ProcessMessage",
+        "body": [
+            "ProcessMessage()"
+        ],
+        "description": "ProcessMessage-Minimizes the effect of 'freezing' of the application during the execution of a long process forcing the refresh of the Smart Client. ProcessMessage()"
+    },
+    "PtGetSessions": {
+        "prefix": "PtGetSessions",
+        "body": [
+            "PtGetSessions()"
+        ],
+        "description": "PtGetSessions-Returns an array with the list of connection sessions between the Smart Client and the Application Server. PtGetSessions()"
+    },
+    "PtKillSession": {
+        "prefix": "PtKillSession",
+        "body": [
+            "PtKillSession(${cSession})"
+        ],
+        "description": "PtKillSession-Terminates a connection session between the Smart Client and the Application Server. PtKillSession(<cSession>)"
+    },
+    "PtRunInSession": {
+        "prefix": "PtRunInSession",
+        "body": [
+            "PtRunInSession(${cThread},${cFunction})"
+        ],
+        "description": "PtRunInSession-Run a command in a given session PtRunInSession(<cThread>,<cFunction>)"
+    },
+    "SetKey": {
+        "prefix": "SetKey",
+        "body": [
+            "SetKey(${nCodInkey},${1:/*bAcao*/})"
+        ],
+        "description": "SetKey-Allocates a block of code to a key. SetKey(<nCodInkey>,[bAcao])"
+    },
+    "SetKeyBlock": {
+        "prefix": "SetKeyBlock",
+        "body": [
+            "SetKeyBlock(${1:/*bBloco*/})"
+        ],
+        "description": "SetKeyBlock-Defines a block of code that will be executed whenever the function SetKey() is called. SetKeyBlock([bBloco])"
+    },
+    "SetStyle-Interna": {
+        "prefix": "SetStyle-Interna",
+        "body": [
+            "SetStyle-Interna(${nEstilo})"
+        ],
+        "description": "SetStyle-Interna-Defines the basic style of the Smart Client. SetStyle-Interna(<nEstilo>)"
+    },
+    "ShellExecute": {
+        "prefix": "ShellExecute",
+        "body": [
+            "ShellExecute(${cAcao},${cArquivo},${cParam},${cDirTrabalho},${1:/*nOpc*/})"
+        ],
+        "description": "ShellExecute-Executes a function, a file, or any execution on the command-line in the S. O. at the station where the Smartclient is running. This function is available for Windows and Linux. ShellExecute(<cAcao>,<cArquivo>,<cParam>,<cDirTrabalho>,[nOpc])"
+    },
+    "Tone": {
+        "prefix": "Tone",
+        "body": [
+            "Tone()"
+        ],
+        "description": "Tone-Returns True if it is effectively sent the command to the client side Tone()"
+    },
+    "Arc4": {
+        "prefix": "Arc4",
+        "body": [
+            "Arc4(${cBase},${cChave})"
+        ],
+        "description": "Arc4-Name Arc4(<cBase>,<cChave>)"
+    },
+    "EVPDigest": {
+        "prefix": "EVPDigest",
+        "body": [
+            "EVPDigest(${cContent},${nType})"
+        ],
+        "description": "EVPDigest-Calculates the digest value of a given content. EVPDigest(<cContent>,<nType>)"
+    },
+    "EVPPrivSign": {
+        "prefix": "EVPPrivSign",
+        "body": [
+            "EVPPrivSign(${cPathKey},${cContent},${nTipo},${cPassword},@${cErrStr})"
+        ],
+        "description": "EVPPrivSign-Signs using digest algorithm a given content using a private key. EVPPrivSign(<cPathKey>,<cContent>,<nTipo>,<cPassword>,<@cErrStr>)"
+    },
+    "EVPPrivVery": {
+        "prefix": "EVPPrivVery",
+        "body": [
+            "EVPPrivVery(${cPathKey},${cContent},${nType},${cSigned},${cPassword},@${cErrStr})"
+        ],
+        "description": "EVPPrivVery-Checks using digest algorithm a given content using a public key. EVPPrivVery(<cPathKey>,<cContent>,<nType>,<cSigned>,<cPassword>,<@cErrStr>)"
+    },
+    "Embaralha": {
+        "prefix": "Embaralha",
+        "body": [
+            "Embaralha(${cTexto},${nTipo})"
+        ],
+        "description": "Embaralha-Shuffles/Desembaralha a string. Embaralha(<cTexto>,<nTipo>)"
+    },
+    "EncryptRSA": {
+        "prefix": "EncryptRSA",
+        "body": [
+            "EncryptRSA(${cKeyFile},${cInfo},${1:/*uParam1*/})"
+        ],
+        "description": "EncryptRSA-Performs the encryption of a string using the RSA algorithm (Ron Rivest, Adi Shamir, and Len Adleman). EncryptRSA(<cKeyFile>,<cInfo>,[uParam1])"
+    },
+    "HMAC": {
+        "prefix": "HMAC",
+        "body": [
+            "HMAC(${cContent},${cKey},${nCryptoType},${1:/*nRetType*/})"
+        ],
+        "description": "HMAC-HMAC (Hash-based Message Authentication Code) generates the authentication hash of an input message, in combination with a secret key. This implementation supports the algorithms SHA-1,SHA-256,SHA-512, and MD5. HMAC(<cContent>,<cKey>,<nCryptoType>,[nRetType])"
+    },
+    "HSMExponent": {
+        "prefix": "HSMExponent",
+        "body": [
+            "HSMExponent(${cKey},${2:/*cPass*/},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMExponent-Returns the exponent (exponent) of a private key in big-endian format stored in an HSM appliance. HSMExponent(<cKey>,[cPass],[lClient])"
+    },
+    "HSMFinalize": {
+        "prefix": "HSMFinalize",
+        "body": [
+            "HSMFinalize(${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMFinalize-Finishes the use of the HSM appliance. HSMFinalize([lClient])"
+    },
+    "HSMGetCertFile": {
+        "prefix": "HSMGetCertFile",
+        "body": [
+            "HSMGetCertFile(${cHSMPath},${cFile},${2:/*cPass*/},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMGetCertFile-Extracts a certificate stored in an HSM appliance to a file. HSMGetCertFile(<cHSMPath>,<cFile>,[cPass],[lClient])"
+    },
+    "HSMGetKeyFile": {
+        "prefix": "HSMGetKeyFile",
+        "body": [
+            "HSMGetKeyFile(${cHSMPath},${cFile},${3:/*cPass*/},${1|.T.,.F.,/*lChangeCase*/|},${2|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMGetKeyFile-Extracts a public key stored in an HSM appliance to a file. HSMGetKeyFile(<cHSMPath>,<cFile>,[cPass],[lChangeCase],[lClient])"
+    },
+    "HSMInitialize": {
+        "prefix": "HSMInitialize",
+        "body": [
+            "HSMInitialize(${2:/*cModule*/},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMInitialize-Initializes the HSM appliance. HSMInitialize([cModule],[lClient])"
+    },
+    "HSMModulus": {
+        "prefix": "HSMModulus",
+        "body": [
+            "HSMModulus(${cKey},${2:/*cPass*/},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMModulus-Returns the module public modulus) of a private key in big-endian format stored in an HSM appliance. HSMModulus(<cKey>,[cPass],[lClient])"
+    },
+    "HSMObjList": {
+        "prefix": "HSMObjList",
+        "body": [
+            "HSMObjList(${nSlot},${cPass},${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMObjList-List the objects contained in a slot. HSMObjList(<nSlot>,<cPass>,[lClient])"
+    },
+    "HSMPrivSign": {
+        "prefix": "HSMPrivSign",
+        "body": [
+            "HSMPrivSign(${cKey},${cContent},${nType},${cPass},@${2:/*cErrStr*/},@${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMPrivSign-Signs using digest algorithm a given content using a private key stored on the HSM appliance. HSMPrivSign(<cKey>,<cContent>,<nType>,<cPass>,[@cErrStr],[lClient])"
+    },
+    "HSMPrivVery": {
+        "prefix": "HSMPrivVery",
+        "body": [
+            "HSMPrivVery(${cKey},${cContent},${nTipo},@${cErrStr},@${cAssinado},@${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMPrivVery-Verifies the digital signature using the certificate/public key stored on the HSM appliance. HSMPrivVery(<cKey>,<cContent>,<nTipo>,<@cErrStr>,<cAssinado>,[lClient])"
+    },
+    "HSMSlotList": {
+        "prefix": "HSMSlotList",
+        "body": [
+            "HSMSlotList(${1|.T.,.F.,/*lClient*/|})"
+        ],
+        "description": "HSMSlotList-List the slots HSM available. HSMSlotList([lClient])"
+    },
+    "HTTPSSLClient": {
+        "prefix": "HTTPSSLClient",
+        "body": [
+            "HTTPSSLClient(${nSSL2},${nSSL3},${nTLS1},${cPassword},${cCertPath},${cKeyPath},${nHSM},${1|.T.,.F.,/*lClient*/|},${2/*nVerbose*/},${3/*nBugs*/},${4/*nState*/},${5/*cCACertPath*/})"
+        ],
+        "description": "HTTPSSLClient-Sets in memory the settings for SSL connection. HTTPSSLClient(<nSSL2>,<nSSL3>,<nTLS1>,<cPassword>,<cCertPath>,<cKeyPath>,<nHSM>,[lClient],[nVerbose],[nBugs],[nState],[cCACertPath])"
+    },
+    "MD5": {
+        "prefix": "MD5",
+        "body": [
+            "MD5(${cValor},${1:/*nType*/})"
+        ],
+        "description": "MD5-Apply to a content, the MD5 algorithm (MessageDigest Algorithm 5). MD5(<cValor>,[nType])"
+    },
+    "MD5File": {
+        "prefix": "MD5File",
+        "body": [
+            "MD5File(${cFile},${1:/*nTipo*/},${2:/*nWhere*/})"
+        ],
+        "description": "MD5File-Reads the contents of the specified file and from this file, generates a hash key using MD5 - Message Digest Algorithm 5. MD5File(<cFile>,[nTipo],[nWhere])"
+    },
+    "PrivSignRSA": {
+        "prefix": "PrivSignRSA",
+        "body": [
+            "PrivSignRSA(${cPathKey},${cContent},${nTipo},${cSenha},@${1:/*cErrStr*/},@${2:/*nPad*/})"
+        ],
+        "description": "PrivSignRSA-Subscribes to a particular content using the private key. PrivSignRSA(<cPathKey>,<cContent>,<nTipo>,<cSenha>,[@cErrStr],[nPad])"
+    },
+    "PrivVeryRSA": {
+        "prefix": "PrivVeryRSA",
+        "body": [
+            "PrivVeryRSA(${cPathKey},${cContent},${nTipo},${cAssinatura},@${1:/*cErrStr*/},@${2:/*nPad*/})"
+        ],
+        "description": "PrivVeryRSA-Checks for a particular signed content using the public key. PrivVeryRSA(<cPathKey>,<cContent>,<nTipo>,<cAssinatura>,[@cErrStr],[nPad])"
+    },
+    "RC4Crypt": {
+        "prefix": "RC4Crypt",
+        "body": [
+            "RC4Crypt(${cInput},${cKey},${1|.T.,.F.,/*lIsReturnASCII*/|},${2|.T.,.F.,/*lIsInputASCII*/|})"
+        ],
+        "description": "RC4Crypt-Encrypts and decrypts a given string using the RC4 algorithm. RC4Crypt(<cInput>,<cKey>,[lIsReturnASCII],[lIsInputASCII])"
+    },
+    "RSAExponent": {
+        "prefix": "RSAExponent",
+        "body": [
+            "RSAExponent(${cKey},${1|.T.,.F.,/*lPublic*/|},${2/*cPassword*/})"
+        ],
+        "description": "RSAExponent-Returns the exponent (exponent) of a key in big-endian format. RSAExponent(<cKey>,<lPublic>,[cPassword])"
+    },
+    "RSAModulus": {
+        "prefix": "RSAModulus",
+        "body": [
+            "RSAModulus(${cKey},${1|.T.,.F.,/*lPublic*/|},${2/*cPassword*/})"
+        ],
+        "description": "RSAModulus-Returns the module public modulus) of a key in big-endian format. RSAModulus(<cKey>,<lPublic>,[cPassword])"
+    },
+    "SHA1": {
+        "prefix": "SHA1",
+        "body": [
+            "SHA1(${cContent},${1:/*nRetType*/})"
+        ],
+        "description": "SHA1-SHA1 (Secure Hash Algorithm) generates the hash (or digest) of a content, based on the algorithm defined in FIPS PUB 180-1 published April 17, 1995. SHA1(<cContent>,[nRetType])"
+    },
+    "SHA256": {
+        "prefix": "SHA256",
+        "body": [
+            "SHA256(${cContent},${1:/*nRetType*/})"
+        ],
+        "description": "SHA256-SHA256 generates the hash (message digest) of an input message, based on the algorithm SHA-256 the SHA-2 family, defined in FIPS PUB 180-4, and published in 2001 by the NIST. SHA256(<cContent>,[nRetType])"
+    },
+    "SHA512": {
+        "prefix": "SHA512",
+        "body": [
+            "SHA512(${cContent},${1:/*nRetType*/})"
+        ],
+        "description": "SHA512-SHA512 generates the hash (message digest) of an input message, based on the algorithm SHA-512 of the SHA-2 family, defined in FIPS PUB 180-4, and published in 2001 by the NIST. SHA512(<cContent>,[nRetType])"
+    },
+    "SMIMESign": {
+        "prefix": "SMIMESign",
+        "body": [
+            "SMIMESign(${cCert1},${cCert2},${cDados},${cOpcoes},@${cError},@${1:/*cSenha*/})"
+        ],
+        "description": "SMIMESign-It carries the signature of S/MIME messages. SMIMESign(<cCert1>,<cCert2>,<cDados>,<cOpcoes>,<@cError>,[cSenha])"
+    },
+    "WebEncript": {
+        "prefix": "WebEncript",
+        "body": [
+            "WebEncript(${cContent},${1|.T.,.F.,/*lDecript*/|},${2|.T.,.F.,/*lUseinjava*/|})"
+        ],
+        "description": "WebEncript-Performs the encryption or decrypts a content, any informed in <cContent>. WebEncript(<cContent>,[lDecript],[lUseinjava])"
+    },
+    "WriteRSAPK": {
+        "prefix": "WriteRSAPK",
+        "body": [
+            "WriteRSAPK(${cDERFile},${cRSAFile},@${cError})"
+        ],
+        "description": "WriteRSAPK-Converts a private key in DER format (Distinguished Encoding Rules) to the PEM format (Privacy Enhanced Mail) by encrypting it with the RSA algorithm WriteRSAPK(<cDERFile>,<cRSAFile>,<@cError>)"
+    },
+    "GetSslObj": {
+        "prefix": "GetSslObj",
+        "body": [
+            "GetSslObj(${cId})"
+        ],
+        "description": "GetSslObj-Retrieves an object of class connection (SSL tSktSslConn), previously stored, to be used in the other thread. GetSslObj(<cId>)"
+    },
+    "PEMInfo": {
+        "prefix": "PEMInfo",
+        "body": [
+            "PEMInfo(${cFile},${1:/*cPassword*/})"
+        ],
+        "description": "PEMInfo-Extracts the information regarding a file of certificates in the format .PEM (Privacy Enhanced Mail). PEMInfo(<cFile>,[cPassword])"
+    },
+    "PFXCA2PEM": {
+        "prefix": "PFXCA2PEM",
+        "body": [
+            "PFXCA2PEM(${cPFXFile},${cPEMFile},@${cError},@${1:/*cPassword*/})"
+        ],
+        "description": "PFXCA2PEM-Extracts the certificate of authorisation (Certificate Authorith) of a file with the extension .PFX format (the default IIS - Internet Information Services), and generates as output a file in format .PEM (Privacy Enhanced Mail). PFXCA2PEM(<cPFXFile>,<cPEMFile>,<@cError>,[cPassword])"
+    },
+    "PFXCert2PEM": {
+        "prefix": "PFXCert2PEM",
+        "body": [
+            "PFXCert2PEM(${cPFXFile},${cPEMFile},@${cError},@${1:/*cPassword*/})"
+        ],
+        "description": "PFXCert2PEM-Extract the client certificate from a file with the extension .PFX format (the default IIS - Internet Information Services), and generates as output a file in format .PEM (Privacy Enhanced Mail). PFXCert2PEM(<cPFXFile>,<cPEMFile>,<@cError>,[cPassword])"
+    },
+    "PFXInfo": {
+        "prefix": "PFXInfo",
+        "body": [
+            "PFXInfo(${cFile},${1:/*cPassword*/})"
+        ],
+        "description": "PFXInfo-Extracts a file with the extension .PFX format (the default IIS - Internet Information Services) information regarding the client certificate, and CA certificates (Certificate Authority). PFXInfo(<cFile>,[cPassword])"
+    },
+    "PFXKey2PEM": {
+        "prefix": "PFXKey2PEM",
+        "body": [
+            "PFXKey2PEM(${cPFXFile},${cPEMFile},@${cError},@${1:/*cPassword*/})"
+        ],
+        "description": "PFXKey2PEM-Extracts the private key from a file with the extension .PFX format (the default IIS - Internet Information Services), and generates as output a file in format .PEM (Privacy Enhanced Mail). PFXKey2PEM(<cPFXFile>,<cPEMFile>,<@cError>,[cPassword])"
+    },
+    "PK8Key2PEM": {
+        "prefix": "PK8Key2PEM",
+        "body": [
+            "PK8Key2PEM(${cPK8File},${cPEMFile},@${cError},@${1:/*cPassword*/})"
+        ],
+        "description": "PK8Key2PEM-Converts a private key to PKCS#8 DER format (Distinguished Encoding Rules) to the PEM format (Privacy Enhanced Mail). PK8Key2PEM(<cPK8File>,<cPEMFile>,<@cError>,[cPassword])"
+    },
+    "SetSslObj": {
+        "prefix": "SetSslObj",
+        "body": [
+            "SetSslObj(${cId},${oObjConn})"
+        ],
+        "description": "SetSslObj-Stores an object of class connection (SSL tSktSslConn) to be able to be used in another thread SetSslObj(<cId>,<oObjConn>)"
+    },
+    "GlbLock": {
+        "prefix": "GlbLock",
+        "body": [
+            "GlbLock()"
+        ],
+        "description": "GlbLock-Gets a flag lock for serializing operations, with scope in the current instance of Protheus Server running, with release explicit through of the function GlbUnlock(). If there is not a release explicit, there will be an automatic release of the lock at the end of the process (Thread) in execution who obtained the lock. GlbLock()"
+    },
+    "GlbNmLock": {
+        "prefix": "GlbNmLock",
+        "body": [
+            "GlbNmLock(${cText})"
+        ],
+        "description": "GlbNmLock-Done the lock, an identifier named. GlbNmLock(<cText>)"
+    },
+    "GlbNmUnlock": {
+        "prefix": "GlbNmUnlock",
+        "body": [
+            "GlbNmUnlock(${cText})"
+        ],
+        "description": "GlbNmUnlock-Releases a lock of an identifier named obtained by the function GlbNmLock(). GlbNmUnlock(<cText>)"
+    },
+    "GlbUnlock": {
+        "prefix": "GlbUnlock",
+        "body": [
+            "GlbUnlock()"
+        ],
+        "description": "GlbUnlock-Releases explicitly flag lock for serializing operations obtained by the current process through of the function GlbLock() GlbUnlock()"
+    },
+    "GetMailObj": {
+        "prefix": "GetMailObj",
+        "body": [
+            "GetMailObj(${cID})"
+        ],
+        "description": "GetMailObj-Gets the object e-mail tMailManager, referring to the value reported in parameter <cID>. GetMailObj(<cID>)"
+    },
+    "MailVersion": {
+        "prefix": "MailVersion",
+        "body": [
+            "MailVersion()"
+        ],
+        "description": "MailVersion-Returns a string with the version of the implementation of the e-mail server. MailVersion()"
+    },
+    "SetMailObj": {
+        "prefix": "SetMailObj",
+        "body": [
+            "SetMailObj(${cID},${oMailObj})"
+        ],
+        "description": "SetMailObj-Stores or deletes an object TMailManager in the list of server objects SetMailObj(<cID>,<oMailObj>)"
+    },
+    "XmlC14N": {
+        "prefix": "XmlC14N",
+        "body": [
+            "XmlC14N(${cXML},${cOption},@${cError},@${cWarning})"
+        ],
+        "description": "XmlC14N-In build more than 7.00.121227 P there is a change of behavior in the canonicalization of the character reference  . XmlC14N(<cXML>,<cOption>,<@cError>,<@cWarning>)"
+    },
+    "XmlC14NFile": {
+        "prefix": "XmlC14NFile",
+        "body": [
+            "XmlC14NFile(${cFile},${cOption},@${cError},@${cWarning})"
+        ],
+        "description": "XmlC14NFile-In build more than 7.00.121227 P there is a change of behavior in the canonicalization of the character reference  . XmlC14NFile(<cFile>,<cOption>,<@cError>,<@cWarning>)"
+    },
+    "XmlChildEx": {
+        "prefix": "XmlChildEx",
+        "body": [
+            "XmlChildEx(${oParent},${cProcura})"
+        ],
+        "description": "XmlChildEx-Returns one or more nodes of the structure, according to the name of the element sought. XmlChildEx(<oParent>,<cProcura>)"
+    },
+    "XmlDelNode": {
+        "prefix": "XmlDelNode",
+        "body": [
+            "XmlDelNode(${oParent},${cNode})"
+        ],
+        "description": "XmlDelNode-Deletes a node from a XML object - the eXtensible Markup Language Language (extensible formatting). XmlDelNode(<oParent>,<cNode>)"
+    },
+    "XmlFVldSch": {
+        "prefix": "XmlFVldSch",
+        "body": [
+            "XmlFVldSch(${cXML},${cXSD},${cError},${cWarning})"
+        ],
+        "description": "XmlFVldSch-Indicates the XML file that will be validated XmlFVldSch(<cXML>,<cXSD>,<cError>,<cWarning>)"
+    },
+    "XmlGetChild": {
+        "prefix": "XmlGetChild",
+        "body": [
+            "XmlGetChild(${oParent},${nChild})"
+        ],
+        "description": "XmlGetChild-Returns a child element of the structure. XmlGetChild(<oParent>,<nChild>)"
+    },
+    "XmlGetParent": {
+        "prefix": "XmlGetParent",
+        "body": [
+            "XmlGetParent(${oNode})"
+        ],
+        "description": "XmlGetParent-Returns a node that represents the parent node of the element specified by the parameter. XmlGetParent(<oNode>)"
+    },
+    "XmlNewNode": {
+        "prefix": "XmlNewNode",
+        "body": [
+            "XmlNewNode(${oParent},${cElementName},${cRealName},${cType})"
+        ],
+        "description": "XmlNewNode-Creates a new node from any point in the XML - the EXtensible Markup Language Language (extensible formatting). XmlNewNode(<oParent>,<cElementName>,<cRealName>,<cType>)"
+    },
+    "XmlNode2Arr": {
+        "prefix": "XmlNode2Arr",
+        "body": [
+            "XmlNode2Arr(${oRoot},${cNode})"
+        ],
+        "description": "XmlNode2Arr-Transforms in the array an object (node) of the structure of the XML - the eXtensible Markup Language Language (extensible formatting). XmlNode2Arr(<oRoot>,<cNode>)"
+    },
+    "XmlParser": {
+        "prefix": "XmlParser",
+        "body": [
+            "XmlParser(${cXml},${cReplace},@${cError},@${cWarning})"
+        ],
+        "description": "XmlParser-Returns an object that has an XML structure, passed by parameter. XmlParser(<cXml>,<cReplace>,<@cError>,<@cWarning>)"
+    },
+    "XmlParserFile": {
+        "prefix": "XmlParserFile",
+        "body": [
+            "XmlParserFile(${cFile},${cReplace},@${cError},@${cWarning})"
+        ],
+        "description": "XmlParserFile-This function allows you to return an object, which has an XML structure, received from a file parameter. XmlParserFile(<cFile>,<cReplace>,<@cError>,<@cWarning>)"
+    },
+    "XmlSVldSch": {
+        "prefix": "XmlSVldSch",
+        "body": [
+            "XmlSVldSch(${cXML},${cSchemaPath},@${cError},@${cWarning})"
+        ],
+        "description": "XmlSVldSch-Performs the validation of a XML string against a XSD file (Schema) XmlSVldSch(<cXML>,<cSchemaPath>,<@cError>,<@cWarning>)"
+    },
+    "ACos": {
+        "prefix": "ACos",
+        "body": [
+            "ACos(${nCos})"
+        ],
+        "description": "ACos-Calculates the value in radians of the arc cosine of a value that represents the cosine of an angle. ACos(<nCos>)"
+    },
+    "ASin": {
+        "prefix": "ASin",
+        "body": [
+            "ASin(${nSin})"
+        ],
+        "description": "ASin-Returns the value in radians of the arc sine of an angle from the value that represents the sine of this angle. ASin(<nSin>)"
+    },
+    "ATan": {
+        "prefix": "ATan",
+        "body": [
+            "ATan(${nTan})"
+        ],
+        "description": "ATan-Calculates the value in radians of the arc tangent of a value that represents the tangent of an angle. ATan(<nTan>)"
+    },
+    "Atn2": {
+        "prefix": "Atn2",
+        "body": [
+            "Atn2(${nSin},${nCos})"
+        ],
+        "description": "Atn2-Calculates the value of the angle, in radians, of a value that represents the sine and of a value that represents the cosine. Atn2(<nSin>,<nCos>)"
+    },
+    "Cos": {
+        "prefix": "Cos",
+        "body": [
+            "Cos(${nAngle})"
+        ],
+        "description": "Cos-Calculates the cosine value of an angle (in radians). Cos(<nAngle>)"
+    },
+    "Sin": {
+        "prefix": "Sin",
+        "body": [
+            "Sin(${nAngle})"
+        ],
+        "description": "Sin-Calculates the value of the sine of an angle (in radians). Sin(<nAngle>)"
+    },
+    "Tan": {
+        "prefix": "Tan",
+        "body": [
+            "Tan(${nAngle})"
+        ],
+        "description": "Tan-Calculates the value of the tangent of an angle (in radians) Tan(<nAngle>)"
+    },
+    "AllwaysFalse": {
+        "prefix": "AllwaysFalse",
+        "body": [
+            "AllwaysFalse()"
+        ],
+        "description": "AllwaysFalse-Function compatibility always returns a value of false (.F.). AllwaysFalse()"
+    },
+    "AllwaysTrue": {
+        "prefix": "AllwaysTrue",
+        "body": [
+            "AllwaysTrue()"
+        ],
+        "description": "AllwaysTrue-Function compatibility always returns a value of true (.T.). AllwaysTrue()"
+    },
+    "Empty": {
+        "prefix": "Empty",
+        "body": [
+            "Empty(${xExp})"
+        ],
+        "description": "Empty-Determines whether the result of an expression is empty Empty(<xExp>)"
+    },
+    "ClearVarSetGet": {
+        "prefix": "ClearVarSetGet",
+        "body": [
+            "ClearVarSetGet(${cNameVar})"
+        ],
+        "description": "ClearVarSetGet-Retreat the block of code assigned to the use of the variable, so that when the variable is used, the block will no longer run. ClearVarSetGet(<cNameVar>)"
+    },
+    "VarRef": {
+        "prefix": "VarRef",
+        "body": [
+            "VarRef(${cVarRefencia},${cVarRefenciada})"
+        ],
+        "description": "VarRef-Creates a reference between the two variables. VarRef(<cVarRefencia>,<cVarRefenciada>)"
+    },
+    "VarSetGet": {
+        "prefix": "VarSetGet",
+        "body": [
+            "VarSetGet(${cVariavel},${bBloco},${1|.T.,.F.,/*lApenasUpdate*/|})"
+        ],
+        "description": "VarSetGet-Allows you to associate a block of code to a program variable of the Advpl, where the code block will be called when the variable is accessed. VarSetGet(<cVariavel>,<bBloco>,[lApenasUpdate])"
+    },
+    "conttype": {
+        "prefix": "conttype",
+        "body": [
+            "conttype(${oObj})"
+        ],
+        "description": "conttype-Returns an array with the type of the variable. Other than the ValType returns the original type of the variable. In the case of ADVPL pure will always return the ValType (contetType - Variant), but if it is called with a variable that came from a 4GL (interop) returns the type that it was created conttype(<oObj>)"
+    }
 }
