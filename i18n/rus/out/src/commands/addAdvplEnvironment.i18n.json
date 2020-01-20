@@ -13,5 +13,6 @@
 	"src.commands.addAdvplEnvironment.includeListText": "Include список",
 	"src.commands.addAdvplEnvironment.enable": "Окружающая среда включена для использования?",
 	"src.extension.yesText": "да",
-	"src.extension.noText": "Нет"
+	"src.extension.noText": "Нет",
+	"src.commands.addAdvplEnvironment.SSL": "SSL?"
 }

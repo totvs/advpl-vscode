@@ -28,5 +28,6 @@
 	"src.advplMonitor.errorText": "Erro!",
 	"src.extension.startingGetINI": "Iniciando a busca do arquivo INI...",
 	"src.extension.getINIOkText": "INI obtido com sucesso.",
-	"src.extension.compiling": "Compilando "
+	"src.extension.compiling": "Compilando ",
+	"src.extension.applyNewest": "Aplicar somente fontes atualizados?"
 }

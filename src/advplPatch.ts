@@ -45,12 +45,17 @@ export class advplPatch {
         });
     }
 
-    public apply(patchApply: string) {
+    public apply(patchApply: string, applyOldProgram: boolean=false) {
         var _args = new Array<string>();
         var that = this;
 
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--patchApply=" + patchApply);
+
+        // Parâmetro da Bridge para aplicar somente fontes atualizados ou não
+        if (applyOldProgram) {
+            _args.push("--applyOldProgram");
+        }
 
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {

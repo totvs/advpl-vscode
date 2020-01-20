@@ -28,5 +28,6 @@
 	"src.advplMonitor.errorText": "Error!",
 	"src.extension.startingGetINI": "Starting INI File Search...",
 	"src.extension.getINIOkText": "Obtaining the successful INI.",
-	"src.extension.compiling": "Compiling "
+	"src.extension.compiling": "Compiling ",
+	"src.extension.applyNewest": "Apply only newest files?"
 }

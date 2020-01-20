@@ -640,16 +640,27 @@ function PathApply() {
         if (!isEnvironmentSelected()) {
             return;
         }
+
         var cResource = context.fsPath;
+
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
-            patch.apply(cResource);
+
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                if (select === list[0])
+                    patch.apply(cResource, false);
+                else if (select === list[1])
+                    patch.apply(cResource, true);
+            });
 
         }
         else {
             vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
     });
+
     return disposable;
 }
 
