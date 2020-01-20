@@ -75,5 +75,6 @@
 	"advpl.serversManagement.getRpoFunctions": "Lista de funciones de RPO",
 	"advpl.serversManagement.rename": "Rebautizar",
 	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI",
-	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos"
+	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos",
+	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)"
 }

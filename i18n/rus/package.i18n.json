@@ -75,5 +75,6 @@
 	"advpl.serversManagement.getRpoFunctions": "Список ролей RPO",
 	"advpl.serversManagement.rename": "Переименовать",
 	"advpl.serversManagement.getAllEnvironments": "Получить среды INI",
-	"advpl.compileFilesOpened": "Advpl - Компилировать открытые файлы"
+	"advpl.compileFilesOpened": "Advpl - Компилировать открытые файлы",
+	"advpl.applyPatchFile": "Advpl - Применить патч (PTM)"
 }

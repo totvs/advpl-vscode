@@ -62,10 +62,10 @@ export class advplPatch {
             var xRet = data + "";
             if (xRet.indexOf("|") > 0) {
                 var values = String.fromCharCode.apply(null, data).split('|');
-                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure:') + values[3];
+                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure:') + values[3] + "\n";
             }
             else {
-                that.consoleReturn = xRet;
+                that.consoleReturn = xRet + "\n";
             }
 
         });

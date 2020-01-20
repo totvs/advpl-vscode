@@ -61,6 +61,7 @@ export async function activate(context: vscode.ExtensionContext) {
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
+    context.subscriptions.push(PathApplyFile());
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathInfo());
     //context.subscriptions.push(PathSelectFolder());
@@ -543,8 +544,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
         for (const element of documents) {
 
             // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
-            let fileSplited = element.fileName.split("\\");
-            progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + fileSplited[fileSplited.length-1] });
+            progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + path.parse(element.fileName).base });
 
             // Aguarda o retorno da chamada de compilação pelo Bridge
             await new Promise(function (resolve, reject) {
@@ -659,6 +659,47 @@ function PathApply() {
         else {
             vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
+    });
+
+    return disposable;
+}
+
+function PathApplyFile() {
+    let disposable = vscode.commands.registerCommand('advpl.applyPatchFile', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        const options: vscode.OpenDialogOptions = {
+            canSelectFolders: false,
+            canSelectFiles: true,
+            canSelectMany: false,
+            openLabel: "Selecione o Patch a aplicar",
+            filters: {'PTM Files': ['ptm']}
+        };
+
+        return vscode.window.showOpenDialog(options).then(folderUris => {
+
+            let resource = folderUris[0].fsPath;
+
+            if (fs.lstatSync(resource).isFile() && path.parse(resource).ext.toLowerCase() == ".ptm") {
+                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
+
+                let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+                vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                    if (select === list[0])
+                        patch.apply(resource, false);
+                    else if (select === list[1])
+                        patch.apply(resource, true);
+                });
+            }
+            else {
+                vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+            }
+
+        });
+
     });
 
     return disposable;
