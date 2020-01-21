@@ -4,6 +4,7 @@ import * as vscode from 'vscode';
 import IEnvironment from '../utils/IEnvironment';
 import { advplCompile } from '../advplCompile'
 import * as nls from 'vscode-nls';
+import * as path from 'path';
 
 const localize = nls.loadMessageBundle();
 
@@ -120,7 +121,7 @@ export default function cmdAddAdvplEnvironment(context): any {
     adapter.prompt(questions, answers => {
         const compile = new advplCompile();
         compile.runCipherPassword(answers.password, cipher => {
-            cipher = cipher.replace(/\r?\n?/g, '')
+            cipher = cipher.replace(/\r?\n?/g, '');
             environments.push({
                 environment: answers.environment,
                 name: answers.name,
@@ -130,11 +131,11 @@ export default function cmdAddAdvplEnvironment(context): any {
                 passwordCipher: cipher,
                 includeList: answers.includeList,
                 user: answers.user,
-                smartClientPath: answers.smartClientPath,
+                smartClientPath: answers.smartClientPath + (compile.getIsAlpha() ? path.sep  : ""),
                 enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false,
                 ssl: answers.ssl
             });
-            config.update("environments", environments)
+            config.update("environments", environments);
         })
 
     });

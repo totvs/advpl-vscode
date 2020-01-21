@@ -20,6 +20,8 @@
         "onCommand:advpl.menucompilemulti",
         "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
+        "onCommand:advpl.compileFilesOpened",
+        "onCommand:advpl.applyPatchFile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
         "onCommand:advpl.getAuthorizationId",
@@ -135,6 +137,36 @@
                     "group": "navigation"
                 }
             ],
+            "editor/title": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                },
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "navigation",
+                    "when": "resourceLangId == advpl"
+                },
+                {
+                    "command": "advpl.applyPatchFile",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
             "commandPalette": [
                 {
                     "command": "advpl.serversManagement.connect",
@@ -162,6 +194,10 @@
                 },
                 {
                     "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.patch.apply",
                     "when": "config.noExists"
                 }
             ]
@@ -596,6 +632,22 @@
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
                 "title": "%advpl.serversManagement.getAllEnvironments%"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "title": "%advpl.compileFilesOpened%",
+                "icon": {
+                    "light": "images/light/build.svg",
+                    "dark": "images/dark/build.svg"
+                }
+            },
+            {
+                "command": "advpl.applyPatchFile",
+                "title": "%advpl.applyPatchFile%",
+                "icon": {
+                    "light": "images/light/package.svg",
+                    "dark": "images/dark/package.svg"
+                }
             }
         ],
         "keybindings": [
@@ -621,6 +673,12 @@
                 "command": "advpl.createPPO",
                 "key": "ctrl+shift+f9",
                 "mac": "cmd+f4",
+                "when": "editorLangId == advpl"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "key": "alt+f9",
+                "mac": "alt+f9",
                 "when": "editorLangId == advpl"
             }
         ],

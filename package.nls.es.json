@@ -58,7 +58,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Depurar/Debuguear.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente en inicio de Depuración/Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo",
-	"advpl.selectEnvironment.title": "Gerente de medio Ambiente",
+	"advpl.selectEnvironment.title": "AdvPL - Gerente de medio Ambiente",
 	"advpl.configuration.properties.ADVPLDICTIONARY": "Diccionario de Subtítulos de Servidores y Servicios",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Dirección IP del servidor relacionada con el Servicio (si se omite, este título servirá para todos los atributos con el mismo nombre)",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Si la configuración es para el servidor: use la dirección IP, si es para el servicio: use el puerto de servicio",
@@ -71,5 +71,7 @@
 	"advpl.serversManagement.getRpoInfos": "Listar objetos RPO",
 	"advpl.serversManagement.getRpoFunctions": "Lista de funciones de RPO",
 	"advpl.serversManagement.rename": "Rebautizar",
-	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI"
+	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI",
+	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos",
+	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)"
 }

@@ -48,6 +48,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompileProjet());
     context.subscriptions.push(menucompiletextfile());
     context.subscriptions.push(GetINI());
+    context.subscriptions.push(compileFilesOpened());
 
     context.subscriptions.push(getAuthorizationId());
     context.subscriptions.push(CipherPassword());
@@ -60,6 +61,7 @@ export async function activate(context: vscode.ExtensionContext) {
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
+    context.subscriptions.push(PathApplyFile());
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathInfo());
     //context.subscriptions.push(PathSelectFolder());
@@ -221,7 +223,7 @@ function generateAuthorizationConfig() {
     return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
-export function createAdvplCompile(cSource: string, cDescription: string) {
+export function createAdvplCompile(cSource: string, cDescription: string, ignoreEvents: Boolean = false) {
     let compile: advplCompile;
 
     try {
@@ -230,19 +232,25 @@ export function createAdvplCompile(cSource: string, cDescription: string) {
             advplDiagnosticCollection,
             OutPutChannel
         );
-        compile.setonError(function () {
-            isCompiling = false;
-        });
-        compile.setAfterCompileOK(function () {
-            if (!(cSource == null)) {
-                vscode.window.setStatusBarMessage(
-                    cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
-                );
-            } else if (!(cDescription == null)) {
-                OutPutChannel.log(cDescription)
-            }
-            isCompiling = false;
-        });
+
+        if (!ignoreEvents) {
+
+            compile.setonError(function () {
+                isCompiling = false;
+            });
+            compile.setAfterCompileOK(function () {
+                if (!(cSource == null)) {
+                    vscode.window.setStatusBarMessage(
+                        cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
+                    );
+                } else if (!(cDescription == null)) {
+                    OutPutChannel.log(cDescription)
+                }
+
+                isCompiling = false;
+            });
+        }
+
         isCompiling = true;
     } catch (e) {
         OutPutChannel.log(localize('src.extension.compileInitializationErrorText', 'Error in compilation initialization:') + (<Error>e).message);
@@ -407,7 +415,7 @@ function compile() {
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
 
-        if (editor.document.isDirty) {
+        if (editor.document.isDirty || editor.document.isUntitled) {
             let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
             vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveConfirmationText', 'The file is not saved and was modified. Save file before compilation?') }).then(function (select) {
                 console.log(select);
@@ -453,8 +461,115 @@ function __internal_compile(cSource, editor, lbuildPPO) {
         }
     }
 }
-function GetDebugPath()
-{
+
+function compileFilesOpened() {
+    let disposable = vscode.commands.registerCommand('advpl.compileFilesOpened', function (context) {
+        let hasDirty = false;
+
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        if (isCompiling) {
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+            return;
+        }
+
+        // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
+        let textDocuments = vscode.workspace.textDocuments.filter(file => file.languageId === "advpl");
+
+        if (textDocuments.find(file => file.isDirty || file.isUntitled)) {
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+
+            // Força o usuário a salvar as alterações antes de continuar
+            vscode.window.showQuickPick(list, { placeHolder: "Existem arquivos abertos não salvos. Deseja salvar para continuar?" }).then(function (select) {
+                if (select === list[0]) {
+                    textDocuments.forEach(element => {
+                        element.save();
+                    });
+                } else {
+                    // vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled!'), 5000);
+                    hasDirty = true;
+                }
+            });
+        }
+
+        // Caso não hajam arquivos pendentes de salvamento continua a compilação
+        if (!hasDirty) {
+
+            vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                // title: "Compilando arquivos...",
+                cancellable: false
+            }, (progress, token) => {
+
+                return new Promise(resolve => {
+                    progress.report({ increment: 0 });
+
+                    __internal_compile_callback(textDocuments, progress).then(() => {
+                        resolve();
+                    });
+
+                });
+            });
+        }
+
+    });
+
+    return disposable;
+}
+
+async function __internal_compile_callback(documents: vscode.TextDocument[],
+    progress: vscode.Progress<{ message?: string; increment?: number }>) {
+
+    // Verifica se está selecionado um ambiente
+    if (!isEnvironmentSelected()) {
+        return;
+    }
+
+    if (isCompiling) {
+        OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+        return;
+    }
+
+    // Cria o objeto de compilação
+    let compile = createAdvplCompile(null, null, true);
+
+    if (!(compile == null)) {
+
+        // Limpa a aba de problemas aqui, pois a função de compilação utilizada irá fazer várias compilações em Loop.
+        advplDiagnosticCollection.clear();
+
+        // Percorre os arquivos abertos do Workspace para compilar. A função "For Of" aguarda a finalização de cada operação await.
+        for (const element of documents) {
+
+            // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
+            progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + path.parse(element.fileName).base });
+
+            // Aguarda o retorno da chamada de compilação pelo Bridge
+            await new Promise(function (resolve, reject) {
+                // Chama o método da classe que compila o arquivo com Callback
+                compile.setonError(function () {
+                    reject();
+                });
+
+                compile.compileCallBack(element.fileName,
+                    function (compile) {
+                        // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
+                        compile._lastAppreMsg = "";
+                        resolve();
+                    }
+                );
+            }).catch(() => console.log("Error on Promise of __internal_compile_callback"));
+        }
+
+        // Retira o modo de compilação da Extensão
+        isCompiling = false;
+    }
+
+}
+
+function GetDebugPath() {
 
     let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {
         let path = debugBrdige.getAdvplDebugBridge();
@@ -525,16 +640,68 @@ function PathApply() {
         if (!isEnvironmentSelected()) {
             return;
         }
+
         var cResource = context.fsPath;
+
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
-            patch.apply(cResource);
+
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+            vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                if (select === list[0])
+                    patch.apply(cResource, false);
+                else if (select === list[1])
+                    patch.apply(cResource, true);
+            });
 
         }
         else {
             vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
     });
+
+    return disposable;
+}
+
+function PathApplyFile() {
+    let disposable = vscode.commands.registerCommand('advpl.applyPatchFile', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        const options: vscode.OpenDialogOptions = {
+            canSelectFolders: false,
+            canSelectFiles: true,
+            canSelectMany: false,
+            openLabel: "Selecione o Patch a aplicar",
+            filters: {'PTM Files': ['ptm']}
+        };
+
+        return vscode.window.showOpenDialog(options).then(folderUris => {
+
+            let resource = folderUris[0].fsPath;
+
+            if (fs.lstatSync(resource).isFile() && path.parse(resource).ext.toLowerCase() == ".ptm") {
+                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
+
+                let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+                vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                    if (select === list[0])
+                        patch.apply(resource, false);
+                    else if (select === list[1])
+                        patch.apply(resource, true);
+                });
+            }
+            else {
+                vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+            }
+
+        });
+
+    });
+
     return disposable;
 }
 

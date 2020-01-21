@@ -183,7 +183,7 @@ export class advplCompile {
         this.genericCompile(files,3);
     }
 
-    private genericCompile(sourceName: string, compileType : number) {
+    private genericCompile(sourceName: string, compileType: number, done?: Function) {
         this.compileStartTime = new Date();
         var _args = new Array<string>()
         var that = this;
@@ -211,6 +211,11 @@ export class advplCompile {
             let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.compilationFinishedText", "Compilation finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+
+            if (done) {
+                done(that);
+            }
+
         });
     }
 
@@ -296,10 +301,15 @@ export class advplCompile {
                 this.outChannel.log(lErrorFound ?
                     ( lAbort ? localize("src.advplCompile.compilationAbortedText", "Compilation aborted, check the log or the Problems tab!") : localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") ) :
                     localize("src.advplCompile.compilationFinishedOkText", "Compilation finished successfully."));
-                this.afterCompile();
+
+                if (this.afterCompile) {
+                    this.afterCompile();
+                }
             }
             else {
-                this.onError();
+                if (this.onError) {
+                    this.onError();
+                }
             }
         }
         catch (ex) {
@@ -459,6 +469,17 @@ export class advplCompile {
             done(that.iniContent);
 
         });
+    }
+
+    public getIsAlpha() : boolean {
+        return this.isAlpha;
+    }
+
+    public compileCallBack(sourceName: string, done?: Function) {
+        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source: ") + sourceName + "\n");
+        // Não limpo diagnosticCollection aqui, pois essa rotina será chamada em Loop para cada arquivo
+        // aberto, e será necessário mostrar os problemas de todos os fontes de uma vez
+        this.genericCompile(sourceName, 0, done);
     }
 
 }

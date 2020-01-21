@@ -29,11 +29,12 @@ Essa extensão possui as seguintes features implementadas:
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
 * Geração de PPO do fonte(Para fazer isso utilize CTRL+SHIFT+F9)
-* Mac OSX 
+* Mac OSX
 * Linux
 * TL++
 * TdsReplay
 * Suporte ao remote WEBAPP
+* Compilação de fontes Abertos
 
 ## Build 191205P
 
@@ -50,6 +51,7 @@ Veja a seguinte pagina na [Wiki](https://github.com/killerall/advpl-vscode/wiki/
 ## Configurações
 
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
+
 ## Gerenciador de Ambiente
 
 Agora é possível Gerenciar de forma intuitiva todos os ambientes já configurados e até mesmo os novos que forem sendo criados:
@@ -65,6 +67,7 @@ Agora é possível Gerenciar de forma intuitiva todos os ambientes já configura
 * CTRL + F9 - Compila o fonte atual
 * CTRL + SHIFT +  F9 - Gera o PPO do fonte atual
 * CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
+* ALT + F9 - Compilar fontes Abertos
 
 # No Debug
 
@@ -95,4 +98,3 @@ Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com
 Obs. Para português, é necessario instalar uma extensão da [microsoft.](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-pt-BR)
 
 Caso você queira contribuir com a localização [veja.](https://github.com/killerall/advpl-vscode/wiki/Localiza%C3%A7%C3%A3o)
-

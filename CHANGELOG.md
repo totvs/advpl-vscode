@@ -1,9 +1,24 @@
+## 0.X.x
+ - Melhoria via Pull Request: [Compilação de fontes Abertos](https://github.com/totvs/advpl-vscode/pull/396)
+ - Melhoria via Pull Request: [Aplicar Patch selecionando o arquivo](https://github.com/totvs/advpl-vscode/pull/396)
+ - Melhoria: Aplicação de Patch [TypeScript] - Ao aplicar um Patch, a extensão irá perguntar se deseja aplicar somente arquivos atualizados
+ - Melhorias no Gerenciador de Ambientes:
+   - Ajustado ícones usados no Gerenciador de Ambientes para o [novo padrão do VsCode](https://github.com/microsoft/vscode-icons)
+   - Ajustado opção "Renomear" para trazer o valor atual como Default
+   - Agora quando o mouse é posicionado em um item do Gerenciador, a tooltip mostrará os dados do Label + Descrição (exceto quando forem iguais)
+   - Ajustado título da View de Gerenciamento de Ambientes
+ - Melhoria: Adicionado novos Snippets AdvPL na extensão
+ - Correção: Ajustado Wizard de Ambientes para que adicione o separador de caminhos no final do SmartClient Path (na Alpha é necessário ter)
+   - Gabriel Alencar
+ - Correção via Pull Request: [Nova versão de appserver e opção de SSL](https://github.com/totvs/advpl-vscode/pull/392)
+   - Daniel Mendes
+
 ## 0.13.0
  - Melhoria: [Suporte ao Binário 191205P](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)
- - Correção via Pull Request: [Assistente de criação de ambientes fecha ao perder o foco](https://github.com/totvs/advpl-vscode/issues/386) 
+ - Correção via Pull Request: [Assistente de criação de ambientes fecha ao perder o foco](https://github.com/totvs/advpl-vscode/issues/386)
     - Gabriel Alencar
  - Correção: Habilitado a extensão para uso de APW.
- - Correção: Monitor cortava o Json de retorno 
+ - Correção: Monitor cortava o Json de retorno
 
 ## 0.12.3
 - Melhoria: [Suporte ao SmartClient com WEBAPP](https://github.com/totvs/advpl-vscode/issues/370)

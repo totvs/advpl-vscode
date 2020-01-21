@@ -125,7 +125,8 @@ export class ServerManagementView {
 
 		let options: vscode.InputBoxOptions = {
 			prompt: localize('src.ServerManagementView.RENAME', "Rename"),
-			placeHolder: oldLabel,
+			placeHolder: localize('src.ServerManagementView.INFORMELABEL', "Enter the Label to change."),
+			value: oldLabel,
 			validateInput: function (newLabel: string) {
 
 				// Não permite label vazio
@@ -333,7 +334,7 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 						toDep(
 							service.serviceName,
 							service.servicePort,
-							service.serviceName,
+							service.serviceName.toUpperCase().trim() == service.servicePort.toUpperCase().trim() ? service.serviceName : service.serviceName + " - " + service.servicePort,
 							service.isConnected,
 							service.isConnected ? Context.ServiceConnected : Context.Service,
 							childElement.label,
@@ -354,7 +355,7 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 						toDep(
 							environment.environmentLabel,
 							environment.environment,
-							environment.environmentLabel,
+							environment.environmentLabel.toUpperCase().trim() == environment.environment.toUpperCase().trim() ? environment.environmentLabel : environment.environmentLabel + " - " + environment.environment,
 							environment.isConnected,
 							environment.isConnected ? Context.EnvironmentConnected : Context.Environment,
 							childElement.label,
@@ -369,7 +370,7 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 				server => environments.push(
 					toDep(server.serverName,
 						server.serverIP,
-						server.serverName,
+						server.serverName.toUpperCase().trim() == server.serverIP.toUpperCase().trim() ? server.serverName : server.serverName + " - " + server.serverIP,
 						server.isConnected,
 						server.isConnected ? Context.ServerConnected : Context.Server,
 						"",

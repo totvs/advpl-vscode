@@ -35,8 +35,8 @@
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.USER": "Usuario com privilegio de Administração para conectar no servidor.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE": "Habilita ou não um Ambiente da lista.",
 	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.DEFRAGPACK": "Erase all old infos on rpo",
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP", 
-	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL": "Habilita o uso de SSL na comunicação com o appserver.", 
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT": "Porta do servico de WEBAPP",
+	"advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL": "Habilita o uso de SSL na comunicação com o appserver.",
 	"advpl.configuration.properties.ADVPLCOMPILE_ALPHA": "Alpha version compile.",
 	"advpl.configuration.properties.ADVPLCOMPILE_THREADS": "Numero de threads utilizada para compilação de folder.",
 	"advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX": "Regex dos tipos de arquivos que serão compilados quando selecionar compilação de pasta",
@@ -61,7 +61,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente no inicio do Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
 	"advpl.replaySelect": "Advpl - Selecione o arquivo do replay",
-	"advpl.selectEnvironment.title": "Gerenciador de Ambientes",
+	"advpl.selectEnvironment.title": "AdvPL - Gerenciador de Ambientes",
 	"advpl.configuration.properties.ADVPLDICTIONARY": "Dicionário de legendas dos Servidores e Serviços",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT": "Endereço IP do Servidor relacionado ao Serviço (caso seja omitido, esta legenda servirá para todos os atributos com mesmo nome)",
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME": "Caso a configuração seja para Servidor: Usar o endereço IP, caso seja para serviço: Usar a Porta do Serviço",
@@ -74,6 +74,8 @@
 	"advpl.serversManagement.getRpoInfos": "Listar objetos do RPO",
 	"advpl.serversManagement.getRpoFunctions": "Listar funções do RPO",
 	"advpl.serversManagement.rename": "Renomear",
-	"advpl.serversManagement.getAllEnvironments": "Obter ambientes do INI"
+	"advpl.serversManagement.getAllEnvironments": "Obter ambientes do INI",
+	"advpl.compileFilesOpened": "Advpl - Compilar arquivos abertos",
+	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)"
 
 }
