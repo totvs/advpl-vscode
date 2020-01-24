@@ -8,6 +8,7 @@
    - Agora quando o mouse é posicionado em um item do Gerenciador, a tooltip mostrará os dados do Label + Descrição (exceto quando forem iguais)
    - Ajustado título da View de Gerenciamento de Ambientes
  - Melhoria: Adicionado novos Snippets AdvPL na extensão
+ - Melhoria: Adicionado novo *type* "Variadic" como tipo reconhecido na linguagem AdvPL
  - Correção: Ajustado Wizard de Ambientes para que adicione o separador de caminhos no final do SmartClient Path (na Alpha é necessário ter)
    - Gabriel Alencar
  - Correção via Pull Request: [Nova versão de appserver e opção de SSL](https://github.com/totvs/advpl-vscode/pull/392)
