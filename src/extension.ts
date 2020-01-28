@@ -680,23 +680,33 @@ function PathApplyFile() {
 
         return vscode.window.showOpenDialog(options).then(folderUris => {
 
-            let resource = folderUris[0].fsPath;
+            return vscode.window.showOpenDialog(options).then(folderUris => {
 
-            if (fs.lstatSync(resource).isFile() && path.parse(resource).ext.toLowerCase() == ".ptm") {
-                var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
+                if (folderUris) {
 
-                let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
-                vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+                    let resource = folderUris[0].fsPath;
 
-                    if (select === list[0])
-                        patch.apply(resource, false);
-                    else if (select === list[1])
-                        patch.apply(resource, true);
-                });
-            }
-            else {
-                vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
-            }
+                    if (fs.lstatSync(resource).isFile() && path.parse(resource).ext.toLowerCase() == ".ptm") {
+                        var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
+
+                        let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+                        vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                            if (select === list[0])
+                                patch.apply(resource, false);
+                            else if (select === list[1])
+                                patch.apply(resource, true);
+                        });
+                    }
+                    else {
+                        vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+                    }
+
+                } else {
+                    vscode.window.showWarningMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+                }
+
+            });
 
         });
 

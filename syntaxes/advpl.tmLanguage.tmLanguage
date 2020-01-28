@@ -636,7 +636,7 @@
         <key>name</key>
         <string>meta.declaration.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -830,7 +830,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -935,7 +935,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -1306,7 +1306,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object)</string>
+            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)</string>
             <key>captures</key>
             <dict>
               <key>1</key>
