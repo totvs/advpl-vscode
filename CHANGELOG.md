@@ -13,6 +13,11 @@
    - Gabriel Alencar
  - Correção via Pull Request: [Nova versão de appserver e opção de SSL](https://github.com/totvs/advpl-vscode/pull/392)
    - Daniel Mendes
+ - Correção: [Debug não para em Breakpoints com o Alpha](https://github.com/totvs/advpl-vscode/issues/395)
+ - Correção: [Não compila na versão Alpha (Windows)](https://github.com/totvs/advpl-vscode/issues/388)
+ - Correção: [Error in compilation if folder name has spaces](https://github.com/totvs/advpl-vscode/issues/269)
+ - Correção: [Configuração "apenas fontes atualizados" aplicação patch](https://github.com/totvs/advpl-vscode/issues/227)
+ - Correção: Corrigido o stack na hora que da errolog.
 
 ## 0.13.0
  - Melhoria: [Suporte ao Binário 191205P](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)

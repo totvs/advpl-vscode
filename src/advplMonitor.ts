@@ -27,7 +27,7 @@ export class advplMonitor {
 
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--threadsInfo");
-
+        this.consoleReturn = "";
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {
             var xRet = data + "";
