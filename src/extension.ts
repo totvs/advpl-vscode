@@ -657,9 +657,9 @@ function PathApply() {
                         patch.apply(cResource, true);
                 });
             }else{
-                OutPutChannel.log("\nPara aplicar somente arquivos do patch atualizados é necessário que a configuração advpl.alpha_compile esteja habilitada.")
-                OutPutChannel.log("Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs\n")
-                // patch.apply(cResource);
+                OutPutChannel.log("\n" + localize('src.extension.patchAlphaInfo', 'To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.'))
+                OutPutChannel.log(localize('src.extension.patchAlphaSee', 'Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs') + "\n")
+                patch.apply(cResource);
             }
 
         }
@@ -704,9 +704,9 @@ function PathApplyFile() {
                                 patch.apply(resource, true);
                         });
                     }else{
-                        OutPutChannel.log("\nPara aplicar somente arquivos do patch atualizados é necessário que a configuração advpl.alpha_compile esteja habilitada.")
-                        OutPutChannel.log("Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs\n")
-                        // patch.apply(resource);
+                        OutPutChannel.log("\n" + localize('src.extension.patchAlphaInfo', 'To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.'))
+                        OutPutChannel.log(localize('src.extension.patchAlphaSee', 'Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs') + "\n")
+                        patch.apply(resource);
                     }
                 }
                 else {

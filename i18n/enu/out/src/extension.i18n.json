@@ -29,5 +29,7 @@
 	"src.extension.startingGetINI": "Starting INI File Search...",
 	"src.extension.getINIOkText": "Obtaining the successful INI.",
 	"src.extension.compiling": "Compiling ",
-	"src.extension.applyNewest": "Apply only newest files?"
+	"src.extension.applyNewest": "Apply only newest files?",
+	"src.extension.patchAlphaInfo": "To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.",
+	"src.extension.patchAlphaSee": "Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
 }

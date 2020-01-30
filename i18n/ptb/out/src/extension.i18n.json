@@ -29,5 +29,8 @@
 	"src.extension.startingGetINI": "Iniciando a busca do arquivo INI...",
 	"src.extension.getINIOkText": "INI obtido com sucesso.",
 	"src.extension.compiling": "Compilando ",
-	"src.extension.applyNewest": "Aplicar somente fontes atualizados?"
+	"src.extension.applyNewest": "Aplicar somente fontes atualizados?",
+	"src.extension.patchAlphaInfo": "Para aplicar somente arquivos do patch atualizados é necessário que a configuração advpl.alpha_compile esteja habilitada.",
+	"src.extension.patchAlphaSee": "Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
+
 }
