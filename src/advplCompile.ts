@@ -471,8 +471,23 @@ export class advplCompile {
         });
     }
 
-    public getIsAlpha() : boolean {
-        return this.isAlpha;
+    public static getIsAlpha() : boolean {
+        const config = vscode.workspace.getConfiguration("advpl");
+        let isAlpha = config.get<boolean>("alpha_compile");
+        let selectedEnvironment: string;
+        
+        selectedEnvironment = config.selectedEnvironment;
+        
+        for (let entry of config.environments) {
+            if (selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
+                if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl") {
+                    isAlpha = true;
+                }
+                break;
+            }
+        }
+        
+        return isAlpha;
     }
 
     public compileCallBack(sourceName: string, done?: Function) {

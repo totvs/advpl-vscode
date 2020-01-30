@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as nls from 'vscode-nls';
 import * as debugBrdige from  './utils/debugBridge';
+import { advplCompile } from './advplCompile';
 
 const localize = nls.loadMessageBundle();
 
@@ -53,7 +54,7 @@ export class advplPatch {
         _args.push("--patchApply=" + patchApply);
 
         // Parâmetro da Bridge para aplicar somente fontes atualizados ou não
-        if (applyOldProgram) {
+        if (applyOldProgram && advplCompile.getIsAlpha()) {
             _args.push("--applyOldProgram");
         }
 
