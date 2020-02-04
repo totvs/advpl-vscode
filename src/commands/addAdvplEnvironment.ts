@@ -131,7 +131,7 @@ export default function cmdAddAdvplEnvironment(context): any {
                 passwordCipher: cipher,
                 includeList: answers.includeList,
                 user: answers.user,
-                smartClientPath: answers.smartClientPath + (compile.getIsAlpha() ? path.sep  : ""),
+                smartClientPath: answers.smartClientPath + (advplCompile.getIsAlpha() ? path.sep  : ""),
                 enable: answers.enable == localize('src.extension.yesText', 'Yes') ? true : false,
                 ssl: answers.ssl
             });

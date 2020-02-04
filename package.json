@@ -122,6 +122,10 @@
                     "when": "view == serversManagement && viewItem == EnvironmentConnected"
                 },
                 {
+                    "command": "advpl.applyPatchFile",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
                     "command": "advpl.serversManagement.rename",
                     "when": "view == serversManagement"
                 },
