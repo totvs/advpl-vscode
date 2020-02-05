@@ -149,7 +149,11 @@ export class advplCompile {
         //var regex = /.*\.(prw|prx)/i;
         var regex = "TEXTFILE:" + vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
-        var files = textFile + "ª" + regex;
+        if (this.isAlpha)        
+            var files = textFile + "|" + regex;        
+        else
+            var files = textFile + "ª" + regex;
+        
         this.genericCompile(files,4);
     }
 
