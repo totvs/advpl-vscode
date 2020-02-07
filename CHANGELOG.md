@@ -1,12 +1,13 @@
-## 0.X.x
+## 0.14.2
  - Melhoria via Pull Request: [Compilação de fontes Abertos](https://github.com/totvs/advpl-vscode/pull/396)
  - Melhoria via Pull Request: [Aplicar Patch selecionando o arquivo](https://github.com/totvs/advpl-vscode/pull/396)
- - Melhoria: Aplicação de Patch [TypeScript] - Ao aplicar um Patch, a extensão irá perguntar se deseja aplicar somente arquivos atualizados
+ - Melhoria: Aplicação de Patch [TypeScript] - Ao aplicar um Patch, a extensão irá perguntar se deseja [aplicar somente arquivos atualizados (Somente na Alpha)](https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs#somente-atualizados)
  - Melhorias no Gerenciador de Ambientes:
    - Ajustado ícones usados no Gerenciador de Ambientes para o [novo padrão do VsCode](https://github.com/microsoft/vscode-icons)
    - Ajustado opção "Renomear" para trazer o valor atual como Default
    - Agora quando o mouse é posicionado em um item do Gerenciador, a tooltip mostrará os dados do Label + Descrição (exceto quando forem iguais)
    - Ajustado título da View de Gerenciamento de Ambientes
+   - Adicionado opção para **Aplicar Patch** com seleção do arquivo *.ptm
  - Melhoria: Adicionado novos Snippets AdvPL na extensão
  - Melhoria: Adicionado novo *type* "Variadic" como tipo reconhecido na linguagem AdvPL
  - Correção: Ajustado Wizard de Ambientes para que adicione o separador de caminhos no final do SmartClient Path (na Alpha é necessário ter)
@@ -17,6 +18,7 @@
  - Correção: [Não compila na versão Alpha (Windows)](https://github.com/totvs/advpl-vscode/issues/388)
  - Correção: [Error in compilation if folder name has spaces](https://github.com/totvs/advpl-vscode/issues/269)
  - Correção: [Configuração "apenas fontes atualizados" aplicação patch](https://github.com/totvs/advpl-vscode/issues/227)
+ - Correção: [Linux|Mac|Windows(alpha)] - Implementado funcionamento do `"Copy Value"` nas Variáveis do Debug.
  - Correção: Corrigido o stack na hora que da errolog.
 
 ## 0.13.0

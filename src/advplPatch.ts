@@ -58,6 +58,8 @@ export class advplPatch {
             _args.push("--applyOldProgram");
         }
 
+        this.outChannel.log(localize('src.advplPatch.startPatchApplication', 'Starting Patch Application...'));
+
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {
             var xRet = data + "";

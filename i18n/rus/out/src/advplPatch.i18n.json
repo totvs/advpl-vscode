@@ -3,5 +3,6 @@
 	"src.advplPatch.applyFailureText": "Применить сбой:",
 	"src.advplPatch.startPatchAnalysisText": "Запуск анализа патчей...",
 	"src.advplPatch.patchCreateSuccessText": " успешно создан!",
-	"src.advplPatch.errorText": "Ошибка!"
+	"src.advplPatch.errorText": "Ошибка!",
+	"src.advplPatch.startPatchApplication": "Запуск патча..."
 }
