@@ -13,7 +13,8 @@
    - Adicionado opção para **Aplicar Patch** com seleção do arquivo *.ptm
  - Melhoria: Adicionado novos Snippets AdvPL na extensão (baseado nos snnipets da **AdvPLS Client**)
  - Melhoria: Adicionado novos *types* `Variadic` e `Base64Binary` como tipos reconhecidos na linguagem AdvPL
- - Melhoria: Melhorias na sintaxe Highlight para AdvPL
+ - Melhoria: Melhorias na sintaxe Highlight para tipos e objetos AdvPL
+ - Melhoria: Adicionado suporte de sintaxe para o `BeginContent`
  - Correção: Ajustado Wizard de Ambientes para que adicione o separador de caminhos no final do SmartClient Path (na Alpha é necessário ter)
    - Gabriel Alencar
  - Correção via Pull Request: [Nova versão de appserver e opção de SSL](https://github.com/totvs/advpl-vscode/pull/392)

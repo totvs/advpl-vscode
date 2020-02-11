@@ -118,6 +118,63 @@
               </dict>
             </array>
           </dict>
+          <dict>
+            <key>name</key>
+            <string>meta.begincontent.advpl</string>
+            <key>begin</key>
+            <string>(?i)\b(begincontent)\s+(var)(\s+\w+)?</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.begincontent.advpl</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.var.advpl</string>
+              </dict>
+              <key>3</key>
+              <dict>
+                <key>name</key>
+                <string>variable.advpl</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>(?i)endcontent</string>
+            <key>endCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.endcontent.advpl</string>
+              </dict>
+            </dict>
+            <key>patterns</key>
+            <array>
+              <dict>
+                <key>include</key>
+                <string>#comentario</string>
+              </dict>
+              <dict>
+                <key>include</key>
+                <string>#tipo-caracter</string>
+              </dict>
+              <dict>
+                <key>name</key>
+                <string>storage.modifier.advpl</string>
+                <key>match</key>
+                <string>%.*?%</string>
+              </dict>
+              <dict>
+                <key>name</key>
+                <string>variable.parameter.sqlquery.advpl</string>
+                <key>match</key>
+                <string>\b(\w+)\b</string>
+              </dict>
+            </array>
+          </dict>
         </array>
       </dict>
       <key>tipos</key>
