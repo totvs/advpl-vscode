@@ -56,7 +56,7 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 
 Agora é possível Gerenciar de forma intuitiva todos os ambientes já configurados e até mesmo os novos que forem sendo criados:
 
-![Demo Gerenciador de Ambientes](https://user-images.githubusercontent.com/10109480/62988989-b4037d00-be1c-11e9-81df-1adae1f71e19.png)
+![Demo Gerenciador de Ambientes](https://user-images.githubusercontent.com/10109480/74032899-d02f4380-4993-11ea-8410-63a2a663d232.png)
 
 [Leia mais](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
 

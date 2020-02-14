@@ -1,14 +1,20 @@
-## 0.X.x
+## 0.14.2
  - Melhoria via Pull Request: [Compilação de fontes Abertos](https://github.com/totvs/advpl-vscode/pull/396)
  - Melhoria via Pull Request: [Aplicar Patch selecionando o arquivo](https://github.com/totvs/advpl-vscode/pull/396)
- - Melhoria: Aplicação de Patch [TypeScript] - Ao aplicar um Patch, a extensão irá perguntar se deseja aplicar somente arquivos atualizados
+ - Melhoria: Aplicação de Patch [TypeScript]:
+   - Ao aplicar um Patch, a extensão irá perguntar se deseja [aplicar somente arquivos atualizados (Somente na Alpha)](https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs#somente-atualizados)
+   - Adicionado mensagem de inicio de aplicação do patch
+   - Adicionado mensagem de informação sugerindo usar a AlphaCompile ao aplicar Patch fora da Alpha 
  - Melhorias no Gerenciador de Ambientes:
    - Ajustado ícones usados no Gerenciador de Ambientes para o [novo padrão do VsCode](https://github.com/microsoft/vscode-icons)
-   - Ajustado opção "Renomear" para trazer o valor atual como Default
+   - Ajustado opção **Renomear** para trazer o valor atual como Default
    - Agora quando o mouse é posicionado em um item do Gerenciador, a tooltip mostrará os dados do Label + Descrição (exceto quando forem iguais)
    - Ajustado título da View de Gerenciamento de Ambientes
- - Melhoria: Adicionado novos Snippets AdvPL na extensão
- - Melhoria: Adicionado novo *type* "Variadic" como tipo reconhecido na linguagem AdvPL
+   - Adicionado opção para **Aplicar Patch** com seleção do arquivo *.ptm
+ - Melhoria: Adicionado novos Snippets AdvPL na extensão (baseado nos snnipets da **AdvPLS Client**)
+ - Melhoria: Adicionado novos *types* `Variadic` e `Base64Binary` como tipos reconhecidos na linguagem AdvPL
+ - Melhoria: Melhorias na sintaxe Highlight para tipos e objetos AdvPL
+ - Melhoria: Adicionado suporte de sintaxe para o `BeginContent`
  - Correção: Ajustado Wizard de Ambientes para que adicione o separador de caminhos no final do SmartClient Path (na Alpha é necessário ter)
    - Gabriel Alencar
  - Correção via Pull Request: [Nova versão de appserver e opção de SSL](https://github.com/totvs/advpl-vscode/pull/392)
@@ -17,7 +23,8 @@
  - Correção: [Não compila na versão Alpha (Windows)](https://github.com/totvs/advpl-vscode/issues/388)
  - Correção: [Error in compilation if folder name has spaces](https://github.com/totvs/advpl-vscode/issues/269)
  - Correção: [Configuração "apenas fontes atualizados" aplicação patch](https://github.com/totvs/advpl-vscode/issues/227)
- - Correção: Corrigido o stack na hora que da errolog.
+ - Correção: [Linux|Mac|Windows(alpha)] - Implementado funcionamento do `"Copy Value"` nas Variáveis do Debug
+ - Correção: Corrigido o stack na hora que da errolog
 
 ## 0.13.0
  - Melhoria: [Suporte ao Binário 191205P](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)
