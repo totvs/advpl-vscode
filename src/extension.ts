@@ -78,6 +78,15 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(ReplaySelect());
     context.subscriptions.push(getReplayTmpDir());
     context.subscriptions.push(getReplayExecId());
+/* Trace de Debug
+    vscode.debug.registerDebugAdapterTrackerFactory('advpl', {
+        createDebugAdapterTracker(session: vscode.DebugSession) {
+          return {
+            onWillReceiveMessage: m => fs.appendFileSync('debugtrace.txt', "\n#################DIDSEND START#####################" +`> ${JSON.stringify(m, undefined, 2)}` + "\n#################DIDSEND STOP#####################" ),
+            onDidSendMessage: m =>  fs.appendFileSync('debugtrace.txt', "\n#################Receive START#####################" +`> ${JSON.stringify(m, undefined, 2)}` + "\n#################Receive STOP#####################" )
+          };
+        }
+      });*/
     //context.subscriptions.push(getReplayPath());
 
     // Binds do Servers View
