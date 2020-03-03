@@ -42,7 +42,7 @@ export class ServerManagementView {
 		// Registra o comando para retornar as funções dos arquivos arquivos presentes no Ambiente
 		vscode.commands.registerCommand("advpl.serversManagement.getRpoFunctions", (element) => this.getRpoFunctions(element));
 		// Registra o comando para desabilitar o Ambiente
-		vscode.commands.registerCommand("advpl.serversManagement.DisableEnvironment", (element) => this.disable(element));
+		vscode.commands.registerCommand("advpl.serversManagement.DeleteEnvironment", (element) => this.delete(element));
 	}
 
 	get provider() {
@@ -254,7 +254,7 @@ export class ServerManagementView {
 		vscode.commands.executeCommand("advpl.monitor.getRpoFunctions");
 	}
 
-	disable(element: Dependency): any {
+	delete(element: Dependency): any {
 		let config = this.Config;
 		let environments = this.EnvironmentsConfig;
 
@@ -262,21 +262,21 @@ export class ServerManagementView {
 			localize('src.ServerManagementView.yesText', 'Yes'),
 			localize('src.ServerManagementView.noText', 'No')
 		]).then(option => {
-			// Confirma se o usuário realmente deseja desabilitar o ambiente
+			// Confirma se o usuário realmente deseja DELETAR o ambiente
 			if (option === localize('src.ServerManagementView.yesText', 'Yes')) {
 				if (element.subject instanceof EnvironmentView) {
 					let obj = <EnvironmentView>element.subject;
-
+					
 					// Busca o ambiente relacionado ao serviço + servidor
-					environments.find(
-						env => env.environment === obj.environment &&
+					environments = environments.filter(
+						env => !(env.environment === obj.environment &&
 							env.port === obj.parent.servicePort &&
-							env.server === obj.parent.parent.serverIP
-					).enable = false;
+							env.server === obj.parent.parent.serverIP)
+					);
 
 					// Atualiza a configuração de ambientes
 					config.update('environments', environments).then(() => {
-						vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', "Environment ") + element.label + localize('src.ServerManagementView.DISABLED', " disabled"));
+						vscode.window.showInformationMessage(localize('src.ServerManagementView.environmentText', "Environment ") + element.label + localize('src.ServerManagementView.DELETED', " deleted"));
 					});
 
 				}

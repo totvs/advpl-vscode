@@ -4,7 +4,7 @@
     "src.ServerManagementView.INFORMELABEL": "Ingrese la etiqueta para cambiar.",
     "src.ServerManagementView.LABELINUSE": "Esta etiqueta ya está en uso.",
     "src.ServerManagementView.NAMEINUSE": "Esta etiqueta ya se está utilizando en un entorno.",
-    "src.ServerManagementView.DISABLED": " disabled",
+    "src.ServerManagementView.DELETED": " eliminado",
     "src.ServerManagementView.environmentText": "Environment ",
     "src.ServerManagementView.yesText": "Si",
     "src.ServerManagementView.noText": "No",
