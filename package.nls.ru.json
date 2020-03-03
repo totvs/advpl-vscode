@@ -65,7 +65,7 @@
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Метка, отображаемая для элемента 'NAME' в представлении сред",
 	"advpl.getINI": "Advpl - получить INI",
 	"advpl.serversManagement.AddServer": "Добавить новую среду",
-	"advpl.serversManagement.DisableEnvironment": "Отключить",
+	"advpl.serversManagement.DeleteEnvironment": "Отключить",
 	"advpl.serversManagement.connect": "Подключения",
 	"advpl.serversManagement.Defrag": "Дефрагментация",
 	"advpl.serversManagement.getRpoInfos": "Список объектов RPO",
