@@ -68,7 +68,7 @@
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Label to display for element 'NAME' in environments view",
 	"advpl.getINI": "Advpl - Get INI",
 	"advpl.serversManagement.AddServer": "Add new environment",
-	"advpl.serversManagement.DisableEnvironment": "Disable",
+	"advpl.serversManagement.DeleteEnvironment": "Delete",
 	"advpl.serversManagement.connect": "Connect",
 	"advpl.serversManagement.Defrag": "Defragment",
 	"advpl.serversManagement.getRpoInfos": "List RPO objects",

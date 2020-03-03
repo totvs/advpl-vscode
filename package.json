@@ -105,7 +105,7 @@
                     "when": "view == serversManagement && viewItem == Environment"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "command": "advpl.serversManagement.DeleteEnvironment",
                     "when": "view == serversManagement && viewItem == Environment",
                     "group": "inline"
                 },
@@ -177,7 +177,7 @@
                     "when": "config.noExists"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "command": "advpl.serversManagement.DeleteEnvironment",
                     "when": "config.noExists"
                 },
                 {
@@ -606,8 +606,8 @@
                 }
             },
             {
-                "command": "advpl.serversManagement.DisableEnvironment",
-                "title": "%advpl.serversManagement.DisableEnvironment%",
+                "command": "advpl.serversManagement.DeleteEnvironment",
+                "title": "%advpl.serversManagement.DeleteEnvironment%",
                 "icon": {
                     "light": "images/light/trash.svg",
                     "dark": "images/dark/trash.svg"

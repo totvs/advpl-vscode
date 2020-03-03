@@ -68,7 +68,7 @@
 	"advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL": "Etiqueta para mostrar para el elemento 'NAME' en la vista de entornos",
 	"advpl.getINI": "Advpl - Obtener INI",
 	"advpl.serversManagement.AddServer": "Agregar nuevo entorno",
-	"advpl.serversManagement.DisableEnvironment": "Inhabilitar",
+	"advpl.serversManagement.DeleteEnvironment": "Eliminar",
 	"advpl.serversManagement.connect": "Conectar",
 	"advpl.serversManagement.Defrag": "Desfragmentar",
 	"advpl.serversManagement.getRpoInfos": "Listar objetos RPO",
