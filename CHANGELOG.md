@@ -1,3 +1,6 @@
+## 0.14.3
+ - Melhoria: Avisar o link do uso do alpha, quando usnado o binario 19 com ssl.
+
 ## 0.14.2
  - Melhoria via Pull Request: [Compilação de fontes Abertos](https://github.com/totvs/advpl-vscode/pull/396)
  - Melhoria via Pull Request: [Aplicar Patch selecionando o arquivo](https://github.com/totvs/advpl-vscode/pull/396)
