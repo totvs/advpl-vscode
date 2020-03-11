@@ -744,7 +744,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary)|(\w+))\s*)?(optional)?</string>
+            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
