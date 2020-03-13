@@ -6,7 +6,7 @@
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.43.0"
     },
     "categories": [
         "Programming Languages"
