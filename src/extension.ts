@@ -142,6 +142,48 @@ export async function activate(context: vscode.ExtensionContext) {
         serverView.provider.refresh();
     }));
 
+    vscode.languages.registerEvaluatableExpressionProvider('advpl', {
+        provideEvaluatableExpression(document: vscode.TextDocument, position: vscode.Position):
+            vscode.ProviderResult<vscode.EvaluatableExpression> {
+
+            const wordRange = document.getWordRangeAtPosition(position);
+            const fieldAlias = document.getWordRangeAtPosition(position, /((\(\s*\w+\s*\)|\w+)->)\w+/i);
+            // const array = document.getWordRangeAtPosition(position, /\w+\s*[^º]*]/i);
+            const macroSubstituicao = document.getWordRangeAtPosition(position, /&[^:]*/i);
+            
+            const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
+            const atributo = document.getWordRangeAtPosition(position, regexAtributo);
+            
+            const regexMetodo = new RegExp("((::|self:)|([^:(\\s\\,]+\\:)+)(" + document.getText(wordRange) + "(\\([^:\\/]*\\)))", 'i')
+            const metodo = document.getWordRangeAtPosition(position, regexMetodo);
+            
+            if (fieldAlias) {
+                return new vscode.EvaluatableExpression(fieldAlias);
+            }
+            
+            // if (array) {
+            //     return new vscode.EvaluatableExpression(array);
+            // }
+
+            if (macroSubstituicao) {
+                return new vscode.EvaluatableExpression(macroSubstituicao);
+            }
+
+            if (metodo) {
+                return new vscode.EvaluatableExpression(metodo);
+            }
+
+            if (atributo) {
+                return new vscode.EvaluatableExpression(atributo);
+            }
+                
+            if (wordRange) {
+                return new vscode.EvaluatableExpression(wordRange);
+            }
+
+        }
+    })
+
     return api;
 }
 
