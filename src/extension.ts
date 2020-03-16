@@ -154,9 +154,6 @@ export async function activate(context: vscode.ExtensionContext) {
             const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
             const atributo = document.getWordRangeAtPosition(position, regexAtributo);
             
-            const regexMetodo = new RegExp("((::|self:)|([^:(\\s\\,]+\\:)+)(" + document.getText(wordRange) + "(\\([^:\\/]*\\)))", 'i')
-            const metodo = document.getWordRangeAtPosition(position, regexMetodo);
-            
             if (fieldAlias) {
                 return new vscode.EvaluatableExpression(fieldAlias);
             }
@@ -167,10 +164,6 @@ export async function activate(context: vscode.ExtensionContext) {
 
             if (macroSubstituicao) {
                 return new vscode.EvaluatableExpression(macroSubstituicao);
-            }
-
-            if (metodo) {
-                return new vscode.EvaluatableExpression(metodo);
             }
 
             if (atributo) {
