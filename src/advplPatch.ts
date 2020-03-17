@@ -6,6 +6,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as nls from 'vscode-nls';
 import * as debugBrdige from  './utils/debugBridge';
+import { advplCompile } from './advplCompile';
 
 const localize = nls.loadMessageBundle();
 
@@ -45,22 +46,29 @@ export class advplPatch {
         });
     }
 
-    public apply(patchApply: string) {
+    public apply(patchApply: string, applyOldProgram: boolean=false) {
         var _args = new Array<string>();
         var that = this;
 
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--patchApply=" + patchApply);
 
+        // Parâmetro da Bridge para aplicar somente fontes atualizados ou não
+        if (applyOldProgram && advplCompile.getIsAlpha()) {
+            _args.push("--applyOldProgram");
+        }
+
+        this.outChannel.log(localize('src.advplPatch.startPatchApplication', 'Starting Patch Application...'));
+
         var child = child_process.spawn(this.debugPath, _args);
         child.stdout.on("data", function (data) {
             var xRet = data + "";
             if (xRet.indexOf("|") > 0) {
                 var values = String.fromCharCode.apply(null, data).split('|');
-                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure:') + values[3];
+                that.consoleReturn = localize('src.advplPatch.applyFailureText', 'Apply failure:') + values[3] + "\n";
             }
             else {
-                that.consoleReturn = xRet;
+                that.consoleReturn = xRet + "\n";
             }
 
         });

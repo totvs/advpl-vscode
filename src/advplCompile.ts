@@ -21,6 +21,7 @@ export class advplCompile {
     private encoding: string;
     private compileStartTime;
     private isAlpha;
+    private iniContent: string;
     constructor(jSonInfos?: string, d?: vscode.DiagnosticCollection, OutPutChannel?) {
         this.EnvInfos = jSonInfos;
         this.diagnosticCollection = d;
@@ -30,7 +31,11 @@ export class advplCompile {
         this.encoding = "";
         if (jSonInfos) this.validateCompile(); // Throws exception
         const config = vscode.workspace.getConfiguration("advpl");
-        this.isAlpha = config.get<boolean>("alpha_compile");        
+        this.isAlpha = config.get<boolean>("alpha_compile");
+        if (process.platform != "win32")
+        {
+            this.isAlpha = true;
+        }
     }
 
     public validateCompile() {
@@ -47,7 +52,7 @@ export class advplCompile {
             foundEnvironment = false;
             for (let entry of parsedEnvInfos.environments) {
                 if(selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
-                    foundEnvironment = true;                    
+                    foundEnvironment = true;
                     if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl")
                     {
                         this.isAlpha = true;
@@ -144,7 +149,11 @@ export class advplCompile {
         //var regex = /.*\.(prw|prx)/i;
         var regex = "TEXTFILE:" + vscode.workspace.rootPath;// vscode.workspace.getConfiguration("advpl").get<string>("compileFolderRegex");
         //var files = this.walk(folder,regex);
-        var files = textFile + "ª" + regex;
+        if (this.isAlpha)        
+            var files = textFile + "|" + regex;        
+        else
+            var files = textFile + "ª" + regex;
+        
         this.genericCompile(files,4);
     }
 
@@ -157,7 +166,7 @@ export class advplCompile {
         let files;
         if (this.isAlpha)
         {
-            files = folder;
+            files = folder + "/";
         }
         else
         {
@@ -178,7 +187,7 @@ export class advplCompile {
         this.genericCompile(files,3);
     }
 
-    private genericCompile(sourceName: string, compileType : number) {
+    private genericCompile(sourceName: string, compileType: number, done?: Function) {
         this.compileStartTime = new Date();
         var _args = new Array<string>()
         var that = this;
@@ -206,6 +215,11 @@ export class advplCompile {
             let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.compilationFinishedText", "Compilation finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+
+            if (done) {
+                done(that);
+            }
+
         });
     }
 
@@ -291,13 +305,18 @@ export class advplCompile {
                 this.outChannel.log(lErrorFound ?
                     ( lAbort ? localize("src.advplCompile.compilationAbortedText", "Compilation aborted, check the log or the Problems tab!") : localize("src.advplCompile.compilationFinishedErrorsText", "Compilation finished with errors, check the Problems tab!") ) :
                     localize("src.advplCompile.compilationFinishedOkText", "Compilation finished successfully."));
-                this.afterCompile();
+
+                if (this.afterCompile) {
+                    this.afterCompile();
+                }
             }
             else {
-                this.onError();
+                if (this.onError) {
+                    this.onError();
+                }
             }
         }
-        catch (ex) {            
+        catch (ex) {
             this.outChannel.log("Bridge Return:");
             this.outChannel.log(this._lastAppreMsg);
             this.outChannel.log(ex);
@@ -331,6 +350,10 @@ export class advplCompile {
                     that.run_callBack(lRunned);
                 });
 
+            }else{
+                vscode.window.showErrorMessage(localize('src.advplCompile.notInformedSource', 'Source to be excluded not informed!'));
+                this._lastAppreMsg = null
+                this.run_callBack(false);
             }
         });
     }
@@ -402,4 +425,80 @@ export class advplCompile {
             });
         });
     }
+
+    public getINI(done?: Function) {
+        var _args = new Array<string>()
+        var that = this;
+
+        _args.push("--compileInfo=" + this.EnvInfos);
+        _args.push("--getIni");
+
+        var child = child_process.spawn(this.debugPath, _args);
+
+        that.iniContent = "";
+
+        child.stdout.on("data", function (data) {
+            var xRet = data + "";
+
+            that._lastAppreMsg += data;
+            that.iniContent += xRet;
+        });
+
+        child.on("exit", function (data) {
+            var noFoundIni = false;
+
+            if (that.iniContent) {
+                if (that.iniContent.indexOf("NOSOURCE") > 0) {
+                    that.run_callBack(false);
+                    noFoundIni = true;
+                }
+                else {
+                    // Devolve via evento o INI
+                    if (that.afterCompile) {
+                        that.afterCompile(that.iniContent);
+                    }
+                }
+
+
+            } else {
+                that.run_callBack(false);
+                noFoundIni = true;
+            }
+
+            if (noFoundIni) {
+                that.iniContent = "";
+            }
+
+            // Devolve via argumento o INI
+            done(that.iniContent);
+
+        });
+    }
+
+    public static getIsAlpha() : boolean {
+        const config = vscode.workspace.getConfiguration("advpl");
+        let isAlpha = config.get<boolean>("alpha_compile");
+        let selectedEnvironment: string;
+        
+        selectedEnvironment = config.selectedEnvironment;
+        
+        for (let entry of config.environments) {
+            if (selectedEnvironment === entry.environment || entry.hasOwnProperty('name') && selectedEnvironment === entry.name) {
+                if (entry.hasOwnProperty('totvs_language') && entry.totvs_language === "4gl") {
+                    isAlpha = true;
+                }
+                break;
+            }
+        }
+        
+        return isAlpha;
+    }
+
+    public compileCallBack(sourceName: string, done?: Function) {
+        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source: ") + sourceName + "\n");
+        // Não limpo diagnosticCollection aqui, pois essa rotina será chamada em Loop para cada arquivo
+        // aberto, e será necessário mostrar os problemas de todos os fontes de uma vez
+        this.genericCompile(sourceName, 0, done);
+    }
+
 }

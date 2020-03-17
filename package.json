@@ -2,11 +2,11 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.10.12",
+    "version": "0.14.3",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.30.0"
     },
     "categories": [
         "Programming Languages"
@@ -20,6 +20,8 @@
         "onCommand:advpl.menucompilemulti",
         "onCommand:advpl.menucompiletextfile",
         "onCommand:advpl.compile",
+        "onCommand:advpl.compileFilesOpened",
+        "onCommand:advpl.applyPatchFile",
         "onCommand:advpl.getProgramName",
         "onCommand:advpl.getDebugInfos",
         "onCommand:advpl.getAuthorizationId",
@@ -37,6 +39,29 @@
     ],
     "main": "./out/src/extension",
     "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "replay-time",
+                    "title": "Replay",
+                    "icon": "images/replay.png"
+                }
+            ]
+        },
+        "views": {
+            "replay-time": [
+                {
+                    "id": "replayTimeLine",
+                    "name": "Replay TimeLine"
+                }
+            ],
+            "explorer": [
+                {
+                    "id": "serversManagement",
+                    "name": "%advpl.selectEnvironment.title%"
+                }
+            ]
+        },
         "menus": {
             "explorer/context": [
                 {
@@ -73,6 +98,112 @@
                     "when": "resourceFilename =~ /.*\\.txt/i",
                     "group": "advpl"
                 }
+            ],
+            "view/item/context": [
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "view == serversManagement && viewItem == Environment"
+                },
+                {
+                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "when": "view == serversManagement && viewItem == Environment",
+                    "group": "inline"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.applyPatchFile",
+                    "when": "view == serversManagement && viewItem == EnvironmentConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.rename",
+                    "when": "view == serversManagement"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "view == serversManagement && viewItem == ServiceConnected"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "advpl.serversManagement.AddServer",
+                    "when": "view == serversManagement",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                },
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "navigation",
+                    "when": "resourceLangId == advpl"
+                },
+                {
+                    "command": "advpl.applyPatchFile",
+                    "group": "navigation"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
+            "editor/context": [
+                {
+                    "command": "advpl.compileFilesOpened",
+                    "group": "advpl",
+                    "when": "resourceLangId == advpl"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "advpl.serversManagement.connect",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.Defrag",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoInfos",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getRpoFunctions",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.rename",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.patch.apply",
+                    "when": "config.noExists"
+                }
             ]
         },
         "configuration": {
@@ -104,11 +235,11 @@
                             "totvs_language": {
                                 "type": "string",
                                 "enum": [
-                                    "advpl","4gl"
+                                    "advpl",
+                                    "4gl"
                                 ],
                                 "default": "advpl",
                                 "description": "language"
-                                
                             },
                             "smartClientPath": {
                                 "type": "string",
@@ -122,7 +253,12 @@
                             },
                             "serverVersion": {
                                 "type": "string",
-                                "default": "131227A",
+                                "enum": [
+                                    "131227A",
+                                    "170117A",
+                                    "191205P"
+                                ],
+                                "default": "170117A",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION%"
                             },
                             "server": {
@@ -164,6 +300,26 @@
                                 "type": "string",
                                 "default": "",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.INCLUDELIST%"
+                            },
+                            "enable": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.ENABLE%"
+                            },
+                            "defragPackAllInfo": {
+                                "type": "boolean",
+                                "default": true,
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.DEFRAGPACK%"
+                            },
+                            "webappPort": {
+                                "type": "string",
+                                "default": "8486",
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.WEBAPPPORT%"
+                            },
+                            "ssl": {
+                                "type": "boolean",
+                                "default": false,
+                                "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SSL%"
                             }
                         }
                     }
@@ -197,7 +353,7 @@
                 },
                 "advpl.compileFolderRegex": {
                     "type": "string",
-                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp)",
+                    "default": ".*\\.(prw|prx|prg|apw|aph|tres|png|bmp|res|apl|tlpp|4gl|per|msg|ahu|app)",
                     "description": "%advpl.configuration.properties.ADVPLCOMPILEFOLDERREGEX%"
                 },
                 "advpl.pathPatchBuild": {
@@ -254,6 +410,31 @@
                     "type": "boolean",
                     "default": false,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
+                },
+                "advpl.dictionary": {
+                    "type": "array",
+                    "default": [],
+                    "description": "%advpl.configuration.properties.ADVPLDICTIONARY%",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "parent": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.PARENT%"
+                            },
+                            "name": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.NAME%"
+                            },
+                            "label": {
+                                "type": "string",
+                                "default": "",
+                                "description": "%advpl.contributes.configuration.properties.DICTIONARY.items.properties.LABEL%"
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -266,7 +447,9 @@
                     ".prg",
                     ".aph",
                     ".apl",
-                    ".tlpp"
+                    ".tlpp",
+                    ".ahu",
+                    ".apw"
                 ],
                 "aliases": [
                     "Advpl(PRW)",
@@ -274,20 +457,23 @@
                     "Advpl(PRG)",
                     "Advpl(APH)",
                     "Advpl(APL)",
-                    "TLPP(tlpp)"
+                    "TLPP(tlpp)",
+                    "Advpl(AHU)",
+                    "Advpl(APW)"
                 ],
                 "configuration": "./advpl.configuration.json"
             },
             {
                 "id": "4gl",
                 "extensions": [
-                    ".4gl"                    
+                    ".4gl",
+                    ".per",
+                    ".msg"
                 ],
                 "aliases": [
-                    "4GL(4gl)"                    
+                    "4GL(4gl)"
                 ],
                 "configuration": "./4gl.configuration.json"
-
             }
         ],
         "grammars": [
@@ -339,7 +525,6 @@
                 "command": "advpl.getDebugPath",
                 "title": "Path"
             },
-
             {
                 "command": "advpl.getAuthorizationId",
                 "title": "%advpl.getAuthorizationId%"
@@ -395,6 +580,78 @@
             {
                 "command": "advpl.addAdvplEnvironment",
                 "title": "%advpl.addAdvplEnvironment%"
+            },
+            {
+                "command": "advpl.replaySelect",
+                "title": "%advpl.replaySelect%"
+            },
+            {
+                "command": "advpl.refreshReplay",
+                "title": "Advpl - Replay Refresh TimeLine"
+            },
+            {
+                "command": "advpl.multiThread",
+                "title": "Advpl - Multi-Thread"
+            },
+            {
+                "command": "advpl.getINI",
+                "title": "%advpl.getINI%"
+            },
+            {
+                "command": "advpl.serversManagement.AddServer",
+                "title": "%advpl.serversManagement.AddServer%",
+                "icon": {
+                    "light": "images/light/add.svg",
+                    "dark": "images/dark/add.svg"
+                }
+            },
+            {
+                "command": "advpl.serversManagement.DisableEnvironment",
+                "title": "%advpl.serversManagement.DisableEnvironment%",
+                "icon": {
+                    "light": "images/light/trash.svg",
+                    "dark": "images/dark/trash.svg"
+                }
+            },
+            {
+                "command": "advpl.serversManagement.connect",
+                "title": "%advpl.serversManagement.connect%"
+            },
+            {
+                "command": "advpl.serversManagement.Defrag",
+                "title": "%advpl.serversManagement.Defrag%"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoInfos",
+                "title": "%advpl.serversManagement.getRpoInfos%"
+            },
+            {
+                "command": "advpl.serversManagement.getRpoFunctions",
+                "title": "%advpl.serversManagement.getRpoFunctions%"
+            },
+            {
+                "command": "advpl.serversManagement.rename",
+                "title": "%advpl.serversManagement.rename%"
+            },
+            {
+                "command": "advpl.serversManagement.getAllEnvironments",
+                "title": "%advpl.serversManagement.getAllEnvironments%"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "title": "%advpl.compileFilesOpened%",
+                "icon": {
+                    "light": "images/light/build.svg",
+                    "dark": "images/dark/build.svg"
+                }
+            },
+            {
+                "command": "advpl.applyPatchFile",
+                "title": "%advpl.applyPatchFile%",
+                "icon": {
+                    "light": "images/light/package.svg",
+                    "dark": "images/dark/package.svg"
+                }
             }
         ],
         "keybindings": [
@@ -410,7 +667,6 @@
                 "mac": "cmd+f9",
                 "when": "editorLangId == 4gl"
             },
-
             {
                 "command": "advpl.startSmartClient",
                 "key": "ctrl+f11",
@@ -422,6 +678,12 @@
                 "key": "ctrl+shift+f9",
                 "mac": "cmd+f4",
                 "when": "editorLangId == advpl"
+            },
+            {
+                "command": "advpl.compileFilesOpened",
+                "key": "alt+f9",
+                "mac": "alt+f9",
+                "when": "editorLangId == advpl"
             }
         ],
         "debuggers": [
@@ -430,10 +692,11 @@
                 "label": "Advpl Debug",
                 "enableBreakpointsFor": {
                     "languageIds": [
-                        "advpl","4gl"
+                        "advpl",
+                        "4gl"
                     ]
                 },
-                "adapterExecutableCommand" :"advpl.getDebugPath",
+                "adapterExecutableCommand": "advpl.getDebugPath",
                 "variables": {
                     "AskForProgramName": "advpl.getProgramName",
                     "GetEnvInfos": "advpl.getDebugInfos"
@@ -454,6 +717,11 @@
                             "enviromentInfo"
                         ],
                         "properties": {
+                            "webapp": {
+                                "type": "boolean",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.webapp%",
+                                "default": true
+                            },
                             "programRun": {
                                 "type": "string",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
@@ -490,6 +758,23 @@
                         }
                     }
                 },
+                "configurationSnippets": [
+                    {
+                        "label": "Advpl Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                        "body": {
+                            "name": "Advpl Debug",
+                            "type": "advpl",
+                            "request": "launch",
+                            "args": [],
+                            "cwd": "${workspaceRoot}",
+                            "programRun": "^\"\\${command:AskForProgramName}\"",
+                            "stopOnEntry": false,
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                            "workspace": "^\"\\${workspaceFolder}/\""
+                        }
+                    }
+                ],
                 "initialConfigurations": [
                     {
                         "name": "Advpl Debug",
@@ -500,7 +785,102 @@
                         "programRun": "${command:AskForProgramName}",
                         "stopOnEntry": false,
                         "enviromentInfo": "${command:GetEnvInfos}",
-                        "workspace": "${workspaceRoot}/"
+                        "workspace": "${workspaceFolder}/"
+                    }
+                ]
+            },
+            {
+                "type": "advpl-replay",
+                "label": "Advpl Replay Debug",
+                "enableBreakpointsFor": {
+                    "languageIds": [
+                        "advpl",
+                        "4gl"
+                    ]
+                },
+                "variables": {
+                    "ReplayTmpDir": "advpl.replayTmpDir",
+                    "ReplayExecId": "advpl.replayExecId",
+                    "GetEnvInfos": "advpl.getDebugInfos"
+                },
+                "configurationAttributes": {
+                    "launch": {
+                        "required": [
+                            "ReplayTmpDir",
+                            "enviromentInfo"
+                        ],
+                        "properties": {
+                            "ReplayTmpDir": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.programrun%",
+                                "default": "${command:ReplayTmpDir}"
+                            },
+                            "replayExecId": {
+                                "type": "string",
+                                "description": "Id da execucao",
+                                "default": "${command:ReplayExecId}"
+                            },
+                            "stopOnEntry": {
+                                "type": "boolean",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry%",
+                                "default": true
+                            },
+                            "enviromentInfo": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo%",
+                                "default": "${command.GetEnvInfos}"
+                            },
+                            "workspace": {
+                                "type": "string",
+                                "default": "${workspaceFolder}/",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.workspace%"
+                            },
+                            "args": {
+                                "type": "array",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.args%",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "default": []
+                            },
+                            "cwd": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.cwd%",
+                                "default": "."
+                            }
+                        }
+                    }
+                },
+                "configurationSnippets": [
+                    {
+                        "label": "Replay Debug: Launch Configuration",
+                        "description": "A new configuration for launch advpl program.",
+                        "body": {
+                            "name": "Replay Debug",
+                            "type": "advpl-replay",
+                            "request": "launch",
+                            "args": [],
+                            "cwd": "^\"\\${workspaceFolder}/\"",
+                            "stopOnEntry": false,
+                            "replayExecId": "^\"\\${command:ReplayExecId}\"",
+                            "ReplayTmpDir": "^\"\\${command:ReplayTmpDir}\"",
+                            "enviromentInfo": "^\"\\${command:GetEnvInfos}\"",
+                            "workspace": "^\"\\${workspaceFolder}/\""
+                        }
+                    }
+                ],
+                "initialConfigurations": [
+                    {
+                        "name": "Replay Debug",
+                        "type": "advpl-replay",
+                        "request": "launch",
+                        "args": [],
+                        "cwd": "${workspaceFolder}",
+                        "stopOnEntry": false,
+                        "replayExecId": "${command:ReplayExecId}",
+                        "ReplayTmpDir": "${command:ReplayTmpDir}",
+                        "enviromentInfo": "${command:GetEnvInfos}",
+                        "workspace": "${workspaceFolder}/"
                     }
                 ]
             }
@@ -509,6 +889,13 @@
             {
                 "language": "advpl",
                 "path": "./snippets/advpl.json"
+            }
+        ],
+        "iconThemes": [
+            {
+                "id": "advplIcons",
+                "label": "AdvPL Icons",
+                "path": "./advpl-icon-theme.json"
             }
         ]
     },
@@ -521,32 +908,33 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.43",
-        "@types/node": "^6.0.40",
+        "@types/node": "^6.14.7",
         "del": "^3.0.0",
-        "mocha": "^4.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
+        "gulp-typescript": "^3.2.2",
+        "mocha": "^4.0.0",
         "run-sequence": "^2.2.0",
         "typescript": "^2.0.3",
-        "gulp-typescript": "^3.2.2",
-        "vsce": "^1.32.0",
+        "vsce": "^1.65.0",
         "vscode": "^1.1.10",
-        "vscode-debugadapter-testsupport": "^1.29.0",
+        "vscode-debugadapter-testsupport": "^1.35.0",
         "vscode-nls-dev": "^2.1.3"
     },
     "dependencies": {
         "error-ex": "^1.3.1",
         "figures": "^2.0.0",
-        "vscode-debugadapter": "^1.29.0",
+        "ini": "^1.3.5",
+        "vscode-debugadapter": "^1.35.0",
         "vscode-debugprotocol": "^1.29.0",
-        "vscode-languageclient": "1.3.1",
+        "vscode-languageclient": "^1.3.1",
         "vscode-nls": "^2.0.2"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/killerall/advpl-vscode.git"
+        "url": "https://github.com/totvs/advpl-vscode.git"
     },
     "bugs": {
-        "url": "https://github.com/killerall/advpl-vscode/issues"
+        "url": "https://github.com/totvs/advpl-vscode/issues"
     }
 }

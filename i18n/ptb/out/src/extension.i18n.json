@@ -24,5 +24,13 @@
 	"src.extension.environmentNotFoundText": "Ambiente não encontrado!",
 	"src.extension.modifiedPpoText": "O arquivo não está salvo e foi modificado. Salvar arquivo antes da geração do PPO?",
 	"src.extension.userCancelPpoText": "Ação cancelada pelo usuário, o PPO não foi gerado!",
-	"src.extension.environmentSelectErrorText": "Por favor, selecione um ambiente!"
+	"src.extension.environmentSelectErrorText": "Por favor, selecione um ambiente!",
+	"src.advplMonitor.errorText": "Erro!",
+	"src.extension.startingGetINI": "Iniciando a busca do arquivo INI...",
+	"src.extension.getINIOkText": "INI obtido com sucesso.",
+	"src.extension.compiling": "Compilando ",
+	"src.extension.applyNewest": "Aplicar somente fontes atualizados?",
+	"src.extension.patchAlphaInfo": "Para aplicar somente arquivos do patch atualizados é necessário que a configuração advpl.alpha_compile esteja habilitada.",
+	"src.extension.patchAlphaSee": "Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
+
 }

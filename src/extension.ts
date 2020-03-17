@@ -3,12 +3,14 @@ import * as nls from 'vscode-nls';
 const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
 
 import * as vscode from 'vscode';
+import { WorkspaceFolder, DebugConfiguration, ProviderResult, CancellationToken } from 'vscode';
 import { advplCompile } from './advplCompile';
 import { smartClientLaunch } from './smartClientLaunch';
 import { advplConsole } from './advplConsole';
 import { advplPatch } from './advplPatch';
 import { advplMonitor } from './advplMonitor';
 import { Environment } from './advplEnvironment';
+import { MultiThread } from './MultiThread';
 import EnvObject from './Environment';
 import { spawn, execFile, ChildProcess } from 'child_process';
 import * as path from 'path';
@@ -21,12 +23,20 @@ import { getConfigurationAsString } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
+import {replayPlay} from './replay/replaySelect';
+import {getReplayExec} from './replay/replayUtil';
+import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
+import { ServerManagementView } from './serversManagementView';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
 let isCompiling = false;
 let env;
-
+let multiThread: MultiThread;
+let oreplayPlay: replayPlay;
+function __getReplayInstance() {
+    return oreplayPlay;
+}
 export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(getProgramName());
     context.subscriptions.push(startSmartClient());
@@ -37,6 +47,8 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(menucompilemulti());
     context.subscriptions.push(menucompileProjet());
     context.subscriptions.push(menucompiletextfile());
+    context.subscriptions.push(GetINI());
+    context.subscriptions.push(compileFilesOpened());
 
     context.subscriptions.push(getAuthorizationId());
     context.subscriptions.push(CipherPassword());
@@ -44,10 +56,12 @@ export async function activate(context: vscode.ExtensionContext) {
 
     context.subscriptions.push(generateAuthorizationConfig());
     context.subscriptions.push(addAdvplEnvironment());
+    context.subscriptions.push(aaddAvplMultiThread());
 
     //Binds dos comandos de patch
     //context.subscriptions.push(PathSelectSource());
     context.subscriptions.push(PathApply());
+    context.subscriptions.push(PathApplyFile());
     context.subscriptions.push(PathBuild());
     context.subscriptions.push(PathInfo());
     //context.subscriptions.push(PathSelectFolder());
@@ -61,7 +75,32 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(DeleteSource());
     context.subscriptions.push(DefragRpo());
     context.subscriptions.push(GetDebugPath());
+    context.subscriptions.push(ReplaySelect());
+    context.subscriptions.push(getReplayTmpDir());
+    context.subscriptions.push(getReplayExecId());
+/* Trace de Debug
+    vscode.debug.registerDebugAdapterTrackerFactory('advpl', {
+        createDebugAdapterTracker(session: vscode.DebugSession) {
+          return {
+            onWillReceiveMessage: m => fs.appendFileSync('debugtrace.txt', "\n#################DIDSEND START#####################" +`> ${JSON.stringify(m, undefined, 2)}` + "\n#################DIDSEND STOP#####################" ),
+            onDidSendMessage: m =>  fs.appendFileSync('debugtrace.txt', "\n#################Receive START#####################" +`> ${JSON.stringify(m, undefined, 2)}` + "\n#################Receive STOP#####################" )
+          };
+        }
+      });*/
+    //context.subscriptions.push(getReplayPath());
 
+    // Binds do Servers View
+    context.subscriptions.push(addServer(context));
+
+    // register a configuration provider for 'mock' debug type
+	const provider = new ReplayConfigurationProvider();
+    context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
+
+    const factory = new ReplayDebugAdapterDescriptorFactory();
+		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl-replay', factory));
+		context.subscriptions.push(factory);
+
+    //vscode.debug.registerDebugConfigurationProvider("advpl-ty")
     //const debugProvider = new AdvplDebugConfigurationProvider();
     //context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider("advpl", debugProvider));
     await ensureRuntimeDependencies();
@@ -69,12 +108,39 @@ export async function activate(context: vscode.ExtensionContext) {
     env = new Environment();
     env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
 
+    // Multi-Thread no Bar
+    multiThread = new MultiThread();
+
+    oreplayPlay = new replayPlay(advplDiagnosticCollection, OutPutChannel);
+    const replayTimeLineProvider = new replaytTimeLineTree(vscode.workspace.rootPath, oreplayPlay);
+    vscode.window.registerTreeDataProvider('replayTimeLine', replayTimeLineProvider);
     //initLanguageServer(context);
     let api = {
         writeAdvplConsole(cLog) {
             OutPutChannel.log(cLog);
         }
     };
+    vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
+    vscode.commands.registerCommand('advpl.refreshReplay', () => replayTimeLineProvider.refresh());
+
+    const serverView = new ServerManagementView();
+
+    vscode.window.createTreeView("serversManagement", {
+        treeDataProvider : serverView.provider,
+        showCollapseAll : true
+    });
+
+    // Evento acionado sempre que uma configuração é alterada no Workspace
+    context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
+        // Atualiza o Status Bar de Multi-Thread
+        multiThread.changeItem();
+
+        // Atualiza o Status Bar de Ambientes
+        env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+
+        // Atualiza o TreeView de servidores
+        serverView.provider.refresh();
+    }));
 
     return api;
 }
@@ -104,7 +170,7 @@ function initLanguageServer(context: vscode.ExtensionContext) {
 
     const serverOptions = () => new Promise<ChildProcess | StreamInfo>((resolve, reject) => {
         function spawnServer(...args: string[]): ChildProcess {
-            // The server is implemented in C#         
+            // The server is implemented in C#
             const childProcess = spawn(executablePath, args);
             childProcess.stderr.on('data', (chunk: Buffer) => {
                 console.error(chunk + '');
@@ -166,7 +232,7 @@ function generateAuthorizationConfig() {
     return vscode.commands.registerCommand('advpl.generateAuthorizationConfig', generateConfigFromAuthorizationFile);
 }
 
-function createAdvplCompile(cSource: string, cDescription: string) {
+export function createAdvplCompile(cSource: string, cDescription: string, ignoreEvents: Boolean = false) {
     let compile: advplCompile;
 
     try {
@@ -175,19 +241,25 @@ function createAdvplCompile(cSource: string, cDescription: string) {
             advplDiagnosticCollection,
             OutPutChannel
         );
-        compile.setonError(function () {
-            isCompiling = false;
-        });
-        compile.setAfterCompileOK(function () {
-            if (!(cSource == null)) {
-                vscode.window.setStatusBarMessage(
-                    cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
-                );
-            } else if (!(cDescription == null)) {
-                OutPutChannel.log(cDescription)
-            }
-            isCompiling = false;
-        });
+
+        if (!ignoreEvents) {
+
+            compile.setonError(function () {
+                isCompiling = false;
+            });
+            compile.setAfterCompileOK(function () {
+                if (!(cSource == null)) {
+                    vscode.window.setStatusBarMessage(
+                        cDescription + ' ' + cSource + localize('src.extension.compiledText', ' compiled!'), 3000
+                    );
+                } else if (!(cDescription == null)) {
+                    OutPutChannel.log(cDescription)
+                }
+
+                isCompiling = false;
+            });
+        }
+
         isCompiling = true;
     } catch (e) {
         OutPutChannel.log(localize('src.extension.compileInitializationErrorText', 'Error in compilation initialization:') + (<Error>e).message);
@@ -200,10 +272,64 @@ function addAdvplEnvironment() {
     return vscode.commands.registerCommand('advpl.addAdvplEnvironment', cmdAddAdvplEnvironment);
 }
 
+function aaddAvplMultiThread() {
+    let disposable = vscode.commands.registerCommand('advpl.multiThread', function (context) {
+
+        let advplConfig = vscode.workspace.getConfiguration("advpl");
+        let newMultiThread = !advplConfig.get<boolean>("debug_multiThread");
+        let newMultiThreadTarget = undefined;
+
+        // Caso nao haja workspace configurado, altera nas configurações globais
+        if (!vscode.workspace.workspaceFolders){
+            newMultiThreadTarget = true;
+        }
+
+        // Inverte a configuração de Multi-Thread
+        advplConfig.update("debug_multiThread", newMultiThread, newMultiThreadTarget).then(e => {
+            // Atualiza o status bar de Multi-Thread
+            multiThread.changeItem(newMultiThread);
+        });
+
+    });
+
+    return disposable;
+}
+
+function ReplaySelect() {
+    return vscode.commands.registerCommand('advpl.replaySelect', function (context) {
+
+        oreplayPlay.clearReplayInfos();
+        //oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+
+        return oreplayPlay.cmdReplaySelect();
+    });
+}
+function getReplayTmpDir()
+{
+    return vscode.commands.registerCommand('advpl.replayTmpDir', function (context){
+        /*if (oreplayPlay === undefined){
+            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+            await oreplayPlay.cmdReplaySelect();
+        } */
+        return oreplayPlay.getTmpDir();
+    });
+}
+function getReplayExecId()
+{
+    return vscode.commands.registerCommand('advpl.replayExecId', function (context){
+        /*if (oreplayPlay === undefined){
+            oreplayPlay = new replayPlay(advplDiagnosticCollection,OutPutChannel);
+            await oreplayPlay.cmdReplaySelect();
+        } */
+        return oreplayPlay.getSelected();
+    });
+}
+
+
 function menucompileProjet() {
     let disposable = vscode.commands.registerCommand('advpl.menucompileProjet', function (context) {
 
-        var cSource = context._fsPath;
+        var cSource = context.fsPath;
         if (isCompiling) {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
@@ -230,7 +356,7 @@ function menucompiletextfile() {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
-            var cSource = context._fsPath;
+            var cSource = context.fsPath;
             if (fs.lstatSync(cSource).isFile()) {
                 vscode.window.setStatusBarMessage(localize('src.extension.projectStartTextFileText', 'Starting project files from text file') + cSource, 3000);
                 var compile = createAdvplCompile(cSource, localize('src.extension.projectText', 'Project'));
@@ -254,7 +380,7 @@ function menucompile() {
             OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
         }
         else {
-            var cSource = context._fsPath;
+            var cSource = context.fsPath;
             vscode.window.setStatusBarMessage(localize('src.extension.startingAdvplCompilationText', 'Starting AdvPL compilation...') + cSource, 3000);
             var compile = createAdvplCompile(cSource, localize('src.extension.sourceText', 'Source'));
             if (!(compile == null)) {
@@ -269,7 +395,7 @@ function menucompilemulti() {
     let disposable = vscode.commands.registerCommand('advpl.menucompilemulti', function (context) {
 
         //var editor = vscode.window.activeTextEditor;
-        var cResource = context._fsPath;
+        var cResource = context.fsPath;
         if (fs.lstatSync(cResource).isDirectory()) {
             if (isCompiling) {
                 OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
@@ -298,7 +424,7 @@ function compile() {
         var editor = vscode.window.activeTextEditor;
         var cSource = editor.document.fileName;
 
-        if (editor.document.isDirty) {
+        if (editor.document.isDirty || editor.document.isUntitled) {
             let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
             vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveConfirmationText', 'The file is not saved and was modified. Save file before compilation?') }).then(function (select) {
                 console.log(select);
@@ -344,16 +470,134 @@ function __internal_compile(cSource, editor, lbuildPPO) {
         }
     }
 }
-function GetDebugPath()
-{
-    
-    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {        
-        let path = debugBrdige.getAdvplDebugBridge();        
+
+function compileFilesOpened() {
+    let disposable = vscode.commands.registerCommand('advpl.compileFilesOpened', function (context) {
+        let hasDirty = false;
+
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        if (isCompiling) {
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+            return;
+        }
+
+        // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
+        let textDocuments = vscode.workspace.textDocuments.filter(file => file.languageId === "advpl");
+
+        if (textDocuments.find(file => file.isDirty || file.isUntitled)) {
+            let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+
+            // Força o usuário a salvar as alterações antes de continuar
+            vscode.window.showQuickPick(list, { placeHolder: "Existem arquivos abertos não salvos. Deseja salvar para continuar?" }).then(function (select) {
+                if (select === list[0]) {
+                    textDocuments.forEach(element => {
+                        element.save();
+                    });
+                } else {
+                    // vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled!'), 5000);
+                    hasDirty = true;
+                }
+            });
+        }
+
+        // Caso não hajam arquivos pendentes de salvamento continua a compilação
+        if (!hasDirty) {
+
+            vscode.window.withProgress({
+                location: vscode.ProgressLocation.Notification,
+                // title: "Compilando arquivos...",
+                cancellable: false
+            }, (progress, token) => {
+
+                return new Promise(resolve => {
+                    progress.report({ increment: 0 });
+
+                    __internal_compile_callback(textDocuments, progress).then(() => {
+                        resolve();
+                    });
+
+                });
+            });
+        }
+
+    });
+
+    return disposable;
+}
+
+async function __internal_compile_callback(documents: vscode.TextDocument[],
+    progress: vscode.Progress<{ message?: string; increment?: number }>) {
+
+    // Verifica se está selecionado um ambiente
+    if (!isEnvironmentSelected()) {
+        return;
+    }
+
+    if (isCompiling) {
+        OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+        return;
+    }
+
+    // Cria o objeto de compilação
+    let compile = createAdvplCompile(null, null, true);
+
+    if (!(compile == null)) {
+
+        // Limpa a aba de problemas aqui, pois a função de compilação utilizada irá fazer várias compilações em Loop.
+        advplDiagnosticCollection.clear();
+
+        // Percorre os arquivos abertos do Workspace para compilar. A função "For Of" aguarda a finalização de cada operação await.
+        for (const element of documents) {
+
+            // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
+            progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + path.parse(element.fileName).base });
+
+            // Aguarda o retorno da chamada de compilação pelo Bridge
+            await new Promise(function (resolve, reject) {
+                // Chama o método da classe que compila o arquivo com Callback
+                compile.setonError(function () {
+                    reject();
+                });
+
+                compile.compileCallBack(element.fileName,
+                    function (compile) {
+                        // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
+                        compile._lastAppreMsg = "";
+                        resolve();
+                    }
+                );
+            }).catch(() => console.log("Error on Promise of __internal_compile_callback"));
+        }
+
+        // Retira o modo de compilação da Extensão
+        isCompiling = false;
+    }
+
+}
+
+function GetDebugPath() {
+
+    let disposable = vscode.commands.registerCommand('advpl.getDebugPath', function (context) {
+        let path = debugBrdige.getAdvplDebugBridge();
         return { command: path};
-        
+
     });
     return disposable;
 }
+/*function getReplayPath()
+{
+
+    let disposable = vscode.commands.registerCommand('advpl.getReplayPath', function (context) {
+        let path = getReplayExec();
+        return { command: path};
+
+    });
+    return disposable;
+}*/
+
 function addGetDebugInfosCommand() {
     let disposable = vscode.commands.registerCommand('advpl.getDebugInfos', function (context) {
         var workSpaceInfo = vscode.workspace.getConfiguration("advpl");
@@ -393,7 +637,7 @@ function CipherPassword() {
 /***
  * Patchs
  */
-/*function PathSelectSource() 
+/*function PathSelectSource()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectSource', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
@@ -405,16 +649,87 @@ function PathApply() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        var cResource = context._fsPath;
+
+        var cResource = context.fsPath;
+
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
-            patch.apply(cResource);
+
+            if (advplCompile.getIsAlpha()){
+
+                let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+                vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                    if (select === list[0])
+                        patch.apply(cResource, false);
+                    else if (select === list[1])
+                        patch.apply(cResource, true);
+                });
+            }else{
+                OutPutChannel.log("\n" + localize('src.extension.patchAlphaInfo', 'To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.'))
+                OutPutChannel.log(localize('src.extension.patchAlphaSee', 'Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs') + "\n")
+                patch.apply(cResource);
+            }
 
         }
         else {
             vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
         }
     });
+
+    return disposable;
+}
+
+function PathApplyFile() {
+    let disposable = vscode.commands.registerCommand('advpl.applyPatchFile', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        const options: vscode.OpenDialogOptions = {
+            canSelectFolders: false,
+            canSelectFiles: true,
+            canSelectMany: false,
+            openLabel: "Selecione o Patch a aplicar",
+            filters: {'PTM Files': ['ptm']}
+        };
+
+        return vscode.window.showOpenDialog(options).then(folderUris => {
+
+            if (folderUris) {
+
+                let resource = folderUris[0].fsPath;
+
+                if (fs.lstatSync(resource).isFile() && path.parse(resource).ext.toLowerCase() == ".ptm") {
+                    var patch = new advplPatch(JSON.stringify(vscode.workspace.getConfiguration("advpl")), OutPutChannel)
+
+                    if (advplCompile.getIsAlpha()){
+                        let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+                        vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.applyNewest', 'Apply only newest files?') }).then(function (select) {
+
+                            if (select === list[0])
+                                patch.apply(resource, false);
+                            else if (select === list[1])
+                                patch.apply(resource, true);
+                        });
+                    }else{
+                        OutPutChannel.log("\n" + localize('src.extension.patchAlphaInfo', 'To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.'))
+                        OutPutChannel.log(localize('src.extension.patchAlphaSee', 'Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs') + "\n")
+                        patch.apply(resource);
+                    }
+                }
+                else {
+                    vscode.window.showErrorMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+                }
+
+            } else {
+                vscode.window.showWarningMessage(localize('src.extension.patchSelectFileErrorText', 'Please, select a patch file (*.ptm)'));
+            }
+
+        });
+
+    });
+
     return disposable;
 }
 
@@ -423,7 +738,7 @@ function PathInfo() {
         if (!isEnvironmentSelected()) {
             return;
         }
-        var cResource = context._fsPath;
+        var cResource = context.fsPath;
         if (fs.lstatSync(cResource).isFile()) {
             var patch = new advplPatch(getConfigurationAsString(), OutPutChannel)
             patch.info(cResource);
@@ -442,7 +757,7 @@ function PathBuild() {
             return;
         }
         var patch = new advplPatch(getConfigurationAsString(), OutPutChannel)
-        let fileToBuildPath = context._fsPath;
+        let fileToBuildPath = context.fsPath;
         if (fileToBuildPath == null) {
             vscode.window.showErrorMessage(localize('src.extension.textPatchSelectFileErrorText', 'Please, select a text file with the sources to be included!'));
         }
@@ -456,8 +771,8 @@ function PathBuild() {
     return disposable;
 }
 
-/*  
-function PathSelectFolder() 
+/*
+function PathSelectFolder()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.selectFolder', function (context)  {
             vscode.window.showInformationMessage("Não implementado ainda.");
@@ -466,7 +781,7 @@ return disposable;
 }
 */
 /*
-function PathFileToBuild() 
+function PathFileToBuild()
 {
 let disposable = vscode.commands.registerCommand('advpl.patch.setFileToBuild', function (context)  {
             var cResource = context._fsPath;
@@ -575,10 +890,9 @@ function selectEnvironment() {
     let disposable = vscode.commands.registerCommand('advpl.selectEnvironment', function (context) {
 
         var obj = vscode.workspace.getConfiguration("advpl").get<any>("environments");
-        let envs = obj.map(env => env["environment"]);
-        let envnames = obj.map(env => env["name"]);
+        let envs = obj.filter(env => env["enable"] != false).map(env => env["environment"]); // Filtra somente os ambientes que não estão desabilitados
+        let envnames = obj.filter(env => env["enable"] != false).map(env => env["name"]); // Filtra somente os ambientes que não estão desabilitados
         let list = envs.map((a, i) => envnames[i] == null ? a : envnames[i]);
-
 
         vscode.window.showQuickPick(list).then(function (select) {
             console.log(select);
@@ -641,7 +955,55 @@ function buildPPO() {
     return disposable;
 }
 
-function isEnvironmentSelected(): boolean {
+function GetINI() {
+    let disposable = vscode.commands.registerCommand('advpl.getINI', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+
+        // Cria o objeto de compilação
+        let compile = createAdvplCompile(null, null);
+
+        // Sobrescreve o evento após compilação do objeto 'compile'
+        compile.setAfterCompileOK(function (iniContent: string) {
+            const newFile = vscode.Uri.parse('untitled:' + path.join(vscode.workspace.rootPath, 'getIni' + (new Date()).getMilliseconds().toString() + '.ini'));
+
+            vscode.workspace.openTextDocument(newFile).then(document => {
+                const edit = new vscode.WorkspaceEdit();
+                edit.insert(newFile, new vscode.Position(0, 0), iniContent);
+
+                return vscode.workspace.applyEdit(edit).then(success => {
+                    if (success) {
+                        vscode.window.showTextDocument(document);
+                        isCompiling = false;
+                    } else {
+                        vscode.window.showInformationMessage(localize('src.advplMonitor.errorText', 'Error!'));
+                    }
+                });
+            });
+
+            OutPutChannel.log(localize('src.extension.getINIOkText', 'Obtaining the successful INI.') + "\n");
+        });
+
+        // Chama o método da classe que busca o INI
+        if (!(compile == null)) {
+            OutPutChannel.log(localize("src.extension.startingGetINI", "Starting INI File Search...") + "\n");
+            compile.getINI();
+        }
+    });
+
+    return disposable;
+}
+
+function addServer(context){
+    let disposable = vscode.commands.registerCommand('advpl.serversManagement.AddServer', async () => {
+        vscode.commands.executeCommand('advpl.addAdvplEnvironment');
+    });
+
+    return disposable;
+}
+
+export function isEnvironmentSelected(): boolean {
     let env = vscode.workspace.getConfiguration("advpl").get("selectedEnvironment");
     if (env === "" || env == undefined) {
         vscode.window.showInformationMessage(localize('src.extension.environmentSelectErrorText', 'Please, select an environment!'));
@@ -663,5 +1025,51 @@ function validEnvironment(environment) {
 async function ensureRuntimeDependencies()
 {
     debugBrdige.installAdvplDebugBridge(OutPutChannel);
-    
+
+}
+
+class ReplayConfigurationProvider implements vscode.DebugConfigurationProvider {
+    resolveDebugConfiguration(folder: WorkspaceFolder | undefined, config: DebugConfiguration, token?: CancellationToken): ProviderResult<DebugConfiguration> {
+
+		// if launch.json is missing or empty
+		if (!config.type && !config.request && !config.name) {
+			const editor = vscode.window.activeTextEditor;
+			if (editor && editor.document.languageId === 'advpl') {
+				config.type = 'advpl-replay';
+				config.name = 'Launch';
+				config.request = 'launch';
+				config.stopOnEntry = true;
+			}
+        }
+        let instance = __getReplayInstance();
+        let replayExec = instance.getSelected();
+
+		if (replayExec === undefined) {
+			return vscode.window.showInformationMessage("Please select a Replay file before.").then(_ => {
+				return undefined;	// abort launch
+			});
+		}
+
+		return config;
+	}
+
+}
+
+
+class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
+
+
+
+	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
+
+        const args = []; //Vai os parametros vai onLaunch
+
+        const program =  getReplayExec(); //"/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/TdsReplayPlay";
+
+		return new vscode.DebugAdapterExecutable(program, args);
+	}
+
+	dispose() {
+
+	}
 }

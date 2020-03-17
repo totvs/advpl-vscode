@@ -1,3 +1,5 @@
+![Version](https://vsmarketplacebadge.apphb.com/version/KillerAll.advpl-vscode.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs/KillerAll.advpl-vscode.svg) ![Rating](https://vsmarketplacebadge.apphb.com/rating-short/KillerAll.advpl-vscode.svg)
+
 # Advpl Language Support
 
 Bem vindo a extensão para desenvolvimento de Advpl no visual code. [VsCode MarketPlace](https://marketplace.visualstudio.com/items?itemName=KillerAll.advpl-vscode)
@@ -6,7 +8,6 @@ Essa extensão adiciona suporte a edição, compilação e debugging de ADVPL no
 
 Caso você encontre algum problema, por favor abra uma issue no [GitHub](https://github.com/killerall/advpl-vscode/issues).
 
-> Atenção! Essa extensão não é desenvolvida ou suportada pela TOTVS. Utilize por sua conta e risco.
 > Existe um migrador de projetos antigos do IDE Totvs (.PRJ) que pode se encontrado [aqui](https://github.com/killerall/advpl-vscode/blob/master/TDSProjectToVscode.jar).
 
 
@@ -28,14 +29,16 @@ Essa extensão possui as seguintes features implementadas:
 * Lista dos fontes/resources do rpo
 * Geração Cliente WS Protheus
 * Geração de PPO do fonte(Para fazer isso utilize CTRL+SHIFT+F9)
-* Mac OSX 
+* Mac OSX
 * Linux
 * TL++
+* TdsReplay
+* Suporte ao remote WEBAPP
+* Compilação de fontes Abertos
 
-As próximas planejadas são:
+## Build 191205P
 
-* [Language Server](https://github.com/advpl/advpl-language-server)
-
+ A Build 191205P utiliza SSL na conexão, para maiores informações consulte [aqui.](https://github.com/totvs/advpl-vscode/wiki/Suporte-ao-bin%C3%A1rio-191205P)
 
 ## Requisitos para utilização
 
@@ -49,6 +52,14 @@ Veja a seguinte pagina na [Wiki](https://github.com/killerall/advpl-vscode/wiki/
 
 Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7%C3%A3o)
 
+## Gerenciador de Ambiente
+
+Agora é possível Gerenciar de forma intuitiva todos os ambientes já configurados e até mesmo os novos que forem sendo criados:
+
+![Demo Gerenciador de Ambientes](https://user-images.githubusercontent.com/10109480/74032899-d02f4380-4993-11ea-8410-63a2a663d232.png)
+
+[Leia mais](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
+
 ## Teclas de Atalho padrões
 
 * F5  - Inicia o Debug
@@ -56,14 +67,15 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 * CTRL + F9 - Compila o fonte atual
 * CTRL + SHIFT +  F9 - Gera o PPO do fonte atual
 * CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
+* ALT + F9 - Compilar fontes Abertos
 
 # No Debug
 
 Utilizada as teclas padrões do VsCode
 
 * F5 - Run/Contiue
-* F10 - Step Into
-* F11 - Step Over
+* F10 - Step Over
+* F11 - Step Into
 
 ## Localização
 
@@ -74,9 +86,15 @@ Atualmente as seguintes linguas estão suportadas:
 * Espanhol
 * Russo
 
+## Replay
+
+Esté plugin tem a capacidade de reproduzir arquivos gerados pelo Totvs Replay.
+Não é possivel gerar o replay pela extensão apenas reproduzir o debug.
+Para maiores informações de como utilizar, veja a wiki.
+
+
 Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com/docs/getstarted/locales)
 
 Obs. Para português, é necessario instalar uma extensão da [microsoft.](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-pt-BR)
 
 Caso você queira contribuir com a localização [veja.](https://github.com/killerall/advpl-vscode/wiki/Localiza%C3%A7%C3%A3o)
-

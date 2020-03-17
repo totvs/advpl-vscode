@@ -1,0 +1,13 @@
+{
+    "src.ServerManagementView.CONTEXTVALID": "Этот параметр можно использовать только для элемента типа службы.",
+    "src.ServerManagementView.CARREGANDO": "Загрузка сред...",
+    "src.ServerManagementView.INFORMELABEL": "Введите метку для изменения.",
+    "src.ServerManagementView.LABELINUSE": "Эта метка уже используется.",
+    "src.ServerManagementView.NAMEINUSE": "Эта метка уже используется в среде.",
+    "src.ServerManagementView.DISABLED": " отключено",
+    "src.ServerManagementView.environmentText": "Среда ",
+    "src.ServerManagementView.yesText": "Да",
+    "src.ServerManagementView.noText": "Нет",
+    "src.ServerManagementView.environmentSelectedText": " выбран успешно.",
+    "src.ServerManagementView.RENAME": "Переименовать"
+}

@@ -3,5 +3,6 @@
 	"src.advplPatch.applyFailureText": "Falla al aplicar:",
 	"src.advplPatch.startPatchAnalysisText": "Iniciando el análisis del patch...",
 	"src.advplPatch.patchCreateSuccessText": " creado exitosamente!",
-	"src.advplPatch.errorText": "Error!"
+	"src.advplPatch.errorText": "Error!",
+	"src.advplPatch.startPatchApplication": "Iniciando aplicación de patch..."
 }

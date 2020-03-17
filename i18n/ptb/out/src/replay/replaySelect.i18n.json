@@ -1,0 +1,9 @@
+{
+    "src.replay.replaySelect.getReplayInfo":"Getting replay Info...",	
+	"src.replay.replaySelect.date": "Date",
+	"src.replay.replaySelect.startProgram": "Start Program",
+	"src.replay.replaySelect.choose": "Choose the recording you would like to replay",
+	"src.replay.replaySelect.strThe": "PQThe ",
+	"src.replay.replaySelect.strRec":" recording is selected from ",
+	"src.replay.replaySelect.strDebug": " file. Please Launch debug with advpl-type=replay"
+}
