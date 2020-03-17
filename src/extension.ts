@@ -27,6 +27,7 @@ import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 import { ServerManagementView } from './serversManagementView';
+import { formattingEditProvider, rangeFormattingEditProvider } from './codeFormat/formatting';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -140,7 +141,17 @@ export async function activate(context: vscode.ExtensionContext) {
 
         // Atualiza o TreeView de servidores
         serverView.provider.refresh();
-    }));
+	}));
+	
+	vscode.languages.registerDocumentFormattingEditProvider(
+		'advpl',
+		formattingEditProvider()
+	);
+
+	vscode.languages.registerDocumentRangeFormattingEditProvider(
+		'advpl',
+		rangeFormattingEditProvider()
+	);
 
     return api;
 }
