@@ -142,7 +142,8 @@ export async function activate(context: vscode.ExtensionContext) {
         serverView.provider.refresh();
     }));
 
-    vscode.languages.registerEvaluatableExpressionProvider('advpl', {
+    // Registra as expressões AdvPL tratadas para o Hover Inspect Debug
+    context.subscriptions.push(vscode.languages.registerEvaluatableExpressionProvider('advpl', {
         provideEvaluatableExpression(document: vscode.TextDocument, position: vscode.Position):
             vscode.ProviderResult<vscode.EvaluatableExpression> {
 
@@ -154,28 +155,37 @@ export async function activate(context: vscode.ExtensionContext) {
             const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
             const atributo = document.getWordRangeAtPosition(position, regexAtributo);
             
-            if (fieldAlias) {
-                return new vscode.EvaluatableExpression(fieldAlias);
-            }
-            
+            // Obs.: Comentado por conta das dificuldades de inspeção usando essa abordagem, pois o usuário poderia querere inspecionar a variável e não o item do array.
+            // Tratamento para inspeções de Arrays: aTeste[1][2]
             // if (array) {
             //     return new vscode.EvaluatableExpression(array);
             // }
-
-            if (macroSubstituicao) {
+                
+            // Tratamento para inspeções de Fields: (cAlias)->TB_FIELD ou TBL->TB_FIELD
+            if (fieldAlias) {
+                return new vscode.EvaluatableExpression(fieldAlias);
+            }
+                
+            // Tratamento para inspeções de Macro Substituíções: &cNomeVar
+            // Obs.: Conforme acordado na issue #417 seria criado uma configuração para o usuário escolher se deseja inspecionar esse tipo de estrutura.
+            if (macroSubstituicao && vscode.workspace.getConfiguration("advpl").get("debug_inspect_macro")) {
                 return new vscode.EvaluatableExpression(macroSubstituicao);
             }
-
+            
+            // Tratamento para inspeções de atributos de classe: oClasse:oAtributo1:oAtributoFilho
             if (atributo) {
                 return new vscode.EvaluatableExpression(atributo);
             }
-                
+
+            // TODO: Pensar numa forma de implementar a inspeção de variáveis em EmbededSQL %Exp:cVar% desconsiderando a sintaxe do EmbededSQL
+            
+            // Tratamento default para inspecionar palavras
             if (wordRange) {
                 return new vscode.EvaluatableExpression(wordRange);
             }
 
         }
-    })
+    }));
 
     return api;
 }

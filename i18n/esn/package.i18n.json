@@ -45,6 +45,7 @@
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWPUBLIC": "Muestra las variables Públicas.",
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWSTATICS": "Muestra las variables Estáticas.",
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWTABLES": "Muestra las tablas abiertas.",
+	"advpl.configuration.properties.ADVPLDEBUG_INSPECT_MACRO": "Habilita la inspección de macros ejecutando la expresión.",
 	"advpl.configuration.properties.ADVPLENVIRONMENTS": "Ambientes",
 	"advpl.configuration.properties.ADVPLLOGGER": "Crea archivo de log.",
 	"advpl.configuration.properties.ADVPLPATHPATCHBUILD": "Patch de cliente que debe existir para generación de patchs. En caso que el arquivo ya exista, será sobreescrito.",

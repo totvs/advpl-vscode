@@ -46,6 +46,7 @@
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWPUBLIC": "Shows Public variables.",
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWSTATICS": "Shows Static variables.",
 	"advpl.configuration.properties.ADVPLDEBUG_SHOWTABLES": "Shows opened tables.",
+	"advpl.configuration.properties.ADVPLDEBUG_INSPECT_MACRO": "Enables macro inspection by executing the expression.",
 	"advpl.configuration.properties.ADVPLENVIRONMENTS": "Environments",
 	"advpl.configuration.properties.ADVPLLOGGER": "Creates log file.",
 	"advpl.configuration.properties.ADVPLPATHPATCHBUILD": "Client Path to place patches generated (should already exist). If the file already exists, it will be overwritten.",
