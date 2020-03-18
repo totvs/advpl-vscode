@@ -159,8 +159,8 @@ export class FormattingRules {
         end: /^(\s*)(endsql)$/i
       },
       {
-        id: 'begincontent',
-        begin: /^(\s*)(begincontent)(\s+)(\w+)/i,
+        id: 'begin content',
+        begin: /^(\s*)(begincontent)(\s+)(var)(\s+)(\w+)/i,
         end: /^(\s*)(endcontent)$/i
       },
       {
