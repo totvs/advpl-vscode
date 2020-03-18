@@ -14,8 +14,10 @@ class Formatting implements DocumentFormattingEditProvider {
   // Regras de estruturas que não sofrem identação interna
   structsNoIdent: string[] = [
     'beginsql (alias)?',
-    'Comentários',
-    'Protheus Doc'
+    'comment',
+    'protheus doc',
+    'begin content',
+    'no format'
   ];
 
   provideDocumentFormattingEdits(
