@@ -5,6 +5,7 @@
     "version": "0.14.3",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
+    "homepage": "https://github.com/totvs/advpl-vscode",
     "engines": {
         "vscode": "^1.30.0"
     },
@@ -652,6 +653,10 @@
                     "light": "images/light/package.svg",
                     "dark": "images/dark/package.svg"
                 }
+            },
+            {
+                "command": "advpl.whatsNew",
+                "title": "Advpl - What's New"
             }
         ],
         "keybindings": [
@@ -922,6 +927,7 @@
         "vscode-nls-dev": "^2.1.3"
     },
     "dependencies": {
+        "@types/semver": "^7.1.0",
         "error-ex": "^1.3.1",
         "figures": "^2.0.0",
         "ini": "^1.3.5",
