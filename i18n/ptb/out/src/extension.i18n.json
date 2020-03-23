@@ -31,6 +31,7 @@
 	"src.extension.compiling": "Compilando ",
 	"src.extension.applyNewest": "Aplicar somente fontes atualizados?",
 	"src.extension.patchAlphaInfo": "Para aplicar somente arquivos do patch atualizados é necessário que a configuração advpl.alpha_compile esteja habilitada.",
-	"src.extension.patchAlphaSee": "Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
-
+	"src.extension.patchAlphaSee": "Saiba mais em: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs",
+	"src.extension.saveDirty": "Existem arquivos abertos não salvos. Deseja salvar para continuar?",
+	"src.extension.processed": " arquivos processados ​​(consulte a saída do log)."
 }

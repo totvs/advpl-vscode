@@ -34,6 +34,7 @@ let isCompiling = false;
 let env;
 let multiThread: MultiThread;
 let oreplayPlay: replayPlay;
+let cancelCompile: boolean;
 function __getReplayInstance() {
     return oreplayPlay;
 }
@@ -517,7 +518,10 @@ function __internal_compile(cSource, editor, lbuildPPO) {
 }
 
 function compileFilesOpened() {
-    let disposable = vscode.commands.registerCommand('advpl.compileFilesOpened', function (context) {
+    let disposable = vscode.commands.registerCommand('advpl.compileFilesOpened', async function (context) {
+        let textDocuments = new Array<vscode.TextDocument>();
+        let firstDocument: vscode.TextEditor;
+        let finish: boolean = false;
         let hasDirty = false;
 
         if (!isEnvironmentSelected()) {
@@ -529,20 +533,63 @@ function compileFilesOpened() {
             return;
         }
 
-        // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
-        let textDocuments = vscode.workspace.textDocuments.filter(file => file.languageId === "advpl");
+        /**
+         * Verifica se o tipo de arquivo é AdvPL.
+         * @param editor Contexto do editor posicionado.
+         */
+        function isAdvPL(editor: vscode.TextEditor): boolean {
+            return editor.document.languageId === "advpl";
+        }
 
+        // Se tiver algum arquivo aberto no editor
+        if (vscode.window.activeTextEditor) {
+
+            // Percorre todos os arquivos abertos do editor
+            do {
+
+                // Posiciona no próximo arquivo
+                await vscode.commands.executeCommand("workbench.action.nextEditor").then(e => {
+
+                    // Verifica se o arquivo é do tipo AdvPLs
+                    if (isAdvPL(vscode.window.activeTextEditor)) {
+
+                        // Caso o primeiro documento AdvPL não tenha sido definido, adiciona no array e define este como o primeiro.
+                        if (!firstDocument) {
+                            firstDocument = vscode.window.activeTextEditor;
+                            textDocuments.push(firstDocument.document);
+                        } else {
+                            // Caso o documento posicionado seja o mesmo do primeiro, termina o loop
+                            if (firstDocument.document.fileName == vscode.window.activeTextEditor.document.fileName) {
+                                finish = true;
+                            } else {
+                                // Se não adiciona no array
+                                textDocuments.push(vscode.window.activeTextEditor.document);
+                            }
+                        }
+                    }
+
+                });
+
+                // Caso tenha finalizado o Loop, volta para o primeiro arquivo do posicionamento, pois o Loop já começa mudando de arquivo
+                if (finish) {
+                    await vscode.commands.executeCommand("workbench.action.previousEditor");
+                }
+
+            } while (!finish);
+
+        }
+
+        // Verifica se todos os arquivos do tipo AdvPL abertos estão salvos.
         if (textDocuments.find(file => file.isDirty || file.isUntitled)) {
             let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
 
             // Força o usuário a salvar as alterações antes de continuar
-            vscode.window.showQuickPick(list, { placeHolder: "Existem arquivos abertos não salvos. Deseja salvar para continuar?" }).then(function (select) {
+            await vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.saveDirty', 'There are unsaved open files. Do you want to save to continue?') }).then(async function (select) {
                 if (select === list[0]) {
-                    textDocuments.forEach(element => {
-                        element.save();
-                    });
+                    for (const element of textDocuments) {
+                        await element.save();
+                    }
                 } else {
-                    // vscode.window.setStatusBarMessage(localize('src.extension.userCancelText', 'Action canceled by the user, the source was not compiled!'), 5000);
                     hasDirty = true;
                 }
             });
@@ -554,13 +601,18 @@ function compileFilesOpened() {
             vscode.window.withProgress({
                 location: vscode.ProgressLocation.Notification,
                 // title: "Compilando arquivos...",
-                cancellable: false
+                cancellable: true
             }, (progress, token) => {
+
+                token.onCancellationRequested(e => {
+                    cancelCompile = true;
+                });
 
                 return new Promise(resolve => {
                     progress.report({ increment: 0 });
 
                     __internal_compile_callback(textDocuments, progress).then(() => {
+                        cancelCompile = false;
                         resolve();
                     });
 
@@ -575,6 +627,8 @@ function compileFilesOpened() {
 
 async function __internal_compile_callback(documents: vscode.TextDocument[],
     progress: vscode.Progress<{ message?: string; increment?: number }>) {
+
+    let processed = 0;
 
     // Verifica se está selecionado um ambiente
     if (!isEnvironmentSelected()) {
@@ -596,7 +650,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
 
         // Percorre os arquivos abertos do Workspace para compilar. A função "For Of" aguarda a finalização de cada operação await.
         for (const element of documents) {
-
+        
             // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
             progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + path.parse(element.fileName).base });
 
@@ -606,19 +660,28 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
                 compile.setonError(function () {
                     reject();
                 });
-
-                compile.compileCallBack(element.fileName,
-                    function (compile) {
-                        // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
-                        compile._lastAppreMsg = "";
-                        resolve();
-                    }
-                );
+                
+                // Antes de chamar a compilação, verifica se foi solicitado um cancelamento
+                if (cancelCompile) {
+                    reject();
+                } else {
+                    compile.compileCallBack(element.fileName,
+                        function (compileCallback) {
+                            // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
+                            compileCallback._lastAppreMsg = "";
+                            processed++;
+                            resolve();
+                        }
+                    );
+                }
             }).catch(() => console.log("Error on Promise of __internal_compile_callback"));
         }
 
         // Retira o modo de compilação da Extensão
         isCompiling = false;
+
+        // Notifica o usuário quantos arquivos foram processados (solicitados compilação)
+        OutPutChannel.log(`${processed + localize('src.extension.processed', ' processed files (see log output). ')}`);
     }
 
 }

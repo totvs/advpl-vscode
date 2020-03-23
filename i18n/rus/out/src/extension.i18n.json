@@ -31,5 +31,7 @@
 	"src.extension.compiling": "Составление ",
 	"src.extension.applyNewest": "Применить только самые новые файлы?",
 	"src.extension.patchAlphaInfo": "Для применения только обновленных файлов исправлений необходимо, чтобы параметр advpl.alpha_compile был включен.",
-	"src.extension.patchAlphaSee": "Узнайте больше на: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
+	"src.extension.patchAlphaSee": "Узнайте больше на: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs",
+	"src.extension.saveDirty": "Есть несохраненные открытые файлы. Вы хотите сохранить, чтобы продолжить?",
+	"src.extension.processed": " обработанные файлы (см. вывод журнала)."
 }
