@@ -31,5 +31,7 @@
 	"src.extension.compiling": "Compiling ",
 	"src.extension.applyNewest": "Apply only newest files?",
 	"src.extension.patchAlphaInfo": "To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.",
-	"src.extension.patchAlphaSee": "Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs"
+	"src.extension.patchAlphaSee": "Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs",
+	"src.extension.saveDirty": "There are unsaved open files. Do you want to save to continue?",
+	"src.extension.processed": " processed files (see log output)."
 }
