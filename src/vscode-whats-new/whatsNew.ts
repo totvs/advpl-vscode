@@ -33,6 +33,8 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
             kind: ChangeLogKind.CHANGED, message: `Permitir <b>excluir um ambiente pelo gerenciador de ambientes</b> - (<a title=\"Open Issue #408\" 
                 href=\"https://github.com/totvs/advpl-vscode/issues/408\">Issue #408</a>)`});
         changeLog.push({
+            kind: ChangeLogKind.CHANGED, message: `Adicionado <i>type</i> <code>Object</code> na sintaxe dos <b>atributos de classe</b>`});
+        changeLog.push({
             kind: ChangeLogKind.FIXED, message: `Ao compilar arquivos abertos, compilava a Workspace inteira - (<a title=\"Open Issue #411\" 
             href=\"https://github.com/totvs/advpl-vscode/issues/411\">Issue #411</a>)</b>`});
         changeLog.push({
