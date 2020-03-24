@@ -30,7 +30,7 @@ class Formatting implements DocumentFormattingEditProvider {
   ): ProviderResult<TextEdit[]> {
 	const formatter: RangeFormatting = new RangeFormatting();
 	// define o range como todo o documento
-	const range: Range = new Range(new Position(0,0), new Position(document.lineCount,0)); 
+	const range: Range = new Range(new Position(0,0), new Position(document.lineCount-1,0)); 
     return formatter.provideDocumentRangeFormattingEdits(document,range,options,token);
   }
 }
@@ -66,7 +66,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
         return structsNoIdent.indexOf(rule.id) !== -1;
       });
 
-    for (let nl = range.start.line; nl < lc; nl++) {
+    for (let nl = range.start.line; nl <= lc; nl++) {
       const line = document.lineAt(nl);
       const text = line.text.trimRight();
       let lastRule: string =
