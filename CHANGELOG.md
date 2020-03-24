@@ -1,3 +1,8 @@
+## 0.14.4
+ - Correção: Conexão com repositorio SQLite
+ - Correção: Deleção de fonte binario 19
+ - Correção: [Problemas com Debug com path com acentos](https://github.com/totvs/advpl-vscode/issues/422)
+
 ## 0.14.3
  - Melhoria: Avisar o link do uso do alpha, quando usnado o binario 19 com ssl.
 
