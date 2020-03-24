@@ -41,14 +41,22 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
     document: TextDocument,
     range: Range,
     options: FormattingOptions,
-    token: CancellationToken
+	token: CancellationToken
   ): ProviderResult<TextEdit[]> {
+	let cont: number = 0;
+	const tab: string = options.insertSpaces
+	  ? ' '.repeat(options.tabSize)
+	  : '\t';
+	// define comom está a identação quando é identação range
+	if(range.start.line > 0){
+		let stringStart = document.lineAt(range.start.line).text.replace(/(^\s*)(.*)/,"$1");
+		while (stringStart.search(tab) >= 0) {
+			cont++;
+			stringStart = stringStart.replace(tab,'');
+		}
+	}
 	const formattingRules = new FormattingRules();
-    const tab: string = options.insertSpaces
-      ? ' '.repeat(options.tabSize)
-      : '\t';
-    let identBlock: string = '';
-    let cont: number = 0;
+    let identBlock: string = tab.repeat(cont);
 
     let result: TextEdit[] = [];
 	const lc = range.end.line;
@@ -93,7 +101,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
               .split('//')[0]
               .trim()
               .endsWith(';') &&
-            ['Comentários', 'Protheus Doc'].indexOf(ruleMatch.rule.id) === -1;
+            rulesIgnored.indexOf(ruleMatch.rule.id) === -1;
 
           if (ruleMatch) {
             if (ruleMatch.increment) {
