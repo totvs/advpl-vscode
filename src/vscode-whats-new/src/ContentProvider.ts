@@ -14,6 +14,7 @@ export interface Image {
 export interface Header {
     logo: Image;
     message: string;
+    notice: string;
 }
 
 // changelog

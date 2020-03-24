@@ -27,7 +27,7 @@ import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 import { ServerManagementView } from './serversManagementView';
-import { WhatsNewAdvPLContentProvider } from './utils/whatsNew';
+import { WhatsNewAdvPLContentProvider } from './vscode-whats-new/whatsNew';
 import { WhatsNewManager } from './vscode-whats-new/src/Manager';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();

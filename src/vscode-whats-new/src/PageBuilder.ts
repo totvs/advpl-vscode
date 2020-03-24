@@ -58,6 +58,7 @@ export class WhatsNewPageBuilder {
         this.htmlFile = this.htmlFile.replace("${headerWidth}", header.logo.width.toString());
         this.htmlFile = this.htmlFile.replace("${headerHeight}", header.logo.height.toString());
         this.htmlFile = this.htmlFile.replace("${headerMessage}", header.message);
+        this.htmlFile = this.htmlFile.replace("${noticeMessage}", header.notice);
         return this;
     }
 
