@@ -11,10 +11,11 @@ export interface Rule {
 }
 
 export interface ClosedStructureRule extends Rule {
-  begin: RegExp;
-  noBegin?: RegExp[];
-  middle?: RegExp;
-  end: RegExp;
+  begin: RegExp; // Expressão do começo
+  noBegin?: RegExp[]; // Expressão que ignora quando dá o match no begin
+  middle?: RegExp; // expressão de meio da sintaxe
+  middleDouble?: RegExp; // expressão de meio da sintaxe que dá um up no meio da expressão
+  end: RegExp; // expressão de fim da sintaxe
 }
 
 export interface OpenStructureRule extends Rule {
@@ -23,14 +24,16 @@ export interface OpenStructureRule extends Rule {
 
 export interface RuleMatch {
   rule: Rule;
-  increment: boolean;
-  decrement: boolean;
+  increment?: boolean;
+  incrementDouble?: boolean;
+  decrement?: boolean;
+  decrementDouble?: boolean;
 }
 
 export class FormattingRules {
   lastMatch: RuleMatch | null = null;
   insideOpenStructure: boolean = false;
-  openStructures: string[] = [];
+  openStructures: RuleMatch[] = [];
 
   private instanceOfClosedStructureRule(
     object: any
@@ -39,12 +42,12 @@ export class FormattingRules {
   }
 
   public match(line: string): boolean {
-    let lastRule: string = this.openStructures[this.openStructures.length - 1];
+    let lastRule: RuleMatch = this.openStructures[this.openStructures.length - 1];
     if (line.trim().length === 0) {
       return false;
     }
 
-    let finddedRule: any = null;
+    let finddedRule: RuleMatch = null;
 
     this.getRules().every((rule: Rule) => {
       if (this.instanceOfClosedStructureRule(rule)) {
@@ -65,9 +68,9 @@ export class FormattingRules {
           line = 'if(' + line;
         }
 
-        if (line.match(rule.end) && lastRule === rule.id) {
+        if (line.match(rule.end) && lastRule.rule.id === rule.id) {
           // console.log('fechou ' + rule.id);
-          finddedRule = { rule: rule, increment: false, decrement: true };
+          finddedRule = { rule: rule, decrement: true, decrementDouble: lastRule.incrementDouble };
           this.openStructures.pop();
         } else if (
           line.match(rule.begin) &&
@@ -77,11 +80,15 @@ export class FormattingRules {
             }).length)
         ) {
           // console.log('abriu ' + rule.id);
-          finddedRule = { rule: rule, increment: true, decrement: false };
-          this.openStructures.push(rule.id);
-        } else if (rule.middle && line.match(rule.middle)) {
+          finddedRule = { rule: rule, increment: true};
+          this.openStructures.push(finddedRule);
+        } else if (rule.middleDouble && line.match(rule.middleDouble)) {
+          // console.log('meio double ' + rule.id);
+          finddedRule = { rule: rule, decrement: true, incrementDouble: true, decrementDouble: lastRule.incrementDouble };
+		  this.openStructures[this.openStructures.length-1] = finddedRule;
+		} else if (rule.middle && line.match(rule.middle)) {
           // console.log('meio ' + rule.id);
-          finddedRule = { rule: rule, increment: true, decrement: true };
+          finddedRule = { rule: rule, increment: true, decrement: true};
         }
       }
 
@@ -166,7 +173,7 @@ export class FormattingRules {
       {
         id: 'do case',
         begin: /^(\s*)(do)(\s+)(case)/i,
-        middle: /^(\s*)(case|otherwise)/i,
+        middleDouble: /^(\s*)(case|otherwise)/i,
         end: /^(\s*)(end)(do)?(\s*)(case)?$/i
       },
       {

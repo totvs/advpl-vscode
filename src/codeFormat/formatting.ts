@@ -28,10 +28,18 @@ class Formatting implements DocumentFormattingEditProvider {
     options: FormattingOptions,
     token: CancellationToken
   ): ProviderResult<TextEdit[]> {
-	const formatter: RangeFormatting = new RangeFormatting();
-	// define o range como todo o documento
-	const range: Range = new Range(new Position(0,0), new Position(document.lineCount-1,0)); 
-    return formatter.provideDocumentRangeFormattingEdits(document,range,options,token);
+    const formatter: RangeFormatting = new RangeFormatting();
+    // define o range como todo o documento
+    const range: Range = new Range(
+      new Position(0, 0),
+      new Position(document.lineCount - 1, 0)
+    );
+    return formatter.provideDocumentRangeFormattingEdits(
+      document,
+      range,
+      options,
+      token
+    );
   }
 }
 
@@ -41,25 +49,27 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
     document: TextDocument,
     range: Range,
     options: FormattingOptions,
-	token: CancellationToken
+    token: CancellationToken
   ): ProviderResult<TextEdit[]> {
-	let cont: number = 0;
-	const tab: string = options.insertSpaces
-	  ? ' '.repeat(options.tabSize)
-	  : '\t';
-	// define comom está a identação quando é identação range
-	if(range.start.line > 0){
-		let stringStart = document.lineAt(range.start.line).text.replace(/(^\s*)(.*)/,"$1");
-		while (stringStart.search(tab) >= 0) {
-			cont++;
-			stringStart = stringStart.replace(tab,'');
-		}
-	}
-	const formattingRules = new FormattingRules();
+    let cont: number = 0;
+    const tab: string = options.insertSpaces
+      ? ' '.repeat(options.tabSize)
+      : '\t';
+    // define comom está a identação quando é identação range
+    if (range.start.line > 0) {
+      let stringStart = document
+        .lineAt(range.start.line)
+        .text.replace(/(^\s*)(.*)/, '$1');
+      while (stringStart.search(tab) >= 0) {
+        cont++;
+        stringStart = stringStart.replace(tab, '');
+      }
+    }
+    const formattingRules = new FormattingRules();
     let identBlock: string = tab.repeat(cont);
 
     let result: TextEdit[] = [];
-	const lc = range.end.line;
+    const lc = range.end.line;
     const rulesIgnored: any[] = formattingRules
       .getClosedStructures()
       .filter(rule => {
@@ -69,12 +79,12 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
     for (let nl = range.start.line; nl <= lc; nl++) {
       const line = document.lineAt(nl);
       const text = line.text.trimRight();
-      let lastRule: string =
+      let lastRule: RuleMatch =
         formattingRules.openStructures[
           formattingRules.openStructures.length - 1
         ];
       let foundIgnore: any[] = rulesIgnored.filter(rule => {
-        return rule.id === lastRule;
+        return lastRule && lastRule.rule && rule.id === lastRule.rule.id;
       });
       // dentro do BeginSql não mexe na identação
       if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
@@ -89,10 +99,19 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
 
           if (ruleMatch) {
             if (ruleMatch.decrement) {
-              cont = cont < 1 ? 0 : cont - 1;
+              if (ruleMatch.decrementDouble) {
+                cont = cont < 2 ? 0 : cont - 2;
+              } else {
+                cont = cont < 1 ? 0 : cont - 1;
+              }
               identBlock = tab.repeat(cont);
             }
-          }
+		  }
+		  
+		  if (ruleMatch.incrementDouble) {
+			cont += 1;
+			identBlock = tab.repeat(cont);
+		  }
 
           const newLine: string = text.replace(/(\s*)?/, identBlock);
           result.push(TextEdit.replace(line.range, newLine));
@@ -100,11 +119,10 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
             newLine
               .split('//')[0]
               .trim()
-              .endsWith(';') &&
-            rulesIgnored.indexOf(ruleMatch.rule.id) === -1;
+              .endsWith(';') && rulesIgnored.indexOf(ruleMatch.rule.id) === -1;
 
           if (ruleMatch) {
-            if (ruleMatch.increment) {
+            if (ruleMatch.increment || ruleMatch.incrementDouble) {
               cont++;
               identBlock = tab.repeat(cont);
             }
