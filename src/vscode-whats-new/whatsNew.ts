@@ -48,12 +48,25 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
 
         changeLog.push({
             kind: ChangeLogKind.FIXED, message: `Ao compilar arquivos abertos, compilava a Workspace inteira - (<a title=\"Open Issue #411\" 
-                href=\"https://github.com/totvs/advpl-vscode/issues/411\">Issue #411</a>)</b>`
+                href=\"https://github.com/totvs/advpl-vscode/issues/411\">Issue #411</a>)`
         });
 
         changeLog.push({
             kind: ChangeLogKind.FIXED, message: `JSON Bridge Return Invalid - (<a title=\"Open Issue #409\" 
-                href=\"https://github.com/totvs/advpl-vscode/issues/409\">Issue #409</a>)</b>`
+                href=\"https://github.com/totvs/advpl-vscode/issues/409\">Issue #409</a>)`
+        });
+        
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Problemas com Debug com path com acentos - (<a title=\"Open Issue #422\" 
+                href=\"https://github.com/totvs/advpl-vscode/issues/422\">Issue #422</a>)`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Deleção de fonte binario 19`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Conexão com repositorio SQLite`
         });
 
         return changeLog;
