@@ -681,7 +681,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
         isCompiling = false;
 
         // Notifica o usuário quantos arquivos foram processados (solicitados compilação)
-        OutPutChannel.log(`${processed + localize('src.extension.processed', ' processed files (see log output). ')}`);
+        OutPutChannel.log(`${processed + localize('src.extension.processed', ' processed files (see log output). ')}\n`);
     }
 
 }
