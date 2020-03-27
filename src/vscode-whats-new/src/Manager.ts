@@ -67,7 +67,7 @@ export class WhatsNewManager {
             const differs: semver.ReleaseType | null = semver.diff(currentVersion, previousVersion);
             
             // only "patch" should be suppressed
-            if (!differs || differs === "patch") {
+            if (!differs /*|| differs === "patch"*/) {
                 return;
             }
         }
