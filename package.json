@@ -9,8 +9,12 @@
         "vscode": "^1.30.0"
     },
     "categories": [
-        "Programming Languages"
-    ],
+		"Programming Languages",
+		"Formatters"
+	],
+	"capabilities": {
+		"documentFormattingProvider": "true"
+	  },
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",

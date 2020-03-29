@@ -42,7 +42,9 @@ export class FormattingRules {
   }
 
   public match(line: string): boolean {
-    let lastRule: RuleMatch = this.openStructures[this.openStructures.length - 1];
+    let lastRule: RuleMatch = this.openStructures[
+      this.openStructures.length - 1
+    ];
     if (line.trim().length === 0) {
       return false;
     }
@@ -68,9 +70,17 @@ export class FormattingRules {
           line = 'if(' + line;
         }
 
-        if (line.match(rule.end) && lastRule.rule.id === rule.id) {
-          // console.log('fechou ' + rule.id);
-          finddedRule = { rule: rule, decrement: true, decrementDouble: lastRule.incrementDouble };
+        if (
+          line.match(rule.end) &&
+          lastRule &&
+          lastRule.rule &&
+          lastRule.rule.id === rule.id
+        ) {
+          finddedRule = {
+            rule: rule,
+            decrement: true,
+            decrementDouble: lastRule.incrementDouble
+          };
           this.openStructures.pop();
         } else if (
           line.match(rule.begin) &&
@@ -79,16 +89,18 @@ export class FormattingRules {
               return line.match(exp);
             }).length)
         ) {
-          // console.log('abriu ' + rule.id);
-          finddedRule = { rule: rule, increment: true};
+          finddedRule = { rule: rule, increment: true };
           this.openStructures.push(finddedRule);
         } else if (rule.middleDouble && line.match(rule.middleDouble)) {
-          // console.log('meio double ' + rule.id);
-          finddedRule = { rule: rule, decrement: true, incrementDouble: true, decrementDouble: lastRule.incrementDouble };
-		  this.openStructures[this.openStructures.length-1] = finddedRule;
-		} else if (rule.middle && line.match(rule.middle)) {
-          // console.log('meio ' + rule.id);
-          finddedRule = { rule: rule, increment: true, decrement: true};
+          finddedRule = {
+            rule: rule,
+            decrement: true,
+            incrementDouble: true,
+            decrementDouble: lastRule.incrementDouble
+          };
+          this.openStructures[this.openStructures.length - 1] = finddedRule;
+        } else if (rule.middle && line.match(rule.middle)) {
+          finddedRule = { rule: rule, increment: true, decrement: true };
         }
       }
 

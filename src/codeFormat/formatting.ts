@@ -106,12 +106,12 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
               }
               identBlock = tab.repeat(cont);
             }
-		  }
-		  
-		  if (ruleMatch.incrementDouble) {
-			cont += 1;
-			identBlock = tab.repeat(cont);
-		  }
+          }
+
+          if (ruleMatch.incrementDouble) {
+            cont += 1;
+            identBlock = tab.repeat(cont);
+          }
 
           const newLine: string = text.replace(/(\s*)?/, identBlock);
           result.push(TextEdit.replace(line.range, newLine));
