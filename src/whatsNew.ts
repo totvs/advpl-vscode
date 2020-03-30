@@ -1,6 +1,6 @@
 
 // tslint:disable-next-line:max-line-length
-import { ChangeLogItem, ChangeLogKind, ContentProvider, Header, Image, Sponsor } from "./src/ContentProvider";
+import { ChangeLogItem, ChangeLogKind, ContentProvider, Header, Image, Sponsor } from "./vscode-whats-new/ContentProvider";
 
 export class WhatsNewAdvPLContentProvider implements ContentProvider {
 

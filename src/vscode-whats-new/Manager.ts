@@ -45,12 +45,12 @@ export class WhatsNewManager {
 
         // Get path to resource on disk
         const onDiskPath = vscode.Uri.file(
-            path.join(this.context.extensionPath, "src", "vscode-whats-new", "ui", "whats-new.html"));
+            path.join(this.context.extensionPath, "vscode-whats-new", "ui", "whats-new.html"));
         const pageUri = onDiskPath.with({ scheme: "vscode-resource" });
 
         // Local path to main script run in the webview
         const cssPathOnDisk = vscode.Uri.file(
-            path.join(this.context.extensionPath, "src", "vscode-whats-new", "ui", "main.css"));
+            path.join(this.context.extensionPath, "vscode-whats-new", "ui", "main.css"));
         const cssUri = cssPathOnDisk.with({ scheme: "vscode-resource" });        
 
         // Local path to main script run in the webview
