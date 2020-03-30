@@ -1,3 +1,5 @@
+<!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+
 ## 0.14.4
  - Melhoria via Pull Request: [What's new page](https://github.com/totvs/advpl-vscode/pull/421)
  - Melhoria: Adicionado *type* `Object` na sintaxe dos atributos de classe
