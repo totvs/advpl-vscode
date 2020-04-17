@@ -35,6 +35,7 @@ Essa extensão possui as seguintes features implementadas:
 * TdsReplay
 * Suporte ao remote WEBAPP
 * Compilação de fontes Abertos
+* Formatação de Código [Wiki](https://github.com/totvs/advpl-vscode/wiki/Identação)
 
 ## Build 191205P
 
@@ -65,9 +66,11 @@ Agora é possível Gerenciar de forma intuitiva todos os ambientes já configura
 * F5  - Inicia o Debug
 * CTRL + F5  - Inicia o SmartClient sem debugar
 * CTRL + F9 - Compila o fonte atual
-* CTRL + SHIFT +  F9 - Gera o PPO do fonte atual
+* CTRL + SHIFT + F9 - Gera o PPO do fonte atual
 * CTRL + F11 - Executa o smartClient sem configuração e mostrando a tela de parametros
 * ALT + F9 - Compilar fontes Abertos
+* SHIFT + ALT + F - Identação de Fonte
+* CTRL + K CTRL + F - Identação de Trecho de Código
 
 # No Debug
 

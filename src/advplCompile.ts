@@ -251,7 +251,7 @@ export class advplCompile {
 
         try {
             if (this._lastAppreMsg != null) {
-                var oEr = JSON.parse(this._lastAppreMsg);
+                var oEr = JSON.parse(this._lastAppreMsg.replace(/(\r\n|\n|\r)/gm, " "));
 
                 let source;
 
@@ -318,7 +318,7 @@ export class advplCompile {
         }
         catch (ex) {
             this.outChannel.log("Bridge Return:");
-            this.outChannel.log(this._lastAppreMsg);
+            this.outChannel.log(this._lastAppreMsg.replace(/(\r\n|\n|\r)/gm, " "));
             this.outChannel.log(ex);
             this.onError();
         }
