@@ -9,8 +9,12 @@
         "vscode": "^1.30.0"
     },
     "categories": [
-        "Programming Languages"
-    ],
+		"Programming Languages",
+		"Formatters"
+	],
+	"capabilities": {
+		"documentFormattingProvider": "true"
+	  },
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",
@@ -908,7 +912,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.43",
-        "@types/node": "^6.14.7",
+        "@types/node": "^13.9.1",
         "del": "^3.0.0",
         "gulp": "^3.9.1",
         "gulp-filter": "^5.0.1",
