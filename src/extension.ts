@@ -29,6 +29,7 @@ import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 import { ServerManagementView } from './serversManagementView';
 import { WhatsNewAdvPLContentProvider } from './whatsNew';
 import { WhatsNewManager } from './vscode-whats-new/Manager';
+import { formattingEditProvider, rangeFormattingEditProvider } from './codeFormat/formatting';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
 let OutPutChannel = new advplConsole();
@@ -142,7 +143,17 @@ export async function activate(context: vscode.ExtensionContext) {
 
         // Atualiza o TreeView de servidores
         serverView.provider.refresh();
-    }));
+	}));
+	
+	vscode.languages.registerDocumentFormattingEditProvider(
+		'advpl',
+		formattingEditProvider()
+	);
+
+	vscode.languages.registerDocumentRangeFormattingEditProvider(
+		'advpl',
+		rangeFormattingEditProvider()
+	);
 
     // Provider What's new
     const providerWhatsNew = new WhatsNewAdvPLContentProvider();

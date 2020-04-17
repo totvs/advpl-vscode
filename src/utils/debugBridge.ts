@@ -62,7 +62,7 @@ function runUnzip(path, args, file ,OutPutChannel)
     });*/
 
     child.on("exit", function (data) {
-        fs.unlink(path+file);
+        fs.unlink(path+file, null);
     });
     
     return true;
@@ -97,7 +97,7 @@ export function installAdvplDebugBridge (OutPutChannel){
                 _args.push('AdvplDebugBridge-linux.tar.gz');
                 const child = child_process.spawn('tar', _args,{cwd:path, shell:true });
                 child.on("exit", function (data) {
-                    fs.unlink(path+'AdvplDebugBridge-linux.tar.gz');
+                    fs.unlink(path+'AdvplDebugBridge-linux.tar.gz', null);
                 });
             }
 
