@@ -7,7 +7,7 @@
     "icon": "images/logo_vscode.png",
     "homepage": "https://github.com/totvs/advpl-vscode",
     "engines": {
-        "vscode": "^1.30.0"
+        "vscode": "^1.43.0"
     },
     "categories": [
 		"Programming Languages",
@@ -110,7 +110,7 @@
                     "when": "view == serversManagement && viewItem == Environment"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "command": "advpl.serversManagement.DeleteEnvironment",
                     "when": "view == serversManagement && viewItem == Environment",
                     "group": "inline"
                 },
@@ -182,7 +182,7 @@
                     "when": "config.noExists"
                 },
                 {
-                    "command": "advpl.serversManagement.DisableEnvironment",
+                    "command": "advpl.serversManagement.DeleteEnvironment",
                     "when": "config.noExists"
                 },
                 {
@@ -395,6 +395,11 @@
                     "type": "boolean",
                     "default": false,
                     "description": "%advpl.configuration.properties.ADVPLDEBUG_SHOWSTATICS%"
+                },
+                "advpl.debug_inspect_macro": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "%advpl.configuration.properties.ADVPLDEBUG_INSPECT_MACRO%"
                 },
                 "advpl.compile_force_recompile": {
                     "type": "boolean",
@@ -611,8 +616,8 @@
                 }
             },
             {
-                "command": "advpl.serversManagement.DisableEnvironment",
-                "title": "%advpl.serversManagement.DisableEnvironment%",
+                "command": "advpl.serversManagement.DeleteEnvironment",
+                "title": "%advpl.serversManagement.DeleteEnvironment%",
                 "icon": {
                     "light": "images/light/trash.svg",
                     "dark": "images/dark/trash.svg"

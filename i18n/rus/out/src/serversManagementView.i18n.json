@@ -4,7 +4,7 @@
     "src.ServerManagementView.INFORMELABEL": "Введите метку для изменения.",
     "src.ServerManagementView.LABELINUSE": "Эта метка уже используется.",
     "src.ServerManagementView.NAMEINUSE": "Эта метка уже используется в среде.",
-    "src.ServerManagementView.DISABLED": " отключено",
+    "src.ServerManagementView.DELETED": " исключен",
     "src.ServerManagementView.environmentText": "Среда ",
     "src.ServerManagementView.yesText": "Да",
     "src.ServerManagementView.noText": "Нет",

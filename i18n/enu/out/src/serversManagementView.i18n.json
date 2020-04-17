@@ -4,7 +4,7 @@
     "src.ServerManagementView.INFORMELABEL": "Enter the Label to change.",
     "src.ServerManagementView.LABELINUSE": "This Label is already in use.",
     "src.ServerManagementView.NAMEINUSE": "This Label is already being used in an environment.",
-    "src.ServerManagementView.DISABLED": " disabled",
+    "src.ServerManagementView.DELETED": " deleted",
     "src.ServerManagementView.environmentText": "Environment ",
     "src.ServerManagementView.yesText": "Yes",
     "src.ServerManagementView.noText": "No",
