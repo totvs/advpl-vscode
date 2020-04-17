@@ -1,4 +1,15 @@
+<!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+
 ## 0.14.4
+ - Melhoria via Pull Request: [What's new page](https://github.com/totvs/advpl-vscode/pull/421)
+ - Melhoria: Adicionado *type* `Object` na sintaxe dos atributos de classe
+ - Melhoria: [Implementado **Hover Inspect** no debug](https://github.com/totvs/advpl-vscode/issues/417)
+ - Melhoria: [Permitir **excluir um ambiente pelo gerenciador de ambientes**](https://github.com/totvs/advpl-vscode/issues/408)
+ - Correção: [Ao compilar arquivos abertos, compilava a Workspace inteira](https://github.com/totvs/advpl-vscode/issues/411)
+ - Correção: [JSON Bridge Return Invalid](https://github.com/totvs/advpl-vscode/issues/409)
+    - Gabriel Alencar
+ - Melhoria via Pull Request: [Code format](https://github.com/totvs/advpl-vscode/pull/420)
+    - Robson Rogério Silva
  - Correção: Conexão com repositorio SQLite
  - Correção: Deleção de fonte binario 19
  - Correção: [Problemas com Debug com path com acentos](https://github.com/totvs/advpl-vscode/issues/422)

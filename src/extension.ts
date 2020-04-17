@@ -27,6 +27,8 @@ import {replayPlay} from './replay/replaySelect';
 import {getReplayExec} from './replay/replayUtil';
 import {replaytTimeLineTree}  from  './replay/replaytTimeLineTree';
 import { ServerManagementView } from './serversManagementView';
+import { WhatsNewAdvPLContentProvider } from './whatsNew';
+import { WhatsNewManager } from './vscode-whats-new/Manager';
 import { formattingEditProvider, rangeFormattingEditProvider } from './codeFormat/formatting';
 
 let advplDiagnosticCollection = vscode.languages.createDiagnosticCollection();
@@ -152,6 +154,16 @@ export async function activate(context: vscode.ExtensionContext) {
 		'advpl',
 		rangeFormattingEditProvider()
 	);
+
+    // Provider What's new
+    const providerWhatsNew = new WhatsNewAdvPLContentProvider();
+    const viewer = new WhatsNewManager(context).registerContentProvider("advpl-vscode", providerWhatsNew);
+
+    // show the page (if necessary)
+    viewer.showPageInActivation();
+
+    // register the additional command (not really necessary, unless you want a command registered in your extension)
+    context.subscriptions.push(vscode.commands.registerCommand("advpl.whatsNew", () => viewer.showPage()));
 
     return api;
 }

@@ -35,6 +35,7 @@ Essa extensão possui as seguintes features implementadas:
 * TdsReplay
 * Suporte ao remote WEBAPP
 * Compilação de fontes Abertos
+* Formatação de Código [Wiki](https://github.com/totvs/advpl-vscode/wiki/Identação)
 
 ## Build 191205P
 
