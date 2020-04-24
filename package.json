@@ -11,11 +11,13 @@
     },
     "categories": [
 		"Programming Languages",
-		"Formatters"
+        "Formatters",
+        "Debuggers",
+        "Snippets"
 	],
 	"capabilities": {
 		"documentFormattingProvider": "true"
-	  },
+	},
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",
@@ -40,7 +42,8 @@
         "onCommand:advpl.monitor.deleteSource",
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
-        "onCommand:advpl.selectEnvironment"
+        "onCommand:advpl.selectEnvironment",
+        "onCommand:advpl.whatsNew"
     ],
     "main": "./out/src/extension",
     "contributes": {

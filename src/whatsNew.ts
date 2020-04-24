@@ -10,7 +10,7 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
             message: `<b>I Love AdvPL</b> provê os recursos necessários para edição, 
                       compilação e debugging em AdvPL, 4GL e TL++ no Visual Code, além de recursos específicos
                       para gerenciamento de ambientes Protheus.`,
-            notice: `Recomenda-se em ambientes Windows alterar a configuração <code>"advpl.alpha_compile": true</code>
+            notice: `Recomenda-se em ambientes Windows habilitar a configuração <code>"advpl.alpha_compile": true</code> 
                      pois as melhorias no Bridge (intermediador do VsCode com AppServer) estão sendo feitas 
                      somente nessa versão.`};
     }
@@ -38,7 +38,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         });
 
         changeLog.push({
-            kind: ChangeLogKind.CHANGED, message: `Permitir <b>excluir um ambiente pelo gerenciador de ambientes</b> - (<a title=\"Open Issue #408\" 
+            kind: ChangeLogKind.NEW, message: `Implementado cancelamento na <b>compilação de arquivos abertos</b>`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.CHANGED, message: `Permitir <b>excluir um ambiente</b> pelo gerenciador de ambientes - (<a title=\"Open Issue #408\" 
                 href=\"https://github.com/totvs/advpl-vscode/issues/408\">Issue #408</a>)`
         });
 

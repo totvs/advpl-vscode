@@ -5,6 +5,7 @@
  - Melhoria: Adicionado *type* `Object` na sintaxe dos atributos de classe
  - Melhoria: [Implementado **Hover Inspect** no debug](https://github.com/totvs/advpl-vscode/issues/417)
  - Melhoria: [Permitir **excluir um ambiente pelo gerenciador de ambientes**](https://github.com/totvs/advpl-vscode/issues/408)
+ - Melhoria: Permitir cancelar a compilação de arquivos abertos
  - Correção: [Ao compilar arquivos abertos, compilava a Workspace inteira](https://github.com/totvs/advpl-vscode/issues/411)
  - Correção: [JSON Bridge Return Invalid](https://github.com/totvs/advpl-vscode/issues/409)
     - Gabriel Alencar
