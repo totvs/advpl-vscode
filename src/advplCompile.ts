@@ -209,7 +209,7 @@ export class advplCompile {
         child.on("exit", function (data) {
             var lRunned = data == 0
             console.log("exit: " + data);
-            that.run_callBack(lRunned);
+            that.run_callBack(lRunned, compileType);
             var endTime;
             endTime = new Date();
             let timeDiff = (endTime - that.compileStartTime); //in ms
@@ -245,7 +245,7 @@ export class advplCompile {
         return results;
     };
 
-    private run_callBack(lOk) {
+    private run_callBack(lOk, type: number = 0) {
         let lErrorFound;
         let lAbort;
 
@@ -259,6 +259,12 @@ export class advplCompile {
                     let sourceArray = oEr.msgs[x];
                     let diags: vscode.Diagnostic[] = [];
                     source = decodeURI(sourceArray.Key);
+                    
+                    // Caso seja compilação de fonte e tenha o retorno do nome do arquivo, adiciona o nome do fonte no console
+                    if (source !== "NOSOURCE" && type > 0) {
+                        this.outChannel.log("Source " + path.basename(source) + ": ");   
+                    }
+
                     for (let y = 0; y < sourceArray.Value.length; y++) {
                         let msgerr = sourceArray.Value[y];
                         let lineIndex = Number(msgerr.Line) - 1;

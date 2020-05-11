@@ -42,6 +42,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         });
 
         changeLog.push({
+            kind: ChangeLogKind.CHANGED, message: `<b>Compilação de pasta</b> não mostra nome do fonte compilado sem warnings - (<a title=\"Open Issue #436\" 
+                href=\"https://github.com/totvs/advpl-vscode/issues/436\">Issue #436</a>)`
+        });
+
+        changeLog.push({
             kind: ChangeLogKind.CHANGED, message: `Permitir <b>excluir um ambiente</b> pelo gerenciador de ambientes - (<a title=\"Open Issue #408\" 
                 href=\"https://github.com/totvs/advpl-vscode/issues/408\">Issue #408</a>)`
         });
@@ -63,6 +68,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         changeLog.push({
             kind: ChangeLogKind.FIXED, message: `Problemas com Debug com path com acentos - (<a title=\"Open Issue #422\" 
                 href=\"https://github.com/totvs/advpl-vscode/issues/422\">Issue #422</a>)`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Exclusão de fonte do RPO no binário 191205P - (<a title=\"Open Issue #416\" 
+                href=\"https://github.com/totvs/advpl-vscode/issues/416\">Issue #416</a>)`
         });
 
         changeLog.push({
