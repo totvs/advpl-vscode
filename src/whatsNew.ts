@@ -76,10 +76,6 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         });
 
         changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Deleção de fonte binario 19`
-        });
-
-        changeLog.push({
             kind: ChangeLogKind.FIXED, message: `Conexão com repositorio SQLite`
         });
 

@@ -13,7 +13,6 @@
     - Robson Rogério Silva
  - Melhoria: [**Compilação de pasta** não mostra nome do fonte compilado sem warnings](https://github.com/totvs/advpl-vscode/issues/436)
  - Correção: Conexão com repositorio SQLite
- - Correção: Deleção de fonte binario 19
  - Correção: [Problemas com Debug com path com acentos](https://github.com/totvs/advpl-vscode/issues/422)
  - Correção: [Exclusão de fonte do RPO no binário 191205P](https://github.com/totvs/advpl-vscode/issues/416)
 
