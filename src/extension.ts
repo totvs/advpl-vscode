@@ -176,7 +176,7 @@ export async function activate(context: vscode.ExtensionContext) {
             // const array = document.getWordRangeAtPosition(position, /\w+\s*[^º]*]/i);
             const macroSubstituicao = document.getWordRangeAtPosition(position, /&[^:]*/i);
             
-            const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,\\!\\+\\-]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
+            const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,\\!\\+\\-\\[\\{]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
             const atributo = document.getWordRangeAtPosition(position, regexAtributo);
             
             // Obs.: Comentado por conta das dificuldades de inspeção usando essa abordagem, pois o usuário poderia querere inspecionar a variável e não o item do array.
