@@ -10,14 +10,14 @@
         "vscode": "^1.43.0"
     },
     "categories": [
-		"Programming Languages",
+        "Programming Languages",
         "Formatters",
         "Debuggers",
         "Snippets"
-	],
-	"capabilities": {
-		"documentFormattingProvider": "true"
-	},
+    ],
+    "capabilities": {
+        "documentFormattingProvider": "true"
+    },
     "activationEvents": [
         "onLanguage:advpl",
         "onLanguage:4gl",
@@ -40,6 +40,7 @@
         "onCommand:advpl.monitor.getRpoInfos",
         "onCommand:advpl.monitor.getRpoFunctions",
         "onCommand:advpl.monitor.deleteSource",
+        "onCommand:advpl.monitor.deleteSourceContext",
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnvironment",
@@ -104,6 +105,10 @@
                 {
                     "command": "advpl.patch.build",
                     "when": "resourceFilename =~ /.*\\.txt/i",
+                    "group": "advpl"
+                },
+                {
+                    "command": "advpl.monitor.deleteSourceContext",
                     "group": "advpl"
                 }
             ],
@@ -210,6 +215,14 @@
                 },
                 {
                     "command": "advpl.patch.apply",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.monitor.deleteSourceContext",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.menucompile",
                     "when": "config.noExists"
                 }
             ]
@@ -572,6 +585,10 @@
             },
             {
                 "command": "advpl.monitor.deleteSource",
+                "title": "%advpl.monitor.deleteSource%"
+            },
+            {
+                "command": "advpl.monitor.deleteSourceContext",
                 "title": "%advpl.monitor.deleteSource%"
             },
             {

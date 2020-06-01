@@ -364,6 +364,36 @@ export class advplCompile {
         });
     }
 
+    public deleteSourceContext(files: string): void {
+        // Verifica se a função encontrou arquivos a excluir
+        if (files.trim() !== "") {
+
+            this.outChannel.log(localize("src.advplCompile.istartSourcesExclusionText", "Starting the exclusion of the sources ") + files + "\n");
+            this.diagnosticCollection.clear();
+            var _args = new Array<string>()
+            var that = this;
+            _args.push("--compileInfo=" + this.EnvInfos);
+            _args.push("--deleteSource=" + files);
+
+            var child = child_process.spawn(this.debugPath, _args);
+
+            child.stdout.on("data", function (data) {
+                that._lastAppreMsg += data;
+            });
+
+            child.on("exit", function (data) {
+                var lRunned = data == 0
+                console.log("exit: " + data);
+                that.run_callBack(lRunned);
+            });
+
+        } else {
+            vscode.window.showErrorMessage(localize('src.advplCompile.notInformedSource', 'Source to be excluded not informed!'));
+            this._lastAppreMsg = null
+            this.run_callBack(false);
+        }
+    }
+    
     public defragRPO(): void {
         this.outChannel.log(localize("src.advplCompile.startingDefragText", "Starting the defragmentation of the RPO...") + "\n");
         this.diagnosticCollection.clear();

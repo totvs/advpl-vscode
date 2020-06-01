@@ -33,5 +33,7 @@
 	"src.extension.patchAlphaInfo": "To apply only updated patch files it is necessary that the advpl.alpha_compile setting is enabled.",
 	"src.extension.patchAlphaSee": "Find out more at: https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs",
 	"src.extension.saveDirty": "There are unsaved open files. Do you want to save to continue?",
-	"src.extension.processed": " processed files (see log output)."
+	"src.extension.processed": " processed files (see log output).",
+	"src.extension.confirmDelete": "Do you really want to delete the file (s) from the RPO?",
+	"src.extension.deleteSourceContext": "Need to select a folder or file in Explorer!"
 }

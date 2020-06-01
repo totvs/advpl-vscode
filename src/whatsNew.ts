@@ -36,6 +36,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
                 href=\"https://github.com/totvs/advpl-vscode/pull/420\">PR #420</a> | <a title=\"Documentação da Feature\"
                 href=\"https://github.com/totvs/advpl-vscode/wiki/Identação\">Documentação</a>)`
         });
+    
+        changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Permitir excluir fontes via <b>menu Explorer</b> - (<a title=\"Open Issue #445\" 
+                href=\"https://github.com/totvs/advpl-vscode/issues/445\">Issue #445</a>)`
+        });
 
         changeLog.push({
             kind: ChangeLogKind.NEW, message: `Implementado cancelamento na <b>compilação de arquivos abertos</b>`

@@ -77,6 +77,7 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(GetRpoFunctions());
     context.subscriptions.push(BuildWSClient());
     context.subscriptions.push(DeleteSource());
+    context.subscriptions.push(DeleteSourceContext());
     context.subscriptions.push(DefragRpo());
     context.subscriptions.push(GetDebugPath());
     context.subscriptions.push(ReplaySelect());
@@ -983,6 +984,73 @@ function DeleteSource() {
             if (!(compile == null)) {
                 compile.setEncoding(encoding);
                 compile.deleteSource();
+            }
+        }
+    });
+    return disposable;
+}
+
+function DeleteSourceContext() {
+    let disposable = vscode.commands.registerCommand('advpl.monitor.deleteSourceContext', function (context) {
+        if (!isEnvironmentSelected()) {
+            return;
+        }
+        if (isCompiling) {
+            OutPutChannel.log(localize('src.extension.compilationIgnoredText', 'Compilation ignored, there is other compilation in progress.'));
+        }
+        else {
+            if (context) {
+
+                function getFiles(dir, files_?) {
+                    files_ = files_ || [];
+                    var files = fs.readdirSync(dir);
+                    for (var i in files) {
+                        var name = dir + '/' + files[i];
+                        if (fs.statSync(name).isDirectory()) {
+                            getFiles(name, files_);
+                        } else {
+                            files_.push(name);
+                        }
+                    }
+                    return files_;
+                }
+
+                let list = [localize('src.extension.yesText', 'Yes'), localize('src.extension.noText', 'No')];
+
+                vscode.window.showQuickPick(list, { placeHolder: localize('src.extension.confirmDelete', 'Do you really want to delete the file (s) from the RPO?') }).then(function (select) {
+
+                    if (select === list[0]) {
+
+                        let cFiles = ""
+                        let cResource = context.fsPath;
+
+                        if (fs.lstatSync(cResource).isDirectory()) {
+                            getFiles(cResource).forEach(dir => {
+                                cFiles += path.basename(dir) + ";"
+                            });
+
+                            if (cFiles.length > 0) {
+                                cFiles = cFiles.substr(0, cFiles.length - 1)
+                            }
+
+                        } else {
+                            cFiles = path.basename(cResource);
+                        }
+
+                        var compile = createAdvplCompile(null, null);
+                        let encoding =
+                            vscode.workspace
+                                .getConfiguration("files")
+                                .get("encoding");
+                        if (!(compile == null)) {
+                            compile.setEncoding(encoding);
+                            compile.deleteSourceContext(cFiles);
+                        }
+                        else {
+                            vscode.window.showInformationMessage(localize('src.extension.deleteSourceContext', 'Need to select a folder or file in Explorer!'));
+                        }
+                    }
+                });
             }
         }
     });
