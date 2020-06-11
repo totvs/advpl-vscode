@@ -72,6 +72,7 @@
 	"advpl.serversManagement.getRpoFunctions": "List RPO functions",
 	"advpl.serversManagement.rename": "Rename",
 	"advpl.serversManagement.getAllEnvironments": "Get INI environments",
+	"advpl.serversManagement.CipherPassword": "Change password",
 	"advpl.compileFilesOpened": "Advpl - Compile open files",
 	"advpl.applyPatchFile": "Advpl - Apply Patch (PTM)"
 }

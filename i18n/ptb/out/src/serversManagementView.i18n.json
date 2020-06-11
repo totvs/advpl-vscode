@@ -9,5 +9,6 @@
     "src.ServerManagementView.yesText": "Sim",
     "src.ServerManagementView.noText": "Não",
     "src.ServerManagementView.environmentSelectedText": " selecionado com sucesso.",
-    "src.ServerManagementView.RENAME": "Renomear"
+    "src.ServerManagementView.RENAME": "Renomear",
+    "src.ServerManagementView.passwordChangedSuccess": "Senha do ambiente %ENV_NAME% alterada com sucesso."
 }

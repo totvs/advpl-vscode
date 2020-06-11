@@ -7,6 +7,7 @@ import { ServerManagement, Context, ServerView, ServiceView, EnvironmentView } f
 import { IniManagement } from './iniManagement';
 import IDictionary from './utils/IDictionary';
 import IEnvironment from './utils/IEnvironment';
+import { advplCompile } from './advplCompile';
 
 export class ServerManagementView {
 
@@ -43,6 +44,8 @@ export class ServerManagementView {
 		vscode.commands.registerCommand("advpl.serversManagement.getRpoFunctions", (element) => this.getRpoFunctions(element));
 		// Registra o comando para desabilitar o Ambiente
 		vscode.commands.registerCommand("advpl.serversManagement.DeleteEnvironment", (element) => this.delete(element));
+		// Registra o comando para alterar a senha do Ambiente
+		vscode.commands.registerCommand("advpl.serversManagement.CipherPassword", (element) => this.cipherPassword(element));
 	}
 
 	get provider() {
@@ -254,6 +257,42 @@ export class ServerManagementView {
 		vscode.commands.executeCommand("advpl.monitor.getRpoFunctions");
 	}
 
+	cipherPassword(element: Dependency): any {
+
+		const compile = new advplCompile();
+
+		let options: vscode.InputBoxOptions = {
+			prompt: localize('src.advplCompile.passwordQueryText', 'Type in the password:'),
+			password: true
+		}
+
+		var password = vscode.window.showInputBox(options).then(newPass => {
+			let environments = this.EnvironmentsConfig;
+			let config = this.Config;
+			let obj = <EnvironmentView>element.subject;
+
+			if (newPass != undefined) {
+				compile.runCipherPassword(newPass, cipher => {
+					cipher = cipher.replace(/\r?\n?/g, '');
+
+					// Busca o ambiente relacionado ao serviço + servidor
+					environments.find(
+						env => env.environment === obj.environment &&
+							env.port === obj.parent.servicePort &&
+							env.server === obj.parent.parent.serverIP
+					).passwordCipher = cipher; // Altera a senha deste ambiente
+
+					// Atualiza a configuração de ambientes
+					config.update('environments', environments).then(() => {
+						let message = localize('src.ServerManagementView.passwordChangedSuccess', 'Environment password %ENV_NAME% successfully changed.');
+						vscode.window.showInformationMessage(message.replace("%ENV_NAME%", obj.environmentLabel));
+					});
+				});
+			}
+		});
+
+	}
+
 	delete(element: Dependency): any {
 		let config = this.Config;
 		let environments = this.EnvironmentsConfig;
@@ -266,7 +305,7 @@ export class ServerManagementView {
 			if (option === localize('src.ServerManagementView.yesText', 'Yes')) {
 				if (element.subject instanceof EnvironmentView) {
 					let obj = <EnvironmentView>element.subject;
-					
+
 					// Busca o ambiente relacionado ao serviço + servidor
 					environments = environments.filter(
 						env => !(env.environment === obj.environment &&

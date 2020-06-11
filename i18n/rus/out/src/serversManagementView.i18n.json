@@ -9,5 +9,6 @@
     "src.ServerManagementView.yesText": "Да",
     "src.ServerManagementView.noText": "Нет",
     "src.ServerManagementView.environmentSelectedText": " выбран успешно.",
-    "src.ServerManagementView.RENAME": "Переименовать"
+    "src.ServerManagementView.RENAME": "Переименовать",
+    "src.ServerManagementView.passwordChangedSuccess": "Пароль среды %ENV_NAME% успешно изменен."
 }

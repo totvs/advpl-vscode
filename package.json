@@ -44,7 +44,9 @@
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
         "onCommand:advpl.selectEnvironment",
-        "onCommand:advpl.whatsNew"
+        "onCommand:advpl.whatsNew",
+        "onCommand:advpl.serversManagement.AddServer",
+        "onCommand:advpl.addAdvplEnvironment"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -71,6 +73,12 @@
                 }
             ]
         },
+        "viewsWelcome": [
+            {
+                "view": "serversManagement",
+                "contents": "No environments found [learn more](https://github.com/totvs/advpl-vscode/wiki/Criação-de-ambiente-facilitada).\n[Add Environment](command:advpl.serversManagement.AddServer)"
+            }
+        ],
         "menus": {
             "explorer/context": [
                 {
@@ -145,6 +153,10 @@
                 {
                     "command": "advpl.serversManagement.getAllEnvironments",
                     "when": "view == serversManagement && viewItem == ServiceConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.CipherPassword",
+                    "when": "view == serversManagement && viewItem =~ /^Environment/i"
                 }
             ],
             "view/title": [
@@ -211,6 +223,10 @@
                 },
                 {
                     "command": "advpl.serversManagement.getAllEnvironments",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.serversManagement.CipherPassword",
                     "when": "config.noExists"
                 },
                 {
@@ -666,6 +682,10 @@
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
                 "title": "%advpl.serversManagement.getAllEnvironments%"
+            },
+            {
+                "command": "advpl.serversManagement.CipherPassword",
+                "title": "%advpl.serversManagement.CipherPassword%"
             },
             {
                 "command": "advpl.compileFilesOpened",
