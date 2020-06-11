@@ -43,6 +43,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         });
 
         changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Alterar senha de ambiente pelo <b>gerenciador de ambientes</b> - (<a title=\"Open Issue #448\" 
+                href=\"https://github.com/totvs/advpl-vscode/issues/448\">Issue #448</a>)`
+        });
+
+        changeLog.push({
             kind: ChangeLogKind.NEW, message: `Implementado cancelamento na <b>compilação de arquivos abertos</b>`
         });
 
