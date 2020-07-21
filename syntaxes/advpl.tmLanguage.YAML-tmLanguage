@@ -246,9 +246,12 @@ repository:
         name: meta.declaration.advpl
         begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
         beginCaptures:
-            '1': {name: storage.modifier.advpl}
-            '3': {name: keyword.control.as.advpl}
-            '4': {name: storage.type.advpl}
+            '1':
+                name: storage.modifier.advpl
+            '3':
+                name: keyword.control.as.advpl
+            '4':
+                name: storage.type.advpl
         end: '(?=$)'
         patterns:
             -
@@ -318,8 +321,10 @@ repository:
                 name: entity.name.function.advpl
         end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
         endCaptures:
-                    '1': {name: keyword.control.as.advpl}
-                    '2': {name: storage.type.advpl}
+            '1':
+                name: keyword.control.as.advpl
+            '2':
+                name: storage.type.advpl
         patterns:
             -
                 include: '#function-parameters'
@@ -458,7 +463,7 @@ repository:
                 match: '(?i)(wssend|wsreceive)'
                 name: storage.type.parameter.advpl
             -
-                match: '(\w+)'
+                match: (\w+)
                 name: variable.parameter.advpl
             -
                 include: '#virgula'
@@ -503,7 +508,7 @@ repository:
         patterns:
             -
                 name: variable.parameter.advpl
-                match: '(\w+)'
+                match: (\w+)
     tipo-dado:
         patterns:
             -
