@@ -1,6 +1,6 @@
 'use strict';
 import * as nls from 'vscode-nls';
-const localize = nls.config(process.env.VSCODE_NLS_CONFIG)();
+const localize = nls.config(process.env.VSCODE_NLS_CONFIG as nls.Options)();
 
 import * as vscode from 'vscode';
 import { WorkspaceFolder, DebugConfiguration, ProviderResult, CancellationToken } from 'vscode';
@@ -97,7 +97,16 @@ export async function activate(context: vscode.ExtensionContext) {
     // Binds do Servers View
     context.subscriptions.push(addServer(context));
 
-    // register a configuration provider for 'mock' debug type
+    
+    const providerAdvpl = new AdvplConfigurationProvider();
+    context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl', providerAdvpl));
+
+    const factoryAdvpl = new AdvplDebugAdapterDescriptorFactory();
+		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl', factoryAdvpl));
+        context.subscriptions.push(factoryAdvpl);
+        
+    
+    // register a configuration provider for 'Replay' debug type
 	const provider = new ReplayConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
 
@@ -1265,6 +1274,44 @@ class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescript
 
         const program =  getReplayExec(); //"/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/TdsReplayPlay";
 
+		return new vscode.DebugAdapterExecutable(program, args);
+	}
+
+	dispose() {
+
+	}
+}
+
+class AdvplConfigurationProvider implements vscode.DebugConfigurationProvider {    
+    resolveDebugConfiguration(folder: WorkspaceFolder | undefined, config: DebugConfiguration, token?: CancellationToken): ProviderResult<DebugConfiguration> {
+
+		// if launch.json is missing or empty
+		if (!config.type && !config.request && !config.name) {
+			const editor = vscode.window.activeTextEditor;
+			if (editor && editor.document.languageId === 'advpl') {
+				config.type = 'advpl';
+				config.name = 'Advpl Debug';
+				config.request = 'launch';
+                config.stopOnEntry = false;
+                config.cwd= "${workspaceRoot}";
+                config.programRun ="${command:AskForProgramName}";                
+                config.enviromentInfo= "${command:GetEnvInfos}";
+                config.workspace= "${workspaceFolder}/";
+			}
+        }
+		return config;
+	}
+
+}
+class AdvplDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescriptorFactory {
+
+
+
+	createDebugAdapterDescriptor(session: vscode.DebugSession, executable: vscode.DebugAdapterExecutable | undefined): vscode.ProviderResult<vscode.DebugAdapterDescriptor> {
+
+        const args = []; //Vai os parametros vai onLaunch
+
+        const program = debugBrdige.getAdvplDebugBridge();
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
 

@@ -14,12 +14,63 @@ patterns:
     -
         include: '#declaracoes'
     -
-        include: '#expressao'
+        include: '#expressao'    
+    -
+       include: '#annotation-def'
+    -   
+        include: '#tlpp'
 repository:
+    tlpp:
+        patterns:
+            -
+                name: entity.name.namespace.tlpp
+                match: '(?i)\b(namespace)\b'
+            -
+                #name: entity.name.namespace.using.tlpp
+                name: keyword.other.using
+                match: '(?i)\b(using namespace)\b'
+            -
+                name: storage.type.annotation.java.tlpp
+                match: '(?i)@[_a-zA-Z][_a-zA-Z0-9]+'
+    annotation-def:        
+        name: meta.class.advpl
+        begin: '(?i)^\s*(@annotation)\s+(\w+)(:((\w+)))?'
+        beginCaptures:
+            '1':
+                name: storage.type.class.advpl
+            '2':
+                name: entity.name.type.class.advpl          
+        end: '(?i)(@end)'
+        endCaptures:
+            '1':
+                name: storage.type.class.advpl
+        patterns:
+        -
+            include: '#comentario'
+        -
+            include: '#declaracao-metodo'
+        -   
+            include: '#annotation-property-def'            
+        
+    annotation-property-def:
+        patterns:
+            -
+                match: '(?i)\s*([_a-zA-Z][_a-zA-Z0-9]+)(?:\s+(as)\s*(?:(numeric|char))\s*)? (default)?'
+                captures:                        
+                    '1': {name: variable.object.property.advpl}
+                    '2': {name: keyword.control.as.advpl}                        
+                    '3': {name: storage.type.advpl}                        
+                    '4': {name: keyword.control.optional.advpl}
+    modifier:
+        patterns:
+             -
+                #name: storage.modifier.advpl
+                name: keyword.control.as.advpl
+                match: '(?i)(static)?\s+(public|private|protected)'
     diretivas-compilador:
         patterns:
             -
-                name: keyword.control.advpl
+                name: keyword.control.directives.advpl
                 match: '(?i)#\b(define|endif|ifn?def|include|x?command|x?translate)\b'
     comandos:
         patterns:
@@ -122,14 +173,14 @@ repository:
                 include: '#chamada-metodo'
             -
                 match: '((?:::|:)\b\w+)\b(?!:\w)'
-                name: variable.parameter.advpl
-            -
-                match: '((?:::|:)\b\w+)\b'
-                name: entity.name.type.object.advpl
-                comment: variable.parameter.advpl
-            -
-                match: '\b(\w+)\b(?=:)(?!:=)'
-                name: entity.name.type.object.advpl
+                name: variable.other.property.advpl
+            #-
+            #    match: '((?:::|:)\b\w+)\b'
+            #    name: entity.name.type.object.advpl
+            #    comment: variable.parameter.advpl
+            #-
+            #    match: '\b(\w+)\b(?=:)(?!:=)'
+            #    name: variable.other.property.advpl
     tipo-array:
         name: meta.array.literal.advpl
         begin: '\{'
@@ -242,13 +293,18 @@ repository:
             -
                 name: keyword.operator.arithmetic.advpl
                 match: '%|\*|/|-|\+'
+            -
+                
     declaracao-variavel:
         name: meta.declaration.advpl
         begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
         beginCaptures:
-            '1': {name: storage.modifier.advpl}
-            '3': {name: keyword.control.as.advpl}
-            '4': {name: storage.type.advpl}
+            '1':
+                name: storage.modifier.advpl
+            '3':
+                name: keyword.control.as.advpl
+            '4':
+                name: storage.type.advpl
         end: '(?=$)'
         patterns:
             -
@@ -257,6 +313,8 @@ repository:
                 include: '#expressao'
     data:
         patterns:
+            -
+                include: '#modifier'
             -
                 match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean)|(\w+))\s*)?(optional)?'
                 captures:
@@ -318,8 +376,10 @@ repository:
                 name: entity.name.function.advpl
         end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
         endCaptures:
-                    '1': {name: keyword.control.as.advpl}
-                    '2': {name: storage.type.advpl}
+            '1':
+                name: keyword.control.as.advpl
+            '2':
+                name: storage.type.advpl
         patterns:
             -
                 include: '#function-parameters'
@@ -352,7 +412,10 @@ repository:
             -
                 include: '#data'
     declaracao-metodo:
-        begin: '(?i)^\s*(method)\s+(\w+)\s*(?=\()'
+        patterns:
+            -
+                include: '#modifier'
+        begin: '(?i)\s*(method)\s+(\w+)\s*(?=\()'
         beginCaptures:
             '1':
                 name: storage.type.method.advpl
@@ -458,7 +521,7 @@ repository:
                 match: '(?i)(wssend|wsreceive)'
                 name: storage.type.parameter.advpl
             -
-                match: '(\w+)'
+                match: (\w+)
                 name: variable.parameter.advpl
             -
                 include: '#virgula'
@@ -503,7 +566,7 @@ repository:
         patterns:
             -
                 name: variable.parameter.advpl
-                match: '(\w+)'
+                match: (\w+)
     tipo-dado:
         patterns:
             -
