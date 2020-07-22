@@ -8,7 +8,7 @@ export class replaytTimeLineTree implements vscode.TreeDataProvider<SourceTreeIt
 
     }    
     refresh(): void {
-		this._onDidChangeTreeData.fire();
+        this._onDidChangeTreeData.fire(undefined);
 	}
 
     getTreeItem(element: SourceTreeItem): vscode.TreeItem | Thenable<vscode.TreeItem> {

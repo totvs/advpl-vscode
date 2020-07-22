@@ -331,7 +331,7 @@ export class ServerProvider implements vscode.TreeDataProvider<Dependency> {
 	readonly onDidChangeTreeData: vscode.Event<Dependency | undefined> = this._onDidChangeTreeData.event;
 
 	refresh(): void {
-		this._onDidChangeTreeData.fire();
+		this._onDidChangeTreeData.fire(undefined);
 	}
 
 	getTreeItem(element: Dependency): Dependency {
