@@ -209,7 +209,7 @@ export class advplCompile {
         child.on("exit", function (data) {
             var lRunned = data == 0
             console.log("exit: " + data);
-            that.run_callBack(lRunned);
+            that.run_callBack(lRunned, compileType);
             var endTime;
             endTime = new Date();
             let timeDiff = (endTime - that.compileStartTime); //in ms
@@ -245,7 +245,7 @@ export class advplCompile {
         return results;
     };
 
-    private run_callBack(lOk) {
+    private run_callBack(lOk, type: number = 0) {
         let lErrorFound;
         let lAbort;
 
@@ -259,6 +259,12 @@ export class advplCompile {
                     let sourceArray = oEr.msgs[x];
                     let diags: vscode.Diagnostic[] = [];
                     source = decodeURI(sourceArray.Key);
+                    
+                    // Caso seja compilação de fonte e tenha o retorno do nome do arquivo, adiciona o nome do fonte no console
+                    if (source !== "NOSOURCE" && type > 0) {
+                        this.outChannel.log("Source " + path.basename(source) + ": ");   
+                    }
+
                     for (let y = 0; y < sourceArray.Value.length; y++) {
                         let msgerr = sourceArray.Value[y];
                         let lineIndex = Number(msgerr.Line) - 1;
@@ -358,6 +364,36 @@ export class advplCompile {
         });
     }
 
+    public deleteSourceContext(files: string): void {
+        // Verifica se a função encontrou arquivos a excluir
+        if (files.trim() !== "") {
+
+            this.outChannel.log(localize("src.advplCompile.istartSourcesExclusionText", "Starting the exclusion of the sources ") + files + "\n");
+            this.diagnosticCollection.clear();
+            var _args = new Array<string>()
+            var that = this;
+            _args.push("--compileInfo=" + this.EnvInfos);
+            _args.push("--deleteSource=" + files);
+
+            var child = child_process.spawn(this.debugPath, _args);
+
+            child.stdout.on("data", function (data) {
+                that._lastAppreMsg += data;
+            });
+
+            child.on("exit", function (data) {
+                var lRunned = data == 0
+                console.log("exit: " + data);
+                that.run_callBack(lRunned);
+            });
+
+        } else {
+            vscode.window.showErrorMessage(localize('src.advplCompile.notInformedSource', 'Source to be excluded not informed!'));
+            this._lastAppreMsg = null
+            this.run_callBack(false);
+        }
+    }
+    
     public defragRPO(): void {
         this.outChannel.log(localize("src.advplCompile.startingDefragText", "Starting the defragmentation of the RPO...") + "\n");
         this.diagnosticCollection.clear();

@@ -5,14 +5,18 @@
  - Melhoria: Adicionado *type* `Object` na sintaxe dos atributos de classe
  - Melhoria: [Implementado **Hover Inspect** no debug](https://github.com/totvs/advpl-vscode/issues/417)
  - Melhoria: [Permitir **excluir um ambiente pelo gerenciador de ambientes**](https://github.com/totvs/advpl-vscode/issues/408)
+ - Melhoria: [Permitir excluir fontes via **menu Explorer**](https://github.com/totvs/advpl-vscode/issues/445)
+ - Melhoria: [Adicionar opção no **Env Manager** para trocar a senha](https://github.com/totvs/advpl-vscode/issues/448)
+ - Melhoria: Permitir cancelar a compilação de arquivos abertos
  - Correção: [Ao compilar arquivos abertos, compilava a Workspace inteira](https://github.com/totvs/advpl-vscode/issues/411)
  - Correção: [JSON Bridge Return Invalid](https://github.com/totvs/advpl-vscode/issues/409)
     - Gabriel Alencar
  - Melhoria via Pull Request: [Code format](https://github.com/totvs/advpl-vscode/pull/420)
     - Robson Rogério Silva
+ - Melhoria: [**Compilação de pasta** não mostra nome do fonte compilado sem warnings](https://github.com/totvs/advpl-vscode/issues/436)
  - Correção: Conexão com repositorio SQLite
- - Correção: Deleção de fonte binario 19
  - Correção: [Problemas com Debug com path com acentos](https://github.com/totvs/advpl-vscode/issues/422)
+ - Correção: [Exclusão de fonte do RPO no binário 191205P](https://github.com/totvs/advpl-vscode/issues/416)
 
 ## 0.14.3
  - Melhoria: Avisar o link do uso do alpha, quando usnado o binario 19 com ssl.
@@ -30,7 +34,7 @@
    - Agora quando o mouse é posicionado em um item do Gerenciador, a tooltip mostrará os dados do Label + Descrição (exceto quando forem iguais)
    - Ajustado título da View de Gerenciamento de Ambientes
    - Adicionado opção para **Aplicar Patch** com seleção do arquivo *.ptm
- - Melhoria: Adicionado novos Snippets AdvPL na extensão (baseado nos snnipets da **AdvPLS Client**)
+ - Melhoria: Adicionado novos Snippets AdvPL na extensão (baseado nos snippets da **AdvPLS Client**)
  - Melhoria: Adicionado novos *types* `Variadic` e `Base64Binary` como tipos reconhecidos na linguagem AdvPL
  - Melhoria: Melhorias na sintaxe Highlight para tipos e objetos AdvPL
  - Melhoria: Adicionado suporte de sintaxe para o `BeginContent`

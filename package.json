@@ -11,7 +11,9 @@
     },
     "categories": [
         "Programming Languages",
-        "Formatters"
+        "Formatters",
+        "Debuggers",
+        "Snippets"
     ],
     "capabilities": {
         "documentFormattingProvider": "true"
@@ -38,9 +40,13 @@
         "onCommand:advpl.monitor.getRpoInfos",
         "onCommand:advpl.monitor.getRpoFunctions",
         "onCommand:advpl.monitor.deleteSource",
+        "onCommand:advpl.monitor.deleteSourceContext",
         "onCommand:advpl.monitor.defragRpo",
         "onCommand:advpl.buildWSClient",
-        "onCommand:advpl.selectEnvironment"
+        "onCommand:advpl.selectEnvironment",
+        "onCommand:advpl.whatsNew",
+        "onCommand:advpl.serversManagement.AddServer",
+        "onCommand:advpl.addAdvplEnvironment"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -67,6 +73,12 @@
                 }
             ]
         },
+        "viewsWelcome": [
+            {
+                "view": "serversManagement",
+                "contents": "No environments found [learn more](https://github.com/totvs/advpl-vscode/wiki/Criação-de-ambiente-facilitada).\n[Add Environment](command:advpl.serversManagement.AddServer)"
+            }
+        ],
         "menus": {
             "explorer/context": [
                 {
@@ -101,6 +113,10 @@
                 {
                     "command": "advpl.patch.build",
                     "when": "resourceFilename =~ /.*\\.txt/i",
+                    "group": "advpl"
+                },
+                {
+                    "command": "advpl.monitor.deleteSourceContext",
                     "group": "advpl"
                 }
             ],
@@ -137,6 +153,10 @@
                 {
                     "command": "advpl.serversManagement.getAllEnvironments",
                     "when": "view == serversManagement && viewItem == ServiceConnected"
+                },
+                {
+                    "command": "advpl.serversManagement.CipherPassword",
+                    "when": "view == serversManagement && viewItem =~ /^Environment/i"
                 }
             ],
             "view/title": [
@@ -206,7 +226,19 @@
                     "when": "config.noExists"
                 },
                 {
+                    "command": "advpl.serversManagement.CipherPassword",
+                    "when": "config.noExists"
+                },
+                {
                     "command": "advpl.patch.apply",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.monitor.deleteSourceContext",
+                    "when": "config.noExists"
+                },
+                {
+                    "command": "advpl.menucompile",
                     "when": "config.noExists"
                 }
             ]
@@ -572,6 +604,10 @@
                 "title": "%advpl.monitor.deleteSource%"
             },
             {
+                "command": "advpl.monitor.deleteSourceContext",
+                "title": "%advpl.monitor.deleteSource%"
+            },
+            {
                 "command": "advpl.monitor.defragRpo",
                 "title": "%advpl.monitor.defragRpo%"
             },
@@ -646,6 +682,10 @@
             {
                 "command": "advpl.serversManagement.getAllEnvironments",
                 "title": "%advpl.serversManagement.getAllEnvironments%"
+            },
+            {
+                "command": "advpl.serversManagement.CipherPassword",
+                "title": "%advpl.serversManagement.CipherPassword%"
             },
             {
                 "command": "advpl.compileFilesOpened",
