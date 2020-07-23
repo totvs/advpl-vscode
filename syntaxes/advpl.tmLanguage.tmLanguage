@@ -503,7 +503,27 @@
             <key>match</key>
             <string>((?:::|:)\b\w+)\b(?!:\w)</string>
             <key>name</key>
-            <string>variable.other.property.advpl</string>
+            <string>variable.advpl</string>
+          </dict>
+          <dict>
+            <key>match</key>
+            <string>((?:::|:)\b\w+)\b</string>
+            <key>name</key>
+            <string>variable.object.advpl</string>
+            <key>comment</key>
+            <string>variable.advpl</string>
+          </dict>
+          <dict>
+            <key>match</key>
+            <string>\b(\w+)\(\)\:</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>entity.name.type.object.advpl</string>
+              </dict>
+            </dict>
           </dict>
         </array>
       </dict>
@@ -812,12 +832,12 @@
           <key>3</key>
           <dict>
             <key>name</key>
-            <string>keyword.control.as.advpl</string>
+            <string>constant.other.symbol.as.advpl</string>
           </dict>
           <key>4</key>
           <dict>
             <key>name</key>
-            <string>storage.type.advpl</string>
+            <string>support.type.advpl</string>
           </dict>
         </dict>
         <key>end</key>
@@ -855,22 +875,22 @@
               <key>2</key>
               <dict>
                 <key>name</key>
-                <string>variable.object.property.advpl</string>
+                <string>variable.parameter.object.property.advpl</string>
               </dict>
               <key>3</key>
               <dict>
                 <key>name</key>
-                <string>keyword.control.as.advpl</string>
+                <string>constant.other.symbol.as.advpl</string>
               </dict>
               <key>4</key>
               <dict>
                 <key>name</key>
-                <string>keyword.control.arrayof.advpl</string>
+                <string>support.type.arrayof.advpl</string>
               </dict>
               <key>5</key>
               <dict>
                 <key>name</key>
-                <string>storage.type.advpl</string>
+                <string>support.type.advpl</string>
               </dict>
               <key>6</key>
               <dict>
@@ -1005,12 +1025,12 @@
           <key>1</key>
           <dict>
             <key>name</key>
-            <string>keyword.control.as.advpl</string>
+            <string>constant.other.symbol.as.advpl</string>
           </dict>
           <key>2</key>
           <dict>
             <key>name</key>
-            <string>storage.type.advpl</string>
+            <string>support.type.advpl</string>
           </dict>
         </dict>
         <key>patterns</key>
@@ -1127,12 +1147,12 @@
           <key>3</key>
           <dict>
             <key>name</key>
-            <string>keyword.control.as.advpl</string>
+            <string>constant.other.symbol.as.advpl</string>
           </dict>
           <key>4</key>
           <dict>
             <key>name</key>
-            <string>storage.type.advpl</string>
+            <string>support.type.advpl</string>
           </dict>
         </dict>
       </dict>
@@ -1293,7 +1313,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>(?i)(wsmethod)\s+(\w+)(\s+description)?</string>
+            <string>(?i)(wsmethod)\s+(\w+)</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -1306,12 +1326,13 @@
                 <key>name</key>
                 <string>entity.name.function.advpl</string>
               </dict>
-              <key>3</key>
-              <dict>
-                <key>name</key>
-                <string>keyword.control.ws.advpl</string>
-              </dict>
             </dict>
+          </dict>
+          <dict>
+            <key>match</key>
+            <string>(?i)(description|wssyntax|path)</string>
+            <key>name</key>
+            <string>keyword.control.ws.advpl</string>
           </dict>
         </array>
       </dict>
@@ -1481,12 +1502,12 @@
               <key>1</key>
               <dict>
                 <key>name</key>
-                <string>keyword.control.as.advpl</string>
+                <string>constant.other.symbol.as.advpl</string>
               </dict>
               <key>2</key>
               <dict>
                 <key>name</key>
-                <string>storage.type.advpl</string>
+                <string>support.type.advpl</string>
               </dict>
             </dict>
           </dict>

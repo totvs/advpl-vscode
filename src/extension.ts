@@ -1,6 +1,11 @@
 'use strict';
 import * as nls from 'vscode-nls';
-const localize = nls.config(process.env.VSCODE_NLS_CONFIG as nls.Options)();
+const _NLSOptions = {
+    locale : process.env.VSCODE_NLS_CONFIG,
+    bundleFormat : nls.BundleFormat.standalone,
+    messageFormat: nls.MessageFormat.file
+}
+let localize = nls.config(_NLSOptions)();
 
 import * as vscode from 'vscode';
 import { WorkspaceFolder, DebugConfiguration, ProviderResult, CancellationToken } from 'vscode';
