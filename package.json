@@ -829,7 +829,7 @@
             },
             {
                 "type": "advpl-replay",
-                "label": "Advpl Replay Debug",                
+                "label": "Advpl Replay Debug",
                 "variables": {
                     "ReplayTmpDir": "advpl.replayTmpDir",
                     "ReplayExecId": "advpl.replayExecId",
@@ -943,9 +943,13 @@
         "@types/vscode": "1.47.0",
         "del": "^5.1.0",
         "gulp": "^4.0.2",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-typescript": "^6.0.0-alpha.1",
+        "gulp4-run-sequence": "^1.0.1",
         "mocha": "^8.0.1",
-        "run-sequence": "^2.2.0",
+        "run-sequence": "^2.2.1",
         "typescript": "^3.8.3",
+        "vsce": "^1.77.0",
         "vscode-debugadapter-testsupport": "^1.41.0",
         "vscode-nls-dev": "^3.3.2"
     },
