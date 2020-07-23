@@ -92,6 +92,21 @@ repository:
                     - {include: '#tipo-caracter'}
                     - {name: storage.modifier.advpl, match: '%.*?%'}
                     - {name: variable.parameter.sqlquery.advpl, match: \b(\w+)\b}
+            -
+                name: meta.begincontent.advpl
+                begin: '(?i)\b(begincontent)\s+(var)(\s+\w+)?'
+                beginCaptures:
+                    '1': {name: keyword.control.begincontent.advpl}
+                    '2': {name: keyword.control.var.advpl}
+                    '3': {name: variable.advpl}
+                end: '(?i)endcontent'
+                endCaptures:
+                    '0': {name: keyword.control.endcontent.advpl}
+                patterns:
+                    - {include: '#comentario'}
+                    - {include: '#tipo-caracter'}
+                    - {name: storage.modifier.advpl, match: '%.*?%'}
+                    - {name: variable.parameter.sqlquery.advpl, match: \b(\w+)\b}
     tipos:
         patterns:
             -
@@ -297,7 +312,7 @@ repository:
                 
     declaracao-variavel:
         name: meta.declaration.advpl
-        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
+        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
         beginCaptures:
             '1':
                 name: storage.modifier.advpl
@@ -316,7 +331,7 @@ repository:
             -
                 include: '#modifier'
             -
-                match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean)|(\w+))\s*)?(optional)?'
+                match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?'
                 captures:
                     '1': {name: storage.modifier.advpl}
                     '2': {name: variable.object.property.advpl}
@@ -374,7 +389,7 @@ repository:
                 name: storage.type.function.advpl
             '3':
                 name: entity.name.function.advpl
-        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
+        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
         endCaptures:
             '1':
                 name: keyword.control.as.advpl
@@ -421,7 +436,7 @@ repository:
                 name: storage.type.method.advpl
             '2':
                 name: entity.name.function.advpl
-        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?'
+        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
         endCaptures:
             '1':
                 name: storage.type.class.advpl
@@ -570,7 +585,7 @@ repository:
     tipo-dado:
         patterns:
             -
-                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object)'
+                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)'
                 captures:
                     '1': {name: keyword.control.as.advpl}
                     '2': {name: storage.type.advpl}

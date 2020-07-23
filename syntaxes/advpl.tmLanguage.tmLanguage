@@ -240,6 +240,63 @@
               </dict>
             </array>
           </dict>
+          <dict>
+            <key>name</key>
+            <string>meta.begincontent.advpl</string>
+            <key>begin</key>
+            <string>(?i)\b(begincontent)\s+(var)(\s+\w+)?</string>
+            <key>beginCaptures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.begincontent.advpl</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.var.advpl</string>
+              </dict>
+              <key>3</key>
+              <dict>
+                <key>name</key>
+                <string>variable.advpl</string>
+              </dict>
+            </dict>
+            <key>end</key>
+            <string>(?i)endcontent</string>
+            <key>endCaptures</key>
+            <dict>
+              <key>0</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.control.endcontent.advpl</string>
+              </dict>
+            </dict>
+            <key>patterns</key>
+            <array>
+              <dict>
+                <key>include</key>
+                <string>#comentario</string>
+              </dict>
+              <dict>
+                <key>include</key>
+                <string>#tipo-caracter</string>
+              </dict>
+              <dict>
+                <key>name</key>
+                <string>storage.modifier.advpl</string>
+                <key>match</key>
+                <string>%.*?%</string>
+              </dict>
+              <dict>
+                <key>name</key>
+                <string>variable.parameter.sqlquery.advpl</string>
+                <key>match</key>
+                <string>\b(\w+)\b</string>
+              </dict>
+            </array>
+          </dict>
         </array>
       </dict>
       <key>tipos</key>
@@ -744,7 +801,7 @@
         <key>name</key>
         <string>meta.declaration.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -787,7 +844,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean)|(\w+))\s*)?(optional)?</string>
+            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -942,7 +999,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -1054,7 +1111,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object))?</string>
+        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -1418,7 +1475,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object)</string>
+            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)</string>
             <key>captures</key>
             <dict>
               <key>1</key>
