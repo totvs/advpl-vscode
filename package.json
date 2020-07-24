@@ -516,8 +516,24 @@
                     "4GL(4gl)"
                 ],
                 "configuration": "./4gl.configuration.json"
+            }, 
+            {
+                "id": "advpl-tlpp-header",
+                "extensions": [
+                    ".ch",
+                    ".th"
+                ],
+                "aliases": [
+                    "Advpl Header(CH)",
+                    "TLPP Header (TH)"
+                ],
+                "configuration": "./advpl-tlpp-header.configuration.json"
             }
         ],
+        "breakpoints": [{
+            "language": "advpl"
+          }]
+        ,
         "grammars": [
             {
                 "language": "advpl",
@@ -528,6 +544,12 @@
                 "language": "4gl",
                 "scopeName": "source.4gl",
                 "path": "./syntaxes/4gl.tmLanguage.tmLanguage"
+            },
+            {
+                "language": "advpl-tlpp-header",
+                "scopeName": "source.advpl-tlpp-header",
+                "path": "./syntaxes/advpl-tlpp-header.tmLanguage"
+                
             }
         ],
         "commands": [

@@ -1,0 +1,71 @@
+$schema: 'https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json'
+name: ADVPL
+patterns:
+    -
+        include: '#comment'
+    -
+        include: '#test'
+    -
+        include: '#annotation-def'
+    -
+        include: '#type-string'
+
+repository:
+    type-string:
+        patterns:
+            -
+                name: string.quoted.double.advpl
+                match: '("[^"]*"?)'
+            -
+                name: string.quoted.double.advpl
+                match: '(''[^'']*''?)'
+    annotation-def:                
+        begin: '(?i)^\s*(@annotation)\s+(\w+)'
+        beginCaptures:
+            '1':
+                name: storage.type.class.advpl
+            '2':
+                name: entity.name.type.class.advpl          
+        end: '(?i)(@end)'
+        endCaptures:
+            '1':
+                name: storage.type.class.advpl
+        patterns:
+        -
+            include: '#comentario'
+        -
+            include: '#declaracao-metodo'
+        -   
+            include: '#annotation-property-def'            
+        
+    annotation-property-def:
+        patterns:
+            -
+                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char)))?\s+(?:(default))?'
+                captures:                        
+                    '1': {name: variable.object.property.advpl}
+                    '2': {name: keyword.control.as.advpl}                        
+                    '3': {name: storage.type.advpl}                        
+                    '4': {name: keyword.control.optional.advpl}
+    test:
+        patterns:
+            -
+                name: keyword.control.directives.advpl-tlpp-header
+                match: '(?i)#\b(define|endif|ifn?def|include|x?command|x?translate)\b'
+    comment:
+        patterns:
+            -
+                name: comment.block.advpl-tlpp-header
+                begin: '/\*'
+                end: '\*/'
+                captures:
+                    '0': {name: punctuation.definition.comment.advpl-tlpp-header}
+            -
+                begin: '(^[ \t]+)?(?=//)'
+                beginCaptures:
+                    '1': {name: punctuation.whitespace.comment.leading.advpl-tlpp-header}
+                end: '(?=$)'
+                patterns:
+                    - {name: comment.line.double-slash.advpl-tlpp-header, begin: //, beginCaptures: {'0': {name: punctuation.definition.comment.advpl-tlpp-header}}, end: '(?=$)'}
+
+scopeName: source.advpl-tlpp-header

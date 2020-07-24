@@ -73,10 +73,8 @@
       </dict>
       <key>annotation-def</key>
       <dict>
-        <key>name</key>
-        <string>meta.class.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*(@annotation)\s+(\w+)(:((\w+)))?</string>
+        <string>(?i)^\s*(@annotation)\s+(\w+)</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
@@ -122,7 +120,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)\s*([_a-zA-Z][_a-zA-Z0-9]+)(?:\s+(as)\s*(?:(numeric|char))\s*)? (default)?</string>
+            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char)))?\s+(?:(default))?</string>
             <key>captures</key>
             <dict>
               <key>1</key>

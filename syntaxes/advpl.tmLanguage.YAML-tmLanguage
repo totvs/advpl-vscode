@@ -32,9 +32,8 @@ repository:
             -
                 name: storage.type.annotation.java.tlpp
                 match: '(?i)@[_a-zA-Z][_a-zA-Z0-9]+'
-    annotation-def:        
-        name: meta.class.advpl
-        begin: '(?i)^\s*(@annotation)\s+(\w+)(:((\w+)))?'
+    annotation-def:                
+        begin: '(?i)^\s*(@annotation)\s+(\w+)'
         beginCaptures:
             '1':
                 name: storage.type.class.advpl
@@ -55,7 +54,7 @@ repository:
     annotation-property-def:
         patterns:
             -
-                match: '(?i)\s*([_a-zA-Z][_a-zA-Z0-9]+)(?:\s+(as)\s*(?:(numeric|char))\s*)? (default)?'
+                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char)))?\s+(?:(default))?'
                 captures:                        
                     '1': {name: variable.object.property.advpl}
                     '2': {name: keyword.control.as.advpl}                        
