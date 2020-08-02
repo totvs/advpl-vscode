@@ -1317,6 +1317,9 @@ class AdvplDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescripto
         const args = []; //Vai os parametros vai onLaunch
 
         const program = debugBrdige.getAdvplDebugBridge();
+        
+       /* const program = "/snap/bin/valgrind";
+        const args = [ "--tool=massif", "--massif-out-file=/home/rodrigo/tmp/valgrid-log/massif.out.%p", "/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/AdvplDebugBridgeC"]*/
 		return new vscode.DebugAdapterExecutable(program, args);
 	}
 

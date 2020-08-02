@@ -44,6 +44,10 @@
         <key>include</key>
         <string>#tlpp</string>
       </dict>
+      <dict>
+        <key>include</key>
+        <string>#annotation-use</string>
+      </dict>
     </array>
     <key>repository</key>
     <dict>
@@ -63,6 +67,12 @@
             <key>match</key>
             <string>(?i)\b(using namespace)\b</string>
           </dict>
+        </array>
+      </dict>
+      <key>annotation-use</key>
+      <dict>
+        <key>patterns</key>
+        <array>
           <dict>
             <key>name</key>
             <string>storage.type.annotation.java.tlpp</string>
@@ -147,6 +157,18 @@
           </dict>
         </array>
       </dict>
+      <key>modifier-visibility</key>
+      <dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>name</key>
+            <string>keyword.control.as.advpl</string>
+            <key>match</key>
+            <string>(?i)(static)?\s+</string>
+          </dict>
+        </array>
+      </dict>
       <key>modifier</key>
       <dict>
         <key>patterns</key>
@@ -155,7 +177,7 @@
             <key>name</key>
             <string>keyword.control.as.advpl</string>
             <key>match</key>
-            <string>(?i)(static)?\s+(public|private|protected)</string>
+            <string>(?i)(static)?\s+(public|private|protected)?</string>
           </dict>
         </array>
       </dict>
@@ -1102,6 +1124,10 @@
             <key>include</key>
             <string>#data</string>
           </dict>
+          <dict>
+            <key>include</key>
+            <string>#annotation-use</string>
+          </dict>
         </array>
       </dict>
       <key>declaracao-metodo</key>
@@ -1111,6 +1137,10 @@
           <dict>
             <key>include</key>
             <string>#modifier</string>
+          </dict>
+          <dict>
+            <key>include</key>
+            <string>#modifier-visibility</string>
           </dict>
         </array>
         <key>begin</key>
