@@ -130,7 +130,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char)))?\s+(?:(default))?</string>
+            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|logical)))?\s+(?:(default))?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -1141,6 +1141,10 @@
           <dict>
             <key>include</key>
             <string>#modifier-visibility</string>
+          </dict>
+          <dict>
+            <key>include</key>
+            <string>#function-parameters</string>
           </dict>
         </array>
         <key>begin</key>

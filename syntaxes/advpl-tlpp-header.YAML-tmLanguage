@@ -41,7 +41,7 @@ repository:
     annotation-property-def:
         patterns:
             -
-                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char)))?\s+(?:(default))?'
+                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|logical)))?\s+(?:(default))?'
                 captures:                        
                     '1': {name: variable.object.property.advpl}
                     '2': {name: keyword.control.as.advpl}                        
