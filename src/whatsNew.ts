@@ -18,6 +18,7 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
+        changeLog.push({ kind: ChangeLogKind.NEW, message: "Aprimorado suporte ao <b>TLPP</b> e edição de .ch e .th" });
         changeLog.push({ kind: ChangeLogKind.NEW, message: "Adicionado <b>What's New</b> para apresentar as novidades e correções da extensão" });
 
         changeLog.push({
