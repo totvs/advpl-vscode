@@ -1,4 +1,6 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.14.5
+ - Correção na aplicação de patch para o binario 19
 
 ## 0.14.4
  - Melhoria via Pull Request: [What's new page](https://github.com/totvs/advpl-vscode/pull/421)
