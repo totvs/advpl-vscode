@@ -81,13 +81,16 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
       const text = line.text.trimRight();
       let lastRule: RuleMatch =
         formattingRules.openStructures[
-          formattingRules.openStructures.length - 1
+        formattingRules.openStructures.length - 1
         ];
       let foundIgnore: any[] = rulesIgnored.filter(rule => {
         return lastRule && lastRule.rule && rule.id === lastRule.rule.id;
       });
-      // dentro do BeginSql não mexe na identação
-      if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
+      // tratamento para não mexer nas linhas de erros do GIT
+      if (text.match('^' + ('\\<'.repeat(7))) || text.match('^' + ('\\>'.repeat(7))) || text.match('^' + ('\\='.repeat(7)))) {
+        result.push(TextEdit.replace(line.range, text))
+        // dentro de algumas estruturas não identa
+      } else if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
         result.push(TextEdit.replace(line.range, text));
       } else {
         if (
