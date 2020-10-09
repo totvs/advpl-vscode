@@ -217,7 +217,7 @@ export class FormattingRules {
           /^(\s*)(if)(\t|\ |\!)*(.)*(\;)+(.)*(\;)+(.)*(endif)/i
         ],
         middle: /^(\s*)((else)|(elseif))(\t|\ |\(|;|\/\*|$)/i,
-        end: /^(\s*)(end)(w*)(if)?$/i
+        end: /^(\s*)(end)(\s)*(if)?$/i
       },
       {
         id: 'structure',
