@@ -70,6 +70,9 @@ export class FormattingRules {
           line = 'if(' + line;
         }
 
+        // removo textos comentados para facilitar a análise
+        line = line.split(/\/\//)[0].trim();
+
         if (
           line.match(rule.end) &&
           lastRule &&
@@ -104,10 +107,10 @@ export class FormattingRules {
         }
       }
 
-      return isNull(finddedRule);
+      return finddedRule === null;
     });
 
-    if (!isNull(finddedRule)) {
+    if (finddedRule !== null) {
       this.lastMatch = finddedRule;
       return true;
     }
