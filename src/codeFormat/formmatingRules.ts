@@ -71,7 +71,12 @@ export class FormattingRules {
         }
 
         // removo textos comentados para facilitar a análise
-        line = line.split(/\/\//)[0].trim();
+        if (lastRule &&
+          lastRule.rule &&
+          lastRule.rule.id !== 'comment' &&
+          lastRule.rule.id !== 'protheus doc') {
+          line = line.split(/\/\//)[0].trim();
+        }
 
         if (
           line.match(rule.end) &&
@@ -230,7 +235,7 @@ export class FormattingRules {
       {
         id: 'while',
         begin: /^(\s*)(do)?(\s*)(while)/i,
-        end: /^(\s*)(end)(do)?$/i
+        end: /^(\s*)(end)(\s*)(do)?$/i
       },
       {
         id: 'wsrestful',
