@@ -70,6 +70,14 @@ export class FormattingRules {
           line = 'if(' + line;
         }
 
+        // removo textos comentados para facilitar a análise
+        if (lastRule &&
+          lastRule.rule &&
+          lastRule.rule.id !== 'comment' &&
+          lastRule.rule.id !== 'protheus doc') {
+          line = line.split(/\/\//)[0].trim();
+        }
+
         if (
           line.match(rule.end) &&
           lastRule &&
@@ -104,10 +112,10 @@ export class FormattingRules {
         }
       }
 
-      return isNull(finddedRule);
+      return finddedRule === null;
     });
 
-    if (!isNull(finddedRule)) {
+    if (finddedRule !== null) {
       this.lastMatch = finddedRule;
       return true;
     }
@@ -217,7 +225,7 @@ export class FormattingRules {
           /^(\s*)(if)(\t|\ |\!)*(.)*(\;)+(.)*(\;)+(.)*(endif)/i
         ],
         middle: /^(\s*)((else)|(elseif))(\t|\ |\(|;|\/\*|$)/i,
-        end: /^(\s*)(end)(w*)(if)?$/i
+        end: /^(\s*)(end)(\s)*(if)?$/i
       },
       {
         id: 'structure',
@@ -227,7 +235,7 @@ export class FormattingRules {
       {
         id: 'while',
         begin: /^(\s*)(do)?(\s*)(while)/i,
-        end: /^(\s*)(end)(do)?$/i
+        end: /^(\s*)(end)(\s*)(do)?$/i
       },
       {
         id: 'wsrestful',
