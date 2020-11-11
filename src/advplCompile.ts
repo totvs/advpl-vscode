@@ -416,13 +416,32 @@ export class advplCompile {
         });
     }
 
-    public BuildPPO(sourceName: string) {
+    public BuildPPO(sourceName: string, stringOnly: boolean = false) {
         this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
-        this.buildPPOCall(sourceName);
+        this.buildPPOCall(sourceName,stringOnly);
     }
 
-    private buildPPOCall(sourceName: string) {
+    // public async getPPO(sourceName: string){
+    //     var _args = new Array<string>()
+    //     var that = this;
+    //     _args.push("--compileInfo=" + this.EnvInfos);
+    //     _args.push("--source=" + sourceName);
+    //     _args.push("--buildPPO");
+
+    //     var child = child_process.spawn(this.debugPath, _args);
+
+    //     child.stdout.on("data", function (data) {
+    //         that._lastAppreMsg += data;
+    //     });
+
+    //     child.on("exit", function (data) {
+    //         that.afterCompile();
+    //         return that._lastAppreMsg;
+    //     });
+    // }
+
+    private buildPPOCall(sourceName: string, stringOnly: boolean = false) {
         this.compileStartTime = new Date();
         var _args = new Array<string>()
         var that = this;
@@ -444,6 +463,11 @@ export class advplCompile {
             let timeDiff = (endTime - that.compileStartTime); //in ms
             timeDiff /= 1000;
             that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+
+            if (stringOnly){
+                that.afterCompile();
+                return that._lastAppreMsg;
+            }
 
             const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName) + '_ppo'));
             vscode.workspace.openTextDocument(newFile).then(document => {
