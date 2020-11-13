@@ -416,72 +416,63 @@ export class advplCompile {
         });
     }
 
-    public BuildPPO(sourceName: string, stringOnly: boolean = false) {
-        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
+    public async buildPPOStringOnly(sourceName: string){
+        this.outChannel.log(`ESP:> starting pre compilation of the source: ${sourceName}`);
         this.diagnosticCollection.clear();
-        this.buildPPOCall(sourceName,stringOnly);
+        
+        let ppo = await this.generatePPO(sourceName);
+        
+        if (ppo !== ''){
+            this._lastAppreMsg = ppo;
+        }
+        this.afterCompile();
     }
 
-    // public async getPPO(sourceName: string){
-    //     var _args = new Array<string>()
-    //     var that = this;
-    //     _args.push("--compileInfo=" + this.EnvInfos);
-    //     _args.push("--source=" + sourceName);
-    //     _args.push("--buildPPO");
+    public async BuildPPO(sourceName: string) {
+        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
+        this.diagnosticCollection.clear();
+        await this.buildPPOCall(sourceName);
+    }
 
-    //     var child = child_process.spawn(this.debugPath, _args);
-
-    //     child.stdout.on("data", function (data) {
-    //         that._lastAppreMsg += data;
-    //     });
-
-    //     child.on("exit", function (data) {
-    //         that.afterCompile();
-    //         return that._lastAppreMsg;
-    //     });
-    // }
-
-    private buildPPOCall(sourceName: string, stringOnly: boolean = false) {
-        this.compileStartTime = new Date();
+    private async generatePPO(sourceName: string): Promise<string>{
         var _args = new Array<string>()
-        var that = this;
+        let ppo = ''
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
         _args.push("--buildPPO");
 
-        this.outChannel.log(localize("src.advplCompile.ppoBuildStartText", "PPO buil started at ") + new Date() + "\n");
         var child = child_process.spawn(this.debugPath, _args);
 
-        child.stdout.on("data", function (data) {
-            that._lastAppreMsg += data;
-        });
+        for await (const data of child.stdout){
+            ppo += data;
+        };
 
-        child.on("exit", function (data) {
+        return ppo;
+    }
 
-            var endTime;
-            endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms
-            timeDiff /= 1000;
-            that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+    private async buildPPOCall(sourceName: string) {
+        this.compileStartTime = new Date();
 
-            if (stringOnly){
-                that.afterCompile();
-                return that._lastAppreMsg;
-            }
+        var that = this;
 
-            const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName) + '_ppo'));
-            vscode.workspace.openTextDocument(newFile).then(document => {
-                const edit = new vscode.WorkspaceEdit();
-                edit.insert(newFile, new vscode.Position(0, 0), that._lastAppreMsg);
-                return vscode.workspace.applyEdit(edit).then(success => {
-                    if (success) {
-                        vscode.window.showTextDocument(document);
-                        that.afterCompile();
-                    } else {
-                        vscode.window.showInformationMessage(localize("src.advplCompile.errorGeneralText", "Error!"));
-                        that.onError();
-                    }
-                });
+        that._lastAppreMsg = await this.generatePPO(sourceName);
+        var endTime: any = new Date();
+        let timeDiff = (endTime - that.compileStartTime); //in ms
+        timeDiff /= 1000;
+        that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+
+        const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName) + '_ppo'));
+        vscode.workspace.openTextDocument(newFile).then(document => {
+            const edit = new vscode.WorkspaceEdit();
+            edit.insert(newFile, new vscode.Position(0, 0), that._lastAppreMsg);
+            return vscode.workspace.applyEdit(edit).then(success => {
+                if (success) {
+                    vscode.window.showTextDocument(document);
+                    that.afterCompile();
+                } else {
+                    vscode.window.showInformationMessage(localize("src.advplCompile.errorGeneralText", "Error!"));
+                    that.onError();
+                }
             });
         });
     }
