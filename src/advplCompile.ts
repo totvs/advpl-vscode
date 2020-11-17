@@ -415,9 +415,17 @@ export class advplCompile {
             that.run_callBack(lRunned);
         });
     }
-
+    
+    /**
+     * Method buildPPOStringOnly
+     * When used this method call the method generatePPO to start pre compile of the source
+     * and save the string output in _lastAppreMsg,
+     * This method was created for use by other tools when theres no need to create a open
+     * document in the editor. 
+     * @param sourceName - string with the name of the file used to generate a ppo 
+     */
     public async buildPPOStringOnly(sourceName: string){
-        this.outChannel.log(`ESP:> starting pre compilation of the source: ${sourceName}`);
+        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
         
         let ppo = await this.generatePPO(sourceName);
@@ -428,12 +436,30 @@ export class advplCompile {
         this.afterCompile();
     }
 
+    /**
+     * Method BuildPPO
+     * When used this method will call the private method buildPPOCall 
+     * starting the process to create a new file with the results of generateppo()
+     * In case of success the file will be open automatically.
+     * it's currently in use by the command : Advpl - Generate PPO.
+     * @param sourceName - string with the name of the file used to generate a ppo 
+     */
     public async BuildPPO(sourceName: string) {
         this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
         await this.buildPPOCall(sourceName);
     }
 
+    /**
+     * Method generatePPO
+     * Async private method used to spawn a event to start a pre compile process.
+     * @param sourceName - string with the name of the file used to generate a ppo
+     * @return {Promise<string>} - string with the results of a ADVPL Compiler command
+     * the ADVPL Compiler will be spawned with the following args: 
+     * --compileInfo
+     * --source
+     * --buildPPO  
+     */
     private async generatePPO(sourceName: string): Promise<string>{
         var _args = new Array<string>()
         let ppo = ''
@@ -450,6 +476,13 @@ export class advplCompile {
         return ppo;
     }
 
+    /**
+     * Method buildPPOCall
+     * Async private Method used to create a new ppo file.
+     * @param sourceName - string with the results of a ADVPL Compiler command
+     * @return {Promise<void>} - returns a Opened VSCODE file with the results of
+     * method generatePP()
+     */
     private async buildPPOCall(sourceName: string) {
         this.compileStartTime = new Date();
 
