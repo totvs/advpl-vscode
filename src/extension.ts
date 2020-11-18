@@ -137,6 +137,9 @@ export async function activate(context: vscode.ExtensionContext) {
     let api = {
         writeAdvplConsole(cLog) {
             OutPutChannel.log(cLog);
+        },
+        compile(cSource: string, cDescription: string = localize('src.extension.sourceText', 'Source'), ignoreEvents: boolean = false){
+            return createAdvplCompile(cSource, cDescription, ignoreEvents);
         }
     };
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));

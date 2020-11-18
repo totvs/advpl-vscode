@@ -415,49 +415,97 @@ export class advplCompile {
             that.run_callBack(lRunned);
         });
     }
-
-    public BuildPPO(sourceName: string) {
+    
+    /**
+     * Method buildPPOStringOnly
+     * When used this method call the method generatePPO to start pre compile of the source
+     * and save the string output in _lastAppreMsg,
+     * This method was created for use by other tools when theres no need to create a open
+     * document in the editor. 
+     * @param sourceName - string with the name of the file used to generate a ppo 
+     */
+    public async buildPPOStringOnly(sourceName: string){
         this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
         this.diagnosticCollection.clear();
-        this.buildPPOCall(sourceName);
+        
+        let ppo = await this.generatePPO(sourceName);
+        
+        if (ppo !== ''){
+            this._lastAppreMsg = ppo;
+        }
+        this.afterCompile();
     }
 
-    private buildPPOCall(sourceName: string) {
-        this.compileStartTime = new Date();
+    /**
+     * Method BuildPPO
+     * When used this method will call the private method buildPPOCall 
+     * starting the process to create a new file with the results of generateppo()
+     * In case of success the file will be open automatically.
+     * it's currently in use by the command : Advpl - Generate PPO.
+     * @param sourceName - string with the name of the file used to generate a ppo 
+     */
+    public async BuildPPO(sourceName: string) {
+        this.outChannel.log(localize("src.advplCompile.startCompilationSourceText", "Starting the compilation of the source:") + sourceName + "\n");
+        this.diagnosticCollection.clear();
+        await this.buildPPOCall(sourceName);
+    }
+
+    /**
+     * Method generatePPO
+     * Async private method used to spawn a event to start a pre compile process.
+     * @param sourceName - string with the name of the file used to generate a ppo
+     * @return {Promise<string>} - string with the results of a ADVPL Compiler command
+     * the ADVPL Compiler will be spawned with the following args: 
+     * --compileInfo
+     * --source
+     * --buildPPO  
+     */
+    private async generatePPO(sourceName: string): Promise<string>{
         var _args = new Array<string>()
-        var that = this;
+        let ppo = ''
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
         _args.push("--buildPPO");
 
-        this.outChannel.log(localize("src.advplCompile.ppoBuildStartText", "PPO buil started at ") + new Date() + "\n");
         var child = child_process.spawn(this.debugPath, _args);
 
-        child.stdout.on("data", function (data) {
-            that._lastAppreMsg += data;
-        });
+        for await (const data of child.stdout){
+            ppo += data;
+        };
 
-        child.on("exit", function (data) {
+        return ppo;
+    }
 
-            var endTime;
-            endTime = new Date();
-            let timeDiff = (endTime - that.compileStartTime); //in ms
-            timeDiff /= 1000;
-            that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+    /**
+     * Method buildPPOCall
+     * Async private Method used to create a new ppo file.
+     * @param sourceName - string with the results of a ADVPL Compiler command
+     * @return {Promise<void>} - returns a Opened VSCODE file with the results of
+     * method generatePP()
+     */
+    private async buildPPOCall(sourceName: string) {
+        this.compileStartTime = new Date();
 
-            const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName) + '_ppo'));
-            vscode.workspace.openTextDocument(newFile).then(document => {
-                const edit = new vscode.WorkspaceEdit();
-                edit.insert(newFile, new vscode.Position(0, 0), that._lastAppreMsg);
-                return vscode.workspace.applyEdit(edit).then(success => {
-                    if (success) {
-                        vscode.window.showTextDocument(document);
-                        that.afterCompile();
-                    } else {
-                        vscode.window.showInformationMessage(localize("src.advplCompile.errorGeneralText", "Error!"));
-                        that.onError();
-                    }
-                });
+        var that = this;
+
+        that._lastAppreMsg = await this.generatePPO(sourceName);
+        var endTime: any = new Date();
+        let timeDiff = (endTime - that.compileStartTime); //in ms
+        timeDiff /= 1000;
+        that.outChannel.log(localize("src.advplCompile.ppoBuildFinishedText", "PPO build finished at ") + new Date() + localize("src.advplCompile.compilationElapsedText", " Elapsed (") + timeDiff + localize("src.advplCompile.compilationSecondsText", " secs.)") + "\n");
+
+        const newFile = vscode.Uri.parse('untitled:' + path.join(path.dirname(sourceName), path.basename(sourceName) + '_ppo'));
+        vscode.workspace.openTextDocument(newFile).then(document => {
+            const edit = new vscode.WorkspaceEdit();
+            edit.insert(newFile, new vscode.Position(0, 0), that._lastAppreMsg);
+            return vscode.workspace.applyEdit(edit).then(success => {
+                if (success) {
+                    vscode.window.showTextDocument(document);
+                    that.afterCompile();
+                } else {
+                    vscode.window.showInformationMessage(localize("src.advplCompile.errorGeneralText", "Error!"));
+                    that.onError();
+                }
             });
         });
     }
