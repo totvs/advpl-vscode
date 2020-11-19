@@ -1,4 +1,10 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.14.7
+ - Implementações iniciais para websocket
+ - Melhoria via Pull Request: [Correção de identação de textos gerados pelo GIT](https://github.com/totvs/advpl-vscode/pull/459)
+  - Robson Rogério Silva
+ - Melhoria via Pull Request: [Exporta função createAdvplCompile](https://github.com/totvs/advpl-vscode/pull/461)
+  - Renato Cunha
 ## 0.14.6
  - Correção no executável do linux
  

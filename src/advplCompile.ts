@@ -199,6 +199,14 @@ export class advplCompile {
         _args.push("--compileInfo=" + this.EnvInfos);
         _args.push("--source=" + sourceName);
 
+
+         /*   
+         Usado para chamar o processo com o valgrind para avaliar leek de memoria em C
+         this.debugPath = "/snap/bin/valgrind";
+        _args.push("--tool=massif");
+        _args.push("--massif-out-file=/home/rodrigo/tmp/valgrid-log/massif.out.%p");
+        _args.push("/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/AdvplDebugBridgeC");*/
+
         this.outChannel.log(localize("src.advplCompile.compilationStartedText", "Compilation started at ") + new Date() + "\n");
         var child = child_process.spawn(this.debugPath, _args);
 
