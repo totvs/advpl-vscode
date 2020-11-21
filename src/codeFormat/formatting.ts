@@ -7,21 +7,25 @@ import {
   TextEdit,
   DocumentRangeFormattingEditProvider,
   Range,
-  Position
-} from 'vscode';
-import { FormattingRules, RuleMatch } from './formmatingRules';
+  Position,
+  workspace,
+  window,
+} from "vscode";
+import {
+  FormattingRules,
+  RuleMatch,
+  getStructsNoIdent,
+  StructureRule,
+} from "./formmatingRules";
+import * as sqlFormatterPlus from "sql-formatter-plus";
+import * as nls from 'vscode-nls';
+const localize = nls.loadMessageBundle();
 
 // Regras de estruturas que não sofrem identação interna
-let structsNoIdent: string[] = [
-  'beginsql (alias)?',
-  'comment',
-  'protheus doc',
-  'begin content',
-  'no format'
-];
+const structsNoIdent: string[] = getStructsNoIdent();
 
 class Formatting implements DocumentFormattingEditProvider {
-  lineContinue: boolean = false;
+  lineContinue = false;
 
   provideDocumentFormattingEdits(
     document: TextDocument,
@@ -44,119 +48,304 @@ class Formatting implements DocumentFormattingEditProvider {
 }
 
 class RangeFormatting implements DocumentRangeFormattingEditProvider {
-  lineContinue: boolean = false;
+  lineContinue = false;
   provideDocumentRangeFormattingEdits(
     document: TextDocument,
     range: Range,
     options: FormattingOptions,
     token: CancellationToken
   ): ProviderResult<TextEdit[]> {
-    let cont: number = 0;
+    let noQueryFormatter: boolean = workspace
+      .getConfiguration()
+      .get("advplformat.noQueryFormatter");
+    let queryLanguage: string = workspace
+      .getConfiguration()
+      .get("advplformat.queryLanguage");
+
+    if (queryLanguage === '' && !noQueryFormatter) {
+      askSqlLanguage();
+      noQueryFormatter = workspace
+        .getConfiguration()
+        .get("advplformat.noQueryFormatter");
+      queryLanguage = workspace
+        .getConfiguration()
+        .get("advplformat.queryLanguage");
+    }
+
+    let cont = 0;
+    // eslint-disable-next-line @typescript-eslint/member-delimiter-style
+    let query: { expression: string; range: Range };
     const tab: string = options.insertSpaces
-      ? ' '.repeat(options.tabSize)
-      : '\t';
+      ? " ".repeat(options.tabSize)
+      : "\t";
     // define comom está a identação quando é identação range
     if (range.start.line > 0) {
       let stringStart = document
         .lineAt(range.start.line)
-        .text.replace(/(^\s*)(.*)/, '$1');
+        .text.replace(/(^\s*)(.*)/, "$1");
       while (stringStart.search(tab) >= 0) {
         cont++;
-        stringStart = stringStart.replace(tab, '');
+        stringStart = stringStart.replace(tab, "");
       }
     }
     const formattingRules = new FormattingRules();
-    let identBlock: string = tab.repeat(cont);
 
-    let result: TextEdit[] = [];
+    const result: TextEdit[] = [];
     const lc = range.end.line;
-    const rulesIgnored: any[] = formattingRules
-      .getClosedStructures()
-      .filter(rule => {
+    const rulesIgnored: StructureRule[] = formattingRules
+      .getStructures()
+      .filter((rule) => {
         return structsNoIdent.indexOf(rule.id) !== -1;
       });
 
     for (let nl = range.start.line; nl <= lc; nl++) {
+      // check operation Cancel
+      if (token.isCancellationRequested) {
+        console.log("cancelado");
+        return [];
+      }
+
       const line = document.lineAt(nl);
       const text = line.text.trimRight();
-      let lastRule: RuleMatch =
+      const lastRule: RuleMatch =
         formattingRules.openStructures[
-        formattingRules.openStructures.length - 1
+          formattingRules.openStructures.length - 1
         ];
-      let foundIgnore: any[] = rulesIgnored.filter(rule => {
+      const foundIgnore: StructureRule[] = rulesIgnored.filter((rule) => {
         return lastRule && lastRule.rule && rule.id === lastRule.rule.id;
       });
-      // tratamento para não mexer nas linhas de erros do GIT
-      if (text.match('^' + ('\\<'.repeat(7))) || text.match('^' + ('\\>'.repeat(7))) || text.match('^' + ('\\='.repeat(7)))) {
-        result.push(TextEdit.replace(line.range, text))
-        // dentro de algumas estruturas não identa
-      } else if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
-        result.push(TextEdit.replace(line.range, text));
+      // dentro do BeginSql não mexe na identação
+      if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
+        // verifica se está em query
+        if (!noQueryFormatter && queryLanguage !== '' && foundIgnore[0].id === "beginsql (alias)?") {
+          if (!query || query.expression.length === 0) {
+            query = { expression: "", range: line.range };
+          }
+          // replace para comentários
+          query.expression +=
+            " " +
+            text.replace("//", "--REPLACE--").replace(/^\s*/gim, "") +
+            "\n";
+          // replace para correção de problema de '\' que quebra a identação
+          query.expression = query.expression.replace(
+            /'\\'/gim,
+            "'******\\******'"
+          );
+          // define o range que será substituído
+          // usando o range inicial da primeira linha
+          // e o atual da ultima linha com a query
+          query.range = new Range(query.range.start, line.range.end);
+        } else {
+          result.push(TextEdit.replace(line.range, text));
+        }
       } else {
         if (
           !line.isEmptyOrWhitespace &&
           !this.lineContinue &&
-          formattingRules.match(text)
+          formattingRules.match(text, cont)
         ) {
-          let ruleMatch: RuleMatch | null = formattingRules.getLastMatch();
+          const ruleMatch: RuleMatch | null = formattingRules.getLastMatch();
 
           if (ruleMatch) {
             if (ruleMatch.decrement) {
-              if (ruleMatch.decrementDouble) {
-                cont = cont < 2 ? 0 : cont - 2;
-              } else {
-                cont = cont < 1 ? 0 : cont - 1;
+              cont = ruleMatch.initialPosition;
+              // trata query
+              if (
+                !noQueryFormatter && queryLanguage !== '' &&
+                ruleMatch.rule.id === "beginsql (alias)?"
+              ) {
+                let queryResult: string = sqlFormatterPlus.format(
+                  query.expression,
+                  { indent: tab, language: queryLanguage }
+                );
+
+                // volta comentários
+                queryResult = queryResult.replace(/--REPLACE--/gim, "//");
+                // adiciona tabulações no início de cada linha
+                queryResult =
+                  tab.repeat(cont + 1) +
+                  queryResult.replace(/\n/gim, "\n" + tab.repeat(cont + 1));
+                // Remove os espaçamentos dentro das expressões %%
+                queryResult = queryResult.replace(
+                  /(%)(\s+)(table|temp-table|exp|xfilial|order)(\s)*(:)((\w|\+|\\|\*|\(|\)|\[|\]|-|>|_|\s|,|\n|"|')*)(\s+)(%)/gim,
+                  "$1$3$5$6$9"
+                );
+                // Como coloca quebras de linhas no orderby por conta da vírgula removo
+                queryResult = queryResult.replace(
+                  /(%order:\w*)(,\n\s*)(\w%)/gim,
+                  "$1,$3"
+                );
+                // Ajusta os sem expressões
+                queryResult = queryResult.replace(
+                  /(%)(\s+)(notDel|noparser)(\s+)(%)/gim,
+                  "$1$3$5"
+                );
+                // se houver espaço entre o . e o %NotDel% remove
+                queryResult = queryResult.replace(/\.\s(%notDel%)/gim, ".$1");
+                //quebra de linha depois do no parser
+                queryResult = queryResult.replace(
+                  /((\s*)%noparser%)\s+/gim,
+                  "$1\n\n$2"
+                );
+                // remove espaços entre ->
+                queryResult = queryResult.replace(/\s*->\s*/gim, "->");
+                // remove espaços antes de colchetes
+                queryResult = queryResult.replace(/\s*\[\s*/gim, "[");
+                // remove espaços antes de , + - \ * dentro de %
+                while (
+                  queryResult.match(/(%.*)(\s+)(,|\+|-|\\|\*)(\s*)(.*%)/gim)
+                ) {
+                  queryResult = queryResult.replace(
+                    /(%.*)(\s+)(,|\+|-|\\|\*)(\s*)(.*%)/gim,
+                    "$1$3$5"
+                  );
+                }
+                // remove espaços depois de , + - \ * dentro de %
+                while (
+                  queryResult.match(/(%.*)(\s*)(,|\+|-|\\|\*)(\s+)(.*%)/gim)
+                ) {
+                  queryResult = queryResult.replace(
+                    /(%.*)(\s*)(,|\+|-|\\|\*)(\s+)(.*%)/gim,
+                    "$1$3$5"
+                  );
+                }
+
+                // Ajustes visuais de query alinhamento de Between em uma linha
+                queryResult = queryResult.replace(
+                  /(^\s*.*between\s*.*)\n\s*(and\s.*)/gim,
+                  "$1 $2"
+                );
+
+                // Quebra linha no ON do JOIN
+                queryResult = queryResult.replace(
+                  /(^(\s*)(.*join\s*.*|\)\s\w*\s))(on)/gim,
+                  "$1\n$2$4"
+                );
+                // Quebra linha no THEN do CASE
+                queryResult = queryResult.replace(
+                  /(^(\s*)when.*)\n*\s*(then.*)/gim,
+                  "$1\n$2" + tab + "$3"
+                );
+                // remove espaço no fim de linha de cima quando quebra on, join, when ou then
+                queryResult = queryResult.replace(
+                  /\s*(\n\s*(on|join|when|then))/gim,
+                  "$1"
+                );
+                // Remove uma das tabulações dos Join's e ON
+                if (queryResult.match(/^\s*(\w*\sjoin|on)\s/gim)) {
+                  const queryLines: string[] = queryResult.split("\n");
+                  queryResult = "";
+                  queryLines.forEach((line) => {
+                    if (line.match(/^\s*(\w*\sjoin|on)\s/gim)) {
+                      queryResult += line.replace(tab, "") + "\n"; // remove uma tabulação
+                    } else {
+                      queryResult += line + "\n";
+                    }
+                  });
+                }
+
+                // Correção de Problemas externos -----
+                // Existe um erro na compilação quando a linha começa com * (PROBLEMA NO APPSERVER)
+                queryResult = queryResult.replace(/\n\s*(\*)/gim, " $1");
+                // volta replace de '\' (PROBLEMA NA EXTENSÃO sql-formatter-plus)
+                queryResult = queryResult.replace(
+                  /'\*\*\*\*\*\*\\\*\*\*\*\*\*'/gim,
+                  "'\\'"
+                );
+                // erro na identação de case quando enviada , CASE (PROBLEMA NA EXTENSÃO sql-formatter-plus)
+                queryResult = queryResult.replace(
+                  /(^(\s*).*,\n)\s*(case)/gim,
+                  "$1$2$3"
+                );
+
+                result.push(
+                  TextEdit.replace(query.range, queryResult.trimEnd())
+                );
+
+                query = { expression: "", range: undefined };
               }
-              identBlock = tab.repeat(cont);
             }
           }
 
           if (ruleMatch.incrementDouble) {
             cont += 1;
-            identBlock = tab.repeat(cont);
           }
 
-          const newLine: string = text.replace(/(\s*)?/, identBlock);
+          const newLine: string = text.replace(/(\s*)?/, tab.repeat(cont));
           result.push(TextEdit.replace(line.range, newLine));
           this.lineContinue =
-            newLine
-              .split('//')[0]
-              .trim()
-              .endsWith(';') && rulesIgnored.indexOf(ruleMatch.rule.id) === -1;
+            newLine.split("//")[0].trim().endsWith(";") &&
+            rulesIgnored.indexOf(ruleMatch.rule) === -1;
 
           if (ruleMatch) {
             if (ruleMatch.increment || ruleMatch.incrementDouble) {
               cont++;
-              identBlock = tab.repeat(cont);
             }
           }
         } else {
-          let newLine: string = '';
+          let newLine = "";
           if (!line.isEmptyOrWhitespace) {
             newLine = text
-              .replace(/(\s*)?/, identBlock + (this.lineContinue ? tab : ''))
+              .replace(
+                /(\s*)?/,
+                tab.repeat(cont) + (this.lineContinue ? tab : "")
+              )
               .trimRight();
           }
           result.push(TextEdit.replace(line.range, newLine));
-          this.lineContinue = newLine
-            .split('//')[0]
-            .trim()
-            .endsWith(';');
+          this.lineContinue = newLine.split("//")[0].trim().endsWith(";");
         }
       }
     }
-
     return result;
   }
+}
+
+export function askSqlLanguage(): void {
+  const sqlLaguages: any[] = [
+    { sigla: "sql", descricao: "Standard SQL" },
+    { sigla: "n1ql", descricao: "Couchbase N1QL" },
+    { sigla: "db2", descricao: "IBM DB2" },
+    { sigla: "pl/sql", descricao: "Oracle PL/SQL" },
+  ];
+  const workspaceFolders = workspace["workspaceFolders"];
+  // check if there is an open folder
+  if (workspaceFolders === undefined) {
+    return;
+  }
+
+  const quetionArray: string[] = sqlLaguages.map((lang) => {
+    return lang.descricao;
+  });
+
+  quetionArray.push(localize("formatting.query.disable","Disable"));
+
+  const defaultConfig = workspace.getConfiguration();
+
+  window
+    .showWarningMessage(localize("formatting.query.question","Do you want to enable query formatting for:"), ...quetionArray)
+    .then((clicked) => {
+      if (clicked === localize("formatting.query.disable","Disable")) {
+        defaultConfig.update("advplformat.noQueryFormatter", true);
+      } else {
+        const config = sqlLaguages.find((lang) => {
+          return lang.descricao === clicked;
+        });
+        if (config) {
+          defaultConfig.update("advplformat.noQueryFormatter", false);
+          defaultConfig.update("advplformat.queryLanguage", config.sigla);
+        }
+      }
+    });
 }
 
 const formatter = new Formatting();
 const rangeFormatter = new RangeFormatting();
 
-export function formattingEditProvider() {
+export function formattingEditProvider(): any {
   return formatter;
 }
 
-export function rangeFormattingEditProvider() {
+export function rangeFormattingEditProvider(): any {
   return rangeFormatter;
 }
