@@ -62,7 +62,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
       .getConfiguration()
       .get("advplformat.queryLanguage");
 
-    if (queryLanguage === '' && !noQueryFormatter) {
+    if (!queryLanguage && !noQueryFormatter) {
       askSqlLanguage();
       noQueryFormatter = workspace
         .getConfiguration()
@@ -71,6 +71,8 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
         .getConfiguration()
         .get("advplformat.queryLanguage");
     }
+
+    queryLanguage = queryLanguage ? queryLanguage : "sql";
 
     let cont = 0;
     // eslint-disable-next-line @typescript-eslint/member-delimiter-style
@@ -117,7 +119,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
       // dentro do BeginSql não mexe na identação
       if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
         // verifica se está em query
-        if (!noQueryFormatter && queryLanguage !== '' && foundIgnore[0].id === "beginsql (alias)?") {
+        if (!noQueryFormatter && foundIgnore[0].id === "beginsql (alias)?") {
           if (!query || query.expression.length === 0) {
             query = { expression: "", range: line.range };
           }
@@ -151,7 +153,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
               cont = ruleMatch.initialPosition;
               // trata query
               if (
-                !noQueryFormatter && queryLanguage !== '' &&
+                !noQueryFormatter &&
                 ruleMatch.rule.id === "beginsql (alias)?"
               ) {
                 let queryResult: string = sqlFormatterPlus.format(
@@ -167,8 +169,8 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
                   queryResult.replace(/\n/gim, "\n" + tab.repeat(cont + 1));
                 // Remove os espaçamentos dentro das expressões %%
                 queryResult = queryResult.replace(
-                  /(%)(\s+)(table|temp-table|exp|xfilial|order)(\s)*(:)((\w|\+|\\|\*|\(|\)|\[|\]|-|>|_|\s|,|\n|"|')*)(\s+)(%)/gim,
-                  "$1$3$5$6$9"
+                  /(%)\s+(table|temp-table|exp|xfilial|order)\s*(:)((\w|\+|\\|\*|\(|\)|\[|\]|-|>|_|\s|,|\n|"|')*)\s+(:*\w*)\s*(%)/gim,
+                  "$1$2$3$4$6$7"
                 );
                 // Como coloca quebras de linhas no orderby por conta da vírgula removo
                 queryResult = queryResult.replace(
@@ -187,6 +189,28 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
                   /((\s*)%noparser%)\s+/gim,
                   "$1\n\n$2"
                 );
+                //quebra linha no column x as  antes do primeiro select
+                if (queryResult.match(/(.*)(\n\s*select)/im)) {
+                  let columnsText: string = queryResult
+                    .match(/(.*)(\n\s*select)/im)[0]
+                    .replace(/(.*)(\n\s*select)/im, "$1");
+                  // pego tamnho de tabulação na linha
+                  const tabColumn = columnsText.replace(/column\s.*/gim, "");
+                  if (tabColumn) {
+                    // quebro cada column em uma linha
+                    columnsText = columnsText.replace(
+                      /(\s*)(column\s[0-z]*\sas\s[0-z]*)/gim,
+                      "\n" + tabColumn + "$2"
+                    );
+                    // remove a primeira quebra de linha
+                    columnsText = columnsText.replace(/\n/, "");
+                    // Troco o que tem antes do primeiro select pelo texto tratado
+                    queryResult = queryResult.replace(
+                      /(.*)(\n\s*select)/im,
+                      columnsText + "$2"
+                    );
+                  }
+                }
                 // remove espaços entre ->
                 queryResult = queryResult.replace(/\s*->\s*/gim, "->");
                 // remove espaços antes de colchetes
@@ -218,7 +242,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
 
                 // Quebra linha no ON do JOIN
                 queryResult = queryResult.replace(
-                  /(^(\s*)(.*join\s*.*|\)\s\w*\s))(on)/gim,
+                  /(^(\s*)(.*join\s*.*\s|\)\s\w*\s))(on(\s|\n))/gim,
                   "$1\n$2$4"
                 );
                 // Quebra linha no THEN do CASE
@@ -323,9 +347,9 @@ export function askSqlLanguage(): void {
   const defaultConfig = workspace.getConfiguration();
 
   window
-    .showWarningMessage(localize("formatting.query.question","Do you want to enable query formatting for:"), ...quetionArray)
-    .then((clicked) => {
-      if (clicked === localize("formatting.query.disable","Disable")) {
+  .showWarningMessage(localize("formatting.query.question","Do you want to enable query formatting for:"), ...quetionArray)
+  .then((clicked) => {
+    if (clicked === localize("formatting.query.disable","Disable")) {
         defaultConfig.update("advplformat.noQueryFormatter", true);
       } else {
         const config = sqlLaguages.find((lang) => {
