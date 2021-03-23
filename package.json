@@ -485,6 +485,27 @@
                             }
                         }
                     }
+                },
+                "advplformat.noQueryFormatter": {
+                    "type": "boolean",
+                    "description": "%contributes.configuration.properties.advplformat.noQueryFormatter%"
+                },
+                "advplformat.queryLanguage": {
+                    "type": "string",
+                    "enum": [
+                        "sql",
+                        "n1ql",
+                        "db2",
+                        "pl/sql"
+                    ],
+                    "enumDescriptions": [
+                        "Standard SQL",
+                        "Couchbase N1QL",
+                        "IBM DB2",
+                        "Oracle PL/SQL"
+                    ],
+                    "default": "sql",
+                    "description": "%contributes.configuration.properties.advplformat.queryLanguage%"
                 }
             }
         },
