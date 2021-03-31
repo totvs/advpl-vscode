@@ -78,6 +78,7 @@
 	"advpl.serversManagement.getAllEnvironments": "Obter ambientes do INI",
 	"advpl.serversManagement.CipherPassword": "Alterar senha",
 	"advpl.compileFilesOpened": "Advpl - Compilar arquivos abertos",
-	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)"
-
+	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)",
+	"contributes.configuration.properties.advplformat.noQueryFormatter": "Desabilitar formatação de queries ADVPL.",
+	"contributes.configuration.properties.advplformat.queryLanguage": "Definição de linguagem para queryes.\nsql - Standard SQL\nn1ql - Couchbase N1QL\ndb2 - IBM DB2\npl/sql - Oracle PL/SQL"
 }

@@ -243,6 +243,14 @@
                 }
             ]
         },
+        "configurationDefaults": {
+            "[advpl]": {
+                "files.encoding": "windows1252"
+            },
+            "[4gl]": {
+                "files.encoding": "windows1252"
+            }
+        },
         "configuration": {
             "type": "object",
             "title": "%advpl.configuration.title%",
@@ -477,6 +485,27 @@
                             }
                         }
                     }
+                },
+                "advplformat.noQueryFormatter": {
+                    "type": "boolean",
+                    "description": "%contributes.configuration.properties.advplformat.noQueryFormatter%"
+                },
+                "advplformat.queryLanguage": {
+                    "type": "string",
+                    "enum": [
+                        "sql",
+                        "n1ql",
+                        "db2",
+                        "pl/sql"
+                    ],
+                    "enumDescriptions": [
+                        "Standard SQL",
+                        "Couchbase N1QL",
+                        "IBM DB2",
+                        "Oracle PL/SQL"
+                    ],
+                    "default": "sql",
+                    "description": "%contributes.configuration.properties.advplformat.queryLanguage%"
                 }
             }
         },
@@ -960,7 +989,7 @@
     },
     "devDependencies": {
         "@types/mocha": "^8.0.0",
-        "@types/node": "^13.9.1",
+        "@types/node": "^14.14.6",
         "@types/semver": "^7.3.1",
         "@types/vscode": "1.47.0",
         "del": "^5.1.0",
@@ -970,6 +999,7 @@
         "gulp4-run-sequence": "^1.0.1",
         "mocha": "^8.2.1",
         "run-sequence": "^2.2.1",
+        "sql-formatter-plus": "^1.3.6",
         "typescript": "^3.8.3",
         "vsce": "^1.77.0",
         "vscode-debugadapter-testsupport": "^1.41.0",
