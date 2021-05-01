@@ -19,7 +19,11 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         const changeLog: ChangeLogItem[] = [];
 
         changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Correções de consumo de memoria quando dava errolog no debug.`
+            kind: ChangeLogKind.NEW, message: `Suporte ao servidor de build 210324P.`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Formatação de #ifdef e de Queryes em Embedded Sql.`
         });
 
         return changeLog;

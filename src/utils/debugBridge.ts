@@ -47,7 +47,7 @@ export function getAdvplDebugBridge(){
     {
         path+=  "AdvplDebugBridgeC";        
     }    
-    
+    path = '/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/AdvplDebugBridgeC'
     return path;
 }
 function runUnzip(path, args, file ,OutPutChannel)

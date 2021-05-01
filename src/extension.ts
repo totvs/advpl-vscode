@@ -654,7 +654,7 @@ function compileFilesOpened() {
 
                     __internal_compile_callback(textDocuments, progress).then(() => {
                         cancelCompile = false;
-                        resolve();
+                        resolve(null);
                     });
 
                 });
@@ -711,7 +711,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
                             // Limpa o Buffer de retorno do Bridge a cada interação, para não gerar um JSON inválido para cada retorno.
                             compileCallback._lastAppreMsg = "";
                             processed++;
-                            resolve();
+                            resolve(null);
                         }
                     );
                 }
