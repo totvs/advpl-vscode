@@ -1,4 +1,6 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.14.10
+ - Correcao 
 ## 0.14.9 
  - Melhoria via Pull Request: [Formatação de #ifdef e de Queryes em Embedded Sql.](https://github.com/totvs/advpl-vscode/pull/472)
    Robson Rogério Silva
