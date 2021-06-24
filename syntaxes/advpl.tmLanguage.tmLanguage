@@ -766,7 +766,7 @@
             <key>name</key>
             <string>keyword.control.loop.advpl</string>
             <key>match</key>
-            <string>(?i)\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\b(?!\$)</string>
+            <string>(?i)\b(for|next|to|exit|loop|step|continue|goto|while|end|enddo)\b(?!\$)</string>
           </dict>
           <dict>
             <key>name</key>
