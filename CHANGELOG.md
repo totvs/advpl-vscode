@@ -1,5 +1,11 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
-## 0.14.8
+## 0.14.10
+ - Correcao 
+## 0.14.9 
+ - Melhoria via Pull Request: [Formatação de #ifdef e de Queryes em Embedded Sql.](https://github.com/totvs/advpl-vscode/pull/472)
+   Robson Rogério Silva
+ - Suporte ao servidor de build 210324P , utilize a tag:   "serverVersion" : "210324P" dentro da configuracao do ambiente. 
+ ## 0.14.8
  - Correções de consumo de memoria quando dava errolog no debug.
 
 ## 0.14.7
