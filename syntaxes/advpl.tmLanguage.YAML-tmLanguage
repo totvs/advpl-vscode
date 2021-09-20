@@ -317,7 +317,7 @@ repository:
             
     declaracao-variavel:
         name: meta.declaration.advpl
-        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?'
         beginCaptures:
             '1':
                 name: storage.modifier.advpl
@@ -394,7 +394,7 @@ repository:
                 name: storage.type.function.advpl
             '3':
                 name: entity.name.function.advpl
-        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?'
         endCaptures:
             '1':
                 name: constant.other.symbol.as.advpl
@@ -447,7 +447,7 @@ repository:
                 name: storage.type.method.advpl
             '2':
                 name: entity.name.function.advpl
-        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?'
         endCaptures:
             '1':
                 name: storage.type.class.advpl
@@ -596,7 +596,7 @@ repository:
     tipo-dado:
         patterns:
             -
-                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)'
+                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json)'
                 captures:
                     '1': {name: constant.other.symbol.as.advpl}
                     '2': {name: support.type.advpl}
