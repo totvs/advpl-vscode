@@ -56,16 +56,38 @@
         <key>patterns</key>
         <array>
           <dict>
-            <key>name</key>
-            <string>entity.name.namespace.tlpp</string>
             <key>match</key>
-            <string>(?i)\b(namespace)\b</string>
+            <string>(?i)^\s*(namespace)\s+((?:\w+(\.)?)*)</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.other.namespace.tlpp</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>entity.name.type.namespace.tlpp</string>
+              </dict>
+            </dict>
           </dict>
           <dict>
-            <key>name</key>
-            <string>keyword.other.using</string>
             <key>match</key>
-            <string>(?i)\b(using namespace)\b</string>
+            <string>(?i)^\s*(using namespace)\s+((?:\w+(\.)?)*)</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.other.using.tlpp</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>entity.name.type.namespace.tlpp</string>
+              </dict>
+            </dict>
           </dict>
         </array>
       </dict>

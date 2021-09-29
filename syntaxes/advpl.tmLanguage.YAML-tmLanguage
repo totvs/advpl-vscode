@@ -25,11 +25,17 @@ repository:
     tlpp:
         patterns:
             -
-                name: entity.name.namespace.tlpp
-                match: '(?i)\b(namespace)\b'
+                match: '(?i)^\s*(namespace)\s+((?:\w+(\.)?)*)'
+                captures:
+                    '1': {name: keyword.other.namespace.tlpp}
+                    '2': {name: entity.name.type.namespace.tlpp}
+
             -
-                name: keyword.other.using
-                match: '(?i)\b(using namespace)\b'
+                match: '(?i)^\s*(using namespace)\s+((?:\w+(\.)?)*)'
+                captures:
+                    '1': {name: keyword.other.using.tlpp}
+                    '2': {name: entity.name.type.namespace.tlpp}
+
     annotation-use:
         patterns:
             -
