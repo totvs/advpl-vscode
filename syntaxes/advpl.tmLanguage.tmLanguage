@@ -130,7 +130,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|logical)))?\s+(?:(default))?</string>
+            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|character|logical)))?\s+(?:(default))?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -841,23 +841,13 @@
         <key>name</key>
         <string>meta.declaration.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?</string>
+        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
           <dict>
             <key>name</key>
             <string>storage.modifier.advpl</string>
-          </dict>
-          <key>3</key>
-          <dict>
-            <key>name</key>
-            <string>constant.other.symbol.as.advpl</string>
-          </dict>
-          <key>4</key>
-          <dict>
-            <key>name</key>
-            <string>support.type.advpl</string>
           </dict>
         </dict>
         <key>end</key>
@@ -872,10 +862,39 @@
             <key>include</key>
             <string>#expressao</string>
           </dict>
+          <dict>
+            <key>include</key>
+            <string>#tipagem</string>
+          </dict>
+        </array>
+      </dict>
+      <key>tipagem</key>
+      <dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?i)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>constant.other.symbol.as.advpl</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>support.type.advpl</string>
+              </dict>
+            </dict>
+          </dict>
         </array>
       </dict>
       <key>data</key>
       <dict>
+        <key>name</key>
+        <string>meta.parameter.advpl</string>
         <key>patterns</key>
         <array>
           <dict>
@@ -883,9 +902,9 @@
             <string>#modifier</string>
           </dict>
           <dict>
-            <key>match</key>
-            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?</string>
-            <key>captures</key>
+            <key>begin</key>
+            <string>(?i)\b((?:ws)?data)\s+(\w+)</string>
+            <key>beginCaptures</key>
             <dict>
               <key>1</key>
               <dict>
@@ -897,32 +916,52 @@
                 <key>name</key>
                 <string>variable.parameter.object.property.advpl</string>
               </dict>
-              <key>3</key>
-              <dict>
-                <key>name</key>
-                <string>constant.other.symbol.as.advpl</string>
-              </dict>
-              <key>4</key>
-              <dict>
-                <key>name</key>
-                <string>support.type.arrayof.advpl</string>
-              </dict>
-              <key>5</key>
-              <dict>
-                <key>name</key>
-                <string>support.type.advpl</string>
-              </dict>
-              <key>6</key>
-              <dict>
-                <key>name</key>
-                <string>entity.name.type.class.advpl</string>
-              </dict>
-              <key>7</key>
-              <dict>
-                <key>name</key>
-                <string>keyword.control.optional.advpl</string>
-              </dict>
             </dict>
+            <key>end</key>
+            <string>(?=$)</string>
+            <key>patterns</key>
+            <array>
+              <dict>
+                <key>match</key>
+                <string>(?i)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object|block|codeblock|character|char|date|logical|numeric|variadic|variant|double|decimal|json)|(\w+))\s*)(optional)?</string>
+                <key>captures</key>
+                <dict>
+                  <key>1</key>
+                  <dict>
+                    <key>name</key>
+                    <string>constant.other.symbol.as.advpl</string>
+                  </dict>
+                  <key>2</key>
+                  <dict>
+                    <key>name</key>
+                    <string>support.type.arrayof.advpl</string>
+                  </dict>
+                  <key>3</key>
+                  <dict>
+                    <key>name</key>
+                    <string>support.type.advpl</string>
+                  </dict>
+                  <key>4</key>
+                  <dict>
+                    <key>name</key>
+                    <string>entity.name.type.class.advpl</string>
+                  </dict>
+                  <key>5</key>
+                  <dict>
+                    <key>name</key>
+                    <string>keyword.control.optional.advpl</string>
+                  </dict>
+                </dict>
+              </dict>
+              <dict>
+                <key>include</key>
+                <string>#comentario</string>
+              </dict>
+              <dict>
+                <key>include</key>
+                <string>#expressao</string>
+              </dict>
+            </array>
           </dict>
         </array>
       </dict>
