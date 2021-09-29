@@ -346,32 +346,20 @@ repository:
                     '2': {name: support.type.advpl}
 
     data:
-        name: 'meta.parameter.advpl'
         patterns:
             -
                 include: '#modifier'
             -
-                begin: '(?i)\b((?:ws)?data)\s+(\w+)'
-                beginCaptures:
-                    '1':
-                        name: storage.modifier.advpl
-                    '2':
-                        name: variable.parameter.object.property.advpl
+                match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object|block|codeblock|character|char|date|logical|numeric|variadic|variant|double|decimal|json)|(\w+))\s*)?(optional)?'
+                captures:
+                    '1': {name: storage.modifier.advpl}
+                    '2': {name: variable.parameter.object.property.advpl}
+                    '3': {name: constant.other.symbol.as.advpl}
+                    '4': {name: support.type.arrayof.advpl}
+                    '5': {name: support.type.advpl}
+                    '6': {name: entity.name.type.class.advpl}
+                    '7': {name: keyword.control.optional.advpl}
 
-                end: '(?=$)'
-                patterns:
-                    -
-                        match: '(?i)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object|block|codeblock|character|char|date|logical|numeric|variadic|variant|double|decimal|json)|(\w+))\s*)(optional)?'
-                        captures:
-                            '1': {name: constant.other.symbol.as.advpl}
-                            '2': {name: support.type.arrayof.advpl}
-                            '3': {name: support.type.advpl}
-                            '4': {name: entity.name.type.class.advpl}
-                            '5': {name: keyword.control.optional.advpl}
-                    -
-                        include: '#comentario'
-                    -
-                        include: '#expressao'
     expressao:
         name: meta.expression.advpl
         patterns:
