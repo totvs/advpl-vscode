@@ -464,7 +464,7 @@
                 },
                 "advpl.alpha_compile": {
                     "type": "boolean",
-                    "default": false,
+                    "default": true,
                     "description": "%advpl.configuration.properties.ADVPLCOMPILE_ALPHA%"
                 },
                 "advpl.dictionary": {
