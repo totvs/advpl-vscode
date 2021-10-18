@@ -42,9 +42,8 @@ export class FormattingRules {
 
   public match(lineGet: string, initialPosition: number): boolean {
     let line: string = lineGet.toString();
-    const lastRule: RuleMatch = this.openStructures[
-      this.openStructures.length - 1
-    ];
+    const lastRule: RuleMatch =
+      this.openStructures[this.openStructures.length - 1];
     if (line.trim().length === 0) {
       return false;
     }
@@ -197,7 +196,8 @@ export class FormattingRules {
       },
       {
         id: "method rest e client",
-        begin: /^(\s*)(wsmethod)(\s+)(\w+)(\s*)(.*)(\s+)(wsservice|wsclient)(\s+)(\w+)/i,
+        begin:
+          /^(\s*)(wsmethod)(\s+)(\w+)(\s*)(.*)(\s+)(wsservice|wsclient)(\s+)(\w+)/i,
         end: /^(\s*)(return)/i,
       },
       {
@@ -272,7 +272,7 @@ export class FormattingRules {
       {
         id: "while",
         begin: /^(\s*)(do)?(\s*)(while)/i,
-        end: /^(\s*)(end)(do)?$/i,
+        end: /^(\s*)(end)(do)?(\s*while)?$/i,
       },
       {
         id: "wsrestful",
