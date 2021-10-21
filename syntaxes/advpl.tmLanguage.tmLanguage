@@ -1202,28 +1202,28 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?</string>
+        <string>(?i)(?&lt;=\))(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?(?:\s+(class)\s+(\w+))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
           <dict>
             <key>name</key>
-            <string>storage.type.class.advpl</string>
+            <string>constant.other.symbol.as.advpl</string>
           </dict>
           <key>2</key>
           <dict>
             <key>name</key>
-            <string>entity.name.type.class.advpl</string>
+            <string>support.type.advpl</string>
           </dict>
           <key>3</key>
           <dict>
             <key>name</key>
-            <string>constant.other.symbol.as.advpl</string>
+            <string>storage.type.class.advpl</string>
           </dict>
           <key>4</key>
           <dict>
             <key>name</key>
-            <string>support.type.advpl</string>
+            <string>entity.name.type.class.advpl</string>
           </dict>
         </dict>
       </dict>
