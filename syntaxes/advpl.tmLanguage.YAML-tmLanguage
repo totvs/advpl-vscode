@@ -287,7 +287,7 @@ repository:
                 match: '(?i)\b(break|return)\b(?!\$)'
             -
                 name: keyword.control.loop.advpl
-                match: '(?i)\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\b(?!\$)'
+                match: '(?i)\b(for|next|to|exit|loop|step|continue|goto|while|end|enddo)\b(?!\$)'
             -
                 name: keyword.control.switch.advpl
                 match: '(?i)\b(do|case|otherwise|endcase)\b(?!\$)'
@@ -463,16 +463,16 @@ repository:
                 name: storage.type.method.advpl
             '2':
                 name: entity.name.function.advpl
-        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?'
+        end: '(?i)(?<=\))(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?(?:\s+(class)\s+(\w+))?'
         endCaptures:
             '1':
-                name: storage.type.class.advpl
-            '2':
-                name: entity.name.type.class.advpl
-            '3':
                 name: constant.other.symbol.as.advpl
-            '4':
+            '2':
                 name: support.type.advpl
+            '3':
+                name: storage.type.class.advpl
+            '4':
+                name: entity.name.type.class.advpl
 
     function-parameters:
         name: meta.parameters.advpl
