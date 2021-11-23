@@ -20,12 +20,27 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         const changeLog: ChangeLogItem[] = [];
 
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Suporte ao servidor de build 210324P.`
+            kind: ChangeLogKind.NEW, message: `Melhoria de performace no formart.`
         });
 
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Formatação de #ifdef e de Queryes em Embedded Sql.`
+            kind: ChangeLogKind.NEW, message: `Suporte ao novos tipos nativos do tlpp.`
         });
+        changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Suporte a novos tipos, namespace, tipagem com atribuição na sintaxe do TLPP.`
+        });
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Correções no inspetor de objetos para a build 210324P.`
+        });
+        changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Implementação da chave additionalSmartClientArgs.`
+        });
+        changeLog.push({
+            kind: ChangeLogKind.CHANGED, message: `Tornado alpha_compile habilitado por default.`
+        });
+        
+        
+        
 
         return changeLog;
     }
