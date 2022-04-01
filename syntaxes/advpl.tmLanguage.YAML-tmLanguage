@@ -25,11 +25,17 @@ repository:
     tlpp:
         patterns:
             -
-                name: entity.name.namespace.tlpp
-                match: '(?i)\b(namespace)\b'
+                match: '(?i)^\s*(namespace)\s+((?:\w+(\.)?)*)'
+                captures:
+                    '1': {name: keyword.other.namespace.tlpp}
+                    '2': {name: entity.name.type.namespace.tlpp}
+
             -
-                name: keyword.other.using
-                match: '(?i)\b(using namespace)\b'
+                match: '(?i)^\s*(using namespace)\s+((?:\w+(\.)?)*)'
+                captures:
+                    '1': {name: keyword.other.using.tlpp}
+                    '2': {name: entity.name.type.namespace.tlpp}
+
     annotation-use:
         patterns:
             -
@@ -56,7 +62,7 @@ repository:
     annotation-property-def:
         patterns:
             -
-                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|logical)))?\s+(?:(default))?'
+                match: '(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|character|logical)))?\s+(?:(default))?'
                 captures:
                     '1': {name: variable.object.property.advpl}
                     '2': {name: keyword.control.as.advpl}
@@ -281,7 +287,7 @@ repository:
                 match: '(?i)\b(break|return)\b(?!\$)'
             -
                 name: keyword.control.loop.advpl
-                match: '(?i)\b(for|next|to|exit|loop|continue|goto|while|end|enddo)\b(?!\$)'
+                match: '(?i)\b(for|next|to|exit|loop|step|continue|goto|while|end|enddo)\b(?!\$)'
             -
                 name: keyword.control.switch.advpl
                 match: '(?i)\b(do|case|otherwise|endcase)\b(?!\$)'
@@ -314,29 +320,37 @@ repository:
             -
                 name: keyword.operator.arithmetic.advpl
                 match: '%|\*|/|-|\+'
-            
+
     declaracao-variavel:
         name: meta.declaration.advpl
-        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        begin: '(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)'
         beginCaptures:
             '1':
                 name: storage.modifier.advpl
-            '3':
-                name: constant.other.symbol.as.advpl
-            '4':
-                name: support.type.advpl
+
         end: '(?=$)'
         patterns:
             -
                 include: '#comentario'
             -
                 include: '#expressao'
+            -
+                include: '#tipagem'
+
+    tipagem:
+        patterns:
+            -
+                match: '(?i)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))'
+                captures:
+                    '1': {name: constant.other.symbol.as.advpl}
+                    '2': {name: support.type.advpl}
+
     data:
         patterns:
             -
                 include: '#modifier'
             -
-                match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?'
+                match: '(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object|block|codeblock|character|char|date|logical|numeric|variadic|variant|double|decimal|json)|(\w+))\s*)?(optional)?'
                 captures:
                     '1': {name: storage.modifier.advpl}
                     '2': {name: variable.parameter.object.property.advpl}
@@ -345,6 +359,7 @@ repository:
                     '5': {name: support.type.advpl}
                     '6': {name: entity.name.type.class.advpl}
                     '7': {name: keyword.control.optional.advpl}
+
     expressao:
         name: meta.expression.advpl
         patterns:
@@ -362,6 +377,7 @@ repository:
                 include: '#expressao-parenteses'
             -
                 include: '#virgula'
+
     chamada-metodo:
         begin: '((?:::|:)\w+)(?=\()'
         beginCaptures:
@@ -394,7 +410,7 @@ repository:
                 name: storage.type.function.advpl
             '3':
                 name: entity.name.function.advpl
-        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        end: '(?<=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?'
         endCaptures:
             '1':
                 name: constant.other.symbol.as.advpl
@@ -447,17 +463,17 @@ repository:
                 name: storage.type.method.advpl
             '2':
                 name: entity.name.function.advpl
-        end: '(?i)(?<=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?'
+        end: '(?i)(?<=\))(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?(?:\s+(class)\s+(\w+))?'
         endCaptures:
             '1':
-                name: storage.type.class.advpl
-            '2':
-                name: entity.name.type.class.advpl
-            '3':
                 name: constant.other.symbol.as.advpl
+            '2':
+                name: support.type.advpl
+            '3':
+                name: storage.type.class.advpl
             '4':
-                name: support.type.advpl        
-            
+                name: entity.name.type.class.advpl
+
     function-parameters:
         name: meta.parameters.advpl
         begin: '\s*\('
@@ -596,7 +612,7 @@ repository:
     tipo-dado:
         patterns:
             -
-                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)'
+                match: '(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json)'
                 captures:
                     '1': {name: constant.other.symbol.as.advpl}
                     '2': {name: support.type.advpl}

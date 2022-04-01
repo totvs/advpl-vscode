@@ -56,16 +56,38 @@
         <key>patterns</key>
         <array>
           <dict>
-            <key>name</key>
-            <string>entity.name.namespace.tlpp</string>
             <key>match</key>
-            <string>(?i)\b(namespace)\b</string>
+            <string>(?i)^\s*(namespace)\s+((?:\w+(\.)?)*)</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.other.namespace.tlpp</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>entity.name.type.namespace.tlpp</string>
+              </dict>
+            </dict>
           </dict>
           <dict>
-            <key>name</key>
-            <string>keyword.other.using</string>
             <key>match</key>
-            <string>(?i)\b(using namespace)\b</string>
+            <string>(?i)^\s*(using namespace)\s+((?:\w+(\.)?)*)</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>keyword.other.using.tlpp</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>entity.name.type.namespace.tlpp</string>
+              </dict>
+            </dict>
           </dict>
         </array>
       </dict>
@@ -130,7 +152,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|logical)))?\s+(?:(default))?</string>
+            <string>(?i)(\w+)(?:\s+(as)\s+(?:(numeric|char|character|logical)))?\s+(?:(default))?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -841,23 +863,13 @@
         <key>name</key>
         <string>meta.declaration.advpl</string>
         <key>begin</key>
-        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
+        <string>(?i)^\s*\b(local|static|private|public|default)\b\s+(\w+)</string>
         <key>beginCaptures</key>
         <dict>
           <key>1</key>
           <dict>
             <key>name</key>
             <string>storage.modifier.advpl</string>
-          </dict>
-          <key>3</key>
-          <dict>
-            <key>name</key>
-            <string>constant.other.symbol.as.advpl</string>
-          </dict>
-          <key>4</key>
-          <dict>
-            <key>name</key>
-            <string>support.type.advpl</string>
           </dict>
         </dict>
         <key>end</key>
@@ -872,6 +884,33 @@
             <key>include</key>
             <string>#expressao</string>
           </dict>
+          <dict>
+            <key>include</key>
+            <string>#tipagem</string>
+          </dict>
+        </array>
+      </dict>
+      <key>tipagem</key>
+      <dict>
+        <key>patterns</key>
+        <array>
+          <dict>
+            <key>match</key>
+            <string>(?i)(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))</string>
+            <key>captures</key>
+            <dict>
+              <key>1</key>
+              <dict>
+                <key>name</key>
+                <string>constant.other.symbol.as.advpl</string>
+              </dict>
+              <key>2</key>
+              <dict>
+                <key>name</key>
+                <string>support.type.advpl</string>
+              </dict>
+            </dict>
+          </dict>
         </array>
       </dict>
       <key>data</key>
@@ -884,7 +923,7 @@
           </dict>
           <dict>
             <key>match</key>
-            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object)|(\w+))\s*)?(optional)?</string>
+            <string>(?i)\b((?:ws)?data)\s+(\w+)(?:\s+(as)\s+(array of\s+)?(?:(string|date|integer|float|boolean|array|Base64Binary|object|block|codeblock|character|char|date|logical|numeric|variadic|variant|double|decimal|json)|(\w+))\s*)?(optional)?</string>
             <key>captures</key>
             <dict>
               <key>1</key>
@@ -1039,7 +1078,7 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
+        <string>(?&lt;=\)|\s)(?:(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
@@ -1163,28 +1202,28 @@
           </dict>
         </dict>
         <key>end</key>
-        <string>(?i)(?&lt;=\))(?:\s+(class)\s+(\w+))?(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic))?</string>
+        <string>(?i)(?&lt;=\))(?:\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json))?(?:\s+(class)\s+(\w+))?</string>
         <key>endCaptures</key>
         <dict>
           <key>1</key>
           <dict>
             <key>name</key>
-            <string>storage.type.class.advpl</string>
+            <string>constant.other.symbol.as.advpl</string>
           </dict>
           <key>2</key>
           <dict>
             <key>name</key>
-            <string>entity.name.type.class.advpl</string>
+            <string>support.type.advpl</string>
           </dict>
           <key>3</key>
           <dict>
             <key>name</key>
-            <string>constant.other.symbol.as.advpl</string>
+            <string>storage.type.class.advpl</string>
           </dict>
           <key>4</key>
           <dict>
             <key>name</key>
-            <string>support.type.advpl</string>
+            <string>entity.name.type.class.advpl</string>
           </dict>
         </dict>
       </dict>
@@ -1528,7 +1567,7 @@
         <array>
           <dict>
             <key>match</key>
-            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic)</string>
+            <string>(?i)\s+(as)\s+(array|block|codeblock|character|char|date|logical|numeric|object|variadic|variant|integer|double|decimal|json)</string>
             <key>captures</key>
             <dict>
               <key>1</key>

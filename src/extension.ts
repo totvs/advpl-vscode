@@ -24,7 +24,7 @@ import * as net from 'net';
 import * as url from 'url';
 import * as fs from 'fs';
 import { StringDecoder } from 'string_decoder';
-import { getConfigurationAsString } from './utils';
+import { getConfigurationAsString, hasCompileKey } from './utils';
 import generateConfigFromAuthorizationFile from './authorizationFile';
 import cmdAddAdvplEnvironment from './commands/addAdvplEnvironment';
 import * as debugBrdige from  './utils/debugBridge';
@@ -102,15 +102,15 @@ export async function activate(context: vscode.ExtensionContext) {
     // Binds do Servers View
     context.subscriptions.push(addServer(context));
 
-    
+
     const providerAdvpl = new AdvplConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl', providerAdvpl));
 
     const factoryAdvpl = new AdvplDebugAdapterDescriptorFactory();
 		context.subscriptions.push(vscode.debug.registerDebugAdapterDescriptorFactory('advpl', factoryAdvpl));
         context.subscriptions.push(factoryAdvpl);
-        
-    
+
+
     // register a configuration provider for 'Replay' debug type
 	const provider = new ReplayConfigurationProvider();
     context.subscriptions.push(vscode.debug.registerDebugConfigurationProvider('advpl-replay', provider));
@@ -138,8 +138,16 @@ export async function activate(context: vscode.ExtensionContext) {
         writeAdvplConsole(cLog) {
             OutPutChannel.log(cLog);
         },
-        compile(cSource: string, cDescription: string = localize('src.extension.sourceText', 'Source'), ignoreEvents: boolean = false){
+        compile(cSource: string, cDescription: string = localize('src.extension.sourceText', 'Source'), ignoreEvents: boolean = false) {
             return createAdvplCompile(cSource, cDescription, ignoreEvents);
+        },
+        async cipherPassword(password: string): Promise<string> {
+            const compile = new advplCompile();
+            return new Promise<string>((resolve, reject) => {
+                compile.runCipherPassword(password, (cipher: string) => {
+                    resolve(cipher.replace(/\r?\n?/g, ''));
+                });
+            });
         }
     };
     vscode.commands.registerCommand('advpl.replay.openFileInLine', (source, line) => oreplayPlay.openFileInLine(source, line));
@@ -155,15 +163,24 @@ export async function activate(context: vscode.ExtensionContext) {
     // Evento acionado sempre que uma configuração é alterada no Workspace
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
         // Atualiza o Status Bar de Multi-Thread
-        multiThread.changeItem();
+        if (e.affectsConfiguration('advpl.debug_multiThread')) {
+            multiThread.changeItem();
+        }
 
         // Atualiza o Status Bar de Ambientes
-        env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+        if (e.affectsConfiguration('advpl.selectedEnvironment')) {
+            env.update(vscode.workspace.getConfiguration("advpl").get("selectedEnvironment"));
+        }
+
+        // Mostra o disclaimer quando houver atualização do token ou chave de compilação
+        if ((e.affectsConfiguration('advpl.compileToken') || e.affectsConfiguration('advpl.authorization_code')) && hasCompileKey()) {
+            OutPutChannel.showDisclaimer();
+        }
 
         // Atualiza o TreeView de servidores
         serverView.provider.refresh();
 	}));
-	
+
 	vscode.languages.registerDocumentFormattingEditProvider(
 		'advpl',
 		formattingEditProvider()
@@ -193,34 +210,34 @@ export async function activate(context: vscode.ExtensionContext) {
             const fieldAlias = document.getWordRangeAtPosition(position, /((\(\s*\w+\s*\)|\w+)->)\w+/i);
             // const array = document.getWordRangeAtPosition(position, /\w+\s*[^º]*]/i);
             const macroSubstituicao = document.getWordRangeAtPosition(position, /&[^:]*/i);
-            
+
             const regexAtributo = new RegExp("((::|self:)|([^:(\\s\\,\\!\\+\\-\\[\\{]+\\:)+)(" + document.getText(wordRange) + ")", 'i')
             const atributo = document.getWordRangeAtPosition(position, regexAtributo);
-            
+
             // Obs.: Comentado por conta das dificuldades de inspeção usando essa abordagem, pois o usuário poderia querere inspecionar a variável e não o item do array.
             // Tratamento para inspeções de Arrays: aTeste[1][2]
             // if (array) {
             //     return new vscode.EvaluatableExpression(array);
             // }
-                
+
             // Tratamento para inspeções de Fields: (cAlias)->TB_FIELD ou TBL->TB_FIELD
             if (fieldAlias) {
                 return new vscode.EvaluatableExpression(fieldAlias);
             }
-                
+
             // Tratamento para inspeções de Macro Substituíções: &cNomeVar
             // Obs.: Conforme acordado na issue #417 seria criado uma configuração para o usuário escolher se deseja inspecionar esse tipo de estrutura.
             if (macroSubstituicao && vscode.workspace.getConfiguration("advpl").get("debug_inspect_macro")) {
                 return new vscode.EvaluatableExpression(macroSubstituicao);
             }
-            
+
             // Tratamento para inspeções de atributos de classe: oClasse:oAtributo1:oAtributoFilho
             if (atributo) {
                 return new vscode.EvaluatableExpression(atributo);
             }
 
             // TODO: Pensar numa forma de implementar a inspeção de variáveis em EmbededSQL %Exp:cVar% desconsiderando a sintaxe do EmbededSQL
-            
+
             // Tratamento default para inspecionar palavras
             if (wordRange) {
                 return new vscode.EvaluatableExpression(wordRange);
@@ -691,7 +708,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
 
         // Percorre os arquivos abertos do Workspace para compilar. A função "For Of" aguarda a finalização de cada operação await.
         for (const element of documents) {
-        
+
             // Quebra o caminho do arquivo em Array para capturar somente o nome do arquivo.
             progress.report({ increment: (100 / documents.length), message: localize('src.extension.compiling', 'Compiling ') + path.parse(element.fileName).base });
 
@@ -701,7 +718,7 @@ async function __internal_compile_callback(documents: vscode.TextDocument[],
                 compile.setonError(function () {
                     reject();
                 });
-                
+
                 // Antes de chamar a compilação, verifica se foi solicitado um cancelamento
                 if (cancelCompile) {
                     reject();
@@ -1290,7 +1307,7 @@ class ReplayDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescript
 	}
 }
 
-class AdvplConfigurationProvider implements vscode.DebugConfigurationProvider {    
+class AdvplConfigurationProvider implements vscode.DebugConfigurationProvider {
     resolveDebugConfiguration(folder: WorkspaceFolder | undefined, config: DebugConfiguration, token?: CancellationToken): ProviderResult<DebugConfiguration> {
 
 		// if launch.json is missing or empty
@@ -1302,7 +1319,7 @@ class AdvplConfigurationProvider implements vscode.DebugConfigurationProvider {
 				config.request = 'launch';
                 config.stopOnEntry = false;
                 config.cwd= "${workspaceRoot}";
-                config.programRun ="${command:AskForProgramName}";                
+                config.programRun ="${command:AskForProgramName}";
                 config.enviromentInfo= "${command:GetEnvInfos}";
                 config.workspace= "${workspaceFolder}/";
 			}
@@ -1320,7 +1337,7 @@ class AdvplDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescripto
         const args = []; //Vai os parametros vai onLaunch
 
         const program = debugBrdige.getAdvplDebugBridge();
-        
+
        /* const program = "/snap/bin/valgrind";
         const args = [ "--tool=massif", "--massif-out-file=/home/rodrigo/tmp/valgrid-log/massif.out.%p", "/home/rodrigo/totvs/vscode/AdvtecMiddleware/build/AdvplDebugBridgeC"]*/
 		return new vscode.DebugAdapterExecutable(program, args);

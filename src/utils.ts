@@ -38,3 +38,10 @@ export function checkIfFileExists(filePath: string): boolean {
 export function getConfigurationAsString(): string{
     return JSON.stringify(vscode.workspace.getConfiguration("advpl"));
 }
+
+export function hasCompileKey(): boolean {
+    const config = vscode.workspace.getConfiguration('advpl');
+
+    return config.get<string>('compileToken', '').trim() !== '' ||
+        config.get<string>('authorization_code', '').trim() !== ''
+}

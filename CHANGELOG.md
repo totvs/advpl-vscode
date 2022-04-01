@@ -1,4 +1,14 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.14.11 
+ - Melhoria via Pull Request: [Melhoria de performace no formarter.](https://github.com/totvs/advpl-vscode/pull/502)
+   Robson Rogério Silva
+ - Melhoria via Pull Request: [Suporte ao novos tipos nativos do tlpp.](https://github.com/totvs/advpl-vscode/pull/499)
+   Daniel Mendes  
+ - Suporte a novos tipos, namespace, tipagem com atribuição na sintaxe do TLPP
+ - Correções no inspetor de objetos para a build 210324P
+ - Implementação da chave additionalSmartClientArgs
+ - Tornado alpha_compile habilitado por default
+
 ## 0.14.10
  - Correcao 
 ## 0.14.9 
