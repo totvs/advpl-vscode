@@ -101,3 +101,9 @@ Para mudar a configuração do vscode veja [aqui.](https://code.visualstudio.com
 Obs. Para português, é necessario instalar uma extensão da [microsoft.](https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-pt-BR)
 
 Caso você queira contribuir com a localização [veja.](https://github.com/killerall/advpl-vscode/wiki/Localiza%C3%A7%C3%A3o)
+
+# Aviso legal sobre o uso de Tokens e Chaves de compilação
+
+As chaves de compilação ou tokens empregados na construção do Protheus e suas funcionalidades, são de uso restrito dos desenvolvedores de cada módulo.
+
+Em caso de mau uso destas chaves ou tokens, por qualquer outra parte, que não a referida acima, a mesma irá se responsabilizar, direta ou regressivamente, única e exclusivamente, por todos os prejuízos, perdas, danos, indenizações, multas, condenações judiciais, arbitrais e administrativas e quaisquer outras despesas relacionadas ao mau uso, causados tanto à TOTVS, quanto a terceiros, eximindo a TOTVS de toda e qualquer responsabilidade.

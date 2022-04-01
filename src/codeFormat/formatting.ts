@@ -116,6 +116,12 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
       const foundIgnore: StructureRule[] = rulesIgnored.filter((rule) => {
         return lastRule && lastRule.rule && rule.id === lastRule.rule.id;
       });
+
+      // Verifica se é uma linha de conflito do GIT ela não deixa identar
+      if (text.match(/(<{7}|>{7}|={7})/)) {
+        continue;
+      }
+
       // dentro do BeginSql não mexe na identação
       if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
         // verifica se está em query
@@ -135,10 +141,12 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
           );
           // define o range que será substituído
           // usando o range inicial da primeira linha
-          // e o atual da ultima linha com a query
+          // e o atual da ultima linha com  a query
           query.range = new Range(query.range.start, line.range.end);
         } else {
-          result.push(TextEdit.replace(line.range, text));
+          if (document.lineAt(nl).text !== text) {
+            result.push(TextEdit.replace(line.range, text));
+          }
         }
       } else {
         if (
@@ -172,6 +180,28 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
                   /(%)\s+(table|temp-table|exp|xfilial|order)\s*(:)((\w|\+|\\|\*|\(|\)|\[|\]|-|>|_|\s|,|\n|"|')*)\s+(:*\w*)\s*(%)/gim,
                   "$1$2$3$4$6$7"
                 );
+                // Remove espacos quando usar array dentro de expressões de query
+                while (
+                  queryResult.match(
+                    /(%(table|temp-table|exp|xfilial|order):.+)\s*\[\s+(.+%)/gim
+                  )
+                ) {
+                  queryResult = queryResult.replace(
+                    /(%(table|temp-table|exp|xfilial|order):.+)\s*\[\s+(.+%)/gim,
+                    "$1[$3"
+                  );
+                }
+                while (
+                  queryResult.match(
+                    /(%(table|temp-table|exp|xfilial|order):.+)\s+\]\s*(.*%)/gim
+                  )
+                ) {
+                  queryResult = queryResult.replace(
+                    /(%(table|temp-table|exp|xfilial|order):.+)\s+\]\s*(.*%)/gim,
+                    "$1]$3"
+                  );
+                }
+
                 // Como coloca quebras de linhas no orderby por conta da vírgula removo
                 queryResult = queryResult.replace(
                   /(%order:\w*)(,\n\s*)(\w%)/gim,
@@ -296,7 +326,9 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
           }
 
           const newLine: string = text.replace(/(\s*)?/, tab.repeat(cont));
-          result.push(TextEdit.replace(line.range, newLine));
+          if (document.lineAt(nl).text !== newLine) {
+            result.push(TextEdit.replace(line.range, newLine));
+          }
           this.lineContinue =
             newLine.split("//")[0].trim().endsWith(";") &&
             rulesIgnored.indexOf(ruleMatch.rule) === -1;
@@ -316,7 +348,9 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
               )
               .trimRight();
           }
-          result.push(TextEdit.replace(line.range, newLine));
+          if (document.lineAt(nl).text !== newLine) {
+            result.push(TextEdit.replace(line.range, newLine));
+          }
           this.lineContinue = newLine.split("//")[0].trim().endsWith(";");
         }
       }

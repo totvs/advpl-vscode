@@ -62,8 +62,8 @@ export default function cmdAddAdvplEnvironment(context): any {
         message: localize('src.commands.addAdvplEnvironment.appserverVersionText', 'AppServer Version'),
         name: "appserverVersion",
         type: "list",
-        default: '131227A',
-        choices: ['131227A', '170117A','191205P']
+        default: '191205P',
+        choices: ['131227A', '170117A','191205P','210324P']
     }, {
         message: localize('src.commands.addAdvplEnvironment.serverIpText', 'Server IP'),
         name: "server",
