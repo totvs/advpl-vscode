@@ -116,6 +116,12 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
       const foundIgnore: StructureRule[] = rulesIgnored.filter((rule) => {
         return lastRule && lastRule.rule && rule.id === lastRule.rule.id;
       });
+
+      // Verifica se é uma linha de conflito do GIT ela não deixa identar
+      if (text.match(/(<{7}|>{7}|={7})/)) {
+        continue;
+      }
+
       // dentro do BeginSql não mexe na identação
       if (foundIgnore.length > 0 && !text.match(foundIgnore[0].end)) {
         // verifica se está em query
@@ -135,7 +141,7 @@ class RangeFormatting implements DocumentRangeFormattingEditProvider {
           );
           // define o range que será substituído
           // usando o range inicial da primeira linha
-          // e o atual da ultima linha com a query
+          // e o atual da ultima linha com  a query
           query.range = new Range(query.range.start, line.range.end);
         } else {
           if (document.lineAt(nl).text !== text) {
