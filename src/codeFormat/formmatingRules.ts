@@ -252,7 +252,7 @@ export class FormattingRules {
       {
         id: "for",
         begin: /^(\s*)(for)(\s+)(\w+)/i,
-        end: /^(\s*)(next|end)(\s*)/i,
+        end: /^(\s*)(next|end)(\s+|$)/i,
       },
       {
         id: "if",
@@ -272,7 +272,7 @@ export class FormattingRules {
       {
         id: "while",
         begin: /^(\s*)(do)?(\s*)(while)/i,
-        end: /^(\s*)(end)(do)?(\s*while)?$/i,
+        end: /^(\s*)(end)(\s*)(do)?(\s*while)?$/i,
       },
       {
         id: "wsrestful",
