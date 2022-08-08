@@ -1,4 +1,10 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.15.1
+- Suporte a MacOS novamente
+- [Erro ao aplicar patch com as ultimas versões do binário](https://github.com/totvs/advpl-vscode/issues/537)
+- Ajustes de Identação: [Melhoria de performace no formarter.](https://github.com/totvs/advpl-vscode/pull/526)
+
+
 ## 0.14.11 
  - Melhoria via Pull Request: [Melhoria de performace no formarter.](https://github.com/totvs/advpl-vscode/pull/502)
    Robson Rogério Silva

@@ -20,24 +20,17 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         const changeLog: ChangeLogItem[] = [];
 
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Melhoria de performace no formart.`
+            kind: ChangeLogKind.NEW, message: `Volta a suporte de compilação a MacOs.`
         });
 
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Suporte ao novos tipos nativos do tlpp.`
+            kind: ChangeLogKind.FIXED, message: `Correção na aplicação de Patch em Binários novos.`
         });
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Suporte a novos tipos, namespace, tipagem com atribuição na sintaxe do TLPP.`
+            kind: ChangeLogKind.FIXED, message: `Ajustes de Identação na formatação.`
         });
-        changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Correções no inspetor de objetos para a build 210324P.`
-        });
-        changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Implementação da chave additionalSmartClientArgs.`
-        });
-        changeLog.push({
-            kind: ChangeLogKind.CHANGED, message: `Tornado alpha_compile habilitado por default.`
-        });
+
+        
         
         
         
