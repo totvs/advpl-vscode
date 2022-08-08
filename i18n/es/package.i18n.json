@@ -57,6 +57,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Argumentos%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Path del command",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Infomraciones de ambinete para Depuración/Debug. Uso interno",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.additionalSmartClientArgs": "Additional SmartClient Args, use string format",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Depurar/Debuguear.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente en inicio de Depuración/Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "Directorio de trabajo",
@@ -78,5 +79,7 @@
 	"advpl.serversManagement.getAllEnvironments": "Obtener entornos INI",
 	"advpl.serversManagement.CipherPassword": "Cambiar contraseña",
 	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos",
-	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)"
+	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)",
+	"contributes.configuration.properties.advplformat.noQueryFormatter": "Disable ADVPL Query formatter.",
+	"contributes.configuration.properties.advplformat.queryLanguage": "Define query language.\nsql - Standard SQL\nn1ql - Couchbase N1QL\ndb2 - IBM DB2\npl/sql - Oracle PL/SQL"
 }

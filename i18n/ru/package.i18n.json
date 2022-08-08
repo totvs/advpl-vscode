@@ -58,6 +58,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Аргументы%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Command Path",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Окружающей среды Информация для Отладки. Внутреннего использования",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.additionalSmartClientArgs": "Additional SmartClient Args, use string format",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Программы для Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Остановить автоматически в начале Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",
@@ -78,5 +79,7 @@
 	"advpl.serversManagement.getAllEnvironments": "Получить среды INI",
 	"advpl.serversManagement.CipherPassword": "Изменить пароль",
 	"advpl.compileFilesOpened": "Advpl - Компилировать открытые файлы",
-	"advpl.applyPatchFile": "Advpl - Применить патч (PTM)"
+	"advpl.applyPatchFile": "Advpl - Применить патч (PTM)",
+	"contributes.configuration.properties.advplformat.noQueryFormatter": "Disable ADVPL Query formatter.",
+	"contributes.configuration.properties.advplformat.queryLanguage": "Define query language.\nsql - Standard SQL\nn1ql - Couchbase N1QL\ndb2 - IBM DB2\npl/sql - Oracle PL/SQL"
 }

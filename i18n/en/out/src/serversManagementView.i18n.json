@@ -10,5 +10,6 @@
     "src.ServerManagementView.noText": "No",
     "src.ServerManagementView.environmentSelectedText": " selected successfully.",
     "src.ServerManagementView.RENAME": "Rename",
-    "src.ServerManagementView.passwordChangedSuccess": "Environment password %ENV_NAME% successfully changed."
+    "src.ServerManagementView.passwordChangedSuccess": "Environment password %ENV_NAME% successfully changed.",
+    "src.advplCompile.passwordQueryText": "Type in the password:"
 }

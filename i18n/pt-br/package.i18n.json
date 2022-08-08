@@ -58,6 +58,7 @@
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.args": "Argumentos%",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.cwd": "Path do command",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.enviromentinfo": "Environment Infos para o Debug. Uso interno",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.additionalSmartClientArgs": "Additional SmartClient Args, use string format",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.programrun": "Programa para Debugar.",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.stoponentry": "Parar automaticamente no inicio do Debug?",
 	"advpl.contributes.debuggers.configurationattributes.launch.properties.workspace": "WorkSpace Directory",

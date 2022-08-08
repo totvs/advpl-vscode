@@ -10,5 +10,6 @@
     "src.ServerManagementView.noText": "No",
     "src.ServerManagementView.environmentSelectedText": " la selección se realizó correctamente",
     "src.ServerManagementView.RENAME": "Renombrar",
-    "src.ServerManagementView.passwordChangedSuccess": "La contraseña del entorno %ENV_NAME% se modificó correctamente."
+    "src.ServerManagementView.passwordChangedSuccess": "La contraseña del entorno %ENV_NAME% se modificó correctamente.",
+    "src.advplCompile.passwordQueryText": "Digite la contraseña:"
 }
