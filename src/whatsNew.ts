@@ -19,6 +19,7 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
+        
         changeLog.push({
             kind: ChangeLogKind.NEW, message: `Volta a suporte de compilação a MacOs.`
         });
@@ -29,6 +30,10 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         changeLog.push({
             kind: ChangeLogKind.FIXED, message: `Ajustes de Identação na formatação.`
         });
+        changeLog.push({
+            kind: ChangeLogKind.FIXED, message: `Descrições do menu de contexto mudaram depois da atualização do vscode.`
+        });
+
 
         
         

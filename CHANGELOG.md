@@ -3,6 +3,7 @@
 - Suporte a MacOS novamente
 - [Erro ao aplicar patch com as ultimas versões do binário](https://github.com/totvs/advpl-vscode/issues/537)
 - Ajustes de Identação: [Melhoria de performace no formarter.](https://github.com/totvs/advpl-vscode/pull/526)
+- [Descrições do menu de contexto mudaram depois da atualização do vscode](https://github.com/totvs/advpl-vscode/issues/538)
 
 
 ## 0.14.11 
