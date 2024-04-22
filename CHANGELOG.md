@@ -1,4 +1,8 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+## 0.16.0
+
+- Suporte ao novo binário 240223P.
+
 ## 0.15.1
 - Suporte a MacOS novamente
 - [Erro ao aplicar patch com as ultimas versões do binário](https://github.com/totvs/advpl-vscode/issues/537)
@@ -6,22 +10,22 @@
 - [Descrições do menu de contexto mudaram depois da atualização do vscode](https://github.com/totvs/advpl-vscode/issues/538)
 
 
-## 0.14.11 
+## 0.14.11
  - Melhoria via Pull Request: [Melhoria de performace no formarter.](https://github.com/totvs/advpl-vscode/pull/502)
    Robson Rogério Silva
  - Melhoria via Pull Request: [Suporte ao novos tipos nativos do tlpp.](https://github.com/totvs/advpl-vscode/pull/499)
-   Daniel Mendes  
+   Daniel Mendes
  - Suporte a novos tipos, namespace, tipagem com atribuição na sintaxe do TLPP
  - Correções no inspetor de objetos para a build 210324P
  - Implementação da chave additionalSmartClientArgs
  - Tornado alpha_compile habilitado por default
 
 ## 0.14.10
- - Correcao 
-## 0.14.9 
+ - Correcao
+## 0.14.9
  - Melhoria via Pull Request: [Formatação de #ifdef e de Queryes em Embedded Sql.](https://github.com/totvs/advpl-vscode/pull/472)
    Robson Rogério Silva
- - Suporte ao servidor de build 210324P , utilize a tag:   "serverVersion" : "210324P" dentro da configuracao do ambiente. 
+ - Suporte ao servidor de build 210324P , utilize a tag:   "serverVersion" : "210324P" dentro da configuracao do ambiente.
  ## 0.14.8
  - Correções de consumo de memoria quando dava errolog no debug.
 
@@ -33,7 +37,7 @@
   - Renato Cunha
 ## 0.14.6
  - Correção no executável do linux
- 
+
 ## 0.14.5
  - Correção na aplicação de patch para o binario 19
 
@@ -64,7 +68,7 @@
  - Melhoria: Aplicação de Patch [TypeScript]:
    - Ao aplicar um Patch, a extensão irá perguntar se deseja [aplicar somente arquivos atualizados (Somente na Alpha)](https://github.com/totvs/advpl-vscode/wiki/Trabalhando-com-Patchs#somente-atualizados)
    - Adicionado mensagem de inicio de aplicação do patch
-   - Adicionado mensagem de informação sugerindo usar a AlphaCompile ao aplicar Patch fora da Alpha 
+   - Adicionado mensagem de informação sugerindo usar a AlphaCompile ao aplicar Patch fora da Alpha
  - Melhorias no Gerenciador de Ambientes:
    - Ajustado ícones usados no Gerenciador de Ambientes para o [novo padrão do VsCode](https://github.com/microsoft/vscode-icons)
    - Ajustado opção **Renomear** para trazer o valor atual como Default

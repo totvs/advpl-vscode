@@ -19,26 +19,13 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
     public provideChangeLog(): ChangeLogItem[] {
         const changeLog: ChangeLogItem[] = [];
 
-        
         changeLog.push({
-            kind: ChangeLogKind.NEW, message: `Volta a suporte de compilação a MacOs.`
+            kind: ChangeLogKind.NEW, message: `Suporte ao novo binário 240223P.`
         });
 
-        changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Correção na aplicação de Patch em Binários novos.`
-        });
-        changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Ajustes de Identação na formatação.`
-        });
-        changeLog.push({
-            kind: ChangeLogKind.FIXED, message: `Descrições do menu de contexto mudaram depois da atualização do vscode.`
-        });
-
-
-        
-        
-        
-        
+        // changeLog.push({
+        //     kind: ChangeLogKind.FIXED, message: `Correção na aplicação de Patch em Binários novos.`
+        // });
 
         return changeLog;
     }
