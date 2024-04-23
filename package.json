@@ -1025,7 +1025,7 @@
         "error-ex": "^1.3.2",
         "figures": "^3.2.0",
         "ini": "^1.3.6",
-        "semver": "^7.3.2",
+        "semver": "^7.5.2",
         "sql-formatter-plus": "^1.3.6",
         "vscode-debugadapter": "^1.41.1",
         "vscode-debugprotocol": "^1.41.0",
