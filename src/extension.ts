@@ -88,6 +88,25 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(ReplaySelect());
     context.subscriptions.push(getReplayTmpDir());
     context.subscriptions.push(getReplayExecId());
+
+    // scan debug console output for a PORT message
+  vscode.debug.registerDebugAdapterTrackerFactory('advpl', {
+    createDebugAdapterTracker(session: vscode.DebugSession) {
+      const args = session.configuration.webapp;
+      if (args) {        
+        return {
+          onDidSendMessage: m => {
+            if (m.type === 'event' && m.event === 'output' && m.body.output) {
+              const key = "[AdvplDebugBridge][StartWebapp]";
+              if (m.body.output.startsWith(key)) {
+                openExternalWithUri(session, m.body.output.substr(key.length));
+              }
+            }
+          }
+        };
+      }
+    }
+  });
 /* Trace de Debug
     vscode.debug.registerDebugAdapterTrackerFactory('advpl', {
         createDebugAdapterTracker(session: vscode.DebugSession) {
@@ -1346,4 +1365,9 @@ class AdvplDebugAdapterDescriptorFactory implements vscode.DebugAdapterDescripto
 	dispose() {
 
 	}
+}
+function openExternalWithUri(session: vscode.DebugSession, uri: string) {
+    const args = session.configuration.serverReadyAction;
+      vscode.env.openExternal(vscode.Uri.parse(uri));
+ 
 }

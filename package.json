@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.16.0",
+    "version": "0.17.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "homepage": "https://github.com/totvs/advpl-vscode",
@@ -813,6 +813,11 @@
                             "enviromentInfo"
                         ],
                         "properties": {
+                            "webappUrl": {
+                                "type": "string",
+                                "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.webappUrl%",
+                                "default": ""
+                            },
                             "webapp": {
                                 "type": "boolean",
                                 "description": "%advpl.contributes.debuggers.configurationattributes.launch.properties.webapp%",

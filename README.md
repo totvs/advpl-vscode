@@ -1,5 +1,3 @@
-![Version](https://vsmarketplacebadge.apphb.com/version/KillerAll.advpl-vscode.svg) ![Installs](https://vsmarketplacebadge.apphb.com/installs/KillerAll.advpl-vscode.svg) ![Rating](https://vsmarketplacebadge.apphb.com/rating-short/KillerAll.advpl-vscode.svg)
-
 # Advpl Language Support
 
 Bem vindo a extensão para desenvolvimento de Advpl no visual code. [VsCode MarketPlace](https://marketplace.visualstudio.com/items?itemName=KillerAll.advpl-vscode)
@@ -56,8 +54,6 @@ Veja nossa [Wiki](https://github.com/killerall/advpl-vscode/wiki/Configura%C3%A7
 ## Gerenciador de Ambiente
 
 Agora é possível Gerenciar de forma intuitiva todos os ambientes já configurados e até mesmo os novos que forem sendo criados:
-
-![Demo Gerenciador de Ambientes](https://user-images.githubusercontent.com/10109480/74032899-d02f4380-4993-11ea-8410-63a2a663d232.png)
 
 [Leia mais](https://github.com/totvs/advpl-vscode/wiki/Gerenciador-de-Ambientes)
 
