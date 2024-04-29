@@ -23,9 +23,14 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
             kind: ChangeLogKind.NEW, message: `Suporte ao novo binário 240223P.`
         });
 
-        // changeLog.push({
-        //     kind: ChangeLogKind.FIXED, message: `Correção na aplicação de Patch em Binários novos.`
-        // });
+        changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Nova configuração de debug WebApp <b>webappUrl</b> no launch - (<a title=\"Documentação launch webapp\"
+            href=\"https://github.com/totvs/advpl-vscode/wiki/Utilizando-WebAPP\">Saiba mais</a>)`
+        });
+
+        changeLog.push({
+            kind: ChangeLogKind.CHANGED, message: `Melhoria no lançamento de debug WebApp.`
+        });
 
         return changeLog;
     }

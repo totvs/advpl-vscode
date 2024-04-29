@@ -1,7 +1,13 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
+
+## 0.17.0
+
+- Nova configuração de debug WebApp `webappUrl` no launch [Saiba mais](https://github.com/totvs/advpl-vscode/wiki/Utilizando-WebAPP)
+- Melhoria no lançamento de debug WebApp
+
 ## 0.16.0
 
-- Suporte ao novo binário 240223P.
+- Suporte ao novo binário 240223P
 
 ## 0.15.1
 - Suporte a MacOS novamente
