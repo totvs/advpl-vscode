@@ -1010,7 +1010,7 @@
         "@types/semver": "^7.3.1",
         "@types/vscode": "1.47.0",
         "del": "^5.1.0",
-        "gulp": "^4.0.2",
+        "gulp": "^5.0.0",
         "gulp-sourcemaps": "^3.0.0",
         "gulp-typescript": "^6.0.0-alpha.1",
         "gulp4-run-sequence": "^1.0.1",
