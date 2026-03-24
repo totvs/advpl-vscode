@@ -81,5 +81,7 @@
 	"advpl.compileFilesOpened": "Advpl - Compilar archivos abiertos",
 	"advpl.applyPatchFile": "Advpl - Aplicar Patch (PTM)",
 	"contributes.configuration.properties.advplformat.noQueryFormatter": "Disable ADVPL Query formatter.",
-	"contributes.configuration.properties.advplformat.queryLanguage": "Define query language.\nsql - Standard SQL\nn1ql - Couchbase N1QL\ndb2 - IBM DB2\npl/sql - Oracle PL/SQL"
+	"contributes.configuration.properties.advplformat.queryLanguage": "Define query language.\nsql - Standard SQL\nn1ql - Couchbase N1QL\ndb2 - IBM DB2\npl/sql - Oracle PL/SQL",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.webappUrl": "WebApp URL for debug launch",
+	"advpl.contributes.debuggers.configurationattributes.launch.properties.webapp": "Enable WebApp debug mode"
 }
