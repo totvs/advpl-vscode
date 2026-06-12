@@ -1,5 +1,9 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
 
+## 0.18.0
+
+- Suporte ao novo binário 260324P (capirava_tucano_arara)
+
 ## 0.17.0
 
 - Nova configuração de debug WebApp `webappUrl` no launch [Saiba mais](https://github.com/totvs/advpl-vscode/wiki/Utilizando-WebAPP)

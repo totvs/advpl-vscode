@@ -20,6 +20,10 @@ export class WhatsNewAdvPLContentProvider implements ContentProvider {
         const changeLog: ChangeLogItem[] = [];
 
         changeLog.push({
+            kind: ChangeLogKind.NEW, message: `Suporte ao novo binário 260324P (capirava_tucano_arara).`
+        });
+
+        changeLog.push({
             kind: ChangeLogKind.NEW, message: `Suporte ao novo binário 240223P.`
         });
 

@@ -2,7 +2,7 @@
     "name": "advpl-vscode",
     "displayName": "Advpl",
     "description": "%advpl.package.description%",
-    "version": "0.17.0",
+    "version": "0.18.0",
     "publisher": "KillerAll",
     "icon": "images/logo_vscode.png",
     "homepage": "https://github.com/totvs/advpl-vscode",
@@ -303,7 +303,8 @@
                                     "170117A",
                                     "191205P",
                                     "210324P",
-                                    "240223P"
+                                    "240223P",
+                                    "260324P"
                                 ],
                                 "default": "191205P",
                                 "description": "%advpl.contributes.configuration.properties.ADVPLENVIRONMENTS.items.properties.SERVERVERSION%"
