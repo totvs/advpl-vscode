@@ -1,6 +1,6 @@
 <!-- NÃO ESQUECER DE AJUSTAR O ARQUIVO whatsNew.ts com as mudanças consideráveis de versão. -->
 
-## 0.18.0
+## 0.18.1
 
 - Suporte ao novo binário 260324P (capirava_tucano_arara)
 
